@@ -182,9 +182,14 @@ export function sites({ mockAuth = true } = {}): Plugin {
 
       await cp(hostingConfig, resolve(outputDirectory, "hosting.json"));
       if (await exists(drizzleSource)) {
-        await cp(drizzleSource, resolve(outputDirectory, "drizzle"), {
-          recursive: true,
-        });
+        const drizzleOutput = resolve(outputDirectory, "drizzle");
+        try {
+          await cp(drizzleSource, drizzleOutput, { recursive: true });
+        } catch (error) {
+          if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+          await mkdir(outputDirectory, { recursive: true });
+          await cp(drizzleSource, drizzleOutput, { recursive: true });
+        }
       }
     },
   };
