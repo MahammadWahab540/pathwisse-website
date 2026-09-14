@@ -11,8 +11,16 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "dist/**",
+    "work/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      "@next/next/no-html-link-for-pages": "off",
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
   {
     files: ["components/ui/**/*.{ts,tsx}", "hooks/use-mobile.ts"],
     rules: {

@@ -19,8 +19,9 @@ import {
   X,
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
 
-export const APP = 'https://app.pathwisse.com/auth';
+export const APP = APP_AUTH_URL;
 
 const audienceData = {
   students: {
@@ -100,25 +101,59 @@ export function Header() {
       <Logo />
       <nav className={open ? 'nav open' : 'nav'} aria-label="Main navigation">
         <details>
-          <summary>Solutions <ChevronDown size={13} /></summary>
+          <summary>Students <ChevronDown size={13} /></summary>
           <div className="dropdown">
-            <a href="/students">For students</a>
-            <a href="/colleges">For placement teams</a>
-            <a href="/enterprises">For enterprises</a>
+            <a href="/students">Student overview</a>
+            <a href="/students/career-roadmaps">Career roadmaps</a>
+            <a href="/students/projects">Projects</a>
+            <a href="/career-audit/start">Career audit</a>
+          </div>
+        </details>
+        <details>
+          <summary>Colleges <ChevronDown size={13} /></summary>
+          <div className="dropdown">
+            <a href="/colleges">College overview</a>
+            <a href="/colleges/placement-teams">Placement teams</a>
+            <a href="/colleges/student-readiness-audit">Readiness audit</a>
+            <a href="/colleges/request-demo">Request demo</a>
+          </div>
+        </details>
+        <details>
+          <summary>Enterprise <ChevronDown size={13} /></summary>
+          <div className="dropdown">
+            <a href="/enterprise">Enterprise overview</a>
+            <a href="/enterprise/upskilling">Enterprise upskilling</a>
+            <a href="/enterprise/talent-intelligence">Talent intelligence</a>
+            <a href="/enterprise/request-demo">Request demo</a>
           </div>
         </details>
         <details>
           <summary>Products <ChevronDown size={13} /></summary>
           <div className="dropdown">
-            <a href="/products/platform">Pathwisse Platform</a>
-            <a href="/products/career-voice">Career Voice</a>
-            <a href="/products/enterprise-upskilling">Enterprise Upskilling</a>
-            <a href="/products/talent-intelligence">Talent Intelligence</a>
-            <a href="/products">All products</a>
+            <a href="/product">Pathwisse Platform</a>
+            <a href="/product/career-voice">Career Voice</a>
+            <a href="/product/career-roadmaps">Career Roadmaps</a>
+            <a href="/product/practice-lab">Practice Lab</a>
+            <a href="/product/projects">Projects</a>
+            <a href="/product/skill-passport">Skill Passport</a>
+            <a href="/product/readiness-scoring">Readiness Scoring</a>
+            <a href="/product/analytics">Analytics</a>
+            <a href="/product/integrations">Integrations</a>
           </div>
         </details>
-        <a href="/careers">Explore careers</a>
-        <a href="/resources">Resources</a>
+        <details>
+          <summary>Resources <ChevronDown size={13} /></summary>
+          <div className="dropdown">
+            <a href="/resources/blog">Blog</a>
+            <a href="/resources/guides">Guides</a>
+            <a href="/resources/career-guides">Career Guides</a>
+            <a href="/resources/placement-guides">Placement Guides</a>
+            <a href="/resources/templates">Templates</a>
+            <a href="/resources/reports">Reports</a>
+            <a href="/resources/webinars">Webinars</a>
+            <a href="/resources/case-studies">Case Studies</a>
+          </div>
+        </details>
       </nav>
       <div className="nav-actions">
         <a className="login" href={APP}>Log in <ArrowUpRight size={14} /></a>
@@ -134,13 +169,17 @@ export function Footer() {
     <footer>
       <div className="footer-top">
         <div><Logo /><p>From potential to possibility.<br />Capability you can build on.</p></div>
-        <div><b>Solutions</b><a href="/students">Students</a><a href="/colleges">Placement teams</a><a href="/enterprises">Enterprises</a></div>
-        <div><b>Products</b><a href="/products/platform">Pathwisse Platform</a><a href="/products/career-voice">Career Voice</a><a href="/products/enterprise-upskilling">Enterprise Upskilling</a><a href="/products/talent-intelligence">Talent Intelligence</a></div>
-        <div><b>Explore</b><a href="/careers">Career roadmaps</a><a href="/skills">Skills</a><a href="/projects">Projects</a><a href="/resources">Guides & resources</a><a href="/contact">Partner with us</a></div>
+        <div><b>Products</b><a href="/product">Pathwisse Platform</a><a href="/product/career-voice">Career Voice</a><a href="/product/projects">Projects</a><a href="/product/readiness-scoring">Readiness Scoring</a><a href="/product/analytics">Analytics</a></div>
+        <div><b>Students</b><a href="/students">Overview</a><a href="/students/career-roadmaps">Career roadmaps</a><a href="/students/projects">Projects</a><a href="/students/career-readiness">Career readiness</a><a href={CAREER_VOICE_URL}>Career Voice</a></div>
+        <div><b>Colleges</b><a href="/colleges">Overview</a><a href="/colleges/placement-teams">Placement teams</a><a href="/colleges/student-analytics">Student analytics</a><a href="/colleges/request-demo">Request demo</a></div>
+        <div><b>Enterprise</b><a href="/enterprise">Overview</a><a href="/enterprise/upskilling">Upskilling</a><a href="/enterprise/talent-intelligence">Talent intelligence</a><a href="/enterprise/request-demo">Request demo</a></div>
+        <div><b>Resources</b><a href="/resources/blog">Blog</a><a href="/resources/guides">Guides</a><a href="/careers">Career roadmaps</a><a href="/skills">Skills</a><a href="/compare">Comparisons</a></div>
+        <div><b>Company</b><a href="/company/about">About</a><a href="/company/partners">Partners</a><a href="/company/contact">Contact</a><a href="/company/press">Press</a></div>
+        <div><b>Trust</b><a href="/trust/privacy">Privacy</a><a href="/trust/terms">Terms</a><a href="/trust/security">Security</a><a href="/trust/dpdp">DPDP</a><a href={APP}>Login</a></div>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Pathwisse. All rights reserved.</span>
-        <span><a href="/privacy">Privacy</a><span className="dot" />Built for possibility. Everywhere.</span>
+        <span><a href="/trust/privacy">Privacy</a><span className="dot" /><a href="/trust/terms">Terms</a><span className="dot" />Built for possibility. Everywhere.</span>
       </div>
     </footer>
   );
@@ -282,7 +321,7 @@ function EcosystemStory() {
         <h2>One evidence layer. Many decisions.</h2>
         <p>Pathwisse turns learning and applied work into signals that can be inspected, discussed, and improved. It is calm by design: fewer vague promises, more visible next steps.</p>
         <div className="narrative-stack">{cards.map(([title, text], index) => <div key={title}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{text}</p></div></div>)}</div>
-        <a className="text-link" href="/products/platform">Meet the Pathwisse Platform <ArrowUpRight size={16} /></a>
+        <a className="text-link" href="/product">Meet the Pathwisse Platform <ArrowUpRight size={16} /></a>
       </div>
     </section>
   );
@@ -291,14 +330,14 @@ function EcosystemStory() {
 function ProductEcosystem() {
   return (
     <section className="products-section">
-      <div className="section-heading"><div><span className="eyebrow">THE PATHWISSE ECOSYSTEM</span><h2>Focused products. One direction of travel.</h2></div><a className="text-link" href="/products">Explore all products <ArrowUpRight size={16} /></a></div>
+      <div className="section-heading"><div><span className="eyebrow">THE PATHWISSE ECOSYSTEM</span><h2>Focused products. One direction of travel.</h2></div><a className="text-link" href="/product">Explore all products <ArrowUpRight size={16} /></a></div>
       <div className="product-feature">
-        <div><span className="product-badge"><AudioLines size={19} /> CAREER VOICE</span><h3>Start with the question beneath the question.</h3><p>A guided career audit for interests, role comparison, evidence review, diagnosis, and a next action. Answer by voice or text, then move with more confidence.</p><a className="text-link" href="/products/career-voice">Find your career voice <ArrowUpRight size={16} /></a></div>
-        <div className="voice-visual"><div className="voice-orb"><AudioLines size={52} /></div><blockquote>"What could my next<br />chapter look like?"</blockquote><span>Understand → Choose → Audit → Next action</span></div>
+        <div><span className="product-badge"><AudioLines size={19} /> CAREER VOICE</span><h3>Start with the question beneath the question.</h3><p>A guided career audit for interests, role comparison, evidence review, diagnosis, and a next action. Answer by voice or text, then move with more confidence.</p><a className="text-link" href="/product/career-voice">Find your career voice <ArrowUpRight size={16} /></a></div>
+        <div className="voice-visual"><div className="voice-orb"><AudioLines size={52} /></div><blockquote>What could my next<br />chapter look like?</blockquote><span>Understand → Choose → Audit → Next action</span></div>
       </div>
       <div className="product-pair">
-        <a href="/products/enterprise-upskilling"><span className="eyebrow">ENTERPRISE UPSKILLING</span><h3>Capability gaps become role-based journeys.</h3><p>Assess teams, identify gaps, assign structured paths, and review growth through applied work.</p><span className="text-link">Explore workforce upskilling <ArrowUpRight size={16} /></span></a>
-        <a href="/products/talent-intelligence"><span className="eyebrow">TALENT INTELLIGENCE <span className="coming">IN DEVELOPMENT</span></span><h3>Hiring signals become easier to inspect.</h3><p>Discover candidates through demonstrated skills, projects, and evidence of capability.</p><span className="text-link">Join the hiring waitlist <ArrowUpRight size={16} /></span></a>
+        <a href="/enterprise/upskilling"><span className="eyebrow">ENTERPRISE UPSKILLING</span><h3>Capability gaps become role-based journeys.</h3><p>Assess teams, identify gaps, assign structured paths, and review growth through applied work.</p><span className="text-link">Explore workforce upskilling <ArrowUpRight size={16} /></span></a>
+        <a href="/enterprise/talent-intelligence"><span className="eyebrow">TALENT INTELLIGENCE <span className="coming">IN DEVELOPMENT</span></span><h3>Hiring signals become easier to inspect.</h3><p>Discover candidates through demonstrated skills, projects, and evidence of capability.</p><span className="text-link">Join the hiring waitlist <ArrowUpRight size={16} /></span></a>
       </div>
     </section>
   );
@@ -324,7 +363,7 @@ export function CTA({ title = 'Your next chapter starts with clarity.' }: { titl
     <section className="cta-section">
       <span className="eyebrow">POTENTIAL IS JUST THE BEGINNING</span>
       <h2>{title}</h2>
-      <div className="button-row"><a className="button orange" href={APP}>Find your path <ArrowRight size={16} /></a><a className="light-link" href="/contact">Let's build together <ArrowUpRight size={16} /></a></div>
+      <div className="button-row"><a className="button orange" href={APP}>Find your path <ArrowRight size={16} /></a><a className="light-link" href="/contact">Let&apos;s build together <ArrowUpRight size={16} /></a></div>
     </section>
   );
 }
