@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: 'Pathwisse — Turn capability into proof', template: '%s | Pathwisse' },
   description: 'Pathwisse turns capability into visible, actionable proof. Career roadmaps for students, readiness for colleges, and hiring and upskilling for enterprises.',
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: '/favicon.svg', apple: '/apple-touch-icon.svg' },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
