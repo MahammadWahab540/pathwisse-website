@@ -1,0 +1,4 @@
+import {sql} from 'drizzle-orm';
+import {sqliteTable,text,integer,index} from 'drizzle-orm/sqlite-core';
+export const leads=sqliteTable('leads',{id:text('id').primaryKey(),name:text('name').notNull(),email:text('email').notNull(),organization:text('organization').notNull().default(''),interest:text('interest').notNull(),message:text('message').notNull().default(''),source:text('source').notNull(),attribution:text('attribution').notNull().default('{}'),consent:integer('consent').notNull(),createdAt:text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`)},t=>[index('leads_email_created').on(t.email,t.createdAt)]);
+export const events=sqliteTable('events',{id:integer('id').primaryKey({autoIncrement:true}),event:text('event').notNull(),page:text('page').notNull(),target:text('target').notNull().default(''),createdAt:text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`)});
