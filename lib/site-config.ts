@@ -19,18 +19,28 @@ export function absoluteUrl(path = '/') {
 }
 
 export const legacyRedirects: Record<string, string> = {
+  '/about': '/company/about',
+  '/privacy': '/trust/privacy',
+  '/privacy-policy': '/trust/privacy',
+  '/terms': '/trust/terms',
+  '/security': '/trust/security',
+  '/compliance': '/trust/compliance',
+  '/request-demo': '/contact?interest=college',
+  '/solutions/colleges': '/colleges',
+  '/solutions/students': '/students',
+  '/solutions/placement': '/colleges/placement-teams',
+  '/solutions/management': '/colleges/overview',
+  '/solutions/educators': '/colleges/overview',
+  '/solutions/mentors': '/colleges/overview',
   '/products': '/product',
   '/products/platform': '/product',
   '/products/career-voice': '/product/career-voice',
   '/products/enterprise-upskilling': '/enterprise/upskilling',
   '/products/talent-intelligence': '/enterprise/talent-intelligence',
   '/enterprises': '/enterprise',
-  '/privacy': '/trust/privacy',
-  '/terms': '/trust/terms',
-  '/security': '/trust/security',
   '/partnerships/colleges': '/colleges/placement-teams',
-  '/workforce/skill-gap-analysis': '/enterprise/workforce-assessment',
-  '/projects': '/product/projects',
+  '/workforce/skill-gap-analysis': '/enterprise/overview',
+  '/projects': '/product/career-roadmaps',
 };
 
 export const trustedOrigins = [SITE_URL, APP_URL, CAREER_VOICE_URL].map((url) => new URL(url).origin);

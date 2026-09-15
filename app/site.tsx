@@ -24,61 +24,62 @@ import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
 export const APP = APP_AUTH_URL;
 
 const audienceData = {
+  colleges: {
+    label: 'Colleges',
+    eyebrow: 'PLACEMENT COMMAND CENTER',
+    headline: 'Know who is ready. Know what they are missing. Know which opportunity fits them.',
+    summary: 'The Placement Command Center — segment cohorts, match candidates to job requirements, predict placement probability with transparent drivers, and run targeted 30-day interventions.',
+    cta: 'Request TPO console demo',
+    href: '/contact?interest=college',
+    status: 'Placement Command Center',
+    stat: '312',
+    statLabel: 'placement ready',
+    nav: ['Cohort', 'Job Match', 'Prediction', 'Intervention'],
+    steps: [
+      ['Who is ready for tomorrow’s drive?', 'Student Readiness Intelligence', 'Instead of an unvetted spreadsheet of 1,200 names, segment cohorts instantly: 312 Placement Ready, 428 Nearly Ready, 306 Need Intervention, and 154 High Risk.', 'Placement ready', '312 students'],
+      ['Which candidate fits this job?', 'Job Intelligence & Matching', 'When an employer posts a mandate (e.g., Python + SQL + APIs), Pathwisse instantly matches 126 eligible candidates with verified project proof.', 'Role match', '72 strong fits'],
+      ['Why is the student predicted this way?', 'Explainable Placement Prediction', 'A transparent 78% placement probability based on technical proof, communication IRI, aptitude, and code repositories — not an AI horoscope.', 'Prediction', '78% probability'],
+      ['How do we lift at-risk students?', '30-Day Intervention Engine', 'Prescribe targeted sprints: advanced SQL, aptitude labs, and mock interviews — then measure probability lift to close the loop.', 'Readiness lift', '+26% conversion'],
+    ],
+  },
   students: {
     label: 'Students',
     eyebrow: 'FOR STUDENTS',
-    headline: 'Know what to do next.',
-    summary: 'Start with a direction, follow a structured path, and turn daily practice into work you can show.',
+    headline: 'Build readiness recruiters can verify.',
+    summary: 'Get a structured roadmap, build skills through daily practice and applied projects, and demonstrate real readiness — not just course certificates.',
     cta: 'Start building',
     href: APP,
     status: 'Personal path',
     stat: '72%',
     statLabel: 'readiness momentum',
-    nav: ['Direction', 'Roadmap', 'Proof', 'Opportunities'],
+    nav: ['Direction', 'Roadmap', 'Proof', 'Readiness'],
     steps: [
-      ['What role fits me?', 'Choose a direction that makes sense.', 'Career Voice and Pathwisse help a student compare roles, understand their starting point, and pick one useful next step.', 'Role fit', 'Data Analyst'],
-      ['What should I learn next?', 'Follow the shortest useful path.', 'Roadmaps connect skills, practice, and projects so progress feels concrete instead of scattered across courses.', 'Next skill', 'SQL joins'],
-      ['How do I prove it?', 'Build evidence, not only certificates.', 'Projects capture the problem, decisions, work, and reflection, giving students a stronger story for interviews.', 'Project proof', '3 signals'],
-      ['Where should I apply?', 'Use readiness to make better choices.', 'Students see where they are strong, where they need support, and which opportunities match their current evidence.', 'Next action', 'Apply with context'],
-    ],
-  },
-  placement: {
-    label: 'Placement Teams',
-    eyebrow: 'FOR PLACEMENT TEAMS',
-    headline: 'Know who is ready and who needs support.',
-    summary: 'Move from late placement-season panic to continuous visibility across cohorts, roles, gaps, and interventions.',
-    cta: 'Explore partnership',
-    href: '/contact?interest=college',
-    status: 'Cohort intelligence',
-    stat: '61%',
-    statLabel: 'job-ready cohort',
-    nav: ['Cohort', 'Gaps', 'Shortlist', 'Outcomes'],
-    steps: [
-      ['Who is actually ready?', 'See readiness before placement season.', 'Placement teams can inspect skills, projects, practice consistency, and role readiness from one view.', 'Ready now', '143 students'],
-      ['Who needs support now?', 'Find gaps early enough to act.', 'Shared weak spots become targeted interventions by branch, cohort, skill, or target role.', 'Priority gap', 'SQL practice'],
-      ['Who should we send?', 'Shortlist with stronger signals.', 'Role requirements can be compared with demonstrated student evidence instead of relying only on CGPA or resume claims.', 'Role match', '88% fit'],
-      ['Did support work?', 'Measure movement over time.', 'Teams can see whether interventions produced stronger work, better readiness, and clearer placement conversations.', 'Readiness lift', '+18%'],
+      ['What role actually fits me?', 'Start with Career Voice.', 'Compare roles, understand your starting point, and choose one useful direction. Career Voice helps you move past uncertainty to a first concrete step.', 'Role fit', 'Data Analyst'],
+      ['What should I build next?', 'Follow the shortest useful path.', 'Role-based roadmaps connect skills, daily practice, and applied projects so your progress is structured, not scattered across random courses.', 'Next skill', 'SQL joins'],
+      ['How do I prove I can do the work?', 'Evidence, not just certificates.', 'Projects capture the problem, your decisions, your output, and your reflection — giving you a richer story than a course completion badge.', 'Project proof', '3 signals'],
+      ['Am I ready to apply?', 'Know your readiness score.', 'Your readiness score shows where you are strong, where gaps remain, and which opportunities match your current demonstrated capability.', 'Next action', 'Apply with context'],
     ],
   },
   enterprise: {
     label: 'Enterprises',
     eyebrow: 'FOR ENTERPRISES',
     headline: 'Hire with evidence. Upskill with direction.',
-    summary: 'Use capability signals to discover talent, identify workforce gaps, and create role-based growth journeys.',
+    summary: 'Assess workforce capability, close skill gaps with role-based journeys, and discover candidates through demonstrated skill evidence — not just CVs.',
     cta: 'Partner with us',
     href: '/contact?interest=upskilling',
     status: 'Capability system',
     stat: '+23%',
     statLabel: 'capability lift',
-    nav: ['Evidence', 'Fit', 'Upskill', 'Mobility'],
+    nav: ['Assess', 'Upskill', 'Hire', 'Mobility'],
     steps: [
-      ['Can they do the work?', 'Look behind the profile.', 'Hiring teams can review skill evidence, project context, and readiness signals as the Talent Intelligence product develops.', 'Evidence', '4 projects'],
-      ['Who fits this role?', 'Compare people with role expectations.', 'Signals become useful when they are evaluated against the actual work a role requires.', 'Candidate fit', '91%'],
-      ['Where is the workforce gap?', 'Turn capability gaps into growth paths.', 'Enterprise Upskilling maps current skills to role needs, then assigns learning, practice, and applied projects.', 'Priority team', 'Product'],
-      ['Who is ready for the next role?', 'Make internal mobility visible.', 'Managers can discuss growth with better context: what changed, what was demonstrated, and what remains to build.', 'Mobility-ready', '18 people'],
+      ['Where are our workforce gaps?', 'Map capability against role requirements.', 'Pathwisse assesses current skills against what each role actually demands — using applied work evidence, not survey responses.', 'Skills gap', 'Product team'],
+      ['How do we close those gaps?', 'Role-based upskilling journeys.', 'Assign structured paths that close specific gaps with skill modules, daily practice, and applied projects. Track readiness movement, not just completion rates.', 'On track', '6 / 8 modules'],
+      ['Can this candidate do the work?', 'Look behind the resume.', 'Hiring teams can review skill evidence, project context, and readiness scores as the Talent Intelligence product develops. Join the waitlist.', 'Evidence', '4 projects'],
+      ['Who is ready for the next role?', 'Make internal mobility visible.', 'Identify people ready to grow and show what they need to build next. Evidence-based conversations instead of guesswork.', 'Mobility-ready', '18 people'],
     ],
   },
 };
+
 
 type AudienceKey = keyof typeof audienceData;
 
@@ -101,63 +102,44 @@ export function Header() {
       <Logo />
       <nav className={open ? 'nav open' : 'nav'} aria-label="Main navigation">
         <details>
-          <summary>Students <ChevronDown size={13} /></summary>
+          <summary>Solutions <ChevronDown size={13} /></summary>
           <div className="dropdown">
-            <a href="/students">Student overview</a>
-            <a href="/students/career-roadmaps">Career roadmaps</a>
-            <a href="/students/projects">Projects</a>
-            <a href="/career-audit/start">Career audit</a>
+            <a href="/colleges"><GraduationCap size={14} /> For Colleges</a>
+            <a href="/students"><Users size={14} /> For Students</a>
+            <a href="/colleges/placement-teams"><BriefcaseBusiness size={14} /> Placement Teams</a>
+            <a href="/enterprise"><BarChart3 size={14} /> For Enterprises</a>
           </div>
         </details>
         <details>
-          <summary>Colleges <ChevronDown size={13} /></summary>
-          <div className="dropdown">
-            <a href="/colleges">College overview</a>
-            <a href="/colleges/placement-teams">Placement teams</a>
-            <a href="/colleges/student-readiness-audit">Readiness audit</a>
-            <a href="/colleges/request-demo">Request demo</a>
+          <summary>Platform <ChevronDown size={13} /></summary>
+          <div className="dropdown dropdown-wide">
+            <a href="/product" className="dropdown-lead">Platform Superstructure ↗</a>
+            <a href="/product/career-voice">CareerVoice <small className="dropdown-tag">· Understand</small></a>
+            <a href="/product/career-roadmaps">Career Roadmaps <small className="dropdown-tag">· Develop</small></a>
+            <a href="/product/practice-lab">Practice Lab <small className="dropdown-tag">· Develop</small></a>
+            <a href="/product/enterprise-projects">Enterprise Projects <small className="dropdown-tag">· Prove</small></a>
+            <a href="/product/skill-passport">Skill Passport <small className="dropdown-tag">· Prove</small></a>
+            <a href="/product/readiness-intelligence">Readiness Intelligence</a>
+            <a href="/product/job-intelligence">Job Intelligence</a>
+            <a href="/product/placement-intelligence">Placement Intelligence</a>
+            <a href="/product/employability-analytics">Employability Analytics</a>
           </div>
         </details>
-        <details>
-          <summary>Enterprise <ChevronDown size={13} /></summary>
-          <div className="dropdown">
-            <a href="/enterprise">Enterprise overview</a>
-            <a href="/enterprise/upskilling">Enterprise upskilling</a>
-            <a href="/enterprise/talent-intelligence">Talent intelligence</a>
-            <a href="/enterprise/request-demo">Request demo</a>
-          </div>
-        </details>
-        <details>
-          <summary>Products <ChevronDown size={13} /></summary>
-          <div className="dropdown">
-            <a href="/product">Pathwisse Platform</a>
-            <a href="/product/career-voice">Career Voice</a>
-            <a href="/product/career-roadmaps">Career Roadmaps</a>
-            <a href="/product/practice-lab">Practice Lab</a>
-            <a href="/product/projects">Projects</a>
-            <a href="/product/skill-passport">Skill Passport</a>
-            <a href="/product/readiness-scoring">Readiness Scoring</a>
-            <a href="/product/analytics">Analytics</a>
-            <a href="/product/integrations">Integrations</a>
-          </div>
-        </details>
+        <a href="/pricing">Pricing</a>
         <details>
           <summary>Resources <ChevronDown size={13} /></summary>
           <div className="dropdown">
             <a href="/resources/blog">Blog</a>
-            <a href="/resources/guides">Guides</a>
-            <a href="/resources/career-guides">Career Guides</a>
-            <a href="/resources/placement-guides">Placement Guides</a>
-            <a href="/resources/templates">Templates</a>
-            <a href="/resources/reports">Reports</a>
-            <a href="/resources/webinars">Webinars</a>
-            <a href="/resources/case-studies">Case Studies</a>
+            <a href="/careers/data-analyst">Career Roadmaps</a>
+            <a href="/skills/sql">Skill Guides</a>
+            <a href="/compare/data-analyst-vs-business-analyst">Role Comparisons</a>
           </div>
         </details>
+        <a href="/company/about">About</a>
       </nav>
       <div className="nav-actions">
         <a className="login" href={APP}>Log in <ArrowUpRight size={14} /></a>
-        <a className="button small" href={APP}>Get started <ArrowRight size={14} /></a>
+        <a className="button small" href="/contact?interest=college">Request demo <ArrowRight size={14} /></a>
         <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation">{open ? <X /> : <Menu />}</button>
       </div>
     </header>
@@ -168,18 +150,16 @@ export function Footer() {
   return (
     <footer>
       <div className="footer-top">
-        <div><Logo /><p>From potential to possibility.<br />Capability you can build on.</p></div>
-        <div><b>Products</b><a href="/product">Pathwisse Platform</a><a href="/product/career-voice">Career Voice</a><a href="/product/projects">Projects</a><a href="/product/readiness-scoring">Readiness Scoring</a><a href="/product/analytics">Analytics</a></div>
-        <div><b>Students</b><a href="/students">Overview</a><a href="/students/career-roadmaps">Career roadmaps</a><a href="/students/projects">Projects</a><a href="/students/career-readiness">Career readiness</a><a href={CAREER_VOICE_URL}>Career Voice</a></div>
-        <div><b>Colleges</b><a href="/colleges">Overview</a><a href="/colleges/placement-teams">Placement teams</a><a href="/colleges/student-analytics">Student analytics</a><a href="/colleges/request-demo">Request demo</a></div>
-        <div><b>Enterprise</b><a href="/enterprise">Overview</a><a href="/enterprise/upskilling">Upskilling</a><a href="/enterprise/talent-intelligence">Talent intelligence</a><a href="/enterprise/request-demo">Request demo</a></div>
-        <div><b>Resources</b><a href="/resources/blog">Blog</a><a href="/resources/guides">Guides</a><a href="/careers">Career roadmaps</a><a href="/skills">Skills</a><a href="/compare">Comparisons</a></div>
-        <div><b>Company</b><a href="/company/about">About</a><a href="/company/partners">Partners</a><a href="/company/contact">Contact</a><a href="/company/press">Press</a></div>
-        <div><b>Trust</b><a href="/trust/privacy">Privacy</a><a href="/trust/terms">Terms</a><a href="/trust/security">Security</a><a href="/trust/dpdp">DPDP</a><a href={APP}>Login</a></div>
+        <div><Logo /><p>Structured roadmaps.<br />Verified skill proof.<br />Placement readiness reporting.</p></div>
+        <div><b>Solutions</b><a href="/colleges">Pathwisse for Colleges</a><a href="/colleges/placement-teams">Placement Command Center</a><a href="/students">Pathwisse for Students</a><a href="/enterprise">Pathwisse for Enterprises</a><a href="/pricing">Institutional Pricing</a></div>
+        <div><b>Platform Products</b><a href="/product">Platform Superstructure</a><a href="/product/career-voice">CareerVoice</a><a href="/product/career-roadmaps">Career Roadmaps</a><a href="/product/practice-lab">Practice Lab</a><a href="/product/enterprise-projects">Enterprise Projects</a><a href="/product/skill-passport">Skill Passport</a><a href="/product/placement-intelligence">Placement Intelligence</a></div>
+        <div><b>Intelligence & Outcomes</b><a href="/product/readiness-intelligence">Readiness Intelligence</a><a href="/product/job-intelligence">Job Intelligence</a><a href="/product/placement-intelligence">Placement Intelligence</a><a href="/product/employability-analytics">Employability Analytics</a><a href="/how-it-works">How It Works</a><a href="/outcomes">Institutional Outcomes</a></div>
+        <div><b>Company</b><a href="/company/about">About Us</a><a href="/company/partners">Partnerships</a><a href="/contact">Contact</a><a href="mailto:partnership@pathwisse.com">partnership@pathwisse.com</a></div>
+        <div><b>Legal & Trust</b><a href="/trust/privacy">Privacy Policy</a><a href="/trust/terms">Terms of Service</a><a href="/trust/security">Security</a><a href="/trust/compliance">Compliance (NEP/NAAC/NIRF)</a></div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Pathwisse. All rights reserved.</span>
-        <span><a href="/trust/privacy">Privacy</a><span className="dot" /><a href="/trust/terms">Terms</a><span className="dot" />Built for possibility. Everywhere.</span>
+        <span>© {new Date().getFullYear()} Pathwisse (Shaquantum Labs Private Limited). All rights reserved.</span>
+        <span><a href="/trust/privacy">Privacy</a><span className="dot" /><a href="/trust/terms">Terms</a><span className="dot" />Institutional Employability Operating System.</span>
       </div>
     </footer>
   );
@@ -277,8 +257,8 @@ function AudienceExperience() {
       <div className="audience-tabs" role="tablist" aria-label="Choose audience view">
         {(Object.keys(audienceData) as AudienceKey[]).map((key) => (
           <button type="button" role="tab" aria-selected={active === key} className={active === key ? 'active' : ''} onClick={() => choose(key)} key={key}>
-            {key === 'students' && <GraduationCap size={18} />}
-            {key === 'placement' && <Users size={18} />}
+            {key === 'colleges' && <GraduationCap size={18} />}
+            {key === 'students' && <Users size={18} />}
             {key === 'enterprise' && <BriefcaseBusiness size={18} />}
             {audienceData[key].label}
           </button>
@@ -307,21 +287,21 @@ function AudienceExperience() {
 
 function EcosystemStory() {
   const cards = useMemo(() => [
-    ['Problem', 'Capability is hidden across resumes, courses, spreadsheets, and scattered projects.'],
-    ['Pathwisse approach', 'Connect direction, skill growth, practice, and evidence in one readable system.'],
-    ['Product experience', 'Give each audience a focused workspace without breaking the shared ecosystem.'],
-    ['Outcome', 'Students know what to do next. Teams know who needs support. Enterprises know where capability lives.'],
+    ['The problem', 'Colleges manage employability through disconnected courses, spreadsheets, and last-minute placement drives — with no continuous visibility into student readiness.'],
+    ['The Pathwisse approach', 'One system connects career direction, structured roadmaps, daily practice, applied projects, readiness scoring, and placement analytics.'],
+    ['What each audience gets', 'Students get a structured path and verified proof. Placement teams get live cohort intelligence. Management gets NAAC/NIRF-aligned reporting.'],
+    ['The outcome', 'Students know exactly what to build next. Placement teams know who is ready and who needs support. Recruiters get pre-filtered, evidence-backed student exports.'],
   ], []);
 
   return (
     <section className="ecosystem-story">
-      <div className="story-visual"><img src="/pathwisse-ecosystem.png" alt="Connected Pathwisse capability system across students, placement teams, and enterprises" loading="lazy" width="1792" height="1024" /><span className="visual-caption">Capability becomes useful when people can act on it.</span></div>
+      <div className="story-visual"><img src="/pathwisse-ecosystem.png" alt="Pathwisse institutional employability platform — connecting students, placement teams, faculty, and enterprise" loading="lazy" width="1792" height="1024" /><span className="visual-caption">From enrollment to placement — one continuous readiness system.</span></div>
       <div className="story-copy">
-        <span className="eyebrow">PROGRESS WITH A PURPOSE</span>
-        <h2>One evidence layer. Many decisions.</h2>
-        <p>Pathwisse turns learning and applied work into signals that can be inspected, discussed, and improved. It is calm by design: fewer vague promises, more visible next steps.</p>
+        <span className="eyebrow">ONE SYSTEM. THREE AUDIENCES.</span>
+        <h2>The operating system for institutional employability.</h2>
+        <p>Pathwisse turns the student journey into a structured, verifiable path — from career direction and skill-building to placement readiness and recruiter exports. Colleges get live visibility. Students get proof that travels with them.</p>
         <div className="narrative-stack">{cards.map(([title, text], index) => <div key={title}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{text}</p></div></div>)}</div>
-        <a className="text-link" href="/product">Meet the Pathwisse Platform <ArrowUpRight size={16} /></a>
+        <a className="text-link" href="/product">Explore the Pathwisse Platform <ArrowUpRight size={16} /></a>
       </div>
     </section>
   );
@@ -330,14 +310,14 @@ function EcosystemStory() {
 function ProductEcosystem() {
   return (
     <section className="products-section">
-      <div className="section-heading"><div><span className="eyebrow">THE PATHWISSE ECOSYSTEM</span><h2>Focused products. One direction of travel.</h2></div><a className="text-link" href="/product">Explore all products <ArrowUpRight size={16} /></a></div>
+      <div className="section-heading"><div><span className="eyebrow">THE PATHWISSE PLATFORM</span><h2>Every feature is connected. Every signal is useful.</h2></div><a className="text-link" href="/product">Explore the platform <ArrowUpRight size={16} /></a></div>
       <div className="product-feature">
-        <div><span className="product-badge"><AudioLines size={19} /> CAREER VOICE</span><h3>Start with the question beneath the question.</h3><p>A guided career audit for interests, role comparison, evidence review, diagnosis, and a next action. Answer by voice or text, then move with more confidence.</p><a className="text-link" href="/product/career-voice">Find your career voice <ArrowUpRight size={16} /></a></div>
-        <div className="voice-visual"><div className="voice-orb"><AudioLines size={52} /></div><blockquote>What could my next<br />chapter look like?</blockquote><span>Understand → Choose → Audit → Next action</span></div>
+        <div><span className="product-badge"><AudioLines size={19} /> CAREER VOICE</span><h3>Career direction, before the roadmap begins.</h3><p>A guided career conversation that helps students compare roles, understand their starting point, and choose one useful next step — by voice or text. Works as a standalone tool or integrated into your institutional placement programme.</p><a className="text-link" href="/product/career-voice">Try Career Voice <ArrowUpRight size={16} /></a></div>
+        <div className="voice-visual"><div className="voice-orb"><AudioLines size={52} /></div><blockquote>What role actually<br />fits me right now?</blockquote><span>Direction → Roadmap → Proof → Readiness</span></div>
       </div>
       <div className="product-pair">
-        <a href="/enterprise/upskilling"><span className="eyebrow">ENTERPRISE UPSKILLING</span><h3>Capability gaps become role-based journeys.</h3><p>Assess teams, identify gaps, assign structured paths, and review growth through applied work.</p><span className="text-link">Explore workforce upskilling <ArrowUpRight size={16} /></span></a>
-        <a href="/enterprise/talent-intelligence"><span className="eyebrow">TALENT INTELLIGENCE <span className="coming">IN DEVELOPMENT</span></span><h3>Hiring signals become easier to inspect.</h3><p>Discover candidates through demonstrated skills, projects, and evidence of capability.</p><span className="text-link">Join the hiring waitlist <ArrowUpRight size={16} /></span></a>
+        <a href="/colleges/placement-teams"><span className="eyebrow">PLACEMENT TEAM TOOLS</span><h3>Live cohort readiness, early warnings, and recruiter exports.</h3><p>Placement coordinators get real-time visibility into who is job-ready, who needs intervention, and how to generate pre-filtered recruiter exports backed by verified skill evidence.</p><span className="text-link">Explore placement tools <ArrowUpRight size={16} /></span></a>
+        <a href="/enterprise/upskilling"><span className="eyebrow">ENTERPRISE UPSKILLING</span><h3>Capability gaps become role-based journeys.</h3><p>Assess teams, identify skill gaps against role requirements, assign structured upskilling paths, and track readiness movement — not just course completion.</p><span className="text-link">Explore enterprise upskilling <ArrowUpRight size={16} /></span></a>
       </div>
     </section>
   );
@@ -347,9 +327,9 @@ function TrustBand() {
   return (
     <section className="trust-band">
       {[
-        [ShieldCheck, 'Evidence-led', 'Signals are grounded in applied work and readiness context.'],
-        [Target, 'Actionable', 'Every view points toward the next useful step.'],
-        [Sparkles, 'AI-assisted', 'Guidance supports decisions without replacing human judgement.'],
+        [ShieldCheck, 'Verified evidence', 'Every skill signal is grounded in applied work, projects, and practice — not just course certificates.'],
+        [Target, 'Placement-ready reporting', 'NAAC, NIRF, and AICTE-aligned reporting built into the institutional analytics dashboard.'],
+        [Sparkles, 'Continuous visibility', 'Placement teams move from end-of-year reviews to real-time cohort readiness intelligence.'],
       ].map(([Icon, title, text]) => {
         const TrustIcon = Icon as typeof ShieldCheck;
         return <div key={title as string}><TrustIcon size={20} /><b>{title as string}</b><p>{text as string}</p></div>;
@@ -358,12 +338,12 @@ function TrustBand() {
   );
 }
 
-export function CTA({ title = 'Your next chapter starts with clarity.' }: { title?: string }) {
+export function CTA({ title = 'Ready to build placement readiness at scale?' }: { title?: string }) {
   return (
     <section className="cta-section">
-      <span className="eyebrow">POTENTIAL IS JUST THE BEGINNING</span>
+      <span className="eyebrow">GET STARTED WITH PATHWISSE</span>
       <h2>{title}</h2>
-      <div className="button-row"><a className="button orange" href={APP}>Find your path <ArrowRight size={16} /></a><a className="light-link" href="/contact">Let&apos;s build together <ArrowUpRight size={16} /></a></div>
+      <div className="button-row"><a className="button orange" href="/contact?interest=college">Request a demo <ArrowRight size={16} /></a><a className="light-link" href={CAREER_VOICE_URL}>Try Career Voice free <ArrowUpRight size={16} /></a></div>
     </section>
   );
 }
@@ -375,16 +355,16 @@ export function HomePage() {
       <main id="main">
         <section className="hero">
           <div className="hero-copy">
-            <div className="eyebrow hero-eyebrow"><span className="orange-line" />CLARITY. CAPABILITY. POSSIBILITY.</div>
-            <h1>Pathwisse turns capability into visible, actionable proof<span className="orange-text">.</span></h1>
-            <p>A connected career-readiness and capability system for students, placement teams, and enterprises. Know what to do next, who needs support, and who can do the work.</p>
-            <div className="button-row"><a className="button" href="#audiences">Explore the three views <ArrowRight size={16} /></a><a className="text-link" href="/contact">Partner with us <ArrowUpRight size={16} /></a></div>
-            <div className="hero-note"><span className="tiny-check"><Check size={11} /></span>Students: know what to do next. Placement teams: know who is ready. Enterprises: hire with evidence and upskill with direction.</div>
+            <div className="eyebrow hero-eyebrow"><span className="orange-line" />INSTITUTIONAL EMPLOYABILITY PLATFORM</div>
+            <h1>Structured roadmaps. Verified skill proof. Placement readiness<span className="orange-text">.</span></h1>
+            <p>Pathwisse is the operating system for college placement teams — giving students a structured path from career direction to verified readiness, and giving placement coordinators the live cohort intelligence they need to act early.</p>
+            <div className="button-row"><a className="button" href="/contact?interest=college">Request a demo <ArrowRight size={16} /></a><a className="text-link" href={CAREER_VOICE_URL}>Try Career Voice <ArrowUpRight size={16} /></a></div>
+            <div className="hero-note"><span className="tiny-check"><Check size={11} /></span>Trusted by placement teams, students, and educators. Aligned with NEP 2020, NAAC, NIRF, and AICTE frameworks.</div>
           </div>
           <div className="hero-product">
-            <div className="floating-label"><span className="proof-icon"><Check size={16} /></span><div><b>Capability, made visible.</b><small>Direction → practice → proof → action</small></div></div>
-            <AudienceWorkspace active="students" />
-            <div className="path-caption"><span className="path-line" />One Pathwisse system. Three customized experiences.</div>
+            <div className="floating-label"><span className="proof-icon"><Check size={16} /></span><div><b>Cohort readiness, live.</b><small>Direction → Practice → Proof → Placement</small></div></div>
+            <AudienceWorkspace active="colleges" />
+            <div className="path-caption"><span className="path-line" />One platform. Colleges, students, and enterprises.</div>
           </div>
         </section>
         <TrustBand />
@@ -392,18 +372,18 @@ export function HomePage() {
         <EcosystemStory />
         <ProductEcosystem />
         <section className="resources-section">
-          <div className="section-heading"><div><span className="eyebrow">ORGANIC GROWTH INFRASTRUCTURE</span><h2>Pages built for search, answers, and conversion.</h2></div><a href="/resources" className="text-link">Explore resources <ArrowUpRight size={16} /></a></div>
+          <div className="section-heading"><div><span className="eyebrow">CAREER RESOURCES</span><h2>Role guides, skill paths, and placement tools.</h2></div><a href="/resources/blog" className="text-link">Read the blog <ArrowUpRight size={16} /></a></div>
           <div className="resource-grid">
             {[
-              ['CAREER ROADMAP', 'Data Analyst', 'Turn questions into useful insights.', '/careers/data-analyst', <Compass size={55} key="icon" />],
-              ['PRACTICAL GUIDE', 'Build proof, not just a resume.', 'A guide to projects that show what you can do.', '/guides/build-career-evidence', <Layers3 size={55} key="icon" />],
-              ['FOR TEAMS', 'From skill gaps to growth.', 'Make workforce development more focused.', '/workforce/skill-gap-analysis', <BarChart3 size={55} key="icon" />],
+              ['CAREER ROADMAP', 'Data Analyst', 'From data foundations to SQL, dashboards, and placement-ready analytics projects.', '/careers/data-analyst', <Compass size={55} key="icon" />],
+              ['ROLE COMPARISON', 'Data Analyst vs Business Analyst', 'Compare responsibilities, required skills, projects, and transition paths between two popular roles.', '/compare/data-analyst-vs-business-analyst', <Layers3 size={55} key="icon" />],
+              ['FOR PLACEMENT TEAMS', 'Readiness before placement season.', 'How placement teams can move from last-minute urgency to continuous, actionable cohort visibility.', '/colleges/placement-teams', <BarChart3 size={55} key="icon" />],
             ].map((x, index) => (
               <a className="resource-item" href={x[3] as string} key={x[1] as string}><div className={'resource-art art-0' + (index + 1)}><span>{x[4]}</span><small>{x[0] as string}</small><ArrowUpRight /></div><h3>{x[1] as string}</h3><p>{x[2] as string}</p></a>
             ))}
           </div>
         </section>
-        <CTA title="Turn potential into proof people can act on." />
+        <CTA title="Give your placement team the visibility they need." />
       </main>
       <Footer />
     </>
