@@ -5,8 +5,8 @@ import { SITE_URL } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: 'Pathwisse — Turn capability into proof', template: '%s | Pathwisse' },
-  description: 'Pathwisse turns capability into visible, actionable proof. Career roadmaps for students, readiness for colleges, and hiring and upskilling for enterprises.',
+  title: { default: 'Pathwisse | Institutional Employability & Placement Platform', template: '%s | Pathwisse' },
+  description: 'Pathwisse is the institutional employability platform for colleges — structured roadmaps, verified skill proof and placement readiness reporting in one system.',
   icons: { icon: '/favicon.svg', apple: '/apple-touch-icon.svg' },
   manifest: '/site.webmanifest',
 };

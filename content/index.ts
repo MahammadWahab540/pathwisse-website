@@ -1,8 +1,6 @@
 import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
 import {
-  blogPostSchema,
   careerSchema,
-  type BlogPost,
   type Career,
   type HubData,
   type PageData,
@@ -14,14 +12,7 @@ import {
 const page = (input: Omit<PageData, 'status' | 'audience'> & Partial<Pick<PageData, 'status' | 'audience'>>) =>
   pageSchema.parse({ status: 'published', audience: 'all', ...input });
 
-const sections = (focus: string): [string, string][] => [
-  ['Problem', focus],
-  ['Pathwisse approach', 'Pathwisse connects direction, skill development, applied projects, readiness signals, and decision support in one capability system.'],
-  ['Product experience', 'The experience moves from diagnosis to guided action, then turns progress into evidence that students, placement teams, and enterprises can use.'],
-  ['Outcome', 'The result is a clearer next step, stronger visibility into capability, and a more useful conversation about readiness.'],
-];
-
-const mk = (slug: string, title: string, description: string, kind: PageData['kind'] = 'product', cta = 'Talk to Pathwisse', href = '/contact', noindex = false) =>
+const mk = (slug: string, title: string, description: string, kind: PageData['kind'] = 'product', cta = 'Request a demo', href = '/contact', noindex = false) =>
   page({
     slug,
     title,
@@ -31,263 +22,802 @@ const mk = (slug: string, title: string, description: string, kind: PageData['ki
     cta,
     href,
     noindex,
-    sections: sections(description),
-    faq: [['Is this page using real customer data?', 'No. Product visuals on the website use illustrative product experience unless approved customer evidence is clearly published.']],
-    related: ['product', 'students', 'colleges', 'enterprise'],
+    sections: [],
+    faq: [],
+    related: [],
   });
 
+// ─── CAREERS ────────────────────────────────────────────────────────────────
 export const careers: Career[] = [
-  ['data-analyst', 'Data Analyst', 'Analyze data, explain patterns, and help teams make better decisions.', ['Clean and prepare data', 'Write SQL queries', 'Build dashboards', 'Explain findings'], ['Reliable analysis', 'Clear dashboards'], ['SQL', 'Power BI', 'Communication'], ['Python'], ['Data foundations', 'SQL', 'Visualization', 'Analytics projects'], ['Customer insights dashboard'], ['business-analyst', 'ai-engineer']],
-  ['business-analyst', 'Business Analyst', 'Translate business problems into requirements, analysis, and practical decisions.', ['Map processes', 'Gather requirements', 'Analyze metrics', 'Coordinate stakeholders'], ['Clear requirements', 'Better process decisions'], ['Communication', 'SQL'], ['Power BI'], ['Business context', 'Requirements', 'Data basics', 'Case practice'], ['Process improvement brief'], ['data-analyst', 'product-manager']],
-  ['product-manager', 'Product Manager', 'Define product direction, prioritize work, and connect user needs with business outcomes.', ['Understand users', 'Prioritize opportunities', 'Write product requirements', 'Measure adoption'], ['Clear product decisions', 'Aligned teams'], ['Communication'], ['SQL', 'Power BI'], ['User research', 'Problem framing', 'Prioritization', 'Metrics'], ['Feature discovery memo'], ['business-analyst', 'data-analyst']],
+  ['data-analyst', 'Data Analyst', 'Analyze data, explain patterns, and help teams make better decisions.', ['Clean and prepare data', 'Write SQL queries', 'Build dashboards', 'Explain findings clearly'], ['Reliable analysis', 'Clear dashboards'], ['SQL', 'Power BI', 'Communication'], ['Python'], ['Data foundations', 'SQL', 'Visualization', 'Analytics projects'], ['Customer insights dashboard'], ['business-analyst', 'ai-engineer']],
+  ['business-analyst', 'Business Analyst', 'Translate business problems into requirements, analysis, and practical decisions.', ['Map processes', 'Gather requirements', 'Analyse metrics', 'Coordinate stakeholders'], ['Clear requirements', 'Better process decisions'], ['Communication', 'SQL'], ['Power BI'], ['Business context', 'Requirements', 'Data basics', 'Case practice'], ['Process improvement brief'], ['data-analyst', 'product-manager']],
+  ['product-manager', 'Product Manager', 'Define product direction, prioritise work, and connect user needs with business outcomes.', ['Understand users', 'Prioritise opportunities', 'Write product requirements', 'Measure adoption'], ['Clear product decisions', 'Aligned teams'], ['Communication'], ['SQL', 'Power BI'], ['User research', 'Problem framing', 'Prioritisation', 'Metrics'], ['Feature discovery memo'], ['business-analyst', 'data-analyst']],
   ['full-stack-developer', 'Full Stack Developer', 'Build web applications across frontend, backend, data, and deployment workflows.', ['Build interfaces', 'Create APIs', 'Work with databases', 'Ship features'], ['Working applications', 'Maintainable code'], ['JavaScript', 'Communication'], ['Python', 'SQL'], ['Web foundations', 'Frontend', 'Backend APIs', 'Databases'], ['Career dashboard app'], ['ai-engineer', 'product-manager']],
   ['ai-engineer', 'AI Engineer', 'Build AI-enabled systems that combine models, product context, data, and evaluation.', ['Design AI workflows', 'Integrate models', 'Evaluate outputs', 'Build safe product experiences'], ['Useful AI features', 'Reliable evaluation'], ['Python', 'Communication'], ['SQL'], ['Python', 'Data basics', 'Model integration', 'Evaluation'], ['AI support assistant prototype'], ['data-analyst', 'full-stack-developer']],
 ].map(([slug, name, shortSummary, responsibilities, roleOutcomes, requiredSkills, optionalSkills, roadmap, projects, relatedCareers]) =>
   careerSchema.parse({
-    slug,
-    name,
-    shortSummary,
-    responsibilities,
-    roleOutcomes,
-    requiredSkills,
-    optionalSkills,
-    roadmap,
-    projects,
-    relatedCareers,
+    slug, name, shortSummary, responsibilities, roleOutcomes, requiredSkills, optionalSkills, roadmap, projects, relatedCareers,
     interviewPreparation: ['Project walkthrough', 'Role-specific scenarios', 'Communication practice'],
-    product: 'product/career-roadmaps',
-    faq: [['How should I use this roadmap?', 'Use it as guidance, then validate direction through practice, projects, and conversations.']],
+    product: 'product',
+    faq: [['How should I use this roadmap?', 'Use it as a starting point, then validate direction through practice, projects, and real conversations with people in the role.']],
     references: [],
-    seoTitle: `${name} Career Roadmap`,
+    seoTitle: `${name} Career Roadmap — Pathwisse`,
     metaDescription: shortSummary,
   }),
 );
 
+// ─── SKILLS ─────────────────────────────────────────────────────────────────
 export const skills: Skill[] = [
-  ['sql', 'SQL', 'Use databases to query, join, aggregate, and explain structured data.', ['Analytics', 'Reporting'], ['data-analyst', 'business-analyst'], ['Data tables'], ['Select and filter', 'Joins', 'Aggregations', 'Window functions'], ['Write joins', 'Analyze metrics'], ['Customer insights dashboard'], ['power-bi', 'python']],
+  ['sql', 'SQL', 'Use databases to query, join, aggregate, and explain structured data.', ['Analytics', 'Reporting'], ['data-analyst', 'business-analyst'], ['Data tables'], ['Select and filter', 'Joins', 'Aggregations', 'Window functions'], ['Write joins', 'Analyse metrics'], ['Customer insights dashboard'], ['power-bi', 'python']],
   ['python', 'Python', 'Use Python for analysis, automation, data workflows, and AI-enabled product work.', ['Automation', 'Data analysis', 'AI prototypes'], ['data-analyst', 'ai-engineer', 'full-stack-developer'], ['Programming basics'], ['Syntax', 'Data structures', 'Files', 'APIs'], ['Clean a dataset', 'Call an API'], ['AI support assistant prototype'], ['sql', 'communication']],
   ['power-bi', 'Power BI', 'Build dashboards that turn data into clear operational and business decisions.', ['Dashboards', 'Business reviews'], ['data-analyst', 'business-analyst'], ['Data basics'], ['Import data', 'Model data', 'DAX basics', 'Dashboard design'], ['Build KPI cards', 'Explain trends'], ['Sales performance analysis'], ['sql', 'communication']],
-  ['communication', 'Communication', 'Explain context, decisions, tradeoffs, and evidence so people can act.', ['Interviews', 'Stakeholder updates', 'Project walkthroughs'], ['data-analyst', 'business-analyst', 'product-manager', 'ai-engineer'], ['Clear thinking'], ['Summaries', 'Structured explanations', 'Stakeholder updates'], ['Explain a project', 'Write a decision memo'], ['Project reflection portfolio'], ['sql', 'power-bi']],
+  ['communication', 'Communication', 'Explain context, decisions, tradeoffs, and evidence so people can act on it.', ['Interviews', 'Stakeholder updates', 'Project walkthroughs'], ['data-analyst', 'business-analyst', 'product-manager', 'ai-engineer'], ['Clear thinking'], ['Summaries', 'Structured explanations', 'Stakeholder updates'], ['Explain a project', 'Write a decision memo'], ['Project reflection portfolio'], ['sql', 'power-bi']],
 ].map(([slug, name, description, whereUsed, careerList, prerequisites, progression, exercises, projects, relatedSkills]) =>
   skillSchema.parse({
-    slug,
-    name,
-    description,
-    whereUsed,
+    slug, name, description, whereUsed,
     careers: careerList,
-    prerequisites,
-    progression,
-    exercises,
-    projects,
-    relatedSkills,
-    faq: [['Can this skill be practiced on Pathwisse?', 'Yes. Skill pages connect to exercises, projects, and readiness context.']],
+    prerequisites, progression, exercises, projects, relatedSkills,
+    faq: [['Can I practice this skill on Pathwisse?', 'Yes. Skill guides connect to exercises, structured projects, and readiness context on the platform.']],
     resources: [],
     cta: `Build ${name} evidence`,
   }),
 );
 
+// ─── PRIMARY AUDIENCE PAGES ──────────────────────────────────────────────────
 const primaryPages = [
-  mk('students', 'For students: know what to do next', 'Find direction, follow structured roadmaps, build skills and projects, practice consistently, and understand career readiness.', 'student', 'Start on Pathwisse', APP_AUTH_URL),
-  mk('colleges', 'For colleges and placement teams', 'Measure student readiness, identify skill gaps, track cohort progress, and improve placement conversations.', 'college', 'Request demo', '/contact?interest=college'),
-  mk('enterprise', 'For enterprises: hire with evidence, upskill with direction', 'Assess employees, identify capability gaps, guide role-based upskilling, and prepare for evidence-led hiring.', 'workforce', 'Request demo', '/contact?interest=upskilling'),
+  page({
+    slug: 'students',
+    title: 'For Students — Build career readiness with proof',
+    description: 'Move from uncertainty to a clear direction. Get a structured roadmap, build verified skills through practice and projects, and demonstrate real readiness for the roles you want.',
+    eyebrow: 'FOR STUDENTS',
+    kind: 'student',
+    cta: 'Start building',
+    href: APP_AUTH_URL,
+    sections: [
+      ['Career direction first', 'Start by understanding which roles fit your interests, strengths, and context. Pathwisse helps you compare options and choose one useful direction instead of staying stuck between possibilities.'],
+      ['Structured roadmaps', 'Follow role-based paths that connect skills, practice, and applied projects. Each step builds on the last, turning learning into visible progress you can discuss in interviews.'],
+      ['Verified skill proof', 'Build a profile grounded in evidence — live projects, mentor-reviewed rubrics, code repositories, and readiness context — rather than course certificates alone.'],
+      ['Placement readiness', 'Understand where you are strong, where gaps exist, and which opportunities match your current evidence. Pathwisse helps you apply with context, not guesswork.'],
+    ],
+    faq: [
+      ['Is Pathwisse only for engineering students?', 'No. Pathwisse supports students across domains, with career roadmaps for roles in data, product, business analysis, full-stack development, and AI engineering.'],
+      ['Do I need to pay to start?', 'You can begin a career audit and explore direction for free. Talk to your placement office — many colleges provide Pathwisse access to all students as part of their employability programme.'],
+    ],
+    related: ['colleges', 'product', 'contact'],
+  }),
+  page({
+    slug: 'colleges',
+    title: 'Pathwisse Employability Operating System for Colleges',
+    description: 'See where every student stands, build the skills employers need, connect learning with real work, and continuously improve placement outcomes.',
+    eyebrow: 'EMPLOYABILITY OPERATING SYSTEM',
+    kind: 'college',
+    cta: 'Request institutional demo',
+    href: '/contact?interest=college',
+    sections: [
+      ['The Institutional Problem: Fragmented Initiatives & Hidden Gaps', 'Higher education does not suffer from a lack of activities — it suffers from fragmentation. Academics, isolated skill courses, guest lectures, student projects, mentoring, and placement drives operate in disconnected silos. Leadership cannot see who is genuinely becoming employable until placement season arrives, resulting in last-minute scrambles, unverified resume claims, and missed opportunities.'],
+      ['Not Another LMS: The 7-Layer Employability Operating System', 'Pathwisse is not another LMS delivering passive video lectures. It is the institutional operating system that connects learning → evidence → employability → placement outcomes across the college:\n\n• Diagnose (CareerVoice): Understand student goals, communication, readiness, and career clarity from Year 1.\n• Predict (Student Intelligence): Identify placement-ready, at-risk, and intervention-needed students across departments.\n• Develop (Pathwisse Learning): Role-specific personalized skills, structured 12-month roadmaps, daily practice, and milestone projects.\n• Experience (Enterprise Projects): Students solve real company problems instead of only completing static theoretical courses.\n• Validate (Skill Passport): Objective, tamper-proof evidence of skills, code repositories, assessments, and verified performance.\n• Connect (Job Intelligence): Map student cohorts against relevant jobs, emerging roles, and real-time market demand.\n• Measure (Employability Analytics): Department, batch, and institution-level employability outcomes.'],
+      ['The Institutional Narrative: From Enrollment to Employment', 'Pathwisse structures institutional career preparation into a continuous, compounding progression:\n\nUnderstand students → Predict outcomes → Build skills → Give real experience → Match opportunities → Measure employability.\n\nDeans, Principals, and TPO Heads gain continuous visibility from Year 1, turning employability from an end-of-year gamble into a measurable institutional capability.'],
+      ['Departmental Benchmarking & Executive Oversight', 'Department Heads (HODs) track their branch-specific skill curves, practice consistency, and capstone project submissions. Institutional leadership receives executive readiness briefings, department benchmark comparisons, and early risk alerts for batches falling behind before placement drives start.'],
+      ['Accreditation & Regulatory Alignment', 'Pathwisse is built to automate evidence gathering and documentation for key institutional frameworks: NEP 2020 (skill-centric progression, Academic Bank of Credits), AICTE (internship tracking, industry linkages), UGC (career counseling records), NAAC & NIRF (outcome tracking and automated evidence collation), NBA (Outcome-Based Education and PO/CO competency mapping), and DPDP Act 2023.'],
+    ],
+    faq: [
+      ['How does Pathwisse differ from traditional LMS and assessment portals?', 'An LMS hosts videos; an assessment portal gives test scores. Pathwisse is an Employability Operating System that connects student career diagnosis, daily practice, enterprise projects, verified skill evidence, candidate-job matching, and institutional outcome analytics in one closed loop.'],
+      ['How does management track progress across different departments and batches?', 'Leadership dashboards provide real-time aggregate and departmental views, tracking student activation rates, roadmap progression, practice consistency, and placement probability across branches.'],
+      ['What is the typical deployment timeline for a university or college?', 'Through the Pathwisse Accelerator, institutions typically complete department configuration, roster onboarding, and faculty enablement within 2 to 4 weeks.'],
+    ],
+    related: ['colleges/placement-teams', 'how-it-works', 'outcomes', 'contact'],
+  }),
+  page({
+    slug: 'enterprise',
+    title: 'For Enterprises — Hire with evidence. Upskill with direction.',
+    description: 'Assess your workforce, identify capability gaps, run role-based upskilling journeys, and discover talent through demonstrated skill evidence — not just resumes.',
+    eyebrow: 'FOR ENTERPRISES',
+    kind: 'workforce',
+    cta: 'Request a demo',
+    href: '/contact?interest=upskilling',
+    sections: [
+      ['Workforce capability assessment', 'Understand what your teams can currently do against what roles require. Move beyond skills lists to actual applied work evidence.'],
+      ['Role-based upskilling journeys', 'Create structured paths that close specific skill gaps with practice, projects, and applied milestones. Track progress and measure readiness movement over time.'],
+      ['AI workforce readiness', 'Map AI-related skills, identify gaps, and build practical upskilling paths for teams who need to work effectively alongside AI tools and systems.'],
+      ['Internal mobility and hiring intelligence', 'Identify people ready for new roles and show what they need to build next. Discover candidates through demonstrated capability, not just profiles. (Hiring intelligence in development.)'],
+    ],
+    faq: [
+      ['How is Pathwisse different from an LMS?', 'An LMS delivers content. Pathwisse builds capability evidence — it tracks whether someone can actually do the work, through applied projects, readiness scores, and structured practice, not just course completion.'],
+      ['What size organisations does Pathwisse serve?', 'Pathwisse works with enterprises of 200+ employees. Pricing is tailored by employee count, roles, integration requirements, and rollout scope.'],
+    ],
+    related: ['product', 'colleges', 'contact'],
+  }),
 ];
 
+// ─── THE PATHWISSE PRODUCT SUPERSTRUCTURE (9 CONNECTED PRODUCTS + PLATFORM) ───
 const productPages = [
-  ['product', 'Pathwisse Platform', 'The connected capability platform for career direction, roadmaps, practice, projects, readiness, and analytics.', 'product', APP_AUTH_URL],
-  ['product/career-voice', 'Career Voice', 'A guided career conversation that helps students compare directions and choose a useful next step.', 'student', CAREER_VOICE_URL],
-  ['product/career-roadmaps', 'Career Roadmaps', 'Role-based paths that connect skills, projects, practice, and readiness milestones.', 'product', '/students/career-roadmaps'],
-  ['product/practice-lab', 'Practice Lab', 'Daily practice that helps learners build consistency and convert learning into usable skills.', 'student', APP_AUTH_URL],
-  ['product/projects', 'Projects', 'Applied work that captures problem context, decisions, outputs, and reflection as evidence of capability.', 'product', '/students/projects'],
-  ['product/skill-passport', 'Skill Passport', 'A portable view of demonstrated skills, projects, progress, and readiness context.', 'product', APP_AUTH_URL],
-  ['product/readiness-scoring', 'Readiness Scoring', 'A transparent readiness layer for students, cohorts, candidates, and employees.', 'college', '/colleges/placement-readiness'],
-  ['product/analytics', 'Analytics', 'Dashboards for cohort progress, skill gaps, journeys, and workforce capability.', 'college', '/contact?interest=college'],
-  ['product/integrations', 'Integrations', 'A practical integration layer for college systems, workforce workflows, CRM, and automation partners.', 'product', '/contact?interest=general'],
-].map(([slug, title, description, kind, href]) => mk(slug, title, description, kind as PageData['kind'], 'Explore', href));
-
-type RouteSeed = [string, string, string, PageData['kind']?];
-const routeTitles: RouteSeed[] = [
-  ['students/career-audit', 'Career audit for students', 'Understand where you are starting from and which directions deserve your attention first.', 'student'],
-  ['students/career-roadmaps', 'Student career roadmaps', 'Follow a structured path from direction to skills, projects, evidence, and readiness.', 'student'],
-  ['students/skill-sprints', 'Skill sprints', 'Build one useful capability at a time with focused practice and applied tasks.', 'student'],
-  ['students/projects', 'Student projects', 'Create evidence through projects that show decisions, constraints, and outcomes.', 'student'],
-  ['students/daily-practice', 'Daily practice', 'Turn consistency into visible progress through small, role-relevant tasks.', 'student'],
-  ['students/career-readiness', 'Career readiness', 'Understand strengths, gaps, next steps, and interview preparation without guessing.', 'student'],
-  ['students/pricing', 'Student pricing', 'Simple student plans for career direction, practice, projects, and readiness support.', 'pricing'],
-  ['students/success-stories', 'Student success stories', 'Approved student journeys will appear here as Pathwisse publishes verified stories.', 'customer'],
-  ['colleges/overview', 'College overview', 'A connected view of readiness for placement teams, management, and faculty.', 'college'],
-  ['colleges/placement-teams', 'Placement teams', 'See who is ready, who needs support, and which interventions should happen next.', 'college'],
-  ['colleges/management', 'College management', 'Track employability initiatives with clearer visibility into cohort progress and readiness.', 'college'],
-  ['colleges/faculty', 'Faculty enablement', 'Connect project-based learning and skill practice to student readiness outcomes.', 'college'],
-  ['colleges/student-readiness-audit', 'Student readiness audit', 'Start with an evidence-based view of cohort readiness and priority gaps.', 'college'],
-  ['colleges/career-accelerator', 'Career accelerator', 'Run structured career readiness journeys across students, roles, and cohorts.', 'college'],
-  ['colleges/placement-readiness', 'Placement readiness', 'Prepare students for opportunities using readiness signals and project evidence.', 'college'],
-  ['colleges/student-analytics', 'Student analytics', 'Measure skill gaps, practice consistency, project progress, and role readiness.', 'college'],
-  ['colleges/project-based-learning', 'Project-based learning for colleges', 'Make applied work visible and useful for readiness conversations.', 'college'],
-  ['colleges/implementation', 'College implementation', 'Plan onboarding, cohort setup, faculty alignment, and reporting workflows.', 'college'],
-  ['colleges/integrations', 'College integrations', 'Connect Pathwisse with workflows that placement and academic teams already use.', 'college'],
-  ['colleges/pricing', 'College pricing', 'Discuss cohort size, implementation scope, and partnership model with the Pathwisse team.', 'pricing'],
-  ['colleges/request-demo', 'Request a college demo', 'Share your placement readiness goals and explore a partnership conversation.', 'campaign'],
-  ['enterprise/overview', 'Enterprise overview', 'One capability system for workforce assessment, upskilling, mobility, and hiring intelligence.', 'workforce'],
-  ['enterprise/workforce-assessment', 'Workforce assessment', 'Assess current capability against role expectations and business needs.', 'workforce'],
-  ['enterprise/upskilling', 'Enterprise upskilling', 'Create role-based journeys that close skill gaps and make workforce progress visible.', 'workforce'],
-  ['enterprise/ai-readiness', 'AI workforce readiness', 'Map AI-related skills, gaps, and applied practice needs across teams.', 'workforce'],
-  ['enterprise/internal-mobility', 'Internal mobility', 'Identify people ready for new roles and show what they need to build next.', 'workforce'],
-  ['enterprise/graduate-training', 'Graduate training', 'Move early talent from onboarding to role readiness through structured paths and projects.', 'workforce'],
-  ['enterprise/project-based-learning', 'Project-based learning for enterprises', 'Use applied projects to build and verify practical capability.', 'workforce'],
-  ['enterprise/talent-intelligence', 'Talent and hiring intelligence', 'A developing product for discovering candidates through evidence of capability.', 'hiring'],
-  ['enterprise/skill-verification', 'Skill verification', 'Review demonstrated skills through practice, project work, and readiness context.', 'workforce'],
-  ['enterprise/implementation', 'Enterprise implementation', 'Plan roles, capability maps, journeys, integrations, reporting, and rollout.', 'workforce'],
-  ['enterprise/integrations', 'Enterprise integrations', 'Prepare CRM, HR, learning, email, and automation workflows without tight provider coupling.', 'workforce'],
-  ['enterprise/request-demo', 'Request an enterprise demo', 'Explore workforce upskilling, assessment, internal mobility, or hiring intelligence.', 'campaign'],
-  ['career-audit/start', 'Start your career audit', 'Begin with a guided audit to clarify possible career directions.', 'student'],
-  ['career-audit/assessment', 'Career audit assessment', 'Answer practical questions about interests, skills, constraints, and goals.', 'student'],
-  ['career-audit/result', 'Career audit result', 'Review likely directions, skill gaps, project ideas, and a recommended next step.', 'student'],
-  ['career-audit/roadmap', 'Career audit roadmap', 'Turn guidance into a simple roadmap with skills, practice, and projects.', 'student'],
-  ['pricing/students', 'Student pricing', 'Choose a student plan for direction, practice, projects, and readiness.', 'pricing'],
-  ['pricing/colleges', 'College pricing', 'Discuss cohort pricing, implementation, and partnership support.', 'pricing'],
-  ['pricing/enterprise', 'Enterprise pricing', 'Request pricing for workforce assessment, upskilling, and capability intelligence.', 'pricing'],
-  ['company/about', 'About Pathwisse', 'Pathwisse helps people and teams turn capability into visible, actionable proof.', 'company'],
-  ['company/careers', 'Careers at Pathwisse', 'Future Pathwisse roles will be published here.', 'company'],
-  ['company/partners', 'Pathwisse partners', 'Partnership routes for colleges, training partners, and ecosystem partners.', 'company'],
-  ['company/contact', 'Contact Pathwisse', 'Reach the Pathwisse team for student, college, enterprise, or partner enquiries.', 'company'],
-  ['company/press', 'Press', 'Company background and media resources will appear here as approved materials are published.', 'company'],
-  ['trust/security', 'Security', 'How Pathwisse thinks about data protection, access, infrastructure, and secure product development.', 'trust'],
-  ['trust/privacy', 'Privacy', 'Pathwisse privacy notice for website visitors, leads, students, partners, and enterprise conversations.', 'trust'],
-  ['trust/compliance', 'Compliance', 'A practical view of Pathwisse compliance readiness and responsible data handling.', 'trust'],
-  ['trust/dpdp', 'DPDP', 'India DPDP-oriented privacy readiness and consent principles for Pathwisse experiences.', 'trust'],
-  ['trust/terms', 'Terms', 'Terms for using Pathwisse website and related public resources.', 'trust'],
-  ['customers', 'Customers', 'Verified customer stories will be published as approved case studies become available.', 'customer'],
-  ['customers/students', 'Student stories', 'Approved student stories will focus on direction, readiness, and project evidence.', 'customer'],
-  ['customers/colleges', 'College stories', 'Approved college stories will focus on readiness visibility and placement support.', 'customer'],
-  ['customers/enterprises', 'Enterprise stories', 'Approved enterprise stories will focus on workforce capability and upskilling journeys.', 'customer'],
-  ['customers/case-studies/sample', 'Case study placeholder', 'Approved case studies will use context, challenge, approach, evidence, outcome, limitations, and CTA.', 'customer'],
+  page({
+    slug: 'product',
+    title: 'Pathwisse Employability Intelligence System — Master Architecture',
+    description: 'A connected architecture across Understand, Develop, Prove, Intelligence, and Outcomes. Built on an evidence graph that turns learning into verifiable placement outcomes.',
+    eyebrow: 'THE SUPERSTRUCTURE',
+    kind: 'product',
+    cta: 'Explore institutional architecture',
+    href: '/contact?interest=college',
+    sections: [
+      ['The Broken System: Disconnected Silos & AI Horoscopes', 'Most higher education platforms operate in disconnected vacuums: LMS portals track video watch time, assessment vendors output isolated test scores, and placement cells maintain outdated spreadsheets. Signals are lost across semesters. When recruiters arrive, institutions scramble to manufacture readiness instead of proving it systematically.'],
+      ['The Three Core Phases: Understand, Develop, Prove', 'Pathwisse organizes capability development into three rigorous, compounding phases:\n\n1. UNDERSTAND (CareerVoice): Surface student career intent, communication readiness, and diagnostic clarity before training begins.\n2. DEVELOP (Career Roadmaps & Practice Lab): Role-specific 12-month paths paired with daily adaptive practice across aptitude, reasoning, and technical stacks.\n3. PROVE (Enterprise Projects & Skill Passport): Real company briefs and code repositories verified into a cryptographic capability passport.'],
+      ['The Intelligence & Outcomes Layer', 'Above the execution phases sits the Pathwisse Intelligence Layer:\n\n• Readiness Intelligence: Multi-factor clinical diagnostic scoring with explainable drivers.\n• Job Intelligence: Real-time labour market demand radar and skill mapping.\n• Placement Intelligence: Candidate-job matching, cohort tiering, and 30-day intervention planning.\n• Employability Analytics: Executive boardroom telemetry for deans, HODs, and accreditation bodies (NEP 2020, NAAC, NIRF, NBA).'],
+      ['Built on Evidence, Not Assumptions: The Data Backbone', 'Pathwisse does not rely on generic claims. The intelligence graph continuously compounds from 9 synchronized data streams:\n\nINPUTS:\n• Student profile & academic history\n• CareerVoice conversation transcripts & communication metrics\n• Practice Lab attempt velocity & accuracy heatmaps\n• Milestone roadmap progression\n• Enterprise project code repositories & mentor rubric evaluations\n• Skill Passport credentials\n• Live job-market demand feeds\n\nCOMPUTATION:\n• Pathwisse Intelligence Graph calculates skill trees, confidence intervals, and placement probabilities.\n\nOUTPUTS:\n• Explainable readiness scores, 30-day intervention prescriptions, recruiter match cohorts, and institutional telemetry.'],
+      ['The Closed Loop: The Defensible Moat', 'Pathwisse does not collect data just to report it. Each new signal changes the next action:\n\nCareerVoice signal → skill gap → roadmap → practice → project evidence → job match → placement outcome → better next recommendation.\n\nThis compounding feedback loop ensures that as cohorts progress, institutional placement velocity continuously lifts.'],
+    ],
+    faq: [
+      ['Is Pathwisse an LMS or an assessment tool?', 'Neither. Pathwisse is an Employability Intelligence System that bridges diagnostics, structured learning paths, real company projects, and placement matching into one unified operating system.'],
+      ['Can institutions license individual modules or the full suite?', 'Colleges can deploy the complete Employability Operating System or phase rollouts starting with CareerVoice diagnostics and the Placement Command Center.'],
+    ],
+    related: ['product/career-voice', 'product/career-roadmaps', 'product/placement-intelligence', 'colleges'],
+  }),
+  page({
+    slug: 'product/career-voice',
+    title: 'CareerVoice — Voice-Led Career Discovery & Diagnostic',
+    description: 'Voice-led career discovery, communication assessment, readiness diagnosis, and actionable guidance. Know what the student can actually do before training begins.',
+    eyebrow: 'UNDERSTAND · DIAGNOSTIC ENTRY POINT',
+    kind: 'product',
+    cta: 'Experience CareerVoice',
+    href: CAREER_VOICE_URL,
+    sections: [
+      ['The Broken System: Marks Without Clarity or Communication Proof', 'Colleges know student marks, CGPA, and attendance, but they have zero visibility into career clarity, spoken communication capability, or authentic intent. Students get pushed into generic placement training without understanding which role fits them or why they struggle in live interviews.'],
+      ['Data Evidence: Where the Placement Breakdown Begins', 'Over 70% of final-year students cite career confusion, while campus recruiters reject up to 65% of technically eligible candidates at the first behavioral or communication round. Traditional multiple-choice questionnaires fail to capture spontaneous reasoning, tone, articulation, or problem-framing.'],
+      ['How Pathwisse Changes It: The Voice-Led Transformation', 'BEFORE: Students fill out static interest surveys; placement cells guess role readiness from branch names.\nPATHWISSE: Students engage in an immersive voice-led career conversation. The AI listens, probes trade-offs, and evaluates communication nuances and role alignment.\nAFTER: Students receive an immediate diagnostic clarity report; the institution gets a baseline map of cohort communication and career intent.'],
+      ['Built on Evidence, Not Assumptions: The CareerVoice Pipeline', 'INPUTS:\n• Audio voice session recordings & spoken responses\n• Self-reported career goals and role interests\n• Spontaneous technical explanations & scenario responses\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Natural language parsing evaluates vocabulary depth, structural coherence, confidence metrics, and role-fit vectors against market benchmarks.\n\nOUTPUTS:\n• Career clarity profile (target roles ranked by fit)\n• Objective Interview Readiness Index (IRI) score\n• Granular communication and reasoning strength/gap breakdown\n• Immediate next roadmap prescription.'],
+      ['Real Outcomes: From Uncertainty to a Concrete First Step', 'Students eliminate months of career anxiety by committing to a role-based trajectory backed by evidence. Placement cells identify communication bottlenecks across first- and second-year cohorts early enough to intervene.'],
+      ['Trust & Governance: Safe, Explainable Diagnostics', 'Audio transcripts are transparently accessible to students and faculty advisors. Scoring rubrics are explainable, purpose-limited, and compliant with DPDP 2023 consent standards.'],
+      ['Next Step in the Loop: From Diagnostic to Structured Roadmap', 'A CareerVoice diagnostic only becomes valuable when it powers action. Once a student’s strengths and gaps are mapped, Pathwisse automatically transitions them into their personalized Career Roadmap.'],
+    ],
+    faq: [
+      ['Can students use CareerVoice on mobile devices?', 'Yes. CareerVoice runs seamlessly in any modern browser on mobile or desktop with no app installation required.'],
+      ['How does CareerVoice evaluate communication objectively?', 'The engine measures structural coherence, explanation logic, vocabulary appropriateness, and conversational confidence against established professional interview rubrics.'],
+    ],
+    related: ['product/career-roadmaps', 'product/practice-lab', 'product/readiness-intelligence'],
+  }),
+  page({
+    slug: 'product/career-roadmaps',
+    title: 'Career Roadmaps — Personalized Role-Based Learning Paths',
+    description: 'Personalized role-based learning paths with skills, stages, topics, and milestones. Turn scattered course completion into a 12-month structured progression.',
+    eyebrow: 'DEVELOP · STRUCTURED PROGRESSION',
+    kind: 'product',
+    cta: 'Explore career roadmaps',
+    href: '/students/career-roadmaps',
+    sections: [
+      ['The Broken System: The Fragmented Course Trap', 'Students jump between random YouTube tutorials, disjointed certification courses, and last-minute coding cram sessions. They collect certificates but cannot assemble a coherent portfolio of skills that matches real job requirements.'],
+      ['Data Evidence: Why Certification Does Not Equal Job Readiness', 'Recruiters report that fewer than 15% of certificate holders can write production-ready code or explain architectural decisions. Without progressive milestones, students drop out of self-paced courses with less than 10% completion rates.'],
+      ['How Pathwisse Changes It: The Milestone Journey', 'BEFORE: Scattered syllabi, generic course lists, and uncoordinated learning across semesters.\nPATHWISSE: A role-specific 12-month spatial roadmap structured into progressive stages: Foundations → Core Skills → Practice Sprints → Applied Enterprise Milestone.\nAFTER: Students know their exact next step every single day; placement teams track cohort milestone completion velocities.'],
+      ['Built on Evidence, Not Assumptions: The Roadmap Pipeline', 'INPUTS:\n• Target role selection & CareerVoice diagnostic baseline\n• Completed prerequisites and module quiz checkpoints\n• Practice Lab streak data and project rubric grades\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Dynamically adapts milestone pacing based on student mastery velocity, unlocking advanced modules as prerequisite capabilities are verified.\n\nOUTPUTS:\n• Personalized stage-by-stage learning trajectory\n• Role-specific topic explainers and practice prompts\n• Real-time milestone progress tracking for faculty and TPOs.'],
+      ['Real Outcomes: Coherent Capability Compounded Over Time', 'Students complete 4x more learning modules when guided by a spatial milestone map. Faculty and HODs see exactly where department cohorts are progressing along role-based trajectories.'],
+      ['Trust & Governance: Industry-Vetted Syllabi', 'Every Career Roadmap is curated with inputs from senior engineers, hiring managers, and corporate partners, ensuring curriculum alignment with modern industry standards.'],
+      ['Next Step in the Loop: From Structured Roadmap to Daily Practice', 'A roadmap defines the destination; daily practice builds the muscle. Follow your roadmap milestones into the Pathwisse Practice Lab.'],
+    ],
+    faq: [
+      ['Can institutions customize roadmaps to match university academic calendars?', 'Yes. Placement cells and HODs can align roadmap milestones with internal semester exams, internship periods, and campus placement schedules.'],
+      ['What roles are supported on Career Roadmaps?', 'Pathwisse provides comprehensive roadmaps for Data Analyst, Business Analyst, Product Manager, Full Stack Developer, AI Engineer, and Cloud Operations.'],
+    ],
+    related: ['product/practice-lab', 'product/enterprise-projects', 'product/career-voice'],
+  }),
+  page({
+    slug: 'product/practice-lab',
+    title: 'Practice Lab — Daily Performance Cockpit & Skill Sprints',
+    description: 'Daily aptitude, reasoning, communication, technical, and interview practice. Build lasting employability habits with game-like consistency and adaptive challenges.',
+    eyebrow: 'DEVELOP · HABIT & MASTERY',
+    kind: 'product',
+    cta: 'Launch Practice Lab',
+    href: APP_AUTH_URL,
+    sections: [
+      ['The Broken System: Passive Video Consumption Without Repetition', 'Watching a tutorial video creates the illusion of learning. When faced with an unscripted coding problem or an aptitude speed test in a 45-minute placement screening, students freeze because they have never built daily muscle memory.'],
+      ['Data Evidence: Retention Plummets Without Daily Retrieval', 'Cognitive research shows that 75% of passive technical content is forgotten within 48 hours without active recall. Campus recruitment tests reject 60% of applicants solely on aptitude and reasoning cutoffs.'],
+      ['How Pathwisse Changes It: The Daily Performance Cockpit', 'BEFORE: Binge-watching tutorials the weekend before campus placement drives.\nPATHWISSE: A daily performance cockpit featuring streak tracking, daily missions, timed aptitude sprints, and adaptive coding challenges tailored to weak areas.\nAFTER: Students build verified 30-day practice streaks, improving problem-solving speed, accuracy, and confidence under timed test conditions.'],
+      ['Built on Evidence, Not Assumptions: The Practice Lab Pipeline', 'INPUTS:\n• Daily attempt logs, submission accuracy, and completion times\n• Problem difficulty ratings and topic tags (SQL, Aptitude, Reasoning, Verbal)\n• Error patterns and repeat attempts\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Spaced repetition algorithm identifies recurring weak spots and serves targeted micro-challenges before performance decays.\n\nOUTPUTS:\n• Daily mission prompts tailored to individual skill gaps\n• Visual practice heatmaps and streak analytics\n• Objective aptitude and problem-solving readiness scores.'],
+      ['Real Outcomes: 3x Higher Screening Pass Rates', 'Students with an active 14+ day practice streak pass corporate aptitude and initial technical screenings at triple the rate of intermittent learners.'],
+      ['Trust & Governance: Integrity & Anti-Plagiarism Verification', 'Practice Lab records typing cadence, execution integrity, and step-by-step reasoning steps to ensure all streak data reflects authentic student effort.'],
+      ['Next Step in the Loop: From Daily Practice to Enterprise Projects', 'Daily drills build speed; now prove you can solve complex company problems. Take your verified skills into Enterprise Projects.'],
+    ],
+    faq: [
+      ['What areas are covered in the daily practice lab?', 'Practice Lab includes Quantitative Aptitude, Logical Reasoning, Verbal Communication, SQL queries, core programming languages, and scenario-based interview questions.'],
+      ['How much time does a daily mission take?', 'Missions are designed as high-intensity, 15- to 25-minute sprints that students can complete consistently every day without overwhelming their academic schedule.'],
+    ],
+    related: ['product/enterprise-projects', 'product/skill-passport', 'product/career-roadmaps'],
+  }),
+  page({
+    slug: 'product/enterprise-projects',
+    title: 'Enterprise Projects — Real Company Briefs & Measurable Evidence',
+    description: 'Real-world projects sourced from companies to create practical experience and measurable evidence. Move beyond toy homework into production-grade work.',
+    eyebrow: 'PROVE · APPLIED EXPERIENCE',
+    kind: 'product',
+    cta: 'Explore enterprise projects',
+    href: '/contact?interest=college',
+    sections: [
+      ['The Broken System: Generic Clones & Unverifiable Homework', 'Recruiters review thousands of resumes featuring the exact same clone projects: basic to-do apps, generic weather dashboards, and copy-pasted tutorial code. None of these demonstrate whether a candidate can solve ambiguous, messy business problems.'],
+      ['Data Evidence: Resumes With Clone Projects Get Ignored', 'Hiring managers spend an average of 6 seconds per resume. Resumes with generic tutorial projects are discarded because they provide zero signal regarding real architecture, error handling, data cleaning, or trade-off decisions.'],
+      ['How Pathwisse Changes It: Production-Grade Industry Briefs', 'BEFORE: Students copy boilerplate tutorials from GitHub repositories.\nPATHWISSE: Students work on structured briefs sourced from real enterprise requirements (FinTech churn models, e-commerce data pipelines, fraud anomaly detection). Work is submitted through GitHub pull requests and graded against industry rubrics.\nAFTER: Students present production-grade repositories with architectural documentation, unit tests, and video walkthroughs.'],
+      ['Built on Evidence, Not Assumptions: The Project Pipeline', 'INPUTS:\n• Company project specification briefs & edge-case requirements\n• Student code submissions, Git commit histories, and pull requests\n• Industry mentor rubric evaluations and feedback logs\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Static analysis evaluates code modularity, test coverage, edge-case resilience, and documentation clarity, validating true authorship and skill depth.\n\nOUTPUTS:\n• Production-grade capstone repositories\n• Mentor-signed rubric evaluations\n• Evidence artifacts verified into the student Skill Passport.'],
+      ['Real Outcomes: Candidates Interviewers Want to Talk To', 'During technical interviews, discussions shift from defensive textbook grilling to deep, engaging walkthroughs of real architecture and decisions made on the project.'],
+      ['Trust & Governance: Authentic Verification & Code Attribution', 'All project repositories are validated for original contribution through commit history analysis and viva voce defense recordings.'],
+      ['Next Step in the Loop: From Project Artifacts to Skill Passport', 'Your completed project code and mentor rubrics are sealed into your tamper-proof Skill Passport.'],
+    ],
+    faq: [
+      ['Who designs the enterprise project briefs?', 'Briefs are crafted in collaboration with corporate tech leaders and engineering partners to replicate real-world sprint tasks.'],
+      ['Are these projects eligible for university semester capstone credits?', 'Yes. Many partner colleges map Pathwisse Enterprise Projects directly into their academic curriculum and NEP 2020 experiential learning requirements.'],
+    ],
+    related: ['product/skill-passport', 'product/readiness-intelligence', 'product/practice-lab'],
+  }),
+  page({
+    slug: 'product/skill-passport',
+    title: 'Skill Passport — Verified Capability Record & Tamper-Proof Credentials',
+    description: 'A verified digital record of skills, assessments, projects, achievements, and capability evidence. Resumes contain claims; the Skill Passport provides proof.',
+    eyebrow: 'PROVE · VERIFIED CAPABILITY',
+    kind: 'product',
+    cta: 'View sample passport',
+    href: APP_AUTH_URL,
+    sections: [
+      ['The Broken System: Resumes Full of Unverified Claims', 'Anyone can write "Expert in Python, SQL, and Machine Learning" on a multi-page PDF resume. Recruiters have no way to verify whether the applicant has solved real problems or simply memorized interview keywords.'],
+      ['Data Evidence: Resume Fraud & Screening Friction', 'Surveys reveal that over 55% of resumes contain exaggerated technical claims, forcing recruiters to run extensive, costly screening rounds just to filter out unqualified candidates.'],
+      ['How Pathwisse Changes It: The Living Digital Passport', 'BEFORE: Static, text-only PDF resumes that recruiters distrust.\nPATHWISSE: A tamper-proof digital credential passport linking directly to verified code repositories, live demo URLs, CareerVoice communication IRI scores, and mentor evaluations.\nAFTER: Recruiters review candidate evidence with complete confidence; students stand out with undeniable proof of work.'],
+      ['Built on Evidence, Not Assumptions: The Passport Pipeline', 'INPUTS:\n• CareerVoice communication index ratings\n• Practice Lab streak and accuracy milestones\n• Enterprise Project code links and mentor rubric evaluations\n• Proctored assessment checkpoints\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Cryptographically aggregates cross-platform signals into a unified, tamper-proof capability graph with unique verification hashes.\n\nOUTPUTS:\n• Public verified capability profile with unique verification hash\n• Recruiter-ready candidate evidence drawers\n• Dynamic skills constellation mapped to market standards.'],
+      ['Real Outcomes: Instant Shortlisting by Corporate Recruiters', 'Placement cells using Skill Passport packages report a 40% reduction in recruiter shortlisting cycles, as hiring partners bypass preliminary filtering.'],
+      ['Trust & Governance: Tamper-Proof & Privacy-Preserving', 'Students control sharing permissions. Every credential is cryptographically stamped and cannot be retroactively altered or forged.'],
+      ['Next Step in the Loop: From Verified Credentials to Readiness Intelligence', 'Verified credentials feed the clinical diagnostic model: discover your multi-factor score in Readiness Intelligence.'],
+    ],
+    faq: [
+      ['Can recruiters verify a Skill Passport without logging in?', 'Yes. Every Skill Passport generates a secure, shareable public link with cryptographic verification badges and one-click code inspection.'],
+      ['How does the Skill Passport integrate with college placement records?', 'TPOs can export batch portfolios directly in recruiter-ready formats, attaching verified credentials to campus drive applications.'],
+    ],
+    related: ['product/readiness-intelligence', 'product/job-intelligence', 'product/enterprise-projects'],
+  }),
+  page({
+    slug: 'product/readiness-intelligence',
+    title: 'Readiness Intelligence — Explainable Multi-Factor Scoring & Gap Analysis',
+    description: 'Student readiness scoring, skill-gap analysis, recommendations, and intervention planning. A single test score cannot explain employability.',
+    eyebrow: 'INTELLIGENCE · DIAGNOSTIC ENGINE',
+    kind: 'product',
+    cta: 'Explore readiness scoring',
+    href: '/contact?interest=college',
+    sections: [
+      ['The Broken System: Oversimplified Cutoff Scores', 'Institutions traditionally evaluate students using single metrics: CGPA or a one-off aptitude test score. This binary cutoff ignores communication ability, project execution, practice consistency, and role-fit nuances.'],
+      ['Data Evidence: High CGPA Does Not Guarantee Placement', 'Up to 40% of students with top-tier academic scores struggle to secure offers because their spoken communication or applied problem-solving skills fall short during technical rounds.'],
+      ['How Pathwisse Changes It: Clinical Multi-Factor Diagnostic Modeling', 'BEFORE: Relying on CGPA cutoffs that fail to predict interview success.\nPATHWISSE: A multi-dimensional readiness model synthesizing technical depth, spoken communication, project evidence, and practice consistency into an explainable score.\nAFTER: Students and faculty see transparent factor trees and actionable prescriptions explaining exactly what needs improvement to achieve job-readiness.'],
+      ['Built on Evidence, Not Assumptions: The Readiness Pipeline', 'INPUTS:\n• Spoken communication signals from CareerVoice\n• Practice Lab speed and accuracy metrics\n• Enterprise Project quality and test coverage\n• Target role market requirements\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Weighs individual capability dimensions against role-specific hiring thresholds, computing multi-factor readiness scores and confidence intervals.\n\nOUTPUTS:\n• Explainable 0–100 Readiness Score with detailed factor tree\n• "Why this changed" delta logs tracking milestone progress\n• Granular skill-gap diagnostic alerts and 30-day intervention prescriptions.'],
+      ['Real Outcomes: Targeted Support That Moves the Needle', 'Instead of generic placement classes, students receive hyper-targeted micro-interventions tailored to their specific deficit (e.g., spoken articulation or SQL subqueries).'],
+      ['Trust & Governance: Explainability Over Black-Box Predictions', 'No black-box guesses. Every score is fully deconstructed into tangible evidence drivers, giving students and mentors transparent reasons for every rating.'],
+      ['Next Step in the Loop: From Readiness Scoring to Job Intelligence', 'Once readiness is diagnosed, discover which market opportunities match your profile in Job Intelligence.'],
+    ],
+    faq: [
+      ['How is the Readiness Score updated over time?', 'The score updates dynamically in real time as students complete practice missions, submit code repositories, and participate in mock interviews.'],
+      ['Can placement teams filter students by specific readiness factors?', 'Yes. TPOs can filter candidates by individual factors (e.g., Technical Score > 80 AND Communication Index > 75) for specialized recruiter drives.'],
+    ],
+    related: ['product/job-intelligence', 'product/placement-intelligence', 'product/skill-passport'],
+  }),
+  page({
+    slug: 'product/job-intelligence',
+    title: 'Job Intelligence — Real-Time Labour Market Radar & Role Mapping',
+    description: 'Job discovery, role-demand analysis, skill-demand mapping, and opportunity intelligence. Understand real-time industry demand before preparing.',
+    eyebrow: 'INTELLIGENCE · MARKET RADAR',
+    kind: 'product',
+    cta: 'Explore market intelligence',
+    href: '/contact?interest=college',
+    sections: [
+      ['The Broken System: Preparing for Yesterday’s Job Market', 'Curriculums and placement training typically lag industry realities by 3 to 5 years. Colleges prepare students for legacy stacks while employers seek modern tools, cloud paradigms, and AI-enabled workflows.'],
+      ['Data Evidence: The Rapidly Widening Skill Mismatch', 'Over 60% of entry-level job descriptions have altered their core skill requirements in the past 24 months, rendering static syllabus prep insufficient for modern hiring bars.'],
+      ['How Pathwisse Changes It: The Live Market Radar', 'BEFORE: Relying on outdated placement brochures and historical recruiter assumptions.\nPATHWISSE: A continuous labour market radar scanning live job postings to map emerging skill combinations, salary percentile bands, and role clusters.\nAFTER: Students and institutions align their roadmaps with live market demand, ensuring preparation matches active hiring requirements.'],
+      ['Built on Evidence, Not Assumptions: The Job Radar Pipeline', 'INPUTS:\n• Real-time data from thousands of corporate job descriptions\n• Industry compensation reports and hiring volume trends\n• Emerging skill co-occurrence patterns (e.g., Python + SQL + Vector DBs)\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Maps unstructured job requirements into structured skill graphs, cross-referencing industry demand against campus cohort capability.\n\nOUTPUTS:\n• Live role demand heatmaps and emerging skill streams\n• Compensation benchmarks and regional hiring trends\n• Instant candidate-to-job matching matrices for campus placement cells.'],
+      ['Real Outcomes: High-Value Placement Drives', 'Colleges attract higher-tier recruiters with competitive packages by proactively showcasing students trained in high-demand, emerging skill clusters.'],
+      ['Trust & Governance: Verified Corporate Demand Data', 'Market data is scrubbed of phantom listings and deduplicated, providing accurate, trustworthy demand telemetry.'],
+      ['Next Step in the Loop: From Market Demand to Placement Intelligence', 'Match identified market opportunities with placement-ready student cohorts in Placement Intelligence.'],
+    ],
+    faq: [
+      ['How frequently is labour market intelligence refreshed?', 'Market radar data is updated continuously from live industry postings, corporate partner mandates, and recruitment feeds.'],
+      ['Can colleges identify which corporate recruiters hire for specific stacks?', 'Yes. Placement cells can search which companies are actively hiring for specific skill profiles to drive targeted corporate outreach.'],
+    ],
+    related: ['product/placement-intelligence', 'product/readiness-intelligence', 'product/employability-analytics'],
+  }),
+  page({
+    slug: 'product/placement-intelligence',
+    title: 'Placement Intelligence — Command Center & Automated Candidate Matching',
+    description: 'Candidate-job matching, eligibility filtering, placement probability, cohort readiness, and intervention tracking. The Placement Command Center.',
+    eyebrow: 'INTELLIGENCE · PLACEMENT COMMAND',
+    kind: 'product',
+    cta: 'Request TPO command demo',
+    href: '/contact?interest=college',
+    sections: [
+      ['The Broken System: Manual Spreadsheets & Panic on Placement Day', 'Placement coordinators manage thousands of student profiles across scattered Excel files, manual WhatsApp groups, and unverified resume submissions. When a recruiter shares an urgent JD, coordinators scramble to identify eligible candidates manually.'],
+      ['Data Evidence: The Cost of Inefficient Placement Operations', 'Over 30% of eligible students miss recruitment drives due to manual communication breakdowns, while recruiters waste valuable interview slots on unvetted candidates.'],
+      ['How Pathwisse Changes It: The Placement Command Center', 'BEFORE: Chasing students across spreadsheets and guessing who is ready for tomorrow’s drive.\nPATHWISSE: An automated command center that segments cohorts into 4 actionable tiers (Placement Ready, Nearly Ready, Need Intervention, High Risk) and matches candidates to JDs in seconds.\nAFTER: TPOs generate 1-click recruiter export packages backed by verified code repositories and Interview Readiness Index scores.'],
+      ['Built on Evidence, Not Assumptions: The Matching Pipeline', 'INPUTS:\n• Comprehensive student Skill Passport and Readiness Scores\n• Recruiter job description specifications and cutoff thresholds\n• Past institutional placement conversion benchmarks\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Computes candidate-job fit vectors, eligibility rules, and explainable placement probability ratings.\n\nOUTPUTS:\n• Segmented candidate shortlists: Strong Match, Moderate Match, Intervention Needed\n• Branded recruiter export packages with verified portfolio links\n• Automated 30-day intervention prescriptions for nearly ready students.'],
+      ['Real Outcomes: Faster Shortlisting & Higher Conversion', 'TPOs reduce screening turnaround from 3 days to 30 seconds, while recruiter conversion rates rise by over 25% due to evidence-backed shortlisting.'],
+      ['Trust & Governance: Institutional Control & Data Privacy', 'Placement teams retain complete editorial control over all candidate shortlists. No student data is shared with recruiters without explicit institutional authorization.'],
+      ['Next Step in the Loop: From Placement Operations to Employability Analytics', 'Monitor cohort placement trajectories and departmental performance in Employability Analytics.'],
+    ],
+    faq: [
+      ['How does candidate matching work when a company posts a new opening?', 'The engine parses the job requirements and instantly filters the student database into strong matches, moderate matches, and students requiring a brief intervention sprint.'],
+      ['Can placement teams customize the 30-day intervention plans?', 'Yes. TPOs and faculty coordinators can adjust the prescribed sprints to align with department workshop calendars and guest mentor sessions.'],
+    ],
+    related: ['product/employability-analytics', 'colleges/placement-teams', 'product/job-intelligence'],
+  }),
+  page({
+    slug: 'product/employability-analytics',
+    title: 'Employability Analytics — Institutional Boardroom Telemetry & Outcome Lift',
+    description: 'Dashboards for colleges to track student readiness, department performance, skill gaps, and placement outcomes. Executive boardroom visibility.',
+    eyebrow: 'OUTCOMES · INSTITUTIONAL EXECUTIVE',
+    kind: 'product',
+    cta: 'Request executive briefing',
+    href: '/contact?interest=college',
+    sections: [
+      ['The Broken System: End-of-Year Autopsies', 'College leadership only learns about placement outcomes after final-semester campus drives conclude. By the time failure or underperformance is visible in annual reports, the batch has graduated and it is too late to intervene.'],
+      ['Data Evidence: Accreditation Penalties & Enrollment Decline', 'Underperforming placement statistics directly damage NIRF rankings, NAAC grades, and future student enrollment. Without continuous telemetry, leadership cannot identify which departments are slipping.'],
+      ['How Pathwisse Changes It: The Executive Boardroom Telemetry', 'BEFORE: Looking at static placement reports 6 months after graduation.\nPATHWISSE: Real-time executive dashboards displaying department-by-department readiness curves, skill gap maps, and forecasted placement probabilities starting from Year 1.\nAFTER: Leadership conducts data-driven reviews and allocates coaching resources proactively to elevate institutional outcomes.'],
+      ['Built on Evidence, Not Assumptions: The Analytics Pipeline', 'INPUTS:\n• Real-time progress data from CareerVoice, Practice Lab, and Projects\n• Placement Command Center match and conversion telemetry\n• Historical batch performance and recruiter hiring trends\n\nPATHWISSE INTELLIGENCE GRAPH:\n• Aggregates student-level capability vectors into departmental and institutional benchmarks, modeling predictive outcome trajectories.\n\nOUTPUTS:\n• Executive boardroom dashboards with branch-by-branch benchmarking\n• Automated compliance exports for NEP 2020, AICTE, UGC, NAAC, and NIRF\n• Early risk alerts identifying departments needing institutional intervention.'],
+      ['Real Outcomes: Predictable, Compounding Institutional Reputation', 'Institutions elevate average package medians, achieve higher placement percentages, and substantiate mandatory accreditation metrics with automated evidence.'],
+      ['Trust & Governance: Role-Based Access & Regulatory Compliance', 'Secure role-based views for Principals, Deans, HODs, and Placement Heads, fully aligned with Indian data governance standards.'],
+      ['Closing the Loop: Re-Engage Through CareerVoice', 'Employability telemetry informs next year’s institutional curriculum, starting the cycle anew with incoming cohorts in CareerVoice.'],
+    ],
+    faq: [
+      ['Can reports be exported for NAAC and NIRF submissions?', 'Yes. The analytics engine produces pre-formatted documentation aligned directly with NAAC criteria and NIRF placement parameters.'],
+      ['Do different stakeholders see different dashboards?', 'Yes. College Principals and Deans see institution-wide macro metrics, while HODs see granular department data, and TPOs see operational candidate pipelines.'],
+    ],
+    related: ['colleges', 'product/career-voice', 'product/placement-intelligence'],
+  }),
 ];
-const routePages = routeTitles.map(([slug, title, description, kind]) => mk(slug, title, description, kind));
 
-const campaignSlugs = [
-  'campaigns/students/free-career-audit',
-  'campaigns/students/career-readiness-test',
-  'campaigns/students/job-readiness-score',
-  'campaigns/students/webinar/sample-webinar',
-  'campaigns/students/event/sample-event',
-  'campaigns/colleges/college-readiness-audit',
-  'campaigns/colleges/placement-readiness',
-  'campaigns/colleges/student-employability-audit',
-  'campaigns/colleges/campus-to-career',
-  'campaigns/colleges/request-demo',
-  'campaigns/enterprise/enterprise-skill-audit',
-  'campaigns/enterprise/ai-workforce-readiness',
-  'campaigns/enterprise/workforce-upskilling-assessment',
-  'campaigns/enterprise/graduate-training',
-  'campaigns/enterprise/request-demo',
-  'campaigns/partners/university-partnerships',
-  'campaigns/partners/training-partners',
-  'campaigns/partners/ecosystem-partners',
-].map((slug) => mk(slug, slug.split('/').pop()!.replaceAll('-', ' ').replace(/\b\w/g, c => c.toUpperCase()), 'A focused campaign landing page with UTM attribution, campaign context, lead capture, and noindex by default.', 'campaign', slug.includes('students') ? 'Start audit' : 'Request demo', slug.includes('students') ? '/career-audit/start' : '/contact', true));
 
-export const blogPosts: BlogPost[] = [
-  ['choose-career-path', 'How to choose a career path when everything feels open', 'A practical guide for turning uncertainty into a first useful direction.', 'Career Direction', 'students'],
-  ['placement-readiness-before-season', 'What placement readiness should measure before placement season', 'A placement-team guide to readiness signals, cohort gaps, and timely support.', 'Placement Readiness', 'colleges'],
-  ['hire-with-evidence-upskill-with-direction', 'Hire with evidence, upskill with direction', 'How enterprises can connect hiring signals, workforce gaps, and role-based learning.', 'Enterprise Capability', 'enterprise'],
-].map(([slug, title, excerpt, category, audience]) => blogPostSchema.parse({
-  slug,
-  title,
-  excerpt,
-  body: `${excerpt} Pathwisse connects the idea to practical skill signals, projects, readiness, and the next useful action.`,
-  author: 'Pathwisse Team',
-  authorBio: 'The Pathwisse team writes about career direction, readiness, and capability evidence.',
-  category,
-  tags: [audience, 'readiness'],
-  publishDate: '2026-09-14',
-  modifiedDate: '2026-09-14',
-  status: 'published',
-  featured: slug === 'choose-career-path',
-  seoTitle: title,
-  metaDescription: excerpt,
-  audience,
-  relatedCareers: ['data-analyst'],
-  relatedSkills: ['communication'],
-  relatedProducts: ['product/career-voice'],
-  relatedGuides: ['resources/guides'],
-  ctaType: audience === 'students' ? 'career_voice' : 'demo',
-  ctaUrl: audience === 'students' ? CAREER_VOICE_URL : '/contact',
-  faq: [['How should I use this guide?', 'Use it to choose a next step, then validate progress with practice and project evidence.']],
-  references: [],
+// ─── PLACEMENT & INSTITUTIONAL PAGES ─────────────────────────────────────────
+const institutionalPages = [
+  page({
+    slug: 'colleges/placement-teams',
+    title: 'Placement Intelligence & Execution System — Command Center',
+    description: 'Know who is ready. Know what they are missing. Know which opportunity fits them. Make the job-to-student decision with verified evidence.',
+    eyebrow: 'PLACEMENT COMMAND CENTER',
+    kind: 'college',
+    cta: 'Request TPO console demo',
+    href: '/contact?interest=college',
+    sections: [
+      ['The TPO’s Daily Decision: "Who can I send for this company tomorrow?"', 'Placement Officers and TPOs don’t need another student-learning platform or an unverified spreadsheet of 1,200 names. When a corporate recruiter arrives with specific technical stacks and cutoff criteria, placement teams need instant, objective answers to three core questions: Who is ready? What are they missing? Which opportunity fits them best?'],
+      ['CareerVoice: Scaled Diagnostic Intelligence', 'Run CareerVoice diagnostics across hundreds or thousands of students simultaneously. The Placement Cell instantly surfaces student career intent, communication evidence, confidence, role preferences, career clarity, and granular strength-and-gap profiles before training begins.'],
+      ['Student Readiness Intelligence: Actionable Cohort Segmentation', 'Instead of an unmanageable list of 1,200 students, the TPO Command Center automatically segments cohorts into actionable tiers:\n\n• 312 Placement Ready: Verified capstone code, strong communication index, immediate recruiter shortlist.\n• 428 Nearly Ready: 1 or 2 specific technical or aptitude gaps away from qualification.\n• 306 Need Intervention: Significant skill deficits requiring structured remedial sprints.\n• 154 High Risk: Inactive or unengaged students identified early for faculty advisor follow-up.'],
+      ['Explainable Placement Prediction (No AI Horoscopes)', 'Every student is evaluated with an explainable Placement Probability score (e.g., 78%), backed by transparent, verifiable drivers:\n\n• Technical readiness & code quality\n• Communication & Interview Readiness Index (IRI)\n• Production-grade enterprise project evidence\n• Daily aptitude consistency & problem-solving speed\n• Activity streaks & milestone velocity\n• Target role alignment to market benchmarks\n\nTPOs see precisely why a student is predicted at that level and what specific action will move them up.'],
+      ['Job Intelligence: Instant Candidate-to-Job Matching', 'When an employer posts a mandate — for example: Software Engineer | ₹8 LPA | Python + SQL + APIs — Pathwisse evaluates the cohort against demonstrated capability:\n\n• 126 eligible students identified\n• 72 strong matches (shortlisted instantly with verified proof)\n• 38 moderate matches (minor gap in 1 skill)\n• 16 need intervention\n\nRecruiter export packages include clean, verified portfolios with live code repositories, capstone demos, and readiness rubrics.'],
+      ['The 30-Day Intervention Engine: Closing the Placement Loop', 'Pathwisse never stops at passive prediction. For a student with 52% placement probability, the engine automatically prescribes a targeted 30-day intervention:\n\n• Advanced SQL sprint\n• 2 targeted aptitude practice modules\n• CareerVoice communication simulation\n• Backend API integration project\n• AI mock interview checkpoint\n\nThe platform monitors completion and measures whether placement probability rises, directly lifting conversion rates.'],
+      ['The End-to-End System Loop', 'CareerVoice finds the gaps → Pathwisse closes the gaps → Enterprise Projects create evidence → Job Intelligence finds opportunities → Placement Intelligence predicts and improves outcomes.'],
+    ],
+    faq: [
+      ['How does candidate matching work when a recruiter provides a job description?', 'Job Intelligence extracts the required technical stack, project expectations, and communication thresholds, instantly filtering your student roster into strong, moderate, and intervention tiers with verified proof.'],
+      ['Can placement teams export candidate data directly for corporate recruiters?', 'Yes. TPOs can generate clean, branded recruiter packages with verified code repositories, live project links, and Interview Readiness Index scores.'],
+      ['How does the Intervention Engine ensure at-risk students actually improve?', 'The system prescribes specific, milestone-based 30-day sprints and tracks daily submission velocity, re-evaluating placement probability as tasks and mock interviews are completed.'],
+    ],
+    related: ['colleges', 'colleges/student-analytics', 'colleges/placement-readiness', 'contact'],
+  }),
+  page({
+    slug: 'colleges/student-analytics',
+    title: 'Student Analytics — Cohort progress, skill gaps, and readiness trends',
+    description: 'Dashboards for placement teams and management: batch-level readiness, individual student progress, shared skill gaps, and intervention tracking — all in one view.',
+    eyebrow: 'STUDENT ANALYTICS',
+    kind: 'college',
+    cta: 'See analytics in a demo',
+    href: '/contact?interest=college',
+    sections: [
+      ['Batch-level readiness overview', 'See the proportion of your cohort that is job-ready, in progress, or at risk — broken down by department, role target, and skill area.'],
+      ['Skill gap mapping', 'Identify which technical and soft skills are most commonly weak across your cohort. Prioritise skill sprints and targeted workshops based on real data, not assumptions.'],
+      ['Individual student timelines', 'Drill into any student\'s journey: which roadmap they are on, which skills they have demonstrated, how consistent their practice has been, and what projects they have completed.'],
+    ],
+    faq: [['Is student data shared with recruiters automatically?', 'No. Student evidence is only shared in recruiter exports that the placement team explicitly generates and approves.']],
+    related: ['colleges', 'colleges/placement-teams', 'contact'],
+  }),
+  page({
+    slug: 'colleges/placement-readiness',
+    title: 'Placement Readiness — Prepare students for opportunities with evidence',
+    description: 'Readiness scoring that gives students, placement teams, and recruiters a clear, consistent signal about who is prepared and what they need next.',
+    eyebrow: 'PLACEMENT READINESS',
+    kind: 'college',
+    cta: 'Request a readiness demo',
+    href: '/contact?interest=college',
+    sections: [
+      ['What readiness actually means', 'Readiness on Pathwisse is a composite of demonstrated skills, project quality, practice consistency, and role-fit context — not just attendance or CGPA.'],
+      ['A signal recruiters can trust', 'When a student shares their readiness profile with a recruiter, it links to live project evidence, verified skill assessments, and a structured career roadmap — context that resumes cannot provide.'],
+      ['Continuous movement, not a one-time score', 'Readiness updates as students practice and build. Placement teams can see which interventions produced the most readiness movement across a cohort.'],
+    ],
+    faq: [['How is readiness calculated?', 'Readiness combines skill demonstration levels, project completion and quality, practice consistency, and role-specific requirements. The exact weights are configurable per institution.']],
+    related: ['colleges', 'colleges/placement-teams', 'students'],
+  }),
+  page({
+    slug: 'colleges/overview',
+    title: 'College Overview — Full platform for institutional employability',
+    description: 'A complete view of how Pathwisse serves colleges: from student career direction and roadmaps to placement team analytics, faculty visibility, and management reporting.',
+    eyebrow: 'COLLEGE OVERVIEW',
+    kind: 'college',
+    cta: 'Request a demo',
+    href: '/contact?interest=college',
+    sections: [
+      ['For students', 'Career direction, structured roadmaps, daily practice, applied projects, and verified readiness — all in one student workspace.'],
+      ['For placement teams', 'Live cohort readiness dashboards, early warning alerts, skill gap maps, and pre-filtered recruiter exports.'],
+      ['For faculty', 'Visibility into student progress by cohort, project submission tracking, and curriculum alignment with real-world role requirements.'],
+      ['For management', 'Institution-level employability metrics, NAAC/NIRF-aligned reporting, and trend data across departments and batches.'],
+    ],
+    faq: [['How is Pathwisse different from other placement management tools?', 'Most placement tools track recruiters and offer letters. Pathwisse tracks student capability — the readiness and evidence that determine whether students get shortlisted in the first place.']],
+    related: ['colleges/placement-teams', 'colleges/student-analytics', 'contact'],
+  }),
+];
+
+// ─── ENTERPRISE PAGES ─────────────────────────────────────────────────────────
+const enterprisePages = [
+  page({
+    slug: 'enterprise/upskilling',
+    title: 'Enterprise Upskilling — Role-based capability journeys',
+    description: 'Close workforce skill gaps with structured, role-based upskilling. Assess teams, assign learning paths, track applied practice, and measure readiness movement.',
+    eyebrow: 'ENTERPRISE UPSKILLING',
+    kind: 'workforce',
+    cta: 'Request a demo',
+    href: '/contact?interest=upskilling',
+    sections: [
+      ['Start with an honest assessment', 'Map current skills against role requirements to find the gaps that actually matter — not a generic skills survey, but a capability picture grounded in applied work.'],
+      ['Role-based learning journeys', 'Assign structured paths that close specific gaps through skill modules, daily practice, and applied projects. Each journey is tailored to the role, not generic training content.'],
+      ['Progress that management can see', 'Track whether upskilling is working. Dashboards show skill movement, project quality, and readiness progression — so L&D decisions are based on evidence, not completion rates.'],
+    ],
+    faq: [['Can we integrate Pathwisse with our existing LMS?', 'Yes. Pathwisse is designed to work alongside existing learning tools, pulling structured practice and project evidence into a unified readiness picture.']],
+    related: ['enterprise', 'enterprise/talent-intelligence', 'contact'],
+  }),
+  page({
+    slug: 'enterprise/talent-intelligence',
+    title: 'Talent Intelligence — Discover candidates through evidence (In development)',
+    description: 'A developing hiring product for discovering candidates through demonstrated skills, project evidence, and verified readiness context — not just CVs and application forms.',
+    eyebrow: 'TALENT INTELLIGENCE',
+    kind: 'hiring',
+    cta: 'Join the hiring waitlist',
+    href: '/contact?interest=hiring',
+    sections: [
+      ['Look behind the resume', 'Talent Intelligence will allow hiring teams to discover candidates through verified project evidence, skill demonstration levels, and readiness context — reducing the noise of unverified CV claims.'],
+      ['Role-specific evidence matching', 'Match candidates to roles based on demonstrated capability in the specific skills each position requires — rather than keyword matching or degree filters.'],
+      ['Currently in development', 'Talent Intelligence is being built with early enterprise partners. Join the waitlist to shape the product and get early access.'],
+    ],
+    faq: [['When will Talent Intelligence launch?', 'We are working with a small group of enterprise partners on early access. Contact us to discuss joining the development programme.']],
+    related: ['enterprise', 'enterprise/upskilling', 'contact'],
+  }),
+  page({
+    slug: 'enterprise/overview',
+    title: 'Enterprise Overview — Workforce capability, upskilling, and hiring',
+    description: 'Pathwisse for enterprises: workforce assessment, role-based upskilling journeys, AI readiness mapping, internal mobility, and hiring intelligence in development.',
+    eyebrow: 'ENTERPRISE OVERVIEW',
+    kind: 'workforce',
+    cta: 'Request a demo',
+    href: '/contact?interest=upskilling',
+    sections: [
+      ['Workforce capability assessment', 'Understand what teams can currently do against what roles require. Applied work evidence, not skills surveys.'],
+      ['Role-based upskilling', 'Close gaps with structured learning paths, practice, and project milestones. Track readiness movement over time.'],
+      ['AI workforce readiness', 'Map AI-related skill needs, identify gaps, and build practical upskilling paths for teams working alongside AI.'],
+      ['Hiring intelligence (in development)', 'Discover candidates through demonstrated capability, not just profiles. Currently in development with early partners.'],
+    ],
+    faq: [['Is Pathwisse suitable for companies outside India?', 'Pathwisse currently focuses on the Indian market and is expanding. Contact us to discuss your location and workforce context.']],
+    related: ['enterprise/upskilling', 'enterprise/talent-intelligence', 'contact'],
+  }),
+];
+
+// ─── COMPANY / INSTITUTIONAL EXECUTION PAGES ───────────────────────────────────
+const companyPages = [
+  page({
+    slug: 'company/about',
+    title: 'About Pathwisse — Shaquantum Labs',
+    description: 'Pathwisse is the Employability Operating System for higher education developed by Shaquantum Labs Private Limited, guiding every student from career choice to placement readiness.',
+    eyebrow: 'ABOUT',
+    kind: 'company',
+    cta: 'Get in touch',
+    href: '/contact',
+    sections: [
+      ['The structural challenge', 'Higher education faces a structural challenge in career readiness: academics, skill courses, projects, mentoring, and placement preparation exist in disconnected silos. Pathwisse unifies these into a single, measurable journey.'],
+      ['Core belief 01: System, Not Scramble', 'Employability is a cumulative outcome built over years through structured, long-term roadmaps rather than last-minute placement preparation panic.'],
+      ['Core belief 02: Evidence Beats Claims', 'Skills must be provable through completed projects, code repositories, and mentor-reviewed rubrics — not just bullet points on a resume.'],
+      ['Core belief 03: Support the Quiet', 'The platform is engineered to catch and guide students early, providing structured milestones and proactive support for learners who are less likely to self-advocate.'],
+      ['What Pathwisse is NOT', 'Pathwisse is not a job board, not a resume keyword builder, not a quick-fix tool, and not a placement guarantee. It is institutional execution infrastructure.'],
+      ['Company and registered office', 'Pathwisse is developed by Shaquantum Labs Private Limited (incorporated in India, Startup India registered). Registered office: 3-49A, Teachers Colony, Madanapalle, Chittoor, Andhra Pradesh, India.'],
+    ],
+    faq: [
+      ['Who can I contact for partnership enquiries?', 'Reach out directly to partnership@pathwisse.com. Our institutional team responds within one business day.'],
+      ['How is Pathwisse funded and supported?', 'Pathwisse is a recognized Indian startup operating with institutional partners across higher education.'],
+    ],
+    related: ['colleges', 'students', 'contact'],
+  }),
+  page({
+    slug: 'company/partners',
+    title: 'Partnerships — Colleges, training partners, and ecosystem',
+    description: 'Partner with Pathwisse to deliver structured employability infrastructure to your students, learners, or workforce. We work with colleges, training providers, and enterprise ecosystem partners.',
+    eyebrow: 'PARTNERSHIPS',
+    kind: 'company',
+    cta: 'Discuss a partnership',
+    href: '/contact?interest=general',
+    sections: [
+      ['College and university partnerships', 'Institutional partnerships give all enrolled students access to career roadmaps, verified skill proof, and placement readiness tools — with placement team and management dashboards included.'],
+      ['Training partner integrations', 'Connect your training programmes with Pathwisse to give learners a verified skills profile and project evidence trail that travels with them into employment.'],
+      ['Enterprise ecosystem', 'Enterprise partners can plug Pathwisse readiness signals into their hiring and upskilling workflows, connecting capability evidence with role requirements at scale.'],
+    ],
+    faq: [['How do I start a partnership conversation?', 'Contact us with your institution name, student count, and the placement challenges you are trying to solve. We will schedule a discovery call within 48 hours.']],
+    related: ['colleges', 'enterprise', 'contact'],
+  }),
+  page({
+    slug: 'how-it-works',
+    title: 'How It Works — From Enrollment to Employment',
+    description: 'The campus-to-career execution system: an 8-step journey that unifies career diagnostics, structured roadmaps, practice labs, verified skill proof, and placement readiness.',
+    eyebrow: 'HOW IT WORKS',
+    kind: 'product',
+    cta: 'Request a demo',
+    href: '/contact?interest=college',
+    sections: [
+      ['01. CV Upload & Baseline Analysis', 'Students upload their existing profile or CV. The system analyzes education, projects, and initial skills to establish a baseline career diagnostic.'],
+      ['02. AI Role Matching & Career Choice', 'The platform matches the student profile with suitable target roles and articulates why specific roles offer the best fit based on capability and industry demand.'],
+      ['03. Skill Gap Diagnosis', 'Pathwisse identifies the precise technical and communication skills needed to reach the target role, eliminating guesswork from preparation.'],
+      ['04. Structured 12-Month Roadmap', 'The platform generates a personalized, milestone-based roadmap. Students move from enrollment to employment through documented, progressive stages.'],
+      ['05. Daily Practice Labs & Stage Projects', 'Students build verified skill proof through daily practice (aptitude and communication) and progressive stage projects, culminating in a production-grade capstone.'],
+      ['06. Mentoring & Faculty Integration', 'Students connect with faculty advisors and industry mentors who log review sessions, provide rubric feedback, and support milestone completions.'],
+      ['07. Interview Readiness Index (IRI)', 'AI-assisted mock evaluations assess communication, technical depth, and role readiness on a 0–100 scale, flagging high-risk areas before live interviews.'],
+      ['08. Placement with Verified Skill Passport', 'Students enter placement season with an evidence-backed profile linking directly to code repositories, capstone projects, and readiness scores.'],
+    ],
+    faq: [
+      ['At what year should colleges introduce Pathwisse?', 'Pathwisse is designed to be implemented from Year 1 to Year 4, allowing students to build cumulative evidence progressively rather than during a final-year scramble.'],
+      ['Can the roadmap be tailored to our syllabus?', 'Yes. The institutional implementation team can align milestones with internal semester schedules and curriculum requirements.'],
+    ],
+    related: ['product', 'colleges', 'outcomes'],
+  }),
+  page({
+    slug: 'outcomes',
+    title: 'Institutional Outcomes — Measurable Placement Readiness',
+    description: 'Placement readiness is measured, not hoped for. Track student activation, roadmap progression, practice consistency, and verified capstone completion across cohorts.',
+    eyebrow: 'OUTCOMES',
+    kind: 'college',
+    cta: 'Request a pilot',
+    href: '/contact?interest=college',
+    sections: [
+      ['Evidence-based outcomes replace claims', 'Replace outdated, unverified multi-page resumes with data-backed candidate profiles. Objective readiness is shared directly with corporate recruiters.'],
+      ['Student activation & roadmap progression', 'Track what percentage of students are actively moving through their career roadmaps. Measure milestone completion rates semester by semester.'],
+      ['Daily practice consistency', 'Monitor aptitude and communication practice streaks. Consistent effort is recorded as verifiable readiness data rather than last-minute cramming.'],
+      ['Capstone project verification', 'Every student builds a production-grade capstone with code repositories and mentor-reviewed rubrics, proving they can execute real work.'],
+      ['Benchmark reports & early risk signals', 'Batch-level diagnostic benchmark reports allow placement teams to forecast outcomes and intervene with at-risk students well before campus drives begin.'],
+    ],
+    faq: [
+      ['Are student outcomes publicly visible?', 'No. Institutional data is private to the college. Recruiter exports are only generated by authorized placement personnel.'],
+      ['What reports are provided for NAAC/NIRF?', 'Pathwisse automatically aggregates skill progression, training hours, mentoring logs, and placement readiness data needed for accreditation documentation.'],
+    ],
+    related: ['colleges/placement-teams', 'how-it-works', 'accelerator'],
+  }),
+  page({
+    slug: 'accelerator',
+    title: 'Pathwisse Accelerator — Fast-Track Institutional Onboarding',
+    description: 'A structured implementation program helping colleges configure cohorts, onboard faculty, and operationalize the placement console within 2 to 4 weeks.',
+    eyebrow: 'ACCELERATOR',
+    kind: 'college',
+    cta: 'Request a pilot',
+    href: '/contact?interest=college',
+    sections: [
+      ['Cohort-based institutional launch', 'A guided rollout track that configures departments, imports student rosters, and aligns milestone calendars with institutional academic schedules.'],
+      ['Placement console & TPO enablement', 'Training for placement heads and coordinators on candidate filtering, cohort readiness scoring, early warning interpretation, and corporate recruiter exports.'],
+      ['Faculty portal training', 'Educators and mentors learn how to monitor student trajectories, review stage project rubrics, log mentoring sessions, and provide targeted support.'],
+      ['Pilot program pathway', 'Institutions can start with a defined pilot cohort (e.g., 200–500 students) before expanding campus-wide, verifying adoption and measurable readiness lift.'],
+    ],
+    faq: [
+      ['What is the typical timeline for the Accelerator?', 'Most partner institutions complete full configuration, staff training, and student onboarding within 2 to 4 weeks.'],
+      ['Is technical integration required to start a pilot?', 'No complex IT integration is required for a pilot. Roster imports and web access allow rapid kickoff.'],
+    ],
+    related: ['colleges', 'how-it-works', 'pricing'],
+  }),
+];
+
+// ─── TRUST / LEGAL PAGES ─────────────────────────────────────────────────────
+const trustPages = [
+  page({
+    slug: 'trust/privacy',
+    title: 'Privacy Policy',
+    description: 'How Pathwisse handles data from website visitors, lead forms, students, institutional partners, and enterprise users.',
+    eyebrow: 'TRUST',
+    kind: 'trust',
+    cta: 'Contact us',
+    href: '/contact',
+    sections: [
+      ['Scope', 'This policy explains how Pathwisse (Shaquantum Labs Private Limited) collects and uses information from website visitors, lead forms, demo requests, and institutional enquiries. Platform-level data for enrolled students is governed by institutional agreements.'],
+      ['Data collected on this website', 'We collect name, email, phone, organisation, role, message, and consent when you submit a form. Optional analytics only activate after you choose to allow them. We do not ask visitors to submit confidential commercial information through public forms.'],
+      ['How we use your data', 'We use submitted information to respond to enquiries, prepare demos, manage partnership conversations, and understand which content is most useful. We do not sell lead data to third parties.'],
+      ['Your rights', 'You may request access to, correction of, or deletion of your data at any time by contacting us at partnership@pathwisse.com. We aim to respond within 5 business days.'],
+    ],
+    faq: [['Is Pathwisse DPDP-compliant?', 'Pathwisse is designed with India\'s Digital Personal Data Protection Act (DPDP 2023) in mind. Consent is explicit, purpose-limited, and tracked with version history.']],
+    related: ['trust/terms', 'trust/security', 'trust/compliance'],
+  }),
+  page({
+    slug: 'trust/terms',
+    title: 'Terms of Service',
+    description: 'Terms for using the Pathwisse website, public resources, and requesting information about the platform.',
+    eyebrow: 'TRUST',
+    kind: 'trust',
+    cta: 'Contact us',
+    href: '/contact',
+    sections: [
+      ['Website use', 'The Pathwisse public website provides information about our platform, partnership options, career resources, and enquiry forms for colleges, students, and enterprises.'],
+      ['Accuracy of information', 'Career roadmap content, readiness frameworks, and skill guides are provided as educational guidance. They do not guarantee employment outcomes, admission, or specific salary ranges.'],
+      ['Acceptable use', 'Do not misuse contact forms, submit confidential third-party information, attempt to attack or scrape the service, or interfere with website operation.'],
+      ['Platform terms', 'Separate terms apply to the Pathwisse platform for enrolled students, institutional partners, and enterprise users. These are provided as part of the institutional or enterprise agreement.'],
+    ],
+    faq: [['Who do I contact for legal enquiries?', 'Email partnership@pathwisse.com for legal, compliance, or data-related enquiries.']],
+    related: ['trust/privacy', 'trust/security', 'trust/compliance'],
+  }),
+  page({
+    slug: 'trust/security',
+    title: 'Security',
+    description: 'How Pathwisse approaches data protection, access controls, infrastructure security, and responsible handling of student and institutional data.',
+    eyebrow: 'TRUST',
+    kind: 'trust',
+    cta: 'Contact us',
+    href: '/contact',
+    sections: [
+      ['Security principles', 'Pathwisse applies secure HTTP headers, origin validation, server-side input validation, rate limiting, and careful handling of public lead and student data.'],
+      ['Data minimisation', 'We collect only what is necessary for the stated purpose. Public forms do not request sensitive commercial information. Student data is scoped to the institutional agreement.'],
+      ['Infrastructure', 'The Pathwisse platform is deployed on Cloudflare-compatible infrastructure with encrypted storage, access controls, and audit logging for sensitive operations.'],
+      ['Reporting a concern', 'If you identify a security concern with the Pathwisse platform or website, contact us at partnership@pathwisse.com with details. We aim to respond within 24 hours.'],
+    ],
+    faq: [['Does Pathwisse offer data residency in India?', 'Yes. All institutional and student data is stored and processed with adherence to Indian regulatory guidelines and DPDP 2023 norms.']],
+    related: ['trust/privacy', 'trust/terms', 'trust/compliance'],
+  }),
+  page({
+    slug: 'trust/compliance',
+    title: 'Regulatory Alignment & Accreditation Compliance',
+    description: 'Pathwisse is architected for Indian higher education regulatory frameworks: NEP 2020, AICTE, UGC, NAAC, NIRF, NBA, and DPDP Act 2023.',
+    eyebrow: 'COMPLIANCE',
+    kind: 'trust',
+    cta: 'Request compliance briefing',
+    href: '/contact?interest=college',
+    sections: [
+      ['NEP 2020 Alignment', 'Supports multidisciplinary learning, skill-centric progression, Academic Bank of Credits (ABC) alignment, and experiential project tracking.'],
+      ['AICTE Norms', 'Built-in tracking for student internships, industry-academia linkages, employment metrics, and placement cell activity documentation.'],
+      ['UGC Guidelines', 'Centralized records for student career counseling, placement reporting, and alumni progression tracking.'],
+      ['NAAC & NIRF Documentation', 'Automates evidence gathering and structured reporting for institutional accreditation criteria and annual NIRF submissions.'],
+      ['NBA Outcome-Based Education (OBE)', 'Enables mapping of skill competencies and capstone project rubrics to program outcomes (POs) and course outcomes (COs).'],
+      ['DPDP Act 2023 Compliance', 'Consent-based data collection, purpose limitation enforcement, and student data principal rights workflows.'],
+    ],
+    faq: [
+      ['Can Pathwisse generate NAAC criterion reports directly?', 'Yes. The institutional analytics module exports structured documentation aligned with NAAC criteria for student support and progression.'],
+    ],
+    related: ['trust/privacy', 'trust/security', 'colleges'],
+  }),
+];
+
+// ─── UTILITY PAGES ───────────────────────────────────────────────────────────
+const utilityPages = [
+  page({
+    slug: 'pricing',
+    title: 'Pricing — Institutional Employability Plans',
+    description: 'Pathwisse uses customized institutional pricing based on cohort size, department scope, and implementation needs. Request a tailored proposal or pilot.',
+    eyebrow: 'PRICING',
+    kind: 'pricing',
+    cta: 'Request a pilot',
+    href: '/contact?interest=college',
+    sections: [
+      ['Institutional pricing model', 'Pathwisse is provided as an enterprise platform license for colleges and universities. Pricing is based on enrolled student count, departments, and support scope.'],
+      ['What is included', 'Full access to Student Roadmaps, Daily Practice Labs, Stage Projects, Capstone evaluations, Placement Console, Faculty Portal, and NAAC/NIRF reporting.'],
+      ['Structured pilot program', 'Institutions can initiate a defined pilot cohort before campus-wide deployment to experience adoption rates, faculty engagement, and readiness gains.'],
+    ],
+    faq: [
+      ['Do individual students pay directly?', 'Pathwisse is primarily an institutional platform funded by partner colleges for their student body. Optional specialized advanced modules can be offered as student add-ons.'],
+      ['How do we receive a formal proposal?', 'Contact partnership@pathwisse.com or submit a demo request with your student count and departments.'],
+    ],
+    related: ['colleges', 'accelerator', 'contact'],
+  }),
+  page({
+    slug: 'contact',
+    title: 'Contact Pathwisse — Request a Demo or Pilot',
+    description: 'Connect with the Pathwisse institutional team to request an institutional demo, explore a college pilot, or discuss workforce partnerships.',
+    eyebrow: 'CONTACT',
+    kind: 'company',
+    cta: 'Send message',
+    href: '/contact',
+    sections: [
+      ['For Colleges & Placement Offices', 'Share your institution details, student count, and current placement challenges. We will schedule a personalized demonstration within 48 hours.'],
+      ['For Enterprise & Hiring Partners', 'Discover how to access pre-filtered cohorts with verified technical proof and Interview Readiness Index scores.'],
+      ['General & Partnership Enquiries', 'Email us directly at partnership@pathwisse.com or write to Shaquantum Labs Private Limited, Madanapalle, Chittoor, Andhra Pradesh, India.'],
+    ],
+    faq: [['What is the turnaround time for demo requests?', 'Our institutional partnership team typically responds within one business day to schedule a briefing.']],
+    related: ['colleges', 'students', 'pricing'],
+  }),
+];
+
+// ─── BLOG HUB PAGES (index pages, individual posts served from DB) ────────────
+const blogHubPages = [
+  mk('resources/blog', 'Pathwisse Blog — Career readiness, placement, and capability', 'Practical writing about career direction, placement readiness, employability, and workforce capability from the Pathwisse team.', 'article', 'Read the latest', '/resources/blog'),
+  mk('resources/blog/category/career-direction', 'Career Direction articles', 'Guides on choosing a career path, building a roadmap, and deciding what skill to develop next.', 'article', 'Explore articles', '/resources/blog'),
+  mk('resources/blog/tag/placement-readiness', 'Placement readiness articles', 'Articles for students and placement teams on readiness signals, evidence, and preparation strategies.', 'article', 'Explore articles', '/resources/blog'),
+  mk('resources/blog/author/pathwisse-team', 'Pathwisse Team articles', 'All articles from the Pathwisse team on institutional employability, career readiness, and workforce capability.', 'article', 'Read latest posts', '/resources/blog'),
+];
+
+// ─── CAREER & SKILL PAGES ────────────────────────────────────────────────────
+const careerPages = careers.map(c => page({
+  slug: `careers/${c.slug}`,
+  title: `${c.name} Career Roadmap — Pathwisse`,
+  description: c.shortSummary,
+  eyebrow: 'CAREER ROADMAP',
+  kind: 'career',
+  cta: 'Try Career Voice',
+  href: CAREER_VOICE_URL,
+  sections: [
+    ['What this role does', c.responsibilities.join('. ') + '.'],
+    ['Skills to build', `Required skills: ${c.requiredSkills.join(', ')}. Useful optional skills: ${c.optionalSkills.join(', ')}.`],
+    ['Learning roadmap', c.roadmap.join(' → ') + '.'],
+    ['Applied projects', c.projects.join(', ') + '.'],
+    ['Interview preparation', c.interviewPreparation.join('. ') + '.'],
+  ],
+  faq: c.faq,
+  related: [c.product, ...c.requiredSkills.map(s => `skills/${s.toLowerCase().replaceAll(' ', '-')}`)],
 }));
 
-const careerPages = careers.map(c => page({ slug: `careers/${c.slug}`, title: `${c.name} career roadmap`, description: c.shortSummary, eyebrow: 'CAREER ROADMAP', kind: 'career', cta: 'Explore with Career Voice', href: CAREER_VOICE_URL, sections: [['What this role does', c.responsibilities.join('. ') + '.'], ['Skills to build', `Required: ${c.requiredSkills.join(', ')}. Useful optional skills: ${c.optionalSkills.join(', ')}.`], ['Roadmap', c.roadmap.join(' → ') + '.'], ['Projects', c.projects.join(', ') + '.'], ['Interview preparation', c.interviewPreparation.join('. ') + '.']], faq: c.faq, related: [c.product, ...c.requiredSkills.map(s => `skills/${s.toLowerCase().replaceAll(' ', '-')}`)] }));
-const skillPages = skills.map(s => page({ slug: `skills/${s.slug}`, title: `${s.name} skill guide`, description: s.description, eyebrow: 'SKILL GUIDE', kind: 'skill', cta: s.cta, href: APP_AUTH_URL, sections: [['Where it is used', s.whereUsed.join('. ') + '.'], ['Progression', s.progression.join(' → ') + '.'], ['Exercises', s.exercises.join('. ') + '.'], ['Projects', s.projects.join(', ') + '.']], faq: s.faq, related: [...s.careers.map(c => `careers/${c}`), ...s.relatedSkills.map(k => `skills/${k}`)] }));
+const skillPages = skills.map(s => page({
+  slug: `skills/${s.slug}`,
+  title: `${s.name} Skill Guide — Pathwisse`,
+  description: s.description,
+  eyebrow: 'SKILL GUIDE',
+  kind: 'skill',
+  cta: s.cta,
+  href: APP_AUTH_URL,
+  sections: [
+    ['Where this skill is used', s.whereUsed.join('. ') + '.'],
+    ['How to progress', s.progression.join(' → ') + '.'],
+    ['Practice exercises', s.exercises.join('. ') + '.'],
+    ['Applied projects', s.projects.join(', ') + '.'],
+  ],
+  faq: s.faq,
+  related: [...s.careers.map(c => `careers/${c}`), ...s.relatedSkills.map(k => `skills/${k}`)],
+}));
+
 const comparisonPages = [
-  mk('compare/data-analyst-vs-business-analyst', 'Data Analyst vs Business Analyst', 'Compare responsibilities, skills, tools, projects, learning curve, and transition paths without treating one role as universally better.', 'comparison', 'Find your direction', CAREER_VOICE_URL),
-  mk('compare/product-manager-vs-business-analyst', 'Product Manager vs Business Analyst', 'Understand how product management and business analysis differ across ownership, decisions, skills, and project evidence.', 'comparison', 'Explore with Career Voice', CAREER_VOICE_URL),
-  mk('compare/data-scientist-vs-data-analyst', 'Data Scientist vs Data Analyst', 'Compare analytics and data science through responsibilities, skills, tools, projects, and transition paths.', 'comparison', 'Build your roadmap', APP_AUTH_URL),
-];
-const blogPages = blogPosts.map(post => page({ slug: `resources/blog/${post.slug}`, title: post.title, description: post.excerpt, eyebrow: post.category.toUpperCase(), kind: 'article', cta: post.ctaType === 'career_voice' ? 'Explore with Career Voice' : 'Talk to Pathwisse', href: post.ctaUrl, sections: [['Summary', post.excerpt], ['Guide', post.body], ['Related next step', `Related careers: ${post.relatedCareers.join(', ')}. Related skills: ${post.relatedSkills.join(', ')}.`]], faq: post.faq, related: [...post.relatedProducts, ...post.relatedCareers.map(c => `careers/${c}`)] }));
-const resourcePages = [
-  mk('resources', 'Pathwisse resources', 'Career guides, placement guides, templates, reports, webinars, case studies, and practical capability content.', 'guide', 'Explore guides', '/resources/guides'),
-  mk('resources/blog', 'Pathwisse blog', 'Practical writing about career direction, readiness, placement intelligence, and workforce capability.', 'article', 'Read featured article', '/resources/blog/choose-career-path'),
-  mk('resources/blog/category/career-direction', 'Career Direction articles', 'Articles about choosing a path, building a roadmap, and deciding what to do next.', 'article', 'Try Career Voice', CAREER_VOICE_URL),
-  mk('resources/blog/tag/career-roadmaps', 'Career roadmap articles', 'Articles tagged with career roadmaps, skills, projects, and readiness.', 'article', 'Explore roadmaps', '/students/career-roadmaps'),
-  mk('resources/blog/author/pathwisse-team', 'Pathwisse Team', 'Articles from the Pathwisse team on capability, readiness, and career direction.', 'article', 'Read latest posts', '/resources/blog'),
-  ...['guides', 'templates', 'reports', 'webinars', 'case-studies', 'career-guides', 'placement-guides'].map(kind => mk(`resources/${kind}`, `Pathwisse ${kind.replace('-', ' ')}`, `A scalable library for ${kind.replace('-', ' ')} connected to products, careers, skills, and campaigns.`, 'guide', 'Talk to Pathwisse', '/contact')),
+  mk('compare/data-analyst-vs-business-analyst', 'Data Analyst vs Business Analyst', 'Compare responsibilities, required skills, tools, applied projects, learning curve, and transition paths between these two roles — without treating one as universally better.', 'comparison', 'Find your direction', CAREER_VOICE_URL),
+  mk('compare/product-manager-vs-business-analyst', 'Product Manager vs Business Analyst', 'Understand how product management and business analysis differ across ownership, decisions, skills required, and the evidence each role expects.', 'comparison', 'Explore with Career Voice', CAREER_VOICE_URL),
+  mk('compare/data-scientist-vs-data-analyst', 'Data Scientist vs Data Analyst', 'Compare analytics and data science through responsibilities, required tools, applied projects, and typical transition paths.', 'comparison', 'Build your roadmap', APP_AUTH_URL),
 ];
 
-const all = [...primaryPages, ...productPages, ...routePages, ...campaignSlugs, ...careerPages, ...skillPages, ...comparisonPages, ...blogPages, ...resourcePages];
+// ─── REDIRECTS ───────────────────────────────────────────────────────────────
+// Legacy paths that point to real pages — handled via legacyRedirects in site-config.ts
+
+// ─── ASSEMBLE ALL PAGES ──────────────────────────────────────────────────────
+const all = [
+  ...primaryPages,
+  ...productPages,
+  ...institutionalPages,
+  ...enterprisePages,
+  ...companyPages,
+  ...trustPages,
+  ...utilityPages,
+  ...blogHubPages,
+  ...careerPages,
+  ...skillPages,
+  ...comparisonPages,
+];
+
 export const pages: Record<string, PageData> = Object.fromEntries(all.map(p => [p.slug, p]));
 
-
-const campaignCopy: Record<string, { title: string; description: string; cta: string; href: string; sections: [string,string][] }> = {
-  'campaigns/students/free-career-audit': { title: 'Free Career Audit for Students', description: 'Get a practical direction, likely role paths, skill gaps, and a first project idea.', cta: 'Start free audit', href: '/career-audit/start', sections: [['Offer','A guided career audit that helps students move from uncertainty to one useful next step.'],['Value proposition','Students receive likely career directions, reasoning, skill gaps, project suggestions, and a roadmap handoff.'],['Lead capture','Campaign attribution is preserved from UTM parameters through the lead workflow.']] },
-  'campaigns/students/career-readiness-test': { title: 'Career Readiness Test', description: 'Check whether your skills, projects, and practice habits are ready for the opportunities you want.', cta: 'Take the readiness test', href: '/career-audit/assessment', sections: [['Offer','A fast readiness check grounded in skills, projects, and consistency.'],['Value proposition','Students see what is strong, what is missing, and what to build next.'],['Next step','Move into Pathwisse roadmaps or Career Voice after the audit.']] },
-  'campaigns/students/job-readiness-score': { title: 'Job Readiness Score', description: 'Understand your current readiness signal and the next action that would improve it.', cta: 'Get my score', href: '/career-audit/start', sections: [['Offer','An illustrative readiness score based on direction, proof, and practice context.'],['Value proposition','The score is guidance, not certainty, and points to a practical next step.'],['Next step','Build skills and projects on Pathwisse.']] },
-  'campaigns/students/webinar/sample-webinar': { title: 'Student Career Direction Webinar', description: 'Join a practical session on choosing a path, building proof, and preparing for opportunities.', cta: 'Register interest', href: '/contact?interest=events', sections: [['Webinar focus','Career direction, role comparison, skill gaps, projects, and readiness.'],['Who should attend','Students who feel stuck between many possible roles.'],['Registration','Event leads preserve source, landing page, and UTM context.']] },
-  'campaigns/students/event/sample-event': { title: 'Campus Career Readiness Event', description: 'A student event page for career direction, skill clarity, and project-based readiness.', cta: 'Register interest', href: '/contact?interest=events', sections: [['Event focus','A practical readiness event for students.'],['Outcome','Students leave with one role direction, one skill to build, and one project idea.'],['Registration','Event leads are captured with campaign attribution.']] },
-  'campaigns/colleges/college-readiness-audit': { title: 'College Readiness Audit', description: 'See cohort readiness, priority skill gaps, and where placement support should begin.', cta: 'Request readiness audit', href: '/colleges/request-demo?campaign_id=college-readiness-audit', sections: [['Offer','A readiness audit for placement teams that need earlier visibility.'],['Value proposition','Identify who is ready, who needs support, and which gaps need intervention.'],['Lead capture','College name, student count, placement challenges, and program interest are captured in the demo flow.']] },
-  'campaigns/colleges/placement-readiness': { title: 'Placement Readiness for Colleges', description: 'Move from placement-season urgency to continuous readiness visibility.', cta: 'Request placement demo', href: '/colleges/request-demo?campaign_id=placement-readiness', sections: [['Offer','A focused placement readiness conversation.'],['Value proposition','Connect skills, projects, practice, and role fit into actionable cohort views.'],['Outcome','Placement teams know who is ready and who needs support.']] },
-  'campaigns/colleges/student-employability-audit': { title: 'Student Employability Audit', description: 'Audit employability signals across skills, projects, communication, and role readiness.', cta: 'Request employability audit', href: '/colleges/request-demo?campaign_id=student-employability-audit', sections: [['Offer','A structured employability audit for colleges.'],['Value proposition','Make student readiness more visible before shortlisting begins.'],['Outcome','Prioritize support by cohort, role, and skill gap.']] },
-  'campaigns/colleges/campus-to-career': { title: 'Campus to Career Program', description: 'Create a structured journey from student learning to project evidence and placement readiness.', cta: 'Discuss campus program', href: '/colleges/request-demo?campaign_id=campus-to-career', sections: [['Offer','A program narrative for colleges building stronger campus-to-career outcomes.'],['Value proposition','Turn learning, practice, and projects into evidence placement teams can act on.'],['Outcome','Students know what to do next; teams know who needs support.']] },
-  'campaigns/colleges/request-demo': { title: 'Request a College Partnership Demo', description: 'Explore Pathwisse for placement teams, readiness audits, analytics, and project-based learning.', cta: 'Request college demo', href: '/colleges/request-demo?campaign_id=college-demo', sections: [['Offer','A demo designed around your college context.'],['Value proposition','Share cohort size, placement challenges, and program needs before the call.'],['Outcome','A clearer implementation conversation.']] },
-  'campaigns/enterprise/enterprise-skill-audit': { title: 'Enterprise Skill Audit', description: 'Map workforce capability against role needs, skill gaps, and business priorities.', cta: 'Request skill audit', href: '/enterprise/request-demo?campaign_id=enterprise-skill-audit', sections: [['Offer','A capability audit for enterprise teams.'],['Value proposition','Assess skills, identify gaps, and shape role-based upskilling journeys.'],['Outcome','Know where capability is ready and where it needs direction.']] },
-  'campaigns/enterprise/ai-workforce-readiness': { title: 'AI Workforce Readiness', description: 'Assess AI-related capability gaps and build practical upskilling paths for teams.', cta: 'Assess AI readiness', href: '/enterprise/request-demo?campaign_id=ai-workforce-readiness', sections: [['Offer','An AI readiness conversation grounded in roles and applied work.'],['Value proposition','Map skills needed, current gaps, and project-based practice.'],['Outcome','Build AI capability without vague training claims.']] },
-  'campaigns/enterprise/workforce-upskilling-assessment': { title: 'Workforce Upskilling Assessment', description: 'Turn employee skill gaps into role-based learning journeys and readiness signals.', cta: 'Request upskilling assessment', href: '/enterprise/request-demo?campaign_id=workforce-upskilling-assessment', sections: [['Offer','A structured starting point for enterprise upskilling.'],['Value proposition','Assess, assign paths, track progress, and measure readiness.'],['Outcome','Upskill with direction.']] },
-  'campaigns/enterprise/graduate-training': { title: 'Graduate Training Program', description: 'Move early talent from onboarding to role readiness through structured practice and projects.', cta: 'Discuss graduate training', href: '/enterprise/request-demo?campaign_id=graduate-training', sections: [['Offer','A graduate training path with skills, projects, and readiness milestones.'],['Value proposition','Give early talent a clearer path from learning to applied work.'],['Outcome','Managers see readiness movement over time.']] },
-  'campaigns/enterprise/request-demo': { title: 'Request an Enterprise Demo', description: 'Explore workforce assessment, upskilling, AI readiness, internal mobility, and hiring intelligence.', cta: 'Request enterprise demo', href: '/enterprise/request-demo?campaign_id=enterprise-demo', sections: [['Offer','A demo shaped around your workforce context.'],['Value proposition','Share employee count, skills needed, L&D stack, and timeline.'],['Outcome','A clearer path to capability growth.']] },
-  'campaigns/partners/university-partnerships': { title: 'University Partnerships', description: 'Partner with Pathwisse to connect student capability, readiness, and placement outcomes.', cta: 'Discuss partnership', href: '/colleges/request-demo?campaign_id=university-partnerships', sections: [['Offer','A partnership path for universities and institutions.'],['Value proposition','Connect student roadmaps, projects, readiness, and placement visibility.'],['Outcome','A stronger campus-to-career system.']] },
-  'campaigns/partners/training-partners': { title: 'Training Partner Programs', description: 'Connect partner training with project evidence, readiness signals, and learner outcomes.', cta: 'Discuss partner program', href: '/contact?interest=general&campaign_id=training-partners', sections: [['Offer','A partner path for training providers.'],['Value proposition','Make learner outcomes more visible through projects and readiness.'],['Outcome','Stronger proof for learners and partners.']] },
-  'campaigns/partners/ecosystem-partners': { title: 'Pathwisse Ecosystem Partners', description: 'Build a capability ecosystem across students, colleges, enterprises, and training partners.', cta: 'Discuss ecosystem partnership', href: '/contact?interest=general&campaign_id=ecosystem-partners', sections: [['Offer','A partnership route for organizations around capability growth.'],['Value proposition','Connect direction, learning, projects, readiness, and opportunity.'],['Outcome','A more useful bridge between potential and possibility.']] },
-};
-for (const [slug, copy] of Object.entries(campaignCopy)) Object.assign(pages[slug], copy, { noindex: true, kind: 'campaign' as const, faq: [['Will my campaign source be preserved?','Yes. UTM parameters, landing page, source, referrer, and campaign ID are captured in the lead flow.']] });
-
-Object.assign(pages['trust/privacy'], { title: 'Privacy Policy', description: 'How Pathwisse handles website, lead, campaign, and product-interest data.', sections: [['Scope','This policy explains how Pathwisse collects and uses information from website visitors, lead forms, campaign pages, demo requests, and product-interest journeys.'],['Data collected','We may collect name, email, phone, organization, role, audience, message, consent, source, landing page, referrer, and UTM attribution when you submit a form. Optional analytics only run after consent.'],['Use of data','We use submitted information to respond to enquiries, prepare demos, manage waitlists, understand campaign performance, and improve the website. We do not ask visitors to submit confidential information through public forms.'],['Retention and rights','Production retention, deletion, and access processes should be reviewed with legal counsel before broader data collection.'],['Legal review','This page is a production-ready draft and should receive legal review before launch.']] });
-Object.assign(pages['trust/terms'], { title: 'Terms of Service', description: 'Terms for using the Pathwisse website and public resources.', sections: [['Website use','The public website provides information, guides, campaign pages, and enquiry forms for Pathwisse audiences.'],['No guarantee','Career audit and readiness content is guidance. It does not guarantee employment, admission, hiring outcomes, or psychological certainty.'],['Acceptable use','Do not misuse forms, submit confidential third-party information, attack the service, scrape private systems, or interfere with website operation.'],['Product terms','Separate product terms may apply to the Pathwisse platform, Career Voice, institutional pilots, or enterprise deployments.'],['Legal review','These terms are a production-ready draft and should be reviewed by counsel before launch.']] });
-Object.assign(pages['trust/security'], { title: 'Security', description: 'Pathwisse security principles for public website and lead-generation systems.', sections: [['Security posture','Pathwisse applies secure headers, origin validation, server-side validation, rate limiting patterns, and careful handling of public lead data.'],['Data minimization','Public forms should collect only the information needed for the stated enquiry or campaign. Sensitive secrets and confidential customer data should not be submitted.'],['Infrastructure','The website is designed for Cloudflare-compatible deployment with D1-backed lead storage and adapter-based integrations.'],['Access and operations','Private lead data must not be exposed publicly. CRM sync failures should not cause data loss.'],['Review','Security controls should be reviewed before production traffic and whenever new integrations are enabled.']] });
-Object.assign(pages['trust/compliance'], { title: 'Compliance Disclosure', description: 'A practical disclosure of Pathwisse compliance readiness and review status.', sections: [['Current status','Compliance content on this website is informational and should be reviewed before external procurement or enterprise security review use.'],['Data handling','Lead data is stored first, then adapter-based sync can send records to CRM, email, or automation systems when configured.'],['Customer data','Do not publish customer logos, testimonials, or case study outcomes unless they are approved.'],['Procurement readiness','Enterprise security, privacy, and compliance questionnaires should be answered from verified operational controls.']] });
-Object.assign(pages['trust/dpdp'], { title: 'DPDP Policy', description: 'India DPDP-oriented privacy and consent principles for Pathwisse public experiences.', sections: [['Consent','Public forms include explicit consent for Pathwisse to respond to the submitted request. Optional analytics are separate from essential website operation.'],['Purpose limitation','Form data should be used for the purpose stated by the page, such as demo requests, audits, waitlists, events, or partnership enquiries.'],['Data principal rights','Pathwisse should provide a process for access, correction, and deletion requests before production data collection at scale.'],['Legal review','This DPDP page is a readiness draft and should be reviewed by counsel.']] });
-
-Object.assign(pages['pricing/students'], { title: 'Student Pricing', description: 'Self-serve student access for career direction, roadmaps, practice, projects, and readiness.', sections: [['Self-serve plan','Student pricing is structured for self-serve access to direction, roadmaps, skill practice, and project evidence. Final public prices should be published only after approval.'],['Included capabilities','Career audit, role roadmaps, skills, projects, readiness guidance, and Career Voice entry points.'],['When to contact','Students can start directly; college cohorts should use college partnership pricing.']] });
-Object.assign(pages['pricing/colleges'], { title: 'College Pricing', description: 'Sales-assisted pricing based on cohort size, readiness scope, implementation, and support.', sections: [['Pricing model','College pricing should be sales-assisted because cohort size, departments, reporting needs, implementation, and support vary.'],['Typical scope','Readiness audit, career accelerator, placement analytics, faculty workflows, and implementation support.'],['Next step','Request a college demo with cohort context and placement challenges.']], href: '/colleges/request-demo' });
-Object.assign(pages['pricing/enterprise'], { title: 'Enterprise Pricing', description: 'Sales-assisted pricing for workforce assessment, upskilling, AI readiness, and talent intelligence.', sections: [['Pricing model','Enterprise pricing should be sales-assisted because employee count, roles, integrations, and rollout scope vary.'],['Typical scope','Workforce assessment, role-based upskilling, capability maps, analytics, internal mobility, and hiring intelligence waitlist.'],['Next step','Request an enterprise demo with skills needed, L&D stack, and timeline.']], href: '/enterprise/request-demo' });
-
-const resourceUpdates: Record<string, [string,string][]> = {
-  'resources/guides': [['Placement readiness report','A practical guide for identifying skill gaps, project evidence, and readiness movement before placement season.'],['AI readiness report','A workforce guide for mapping AI-related skills to roles and applied projects.']],
-  'resources/templates': [['Student employability audit template','A template for placement teams to review readiness by skill, project, and role target.'],['Placement-team checklist','A checklist for moving from late placement-season panic to continuous support.']],
-  'resources/reports': [['Campus-to-career benchmark','A report framework for comparing cohort readiness, gaps, and intervention needs.'],['Placement dashboard sample','A sample dashboard outline for readiness, skill gaps, and cohort progress.']],
-  'resources/webinars': [['Career direction webinar','A student-focused session on choosing roles and building proof.'],['Placement readiness webinar','A college-focused session on cohort visibility and interventions.']],
-  'resources/case-studies': [['Customer proof policy','Approved logos, quotes, and outcomes will be published only after explicit customer approval.'],['Current state','No unapproved testimonials or fabricated outcomes are shown.']],
-  'resources/career-guides': [['Data Analyst guide','Skills, projects, and interview preparation for analytics roles.'],['Business Analyst guide','Requirements, process work, communication, and role readiness.']],
-  'resources/placement-guides': [['Readiness audit guide','How placement teams can inspect readiness before shortlisting.'],['Project evidence guide','How colleges can make applied work useful for placement conversations.']],
-};
-for (const [slug, items] of Object.entries(resourceUpdates)) Object.assign(pages[slug], { sections: items.map(([a,b]) => [a,b] as [string,string]), cta: 'Request this resource', href: '/contact?interest=events' });
-for (const slug of ['customers','customers/students','customers/colleges','customers/enterprises','customers/case-studies/sample']) Object.assign(pages[slug], { noindex: true, sections: [['Proof policy','Pathwisse will not publish fake logos, testimonials, numbers, or outcomes.'],['Current state','Customer proof pages remain available as draft-like placeholders until approved stories are ready.'],['Next step','Use case study templates internally, then publish only verified customer-approved evidence.']] });
 export const hubs: Record<string, HubData> = {
-  product: { title: 'Products', description: 'Explore Pathwisse products across direction, practice, projects, readiness, analytics, and integrations.', items: productPages.filter(p => p.slug !== 'product').map(p => p.slug) },
-  careers: { title: 'Career roadmaps', description: 'Role pages that connect responsibilities, skills, projects, interview preparation, and next steps.', items: careers.map(c => `careers/${c.slug}`) },
-  skills: { title: 'Skill guides', description: 'Skill pages that connect learning progression, practice, projects, careers, and resources.', items: skills.map(s => `skills/${s.slug}`) },
-  compare: { title: 'Career comparisons', description: 'Compare roles by responsibilities, skills, tools, projects, learning curve, and transition paths.', items: comparisonPages.map(p => p.slug) },
-  'resources/blog/category': { title: 'Blog categories', description: 'Browse Pathwisse articles by category.', items: ['resources/blog/category/career-direction'] },
-  'resources/blog/tag': { title: 'Blog tags', description: 'Browse Pathwisse articles by tag.', items: ['resources/blog/tag/career-roadmaps'] },
+  product: {
+    title: 'Pathwisse Products',
+    description: 'Explore the 9 connected products across Understand, Develop, Prove, Intelligence, and Outcomes.',
+    items: [
+      'product/career-voice',
+      'product/career-roadmaps',
+      'product/practice-lab',
+      'product/enterprise-projects',
+      'product/skill-passport',
+      'product/readiness-intelligence',
+      'product/job-intelligence',
+      'product/placement-intelligence',
+      'product/employability-analytics',
+    ],
+  },
+  careers: { title: 'Career Roadmaps', description: 'Role-specific paths that connect responsibilities, required skills, applied projects, interview preparation, and next steps.', items: careers.map(c => `careers/${c.slug}`) },
+  skills: { title: 'Skill Guides', description: 'Skill pages that connect learning progression, practice exercises, applied projects, career connections, and resources.', items: skills.map(s => `skills/${s.slug}`) },
+  compare: { title: 'Career Comparisons', description: 'Compare roles by responsibilities, required skills, tools, projects, learning curve, and transition paths.', items: comparisonPages.map(p => p.slug) },
+  colleges: { title: 'For Colleges', description: 'Everything colleges need: placement team tools, student analytics, readiness reporting, and faculty visibility.', items: ['colleges', 'colleges/overview', 'colleges/placement-teams', 'colleges/placement-readiness', 'colleges/student-analytics'] },
+  'resources/blog/category': { title: 'Blog Categories', description: 'Browse Pathwisse articles by category.', items: ['resources/blog/category/career-direction'] },
+  'resources/blog/tag': { title: 'Blog Tags', description: 'Browse Pathwisse articles by tag.', items: ['resources/blog/tag/placement-readiness'] },
 };
 
-export const searchable = [...Object.values(pages), ...Object.entries(hubs).map(([slug, hub]) => ({ slug, title: hub.title, description: hub.description }))];
-export const indexablePaths = [...Object.entries(pages).filter(([, p]) => !p.draft && !p.noindex && p.status === 'published').map(([slug]) => slug), ...Object.keys(hubs)];
+export const searchable = [
+  ...Object.values(pages),
+  ...Object.entries(hubs).map(([slug, hub]) => ({ slug, title: hub.title, description: hub.description })),
+];
 
+export const indexablePaths = [
+  ...Object.entries(pages)
+    .filter(([, p]) => !p.draft && !p.noindex && p.status === 'published')
+    .map(([slug]) => slug),
+  ...Object.keys(hubs),
+];

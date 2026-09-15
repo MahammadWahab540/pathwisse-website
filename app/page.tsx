@@ -4,15 +4,15 @@ import { HomePage } from './site';
 export const metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'Pathwisse — Turn capability into proof',
-    description: 'Know what to do next. Hire with evidence. Upskill with direction.',
+    title: 'Pathwisse | Institutional Employability & Placement Platform',
+    description: 'Structured roadmaps, verified skill proof and placement readiness reporting for colleges, students and educators.',
     url: SITE_URL,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pathwisse — Turn capability into proof',
-    description: 'Know what to do next. Hire with evidence. Upskill with direction.',
+    title: 'Pathwisse | Institutional Employability & Placement Platform',
+    description: 'Structured roadmaps, verified skill proof and placement readiness reporting for colleges, students and educators.',
   },
 };
 
@@ -22,7 +22,9 @@ export default function Page() {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'Pathwisse',
+      legalName: 'Shaquantum Labs Private Limited',
       url: SITE_URL,
+      email: 'partnership@pathwisse.com',
       logo: absoluteUrl('/favicon.svg'),
       sameAs: [APP_AUTH_URL, CAREER_VOICE_URL],
     },
