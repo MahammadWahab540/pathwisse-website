@@ -15,37 +15,29 @@ function parseBlogRow(row: Record<string, unknown>) {
   };
 }
 
-function isAuthorized(request: Request) {
-  const apiKey = request.headers.get('x-api-key');
-  return apiKey && apiKey === (globalThis as Record<string, unknown>).BLOG_API_KEY;
-}
-
-// GET /api/blog/:slug — fetch a single blog post (published posts are public)
+// GET /api/blog/:slug — fetch a single blog post
 export async function GET(_request: Request, { params }: Props) {
   const { slug } = await params;
   try {
     const db = rawDb();
     const row = await db.prepare(
-      "SELECT * FROM blog_posts WHERE slug = ? AND status = 'published'"
+      "SELECT * FROM blog_posts WHERE slug = ?"
     ).bind(slug).first<Record<string, unknown>>();
 
     if (!row) return Response.json({ error: 'Post not found.' }, { status: 404 });
 
     return Response.json({ post: parseBlogRow(row) }, {
-      headers: { 'Cache-Control': 'public, max-age=300, stale-while-revalidate=600' },
+      headers: { 'Cache-Control': 'no-store' },
     });
   } catch {
     return Response.json({ error: 'Could not load the post.' }, { status: 503 });
   }
 }
 
-// PUT /api/blog/:slug — update an existing post (requires API key)
+// PUT /api/blog/:slug — update an existing post
 export async function PUT(request: Request, { params }: Props) {
   if (!allowedOrigin(request)) {
     return Response.json({ error: 'Request origin is not allowed.' }, { status: 403 });
-  }
-  if (!isAuthorized(request)) {
-    return Response.json({ error: 'Unauthorized.' }, { status: 401 });
   }
 
   const { slug } = await params;
@@ -107,10 +99,10 @@ export async function PUT(request: Request, { params }: Props) {
   }
 }
 
-// DELETE /api/blog/:slug — delete a post (requires API key)
+// DELETE /api/blog/:slug — delete a post
 export async function DELETE(request: Request, { params }: Props) {
-  if (!isAuthorized(request)) {
-    return Response.json({ error: 'Unauthorized.' }, { status: 401 });
+  if (!allowedOrigin(request)) {
+    return Response.json({ error: 'Request origin is not allowed.' }, { status: 403 });
   }
 
   const { slug } = await params;
