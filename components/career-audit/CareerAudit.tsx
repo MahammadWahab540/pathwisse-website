@@ -45,9 +45,29 @@ export function CareerAudit({ mode }: { mode: Mode }) {
   const ranked = useMemo(() => score(answers), [answers]);
   const top = roles[ranked[0] || 'analytics'];
   const readiness = Math.min(88, 28 + Object.keys(answers).length * 10 + (answers.proof === 'project' ? 15 : answers.proof === 'internship' ? 20 : 0));
-  function save(next: AnswerMap) { setAnswers(next); try { localStorage.setItem(key, JSON.stringify(next)); } catch {} }
+  function save(next: AnswerMap) {
+    setAnswers(next);
+    try { localStorage.setItem(key, JSON.stringify(next)); } catch {}
+  }
+
+  function handleComplete() {
+    track('career_audit_complete','student');
+    // Asynchronously sync to D1 database
+    try {
+      fetch('/api/career-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          answers,
+          recommendedRole: ranked[0] || 'analytics',
+          readinessScore: readiness,
+        }),
+      }).catch(() => {});
+    } catch {}
+  }
+
   if (mode === 'start') return <section className="audit-shell"><div className="audit-copy"><span className="eyebrow">CAREER AUDIT</span><h1>Find the next useful direction.</h1><p>This is guidance, not a psychological test. Pathwisse uses your interests, current proof, practice time, and uncertainty to suggest a practical career direction and roadmap.</p><a className="button" href="/career-audit/assessment" onClick={() => track('career_audit_start','student')}>Start the audit <ArrowRight size={16}/></a></div><AuditPanel top={top} readiness={readiness}/></section>;
-  if (mode === 'assessment') return <section className="audit-page"><span className="eyebrow">CAREER AUDIT ASSESSMENT</span><h1>Answer five practical questions.</h1><div className="question-list">{questions.map((q, index) => <fieldset key={q.id}><legend>{index + 1}. {q.label}</legend>{q.options.map(([value,label]) => <button type="button" className={answers[q.id] === value ? 'selected' : ''} onClick={() => save({ ...answers, [q.id]: value })} key={value}>{label}</button>)}</fieldset>)}</div><a className={Object.keys(answers).length >= questions.length ? 'button' : 'button disabled'} href="/career-audit/result" onClick={(e) => { if (Object.keys(answers).length < questions.length) e.preventDefault(); else track('career_audit_complete','student'); }}>See my result <ArrowRight size={16}/></a></section>;
+  if (mode === 'assessment') return <section className="audit-page"><span className="eyebrow">CAREER AUDIT ASSESSMENT</span><h1>Answer five practical questions.</h1><div className="question-list">{questions.map((q, index) => <fieldset key={q.id}><legend>{index + 1}. {q.label}</legend>{q.options.map(([value,label]) => <button type="button" className={answers[q.id] === value ? 'selected' : ''} onClick={() => save({ ...answers, [q.id]: value })} key={value}>{label}</button>)}</fieldset>)}</div><a className={Object.keys(answers).length >= questions.length ? 'button' : 'button disabled'} href="/career-audit/result" onClick={(e) => { if (Object.keys(answers).length < questions.length) e.preventDefault(); else handleComplete(); }}>See my result <ArrowRight size={16}/></a></section>;
   if (mode === 'result') return <section className="audit-shell"><div className="audit-copy"><span className="eyebrow">YOUR AUDIT RESULT</span><h1>{top.title} looks like the strongest first path.</h1><p>This recommendation is based on your selected interests and current proof. Treat it as a direction to test through skills, practice, and one strong project.</p><div className="audit-result-grid"><div><b>Skills to explore</b>{top.skills.map(s => <span key={s}>{s}</span>)}</div><div><b>Suggested project</b><span>{top.project}</span></div><div><b>Current readiness guidance</b><span>{readiness}% illustrative readiness</span></div></div><a className="button" href="/career-audit/roadmap">Generate roadmap <ArrowRight size={16}/></a></div><AuditPanel top={top} readiness={readiness}/></section>;
   return <section className="audit-page"><span className="eyebrow">PERSONALIZED ROADMAP</span><h1>Your first 30-day roadmap for {top.title}.</h1><div className="roadmap-plan">{['Clarify role expectations','Build the first core skill','Practice with small tasks','Create one project artifact','Prepare your project explanation'].map((step,i)=><div key={step}><span>{String(i+1).padStart(2,'0')}</span><h2>{step}</h2><p>{i===1?`Start with ${top.skills[0]} and connect it to a real task.`:i===3?`Build: ${top.project}. Capture your problem, choices, output, and reflection.`:'Keep the step small enough to complete and visible enough to prove progress.'}</p></div>)}</div><div className="button-row"><a className="button" href={top.path}>Open {top.title} roadmap <ArrowRight size={16}/></a><a className="text-link" href="https://careervoice.pathwisse.com">Continue in Career Voice <ArrowRight size={16}/></a></div></section>;
 }

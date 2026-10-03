@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
+import { Hero } from '@/components/hero';
 
 export const APP = APP_AUTH_URL;
 
@@ -84,12 +85,11 @@ type AudienceKey = keyof typeof audienceData;
 
 export function Logo() {
   return (
-    <a className="logo" href="/" aria-label="Pathwisse home">
-      <svg width="36" height="34" viewBox="0 0 44 40" fill="none" aria-hidden="true">
-        <path d="M29 5H16v12H5v17h13v-9h16V14" stroke="currentColor" strokeWidth="7" strokeLinejoin="round" />
-        <circle cx="37" cy="5" r="4" fill="#f5913f" />
-      </svg>
-      <span>Path<span className="blue">wisse</span></span>
+    <a className="logo" href="/" aria-label="Pathwisse home" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: "'Outfit', sans-serif", fontSize: '23px', fontWeight: 700, letterSpacing: '-0.02em', color: '#1F3861' }}>
+        <span style={{ display: 'block', width: '10px', height: '10px', borderRadius: '50%', background: '#1F3861' }} />
+        <span>Path<span style={{ color: '#2458ae' }}>wisse</span></span>
+      </span>
     </a>
   );
 }
@@ -373,20 +373,7 @@ export function HomePage() {
     <>
       <Header />
       <main id="main">
-        <section className="hero">
-          <div className="hero-copy">
-            <div className="eyebrow hero-eyebrow"><span className="orange-line" />CLARITY. CAPABILITY. POSSIBILITY.</div>
-            <h1>Pathwisse turns capability into visible, actionable proof<span className="orange-text">.</span></h1>
-            <p>A connected career-readiness and capability system for students, placement teams, and enterprises. Know what to do next, who needs support, and who can do the work.</p>
-            <div className="button-row"><a className="button" href="#audiences">Explore the three views <ArrowRight size={16} /></a><a className="text-link" href="/contact">Partner with us <ArrowUpRight size={16} /></a></div>
-            <div className="hero-note"><span className="tiny-check"><Check size={11} /></span>Students: know what to do next. Placement teams: know who is ready. Enterprises: hire with evidence and upskill with direction.</div>
-          </div>
-          <div className="hero-product">
-            <div className="floating-label"><span className="proof-icon"><Check size={16} /></span><div><b>Capability, made visible.</b><small>Direction → practice → proof → action</small></div></div>
-            <AudienceWorkspace active="students" />
-            <div className="path-caption"><span className="path-line" />One Pathwisse system. Three customized experiences.</div>
-          </div>
-        </section>
+        <Hero accent="#3B82F6" />
         <TrustBand />
         <AudienceExperience />
         <EcosystemStory />
