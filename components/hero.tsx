@@ -578,10 +578,7 @@ export function Hero({ accent = '#3B82F6', autoplay = true }: HeroProps) {
 
       {/* Top action row */}
       <div className="pw-top">
-        <div className="pw-badge">
-          <span className="pw-badge-dot" />
-          <span>Potential to Opportunity System</span>
-        </div>
+        <div />
 
         <button
           type="button"
