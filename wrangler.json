@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pathwisse-website",
+  "main": "vinext/server/fetch-handler",
+  "compatibility_date": "2024-09-23",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "pathwisse-db",
+      "database_id": "6154146c-e8be-4de3-b568-827a478e5a13"
+    }
+  ]
+}

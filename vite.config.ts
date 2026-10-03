@@ -20,8 +20,8 @@ const localBindingConfig = {
     ? [
         {
           binding: d1,
-          database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
+          database_name: "pathwisse-db",
+          database_id: "6154146c-e8be-4de3-b568-827a478e5a13",
         },
       ]
     : [],

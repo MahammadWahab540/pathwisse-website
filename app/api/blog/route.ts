@@ -37,8 +37,9 @@ export async function GET(request: Request) {
     return Response.json({ posts }, {
       headers: { 'Cache-Control': 'no-store' },
     });
-  } catch {
-    return Response.json({ error: 'Could not load blog posts.' }, { status: 503 });
+  } catch (err) {
+    console.error('Error loading blog posts:', err);
+    return Response.json({ error: 'Could not load blog posts.', details: String(err) }, { status: 503 });
   }
 }
 
@@ -77,37 +78,40 @@ export async function POST(request: Request) {
   try {
     const db = rawDb();
     await db.prepare(
-      `INSERT INTO blog_posts (slug,title,excerpt,body,hero_image,og_image,author,author_bio,category,tags,
-        publish_date,modified_date,status,featured,seo_title,meta_description,canonical,audience,
-        related_careers,related_skills,related_products,related_guides,cta_type,cta_url,faq,references)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-       ON CONFLICT(slug) DO UPDATE SET
-        title = excluded.title,
-        excerpt = excluded.excerpt,
-        body = excluded.body,
-        hero_image = excluded.hero_image,
-        og_image = excluded.og_image,
-        author = excluded.author,
-        author_bio = excluded.author_bio,
-        category = excluded.category,
-        tags = excluded.tags,
-        publish_date = excluded.publish_date,
-        modified_date = excluded.modified_date,
-        status = excluded.status,
-        featured = excluded.featured,
-        seo_title = excluded.seo_title,
-        meta_description = excluded.meta_description,
-        canonical = excluded.canonical,
-        audience = excluded.audience,
-        related_careers = excluded.related_careers,
-        related_skills = excluded.related_skills,
-        related_products = excluded.related_products,
-        related_guides = excluded.related_guides,
-        cta_type = excluded.cta_type,
-        cta_url = excluded.cta_url,
-        faq = excluded.faq,
-        references = excluded.references,
-        updated_at = CURRENT_TIMESTAMP`
+      `INSERT INTO blog_posts (
+        \`slug\`, \`title\`, \`excerpt\`, \`body\`, \`hero_image\`, \`og_image\`, \`author\`, \`author_bio\`,
+        \`category\`, \`tags\`, \`publish_date\`, \`modified_date\`, \`status\`, \`featured\`,
+        \`seo_title\`, \`meta_description\`, \`canonical\`, \`audience\`, \`related_careers\`,
+        \`related_skills\`, \`related_products\`, \`related_guides\`, \`cta_type\`, \`cta_url\`,
+        \`faq\`, \`references\`
+      ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      ON CONFLICT(\`slug\`) DO UPDATE SET
+        \`title\` = excluded.\`title\`,
+        \`excerpt\` = excluded.\`excerpt\`,
+        \`body\` = excluded.\`body\`,
+        \`hero_image\` = excluded.\`hero_image\`,
+        \`og_image\` = excluded.\`og_image\`,
+        \`author\` = excluded.\`author\`,
+        \`author_bio\` = excluded.\`author_bio\`,
+        \`category\` = excluded.\`category\`,
+        \`tags\` = excluded.\`tags\`,
+        \`publish_date\` = excluded.\`publish_date\`,
+        \`modified_date\` = excluded.\`modified_date\`,
+        \`status\` = excluded.\`status\`,
+        \`featured\` = excluded.\`featured\`,
+        \`seo_title\` = excluded.\`seo_title\`,
+        \`meta_description\` = excluded.\`meta_description\`,
+        \`canonical\` = excluded.\`canonical\`,
+        \`audience\` = excluded.\`audience\`,
+        \`related_careers\` = excluded.\`related_careers\`,
+        \`related_skills\` = excluded.\`related_skills\`,
+        \`related_products\` = excluded.\`related_products\`,
+        \`related_guides\` = excluded.\`related_guides\`,
+        \`cta_type\` = excluded.\`cta_type\`,
+        \`cta_url\` = excluded.\`cta_url\`,
+        \`faq\` = excluded.\`faq\`,
+        \`references\` = excluded.\`references\`,
+        \`updated_at\` = CURRENT_TIMESTAMP`
     ).bind(
       slug, title, excerpt, postBody, heroImage, ogImage, author, authorBio, category,
       JSON.stringify(tags), publishDate, modifiedDate, status,
