@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Tracking } from './tracking';
+import { Preloader } from '@/components/preloader';
 import { SITE_URL } from '@/lib/site-config';
 
 export const metadata: Metadata = {
@@ -12,5 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body><a className="skip-link" href="#main">Skip to content</a>{children}<Tracking /></body></html>;
+  return (
+    <html lang="en">
+      <body>
+        <Preloader />
+        <a className="skip-link" href="#main">Skip to content</a>
+        {children}
+        <Tracking />
+      </body>
+    </html>
+  );
 }
