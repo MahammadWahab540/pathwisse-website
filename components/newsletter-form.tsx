@@ -77,9 +77,9 @@ export function NewsletterForm({ className = '' }: { className?: string }) {
           type="submit"
           disabled={state === 'saving' || state === 'success'}
           aria-label="Subscribe to newsletter"
-          className="relative inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-white transition-all duration-200 select-none cursor-pointer disabled:cursor-not-allowed"
+          className="relative inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-white transition-all duration-200 select-none cursor-pointer disabled:cursor-not-allowed shadow-sm hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2458ae] focus-visible:ring-offset-2"
           style={{
-            background: state === 'success' ? '#10B981' : '#173c6e',
+            background: state === 'success' ? '#10B981' : '#2458ae',
           }}
         >
           {state === 'saving' ? (

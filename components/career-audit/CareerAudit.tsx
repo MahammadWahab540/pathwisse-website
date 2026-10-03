@@ -73,5 +73,16 @@ export function CareerAudit({ mode }: { mode: Mode }) {
 }
 
 function AuditPanel({ top, readiness }: { top: { title:string; skills:string[]; project:string }, readiness: number }) {
-  return <div className="audit-panel"><span>Illustrative result</span><h2>{top.title}</h2><div className="audit-meter"><strong>{readiness}%</strong><small>direction confidence</small></div>{top.skills.map(skill => <p key={skill}><CheckCircle2 size={16}/>{skill}</p>)}<em>Recommended proof: {top.project}</em></div>;
+  return (
+    <div className="audit-panel">
+      <span>Illustrative result</span>
+      <h2>{top.title}</h2>
+      <div className="audit-meter" style={{ '--readiness': `${readiness}%` } as React.CSSProperties}>
+        <strong>{readiness}%</strong>
+        <small>direction confidence</small>
+      </div>
+      {top.skills.map(skill => <p key={skill}><CheckCircle2 size={16}/>{skill}</p>)}
+      <em>Recommended proof: {top.project}</em>
+    </div>
+  );
 }

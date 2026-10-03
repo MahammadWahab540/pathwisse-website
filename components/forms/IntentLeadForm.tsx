@@ -261,9 +261,15 @@ export function IntentLeadForm({ variant }: { variant: keyof typeof configs }) {
         />
       </div>
 
-      <p className="text-[11px] text-center text-[#8a98a8]">
-        No credit card required. Encrypted with TLS 1.3 enterprise standards.
-      </p>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1 text-xs text-[#708093]">
+        <span className="flex items-center gap-1.5 font-medium text-[#2458ae]">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          Guaranteed response within 1 business day
+        </span>
+        <span className="text-[11px] text-[#8a98a8]">
+          Encrypted TLS 1.3 · No spam guarantee
+        </span>
+      </div>
     </form>
   );
 }

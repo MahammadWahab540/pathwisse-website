@@ -394,7 +394,7 @@ export function HomePage() {
         <EcosystemStory />
         <ProductEcosystem />
         <section className="resources-section">
-          <div className="section-heading"><div><span className="eyebrow">ORGANIC GROWTH INFRASTRUCTURE</span><h2>Pages built for search, answers, and conversion.</h2></div><a href="/resources" className="text-link">Explore resources <ArrowUpRight size={16} /></a></div>
+          <div className="section-heading"><div><span className="eyebrow">GUIDES & ROADMAPS</span><h2>Structured blueprints for every stage of capability.</h2></div><a href="/resources" className="text-link">Explore all resources <ArrowUpRight size={16} /></a></div>
           <div className="resource-grid">
             {[
               ['CAREER ROADMAP', 'Data Analyst Roadmap', 'Turn questions into structured data models and actionable business signals.', '/careers/data-analyst', <Compass size={55} key="icon" />],

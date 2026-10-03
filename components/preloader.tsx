@@ -10,26 +10,34 @@ const SLOGANS = [
 ];
 
 export function Preloader() {
-  const [visible, setVisible] = useState(true);
-  const [sloganIndex, setSloganIndex] = useState(0);
+  const [visible, setVisible] = useState(false);
   const [animatingOut, setAnimatingOut] = useState(false);
+  const [sloganIndex] = useState(0);
 
   useEffect(() => {
-    // Only show once per session or on full reloads
-    const interval = setInterval(() => {
-      setSloganIndex((prev) => (prev + 1) % SLOGANS.length);
-    }, 1100);
+    // Only show once per session
+    try {
+      if (sessionStorage.getItem('pw_preloader_seen')) {
+        return;
+      }
+      sessionStorage.setItem('pw_preloader_seen', '1');
+      setVisible(true);
+      document.body.style.overflow = 'hidden';
+    } catch {
+      return;
+    }
 
     const timer = setTimeout(() => {
       setAnimatingOut(true);
       setTimeout(() => {
         setVisible(false);
-      }, 750);
-    }, 2800);
+        document.body.style.overflow = '';
+      }, 350);
+    }, 550);
 
     return () => {
-      clearInterval(interval);
       clearTimeout(timer);
+      document.body.style.overflow = '';
     };
   }, []);
 
