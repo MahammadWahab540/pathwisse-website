@@ -10,7 +10,7 @@ export const leadSchema = z.object({
   organization: clean(160),
   organization_type: clean(60),
   designation: clean(100),
-  interest: z.enum(['student', 'college', 'upskilling', 'hiring', 'events', 'story', 'general']),
+  interest: z.enum(['student', 'college', 'upskilling', 'hiring', 'events', 'story', 'general', 'newsletter']),
   message: clean(2000),
   audience: clean(40),
   campaign_id: clean(120),

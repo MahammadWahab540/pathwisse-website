@@ -21,6 +21,7 @@ import {
 import { useMemo, useState } from 'react';
 import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
 import { Hero } from '@/components/hero';
+import { NewsletterForm } from '@/components/newsletter-form';
 
 export const APP = APP_AUTH_URL;
 
@@ -167,6 +168,13 @@ export function Header() {
 export function Footer() {
   return (
     <footer>
+      <div className="footer-newsletter" style={{ paddingBottom: '32px', borderBottom: '1px solid #e6ebf1', marginBottom: '36px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div>
+          <b style={{ fontSize: '15px', color: '#142e50', display: 'block', marginBottom: '4px' }}>Stay ahead with Pathwisse insights</b>
+          <p style={{ fontSize: '13px', color: '#637183', margin: 0 }}>Practical roadmaps, capability benchmarks, and campus placement signals delivered monthly.</p>
+        </div>
+        <NewsletterForm />
+      </div>
       <div className="footer-top">
         <div><Logo /><p>From potential to possibility.<br />Capability you can build on.</p></div>
         <div><b>Products</b><a href="/product">Pathwisse Platform</a><a href="/product/career-voice">Career Voice</a><a href="/product/projects">Projects</a><a href="/product/readiness-scoring">Readiness Scoring</a><a href="/product/analytics">Analytics</a></div>
