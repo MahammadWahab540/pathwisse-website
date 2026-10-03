@@ -145,14 +145,12 @@ export function Header() {
         <details>
           <summary>Resources <ChevronDown size={13} /></summary>
           <div className="dropdown">
-            <a href="/resources/blog">Blog</a>
-            <a href="/resources/guides">Guides</a>
-            <a href="/resources/career-guides">Career Guides</a>
-            <a href="/resources/placement-guides">Placement Guides</a>
-            <a href="/resources/templates">Templates</a>
-            <a href="/resources/reports">Reports</a>
-            <a href="/resources/webinars">Webinars</a>
-            <a href="/resources/case-studies">Case Studies</a>
+            <a href="/resources">Resource Hub</a>
+            <a href="/resources/blog">Blog & Insights</a>
+            <a href="/careers">Career Roadmaps</a>
+            <a href="/skills">Skill Guides</a>
+            <a href="/compare">Role Comparisons</a>
+            <a href={CAREER_VOICE_URL} target="_blank" rel="noopener noreferrer">Career Voice Audit</a>
           </div>
         </details>
       </nav>
@@ -369,9 +367,18 @@ function TrustBand() {
 export function CTA({ title = 'Your next chapter starts with clarity.' }: { title?: string }) {
   return (
     <section className="cta-section">
-      <span className="eyebrow">POTENTIAL IS JUST THE BEGINNING</span>
       <h2>{title}</h2>
-      <div className="button-row"><a className="button orange" href={APP}>Find your path <ArrowRight size={16} /></a><a className="light-link" href="/contact">Let&apos;s build together <ArrowUpRight size={16} /></a></div>
+      <p style={{ maxWidth: '580px', margin: '0 auto 28px', color: '#93a7c4', fontSize: '15px' }}>
+        Start with what you know, build what you can show, and move forward with evidence.
+      </p>
+      <div className="button-row">
+        <a className="button" style={{ background: '#2458ae' }} href={APP}>
+          Find your path <ArrowRight size={16} />
+        </a>
+        <a className="light-link" href="/contact">
+          Let&apos;s build together <ArrowUpRight size={16} />
+        </a>
+      </div>
     </section>
   );
 }
@@ -390,9 +397,9 @@ export function HomePage() {
           <div className="section-heading"><div><span className="eyebrow">ORGANIC GROWTH INFRASTRUCTURE</span><h2>Pages built for search, answers, and conversion.</h2></div><a href="/resources" className="text-link">Explore resources <ArrowUpRight size={16} /></a></div>
           <div className="resource-grid">
             {[
-              ['CAREER ROADMAP', 'Data Analyst', 'Turn questions into useful insights.', '/careers/data-analyst', <Compass size={55} key="icon" />],
-              ['PRACTICAL GUIDE', 'Build proof, not just a resume.', 'A guide to projects that show what you can do.', '/guides/build-career-evidence', <Layers3 size={55} key="icon" />],
-              ['FOR TEAMS', 'From skill gaps to growth.', 'Make workforce development more focused.', '/workforce/skill-gap-analysis', <BarChart3 size={55} key="icon" />],
+              ['CAREER ROADMAP', 'Data Analyst Roadmap', 'Turn questions into structured data models and actionable business signals.', '/careers/data-analyst', <Compass size={55} key="icon" />],
+              ['STRATEGIC GUIDE', 'How to choose a career path', 'A practical framework for turning uncertainty into your first clear direction.', '/resources/blog/choose-career-path', <Layers3 size={55} key="icon" />],
+              ['FOR TEAMS', 'From skill gaps to growth', 'Make workforce upskilling and internal mobility measurable.', '/enterprise/upskilling', <BarChart3 size={55} key="icon" />],
             ].map((x, index) => (
               <a className="resource-item" href={x[3] as string} key={x[1] as string}><div className={'resource-art art-0' + (index + 1)}><span>{x[4]}</span><small>{x[0] as string}</small><ArrowUpRight /></div><h3>{x[1] as string}</h3><p>{x[2] as string}</p></a>
             ))}

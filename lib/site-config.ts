@@ -31,6 +31,13 @@ export const legacyRedirects: Record<string, string> = {
   '/partnerships/colleges': '/colleges/placement-teams',
   '/workforce/skill-gap-analysis': '/enterprise/workforce-assessment',
   '/projects': '/product/projects',
+  '/resources/templates': '/resources',
+  '/resources/reports': '/resources',
+  '/resources/webinars': '/resources',
+  '/resources/case-studies': '/resources',
+  '/resources/guides': '/resources',
+  '/resources/career-guides': '/careers',
+  '/resources/placement-guides': '/colleges',
 };
 
 export const trustedOrigins = [SITE_URL, APP_URL, CAREER_VOICE_URL].map((url) => new URL(url).origin);
