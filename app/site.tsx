@@ -22,6 +22,7 @@ import { useMemo, useState } from 'react';
 import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
 import { Hero } from '@/components/hero';
 import { NewsletterForm } from '@/components/newsletter-form';
+import { LiquidGlassFooter } from '@/components/footer/LiquidGlassFooter';
 
 export const APP = APP_AUTH_URL;
 
@@ -164,31 +165,7 @@ export function Header() {
 }
 
 export function Footer() {
-  return (
-    <footer>
-      <div className="footer-newsletter" style={{ paddingBottom: '32px', borderBottom: '1px solid #e6ebf1', marginBottom: '36px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <div>
-          <b style={{ fontSize: '15px', color: '#142e50', display: 'block', marginBottom: '4px' }}>Stay ahead with Pathwisse insights</b>
-          <p style={{ fontSize: '13px', color: '#637183', margin: 0 }}>Practical roadmaps, capability benchmarks, and campus placement signals delivered monthly.</p>
-        </div>
-        <NewsletterForm />
-      </div>
-      <div className="footer-top">
-        <div><Logo /><p>From potential to possibility.<br />Capability you can build on.</p></div>
-        <div><b>Products</b><a href="/product">Pathwisse Platform</a><a href="/product/career-voice">Career Voice</a><a href="/product/projects">Projects</a><a href="/product/readiness-scoring">Readiness Scoring</a><a href="/product/analytics">Analytics</a></div>
-        <div><b>Students</b><a href="/students">Overview</a><a href="/students/career-roadmaps">Career roadmaps</a><a href="/students/projects">Projects</a><a href="/students/career-readiness">Career readiness</a><a href={CAREER_VOICE_URL}>Career Voice</a></div>
-        <div><b>Colleges</b><a href="/colleges">Overview</a><a href="/colleges/placement-teams">Placement teams</a><a href="/colleges/student-analytics">Student analytics</a><a href="/colleges/request-demo">Request demo</a></div>
-        <div><b>Enterprise</b><a href="/enterprise">Overview</a><a href="/enterprise/upskilling">Upskilling</a><a href="/enterprise/talent-intelligence">Talent intelligence</a><a href="/enterprise/request-demo">Request demo</a></div>
-        <div><b>Resources</b><a href="/resources/blog">Blog</a><a href="/resources/guides">Guides</a><a href="/careers">Career roadmaps</a><a href="/skills">Skills</a><a href="/compare">Comparisons</a></div>
-        <div><b>Company</b><a href="/company/about">About</a><a href="/company/partners">Partners</a><a href="/company/contact">Contact</a><a href="/company/press">Press</a></div>
-        <div><b>Trust</b><a href="/trust/privacy">Privacy</a><a href="/trust/terms">Terms</a><a href="/trust/security">Security</a><a href="/trust/dpdp">DPDP</a><a href={APP}>Login</a></div>
-      </div>
-      <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Pathwisse. All rights reserved.</span>
-        <span><a href="/trust/privacy">Privacy</a><span className="dot" /><a href="/trust/terms">Terms</a><span className="dot" />Built for possibility. Everywhere.</span>
-      </div>
-    </footer>
-  );
+  return <LiquidGlassFooter />;
 }
 
 export function Dashboard({ kind = 'student' }: { kind?: string }) {
