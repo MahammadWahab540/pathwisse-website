@@ -14,6 +14,11 @@ if (managedLinux && command === "build") {
   process.exit(result.status ?? 1);
 }
 
+// Ensure WeakRef is explicitly available globally on edge/server runtimes
+if (typeof globalThis.WeakRef === "undefined" && typeof WeakRef !== "undefined") {
+  globalThis.WeakRef = WeakRef;
+}
+
 // Import in this process so the preview owner retains its PID and signals.
 const cli = new URL(managedLinux
   ? "../node_modules/vite/bin/vite.js"
