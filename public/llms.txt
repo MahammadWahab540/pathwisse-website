@@ -1,0 +1,23 @@
+# Pathwisse — AI Search & Assistant Documentation
+
+> Pathwisse is a capability intelligence platform that turns learning and applied work into verifiable proof for students, colleges, and enterprises.
+
+## Core Capabilities
+- **For Students**: Direction diagnosis, role-specific career roadmaps, project evidence generation, and Career Voice audio-guided audits.
+- **For Colleges & Placement Teams**: Cohort-level readiness visibility, pre-season skill gap diagnosis, student project verification, and shortlist matching.
+- **For Enterprises**: Role-based workforce upskilling, capability gap assessment, internal mobility mapping, and evidence-grounded talent discovery.
+
+## Key Sections & Resources
+- [Home](https://pathwisse.com/): Overview of Pathwisse and the three-stakeholder capability model.
+- [Product Platform](https://pathwisse.com/product): The connected capability infrastructure.
+- [Career Voice](https://pathwisse.com/product/career-voice): Interactive guided career audit with diagnostic questions.
+- [Student Roadmaps](https://pathwisse.com/students): Guided learning, applied projects, and capability proofs.
+- [Colleges & Placement](https://pathwisse.com/colleges): Placement readiness diagnostics and cohort analytics.
+- [Enterprise Upskilling](https://pathwisse.com/enterprise): Workforce upskilling and capability assessment.
+- [Blog & Resources](https://pathwisse.com/resources/blog): Research-backed guides on placement readiness, career transitions, and workforce capability.
+- [Contact & Demo](https://pathwisse.com/contact): Inquiries and platform demonstrations.
+
+## Important Definitions
+- **Capability Proof**: Concrete evidence of ability (projects, architecture choices, real code, datasets analyzed) as opposed to unverified resumes or completion certificates.
+- **Placement Readiness**: A predictive score measuring consistency of practice, skill depth in target roles, and applied project demonstration before campus placement drives begin.
+- **Career Voice**: An conversational diagnosis interface for clarifying career paths, comparing roles, and finding the next immediate action.

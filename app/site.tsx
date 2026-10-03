@@ -390,6 +390,38 @@ export function HomePage() {
             ))}
           </div>
         </section>
+        <section className="faq" id="faq" style={{ maxWidth: '960px', margin: '4rem auto 2rem', padding: '0 1.5rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <span className="eyebrow" style={{ color: '#2563EB', fontWeight: 600, letterSpacing: '0.05em' }}>CLEAR ANSWERS</span>
+            <h2 style={{ fontSize: '2rem', fontWeight: 700, marginTop: '0.5rem', color: '#0F172A' }}>Frequently asked questions about Pathwisse</h2>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <details style={{ background: '#F8FAFC', borderRadius: '12px', padding: '1.25rem 1.5rem', border: '1px solid #E2E8F0' }}>
+              <summary style={{ fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', color: '#1E293B' }}>
+                What is Pathwisse and how does it work? <span>+</span>
+              </summary>
+              <p style={{ marginTop: '0.75rem', color: '#475569', lineHeight: '1.65' }}>
+                Pathwisse is a connected capability intelligence platform that turns learning and applied work into verifiable proof. For students, it provides role roadmaps, project evidence, and Career Voice diagnostics. For colleges, it delivers pre-season placement readiness signals and cohort gap analytics. For enterprises, it guides role-based workforce upskilling and evidence-grounded talent discovery.
+              </p>
+            </details>
+            <details style={{ background: '#F8FAFC', borderRadius: '12px', padding: '1.25rem 1.5rem', border: '1px solid #E2E8F0' }}>
+              <summary style={{ fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', color: '#1E293B' }}>
+                How is capability proof different from standard course certificates? <span>+</span>
+              </summary>
+              <p style={{ marginTop: '0.75rem', color: '#475569', lineHeight: '1.65' }}>
+                Course certificates confirm completion rather than competence. Pathwisse builds verifiable capability proof from demonstrated project artifacts, code decisions, architectural trade-offs, and consistent problem-solving practice that interviewers and managers can inspect directly.
+              </p>
+            </details>
+            <details style={{ background: '#F8FAFC', borderRadius: '12px', padding: '1.25rem 1.5rem', border: '1px solid #E2E8F0' }}>
+              <summary style={{ fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', color: '#1E293B' }}>
+                What is Career Voice and who should use it? <span>+</span>
+              </summary>
+              <p style={{ marginTop: '0.75rem', color: '#475569', lineHeight: '1.65' }}>
+                Career Voice is an interactive career audit interface accessible via voice or text. It helps learners and career switchers analyze their interests, compare roles, diagnose skill gaps, and define a clear, immediate next action without getting overwhelmed by vague advice.
+              </p>
+            </details>
+          </div>
+        </section>
         <CTA title="Turn potential into proof people can act on." />
       </main>
       <Footer />

@@ -47,8 +47,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const post = await getBlogPostFromDb(postSlug);
     if (post) {
       const url = absoluteUrl(path);
+      const rawTitle = (post.seo_title as string) || (post.title as string);
+      const cleanTitle = rawTitle.replace(/\s*[|\-–—]\s*Pathwisse.*$/i, '').trim();
       return {
-        title: (post.seo_title as string) || (post.title as string),
+        title: cleanTitle,
         description: (post.meta_description as string) || (post.excerpt as string),
         alternates: { canonical: url },
         openGraph: { title: post.title as string, description: post.excerpt as string, url, type: 'article' },
@@ -94,9 +96,22 @@ export default async function Page({ params }: Props) {
         headline: post.title,
         description: post.excerpt,
         url,
-        author: { '@type': 'Organization', name: post.author },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        author: {
+          '@type': 'Person',
+          name: post.author,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Pathwisse',
+          url: SITE_URL,
+          logo: {
+            '@type': 'ImageObject',
+            url: absoluteUrl('/favicon.svg'),
+          },
+        },
         datePublished: post.publish_date,
-        dateModified: post.modified_date,
+        dateModified: post.modified_date || post.publish_date,
       },
       {
         '@context': 'https://schema.org',
@@ -130,6 +145,17 @@ export default async function Page({ params }: Props) {
               <span className="eyebrow">{String(post.category).toUpperCase()}</span>
               <h1>{String(post.title)}</h1>
               <p>{String(post.excerpt)}</p>
+              <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', fontSize: '0.875rem', color: '#64748B', margin: '1rem 0 1.5rem', flexWrap: 'wrap' }}>
+                <span>By <strong style={{ color: '#1E293B' }}>{String(post.author || 'Pathwisse Research')}</strong></span>
+                <span>•</span>
+                <time dateTime={String(post.publish_date)}>Published: {new Date(String(post.publish_date)).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                {post.modified_date && (
+                  <>
+                    <span>•</span>
+                    <time dateTime={String(post.modified_date)}>Updated: {new Date(String(post.modified_date)).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                  </>
+                )}
+              </div>
               <a className="button" href={String(post.cta_url || '/contact')}>
                 {post.cta_type === 'career_voice' ? 'Explore with Career Voice' : 'Talk to Pathwisse'}
                 <ArrowRight size={16} />
@@ -202,9 +228,39 @@ export default async function Page({ params }: Props) {
   if (!p && !hub) notFound();
   const item = p || hub;
   const url = absoluteUrl(path);
+
+  // Determine specific Schema type for AI search disambiguation
+  let primaryType = 'WebPage';
+  if (key.startsWith('careers/')) {
+    primaryType = 'Occupation';
+  } else if (key.startsWith('guides/')) {
+    primaryType = 'Article';
+  } else if (key.startsWith('skills/')) {
+    primaryType = 'DefinedTerm';
+  }
+
   const schema: object[] = [
-    { '@context': 'https://schema.org', '@type': 'WebPage', name: item.title, description: item.description, url },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL }, { '@type': 'ListItem', position: 2, name: item.title, item: url }] },
+    {
+      '@context': 'https://schema.org',
+      '@type': primaryType,
+      name: item.title,
+      description: item.description,
+      url,
+      publisher: {
+        '@type': 'Organization',
+        name: 'Pathwisse',
+        url: SITE_URL,
+        logo: absoluteUrl('/favicon.svg'),
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: item.title, item: url }
+      ]
+    },
   ];
   if (p?.faq) schema.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: p.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
   const source = (skills.find((s) => 'skills/' + s.slug === key) as { source?: string } | undefined)?.source;
