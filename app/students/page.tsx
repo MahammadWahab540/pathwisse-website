@@ -14,9 +14,9 @@ import {
   ShieldCheck, 
   Layers, 
   Zap,
-  Target,
   FileText
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'For Students: Career Direction, Real Projects & Verified Proof | Pathwisse',
@@ -85,7 +85,7 @@ export default function StudentsPage() {
                   7 Connected Steps From Day One to Offer Letter
                 </h2>
               </div>
-              <div className="flex items-center gap-2 overflow-x-auto py-2 w-full md:w-auto">
+              <div className="flex items-center gap-2 overflow-x-auto py-2 w-full md:w-auto scrollbar-none touch-pan-x pl-1 pr-4">
                 {[
                   'Direction',
                   'Roadmap',
@@ -97,9 +97,9 @@ export default function StudentsPage() {
                 ].map((step, idx) => (
                   <span
                     key={step}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#dce4ee] text-xs font-semibold text-[#142e50] shrink-0 shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#dce4ee] text-xs font-semibold text-[#142e50] shrink-0 shadow-2xs whitespace-nowrap"
                   >
-                    <span className="w-4 h-4 rounded-full bg-[#173c6e] text-white flex items-center justify-center text-[10px]">
+                    <span className="w-4 h-4 rounded-full bg-[#173c6e] text-white flex items-center justify-center text-[10px] font-bold">
                       {idx + 1}
                     </span>
                     <span>{step}</span>
@@ -183,31 +183,35 @@ export default function StudentsPage() {
             })}
 
             {/* Final Highlight Card: Ready for Opportunities */}
-            <div className="rounded-3xl p-8 flex flex-col justify-between text-white relative overflow-hidden"
+            <div className="rounded-3xl p-8 flex flex-col justify-between text-white relative overflow-hidden bg-[#132b4a]"
               style={{
-                background: 'linear-gradient(145deg, #132b4a 0%, #1e4a8a 100%)',
+                background: 'linear-gradient(145deg, #132b4a 0%, #173c6e 100%)',
               }}
             >
               <div className="space-y-4 relative z-10">
-                <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-white/20 text-white uppercase">
+                <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-white/20 text-white uppercase tracking-wider">
                   READY TO BEGIN
                 </span>
                 <h3 className="text-2xl font-bold text-white tracking-tight">
                   Your next chapter starts with one click.
                 </h3>
-                <p className="text-sm text-white/80 leading-relaxed">
+                <p className="text-sm text-slate-200 leading-relaxed">
                   Join thousands of students turning their college coursework into verified, job-ready proof.
                 </p>
               </div>
 
               <div className="mt-8 relative z-10">
-                <a
-                  href={APP_AUTH_URL}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-bold text-[#142e50] bg-white hover:bg-slate-100 shadow-md transition-all"
+                <Button
+                  asChild
+                  variant="inverse"
+                  size="lg"
+                  className="w-full rounded-full font-bold shadow-md hover:shadow-lg text-[#142e50] !text-[#142e50]"
                 >
-                  <span>Start Your Career Journey</span>
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+                  <a href={APP_AUTH_URL}>
+                    <span>Start Your Career Journey</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
               </div>
             </div>
           </div>
@@ -286,29 +290,37 @@ export default function StudentsPage() {
               <span className="px-3.5 py-1.5 rounded-full bg-white/10 text-xs font-bold uppercase tracking-widest text-sky-300 border border-white/15">
                 START TODAY · FREE ACCESS
               </span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
                 Ready to build proof people can act on?
               </h2>
-              <p className="text-base sm:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-200 max-w-xl mx-auto leading-relaxed">
                 Take the career audit, inspect your skill gaps, and begin working on your first verified project.
               </p>
 
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
-                  href={APP_AUTH_URL}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-sm text-[#142e50] bg-white hover:bg-slate-100 shadow-xl transition-all"
+                <Button
+                  asChild
+                  variant="inverse"
+                  size="lg"
+                  className="w-full sm:w-auto font-bold rounded-full shadow-xl hover:shadow-2xl"
                 >
-                  <span>Start Your Career Journey</span>
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+                  <a href={APP_AUTH_URL}>
+                    <span>Start Your Career Journey</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
 
-                <a
-                  href={CAREER_VOICE_URL}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all"
+                <Button
+                  asChild
+                  variant="inverseOutline"
+                  size="lg"
+                  className="w-full sm:w-auto rounded-full border-white/20 text-white hover:bg-white/10"
                 >
-                  <Sparkles className="h-4 w-4 text-sky-300" />
-                  <span>Try Career Voice Audit</span>
-                </a>
+                  <a href={CAREER_VOICE_URL}>
+                    <Sparkles className="h-4 w-4 text-sky-300" />
+                    <span>Try Career Voice Audit</span>
+                  </a>
+                </Button>
               </div>
             </div>
           </div>

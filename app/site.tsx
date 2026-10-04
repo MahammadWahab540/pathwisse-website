@@ -66,19 +66,19 @@ const audienceData = {
   enterprise: {
     label: 'Enterprises',
     eyebrow: 'FOR ENTERPRISES',
-    headline: 'Hire with evidence. Upskill with direction.',
-    summary: 'Use capability signals to discover talent, identify workforce gaps, and create role-based growth journeys.',
-    cta: 'Partner with us',
-    href: '/contact?interest=upskilling',
-    status: 'Capability system',
-    stat: '+23%',
-    statLabel: 'capability lift',
-    nav: ['Evidence', 'Fit', 'Upskill', 'Mobility'],
+    headline: 'Discover talent through demonstrated capability.',
+    summary: 'Evaluate candidates by inspecting actual project decisions, code architecture, and verified readiness signals.',
+    cta: 'Request a demo',
+    href: '/enterprise/request-demo',
+    status: 'Talent Intelligence',
+    stat: '4.8x',
+    statLabel: 'higher signal-to-hire',
+    nav: ['Evidence', 'Candidate Fit', 'Project Proof', 'Direct Shortlist'],
     steps: [
-      ['Can they do the work?', 'Look behind the profile.', 'Hiring teams can review skill evidence, project context, and readiness signals as the Talent Intelligence product develops.', 'Evidence', '4 projects'],
-      ['Who fits this role?', 'Compare people with role expectations.', 'Signals become useful when they are evaluated against the actual work a role requires.', 'Candidate fit', '91%'],
-      ['Where is the workforce gap?', 'Turn capability gaps into growth paths.', 'Enterprise Upskilling maps current skills to role needs, then assigns learning, practice, and applied projects.', 'Priority team', 'Product'],
-      ['Who is ready for the next role?', 'Make internal mobility visible.', 'Managers can discuss growth with better context: what changed, what was demonstrated, and what remains to build.', 'Mobility-ready', '18 people'],
+      ['Can they do the work?', 'Inspect capability behind the résumé.', 'Review verifiable project artifacts, problem-solving depth, and architectural trade-offs.', 'Evidence trail', 'Verified projects'],
+      ['Who fits this role?', 'Compare candidates against actual role expectations.', 'Signals become actionable when evaluated against the concrete engineering work a role requires.', 'Candidate fit', '92% match'],
+      ['How was it evaluated?', 'Transparent assessment criteria.', 'Every readiness score is grounded in code reviews, system design choices, and practice consistency.', 'Signal integrity', 'Inspected proof'],
+      ['How fast can we shortlist?', 'Hire with evidence without sorting 1,000 resumes.', 'Identify candidates with demonstrated readiness who can contribute effectively from day one.', 'Shortlist speed', '< 48 hours'],
     ],
   },
 };
@@ -105,28 +105,22 @@ export function Header() {
         <details>
           <summary>Students <ChevronDown size={13} /></summary>
           <div className="dropdown">
-            <a href="/students">Student overview</a>
-            <a href="/students/career-roadmaps">Career roadmaps</a>
-            <a href="/students/projects">Projects</a>
-            <a href="/career-audit/start">Career audit</a>
+            <a href="/students">For Students</a>
+            <a href="/career-audit/start">Career Audit & Assessment</a>
           </div>
         </details>
         <details>
           <summary>Colleges <ChevronDown size={13} /></summary>
           <div className="dropdown">
-            <a href="/colleges">College overview</a>
-            <a href="/colleges/placement-teams">Placement teams</a>
-            <a href="/colleges/student-readiness-audit">Readiness audit</a>
-            <a href="/colleges/request-demo">Request demo</a>
+            <a href="/colleges">For Colleges & Placement</a>
+            <a href="/colleges/request-demo">Request Partnership Demo</a>
           </div>
         </details>
         <details>
           <summary>Enterprise <ChevronDown size={13} /></summary>
           <div className="dropdown">
-            <a href="/enterprise">Enterprise overview</a>
-            <a href="/enterprise/upskilling">Enterprise upskilling</a>
-            <a href="/enterprise/talent-intelligence">Talent intelligence</a>
-            <a href="/enterprise/request-demo">Request demo</a>
+            <a href="/enterprise">Talent & Hiring Intelligence</a>
+            <a href="/enterprise/request-demo">Request Enterprise Demo</a>
           </div>
         </details>
         <details>
@@ -136,25 +130,28 @@ export function Header() {
             <a href="/product/career-voice">Career Voice</a>
             <a href="/product/career-roadmaps">Career Roadmaps</a>
             <a href="/product/practice-lab">Practice Lab</a>
-            <a href="/product/projects">Projects</a>
+            <a href="/product/projects">Applied Projects</a>
             <a href="/product/skill-passport">Skill Passport</a>
             <a href="/product/readiness-scoring">Readiness Scoring</a>
-            <a href="/product/analytics">Analytics</a>
+            <a href="/product/analytics">Analytics & Signals</a>
             <a href="/product/integrations">Integrations</a>
           </div>
         </details>
-        <details>
-          <summary>Resources <ChevronDown size={13} /></summary>
-          <div className="dropdown">
-            <a href="/resources">Resource Hub</a>
-            <a href="/resources/blog">Blog & Insights</a>
-            <a href="/careers">Career Roadmaps</a>
-            <a href="/skills">Skill Guides</a>
-            <a href="/compare">Role Comparisons</a>
-            <a href={CAREER_VOICE_URL} target="_blank" rel="noopener noreferrer">Career Voice Audit</a>
-          </div>
-        </details>
-      </nav>
+          <details>
+            <summary>Resources <ChevronDown size={13} /></summary>
+            <div className="dropdown">
+              <a href="/resources">Resource Hub</a>
+              <a href="/resources/blog">Blog & Insights</a>
+              <a href="/careers">Career Roadmaps</a>
+              <a href="/skills">Skill Guides</a>
+              <a href="/compare/data-analyst-vs-business-analyst">Role Comparisons</a>
+              <a href={CAREER_VOICE_URL} target="_blank" rel="noopener noreferrer">Career Voice Audit</a>
+            </div>
+          </details>
+          <a href="/pricing" className="text-sm font-semibold text-[#142e50] hover:text-[#2458ae] transition-colors py-2 px-1">
+            Pricing
+          </a>
+        </nav>
       <div className="nav-actions">
         <a className="login" href={APP}>Log in <ArrowUpRight size={14} /></a>
         <a className="button small" href={APP}>Get started <ArrowRight size={14} /></a>
@@ -298,7 +295,63 @@ function EcosystemStory() {
 
   return (
     <section className="ecosystem-story">
-      <div className="story-visual"><img src="/pathwisse-ecosystem.png" alt="Connected Pathwisse capability system across students, placement teams, and enterprises" loading="lazy" width="1792" height="1024" /><span className="visual-caption">Capability becomes useful when people can act on it.</span></div>
+      <div className="story-visual relative rounded-2xl border border-[#dce6f2] bg-gradient-to-br from-[#f8fafc] via-white to-[#edf4fc] p-6 shadow-xl overflow-hidden flex flex-col justify-between min-h-[460px]">
+        {/* Top Header of the Dossier */}
+        <div className="flex items-center justify-between pb-4 border-b border-[#e2e8f0]">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#173c6e] text-white flex items-center justify-center font-bold text-sm shadow-sm">
+              PW
+            </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#2458ae] block">Verified Skill Passport</span>
+              <strong className="text-sm text-[#0f172a] font-['Outfit'] block">Aravind Kumar · Full-Stack Eng.</strong>
+            </div>
+          </div>
+          <span className="px-2.5 py-1 rounded-full bg-[#ecfdf5] border border-[#a7f3d0] text-[#065f46] text-xs font-semibold flex items-center gap-1.5 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" /> Verified Evidence
+          </span>
+        </div>
+
+        {/* Middle: 3 Pillars of Evidence */}
+        <div className="grid grid-cols-3 gap-3 my-4">
+          <div className="p-3.5 rounded-xl bg-white border border-[#e2e8f0] shadow-2xs">
+            <span className="text-[10px] font-semibold text-[#64748b] uppercase tracking-wide block mb-1">Algorithmic</span>
+            <div className="text-xl font-bold text-[#173c6e] font-['Outfit']">94<span className="text-xs text-[#64748b] font-normal">/100</span></div>
+            <p className="text-[10px] text-[#475569] mt-1 leading-snug">Consistent test suite pass rate</p>
+          </div>
+          <div className="p-3.5 rounded-xl bg-white border border-[#e2e8f0] shadow-2xs">
+            <span className="text-[10px] font-semibold text-[#64748b] uppercase tracking-wide block mb-1">Architecture</span>
+            <div className="text-xl font-bold text-[#2458ae] font-['Outfit']">Top 5%</div>
+            <p className="text-[10px] text-[#475569] mt-1 leading-snug">Modular API design & schema</p>
+          </div>
+          <div className="p-3.5 rounded-xl bg-white border border-[#e2e8f0] shadow-2xs">
+            <span className="text-[10px] font-semibold text-[#64748b] uppercase tracking-wide block mb-1">Projects</span>
+            <div className="text-xl font-bold text-[#0f172a] font-['Outfit']">4 Shipped</div>
+            <p className="text-[10px] text-[#475569] mt-1 leading-snug">Verifiable GitHub repositories</p>
+          </div>
+        </div>
+
+        {/* Recent Artifact Trail */}
+        <div className="rounded-xl bg-white border border-[#e2e8f0] p-4 shadow-2xs space-y-2.5">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-semibold text-[#0f172a] flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#2458ae]" /> Distributed Task Queue
+            </span>
+            <span className="text-[10px] text-[#64748b] font-mono">PR #42 · Merged</span>
+          </div>
+          <p className="text-xs text-[#475569] leading-relaxed">
+            Architected Redis-backed async job worker with exponential backoff and dead-letter queues. Complete test coverage across 24 edge cases.
+          </p>
+        </div>
+
+        {/* Bottom Bar: Actionable Proof */}
+        <div className="pt-3 border-t border-[#e2e8f0] flex items-center justify-between text-[11px] text-[#64748b]">
+          <span className="flex items-center gap-1.5">
+            <span className="text-[#10b981] font-bold">✓</span> Evaluated by Senior Technical Reviewers
+          </span>
+          <span className="font-medium text-[#173c6e]">Inspect Technical Memo ↗</span>
+        </div>
+      </div>
       <div className="story-copy">
         <span className="eyebrow">PROGRESS WITH A PURPOSE</span>
         <h2>One evidence layer. Many decisions.</h2>
@@ -319,8 +372,8 @@ function ProductEcosystem() {
         <div className="voice-visual"><div className="voice-orb"><AudioLines size={52} /></div><blockquote>What could my next<br />chapter look like?</blockquote><span>Understand → Choose → Audit → Next action</span></div>
       </div>
       <div className="product-pair">
-        <a href="/enterprise/upskilling"><span className="eyebrow">ENTERPRISE UPSKILLING</span><h3>Capability gaps become role-based journeys.</h3><p>Assess teams, identify gaps, assign structured paths, and review growth through applied work.</p><span className="text-link">Explore workforce upskilling <ArrowUpRight size={16} /></span></a>
-        <a href="/enterprise/talent-intelligence"><span className="eyebrow">TALENT INTELLIGENCE <span className="coming">IN DEVELOPMENT</span></span><h3>Hiring signals become easier to inspect.</h3><p>Discover candidates through demonstrated skills, projects, and evidence of capability.</p><span className="text-link">Join the hiring waitlist <ArrowUpRight size={16} /></span></a>
+        <a href="/enterprise"><span className="eyebrow">TALENT INTELLIGENCE</span><h3>Hiring signals become verifiable capability proof.</h3><p>Discover early-career talent through demonstrated skills, real code projects, and validated problem-solving.</p><span className="text-link">Explore hiring intelligence <ArrowUpRight size={16} /></span></a>
+        <a href="/enterprise/request-demo"><span className="eyebrow">EVALUATION PLATFORM</span><h3>Shortlist candidates with inspected evidence.</h3><p>Skip résumé guesswork with actionable readiness metrics and comprehensive project portfolios.</p><span className="text-link">Request enterprise demo <ArrowUpRight size={16} /></span></a>
       </div>
     </section>
   );
@@ -376,7 +429,7 @@ export function HomePage() {
             {[
               ['CAREER ROADMAP', 'Data Analyst Roadmap', 'Turn questions into structured data models and actionable business signals.', '/careers/data-analyst', <Compass size={55} key="icon" />],
               ['STRATEGIC GUIDE', 'How to choose a career path', 'A practical framework for turning uncertainty into your first clear direction.', '/resources/blog/choose-career-path', <Layers3 size={55} key="icon" />],
-              ['FOR TEAMS', 'From skill gaps to growth', 'Make workforce upskilling and internal mobility measurable.', '/enterprise/upskilling', <BarChart3 size={55} key="icon" />],
+              ['FOR EMPLOYERS', 'Hire with Evidence', 'How leading engineering teams identify talent through demonstrated capability.', '/enterprise', <BriefcaseBusiness size={55} key="icon" />],
             ].map((x, index) => (
               <a className="resource-item" href={x[3] as string} key={x[1] as string}><div className={'resource-art art-0' + (index + 1)}><span>{x[4]}</span><small>{x[0] as string}</small><ArrowUpRight /></div><h3>{x[1] as string}</h3><p>{x[2] as string}</p></a>
             ))}
@@ -393,7 +446,7 @@ export function HomePage() {
                 What is Pathwisse and how does it work? <span>+</span>
               </summary>
               <p style={{ marginTop: '0.75rem', color: '#475569', lineHeight: '1.65' }}>
-                Pathwisse is a connected capability intelligence platform that turns learning and applied work into verifiable proof. For students, it provides role roadmaps, project evidence, and Career Voice diagnostics. For colleges, it delivers pre-season placement readiness signals and cohort gap analytics. For enterprises, it guides role-based workforce upskilling and evidence-grounded talent discovery.
+                Pathwisse is a connected capability intelligence platform that turns learning and applied work into verifiable proof. For students, it provides role roadmaps, project evidence, and Career Voice diagnostics. For colleges, it delivers pre-season placement readiness signals and cohort gap analytics. For enterprises, it powers evidence-grounded talent discovery and hiring intelligence.
               </p>
             </details>
             <details style={{ background: '#F8FAFC', borderRadius: '12px', padding: '1.25rem 1.5rem', border: '1px solid #E2E8F0' }}>

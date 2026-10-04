@@ -4,24 +4,24 @@ import { CheckCircle2, ShieldCheck, Sparkles, Building2, TrendingUp, Users } fro
 
 export const metadata = {
   title: 'Request Enterprise Demo | Pathwisse',
-  description: 'Request a Pathwisse enterprise demo for workforce assessment, upskilling, AI readiness, and talent intelligence.',
+  description: 'Request a Pathwisse enterprise demo for early-career talent intelligence, candidate verification, and evidence-based technical hiring.',
 };
 
 export default function Page() {
   const highlights = [
     {
-      title: 'Evidence-led talent audit',
-      description: 'Audit internal teams and prospective candidates against demonstrable engineering and analytical capability.',
+      title: 'Inspectable candidate evidence',
+      description: 'Review verifiable technical project portfolios, design trade-offs, and architecture decisions before scheduling screens.',
       icon: ShieldCheck,
     },
     {
-      title: 'Targeted workforce upskilling',
-      description: 'Assign role-based roadmaps with zero video fluff and verify real skill acquisition with production projects.',
+      title: 'Role-calibrated readiness scores',
+      description: 'Match candidate proof against your specific junior and associate engineering benchmarks with zero resume keyword noise.',
       icon: TrendingUp,
     },
     {
-      title: 'Continuous AI mentor reviews',
-      description: '24/7 code complexity analysis and architecture feedback to accelerate developer velocity.',
+      title: 'Accelerated technical hiring',
+      description: 'Skip 1,000 uncalibrated applicants and shortlist evaluated candidates who can contribute from day one.',
       icon: Sparkles,
     },
   ];
@@ -37,14 +37,14 @@ export default function Page() {
               <div>
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#173c6e]/10 text-[#173c6e] text-xs font-bold uppercase tracking-wider mb-4">
                   <Building2 className="w-3.5 h-3.5 text-[#2458ae]" />
-                  Enterprise Capability
+                  Talent Intelligence
                 </span>
                 <h1 className="text-4xl sm:text-5xl font-extrabold text-[#142e50] tracking-tight leading-[1.08] mb-5">
                   Hire with evidence. <br />
-                  <span className="text-[#2458ae]">Upskill with direction.</span>
+                  <span className="text-[#2458ae]">Inspect capability.</span>
                 </h1>
                 <p className="text-base sm:text-lg text-[#586a80] leading-relaxed">
-                  Tell us about your workforce, target roles, and capability gaps. Our solutions team will configure a dedicated walkthrough of the Pathwisse platform.
+                  Tell us about your open engineering roles and hiring timeline. Our solutions team will configure a dedicated walkthrough of our candidate dossiers and verification platform.
                 </p>
               </div>
 

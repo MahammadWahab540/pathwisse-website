@@ -141,7 +141,13 @@ export default async function Page({ params }: Props) {
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
           <section className="inner-hero with-product">
             <div>
-              <a href="/resources/blog" className="breadcrumb">Blog <span>/</span> {String(post.category)}</a>
+              <nav aria-label="Breadcrumb" className="breadcrumb">
+                <a href="/" className="hover:text-[#2458ae]">Home</a>
+                <span aria-hidden="true">/</span>
+                <a href="/resources/blog" className="hover:text-[#2458ae]">Blog</a>
+                <span aria-hidden="true">/</span>
+                <span className="text-[#142e50] font-medium" aria-current="page">{String(post.category)}</span>
+              </nav>
               <span className="eyebrow">{String(post.category).toUpperCase()}</span>
               <h1>{String(post.title)}</h1>
               <p>{String(post.excerpt)}</p>
@@ -273,7 +279,21 @@ export default async function Page({ params }: Props) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
         <section className={'inner-hero ' + (p?.kind ? 'with-product' : '')}>
           <div>
-            <a href="/" className="breadcrumb">Home <span>/</span> {key.split('/')[0].replaceAll('-', ' ')}</a>
+            <nav aria-label="Breadcrumb" className="breadcrumb">
+              <a href="/" className="hover:text-[#2458ae]">Home</a>
+              <span aria-hidden="true">/</span>
+              {key.includes('/') ? (
+                <>
+                  <a href={`/${key.split('/')[0]}`} className="hover:text-[#2458ae] capitalize">
+                    {key.split('/')[0].replaceAll('-', ' ')}
+                  </a>
+                  <span aria-hidden="true">/</span>
+                  <span className="text-[#142e50] font-medium" aria-current="page">{item.title}</span>
+                </>
+              ) : (
+                <span className="text-[#142e50] font-medium" aria-current="page">{item.title}</span>
+              )}
+            </nav>
             <span className="eyebrow">{p?.eyebrow || 'EXPLORE PATHWISSE'}</span>
             <h1>{item.title}</h1>
             <p>{item.description}</p>

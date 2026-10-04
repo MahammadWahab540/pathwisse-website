@@ -39,12 +39,12 @@ interface OpportunityCoord {
 
 function parseRgb(hex: string): [number, number, number] {
   const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || ''));
-  if (!m) return [59, 130, 246];
+  if (!m) return [36, 88, 174];
   const n = parseInt(m[1], 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
-export function Hero({ accent = '#3B82F6', autoplay = true }: HeroProps) {
+export function Hero({ accent = '#2458ae', autoplay = true }: HeroProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -620,15 +620,14 @@ export function Hero({ accent = '#3B82F6', autoplay = true }: HeroProps) {
             </h1>
 
             <p className="rise rise-2 pw-description">
-              We&apos;re building a world where people are discovered for what they can actually do, not for degrees,
-              résumés, or credentials.
+              Where ambitious students turn real coursework into verified capability, and leading companies discover talent through inspectable technical proof.
             </p>
 
             <div className="rise rise-3 pw-cta-wrap">
               <button type="button" className="cta" onClick={openPaths}>
                 <span className="cta-glow" style={{ background: accent }} />
                 <span className="cta-content">
-                  <span>Find your path</span>
+                  <span>Explore Pathways</span>
                   <ArrowRight className="cta-arrow" size={18} aria-hidden="true" />
                 </span>
               </button>

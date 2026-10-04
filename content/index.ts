@@ -1,4 +1,4 @@
-import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
+import { APP_AUTH_URL, CAREER_VOICE_URL, legacyRedirects } from '@/lib/site-config';
 import {
   blogPostSchema,
   careerSchema,
@@ -88,19 +88,19 @@ export const skills: Skill[] = [
 
 const primaryPages = [
   mk('students', 'For students: know what to do next', 'Find direction, follow structured roadmaps, build skills and projects, practice consistently, and understand career readiness.', 'student', 'Start on Pathwisse', APP_AUTH_URL),
-  mk('colleges', 'For colleges and placement teams', 'Measure student readiness, identify skill gaps, track cohort progress, and improve placement conversations.', 'college', 'Request demo', '/contact?interest=college'),
-  mk('enterprise', 'For enterprises: hire with evidence, upskill with direction', 'Assess employees, identify capability gaps, guide role-based upskilling, and prepare for evidence-led hiring.', 'workforce', 'Request demo', '/contact?interest=upskilling'),
+  mk('colleges', 'For colleges and placement teams', 'Measure student readiness, identify skill gaps, track cohort progress, and improve placement conversations.', 'college', 'Request demo', '/colleges/request-demo'),
+  mk('enterprise', 'For enterprises: hire with evidence', 'Discover and evaluate candidates through demonstrated capability, applied projects, and verified readiness signals.', 'hiring', 'Request demo', '/enterprise/request-demo'),
 ];
 
 const productPages = [
   ['product', 'Pathwisse Platform', 'The connected capability platform for career direction, roadmaps, practice, projects, readiness, and analytics.', 'product', APP_AUTH_URL],
   ['product/career-voice', 'Career Voice', 'A guided career conversation that helps students compare directions and choose a useful next step.', 'student', CAREER_VOICE_URL],
-  ['product/career-roadmaps', 'Career Roadmaps', 'Role-based paths that connect skills, projects, practice, and readiness milestones.', 'product', '/students/career-roadmaps'],
+  ['product/career-roadmaps', 'Career Roadmaps', 'Role-based paths that connect skills, projects, practice, and readiness milestones.', 'product', '/careers'],
   ['product/practice-lab', 'Practice Lab', 'Daily practice that helps learners build consistency and convert learning into usable skills.', 'student', APP_AUTH_URL],
-  ['product/projects', 'Projects', 'Applied work that captures problem context, decisions, outputs, and reflection as evidence of capability.', 'product', '/students/projects'],
+  ['product/projects', 'Projects', 'Applied work that captures problem context, decisions, outputs, and reflection as evidence of capability.', 'product', '/students#projects'],
   ['product/skill-passport', 'Skill Passport', 'A portable view of demonstrated skills, projects, progress, and readiness context.', 'product', APP_AUTH_URL],
-  ['product/readiness-scoring', 'Readiness Scoring', 'A transparent readiness layer for students, cohorts, candidates, and employees.', 'college', '/colleges/placement-readiness'],
-  ['product/analytics', 'Analytics', 'Dashboards for cohort progress, skill gaps, journeys, and workforce capability.', 'college', '/contact?interest=college'],
+  ['product/readiness-scoring', 'Readiness Scoring', 'A transparent readiness layer for students, cohorts, candidates, and employees.', 'college', '/colleges'],
+  ['product/analytics', 'Analytics', 'Dashboards for cohort progress, skill gaps, journeys, and workforce capability.', 'college', '/colleges/request-demo'],
   ['product/integrations', 'Integrations', 'A practical integration layer for college systems, workforce workflows, CRM, and automation partners.', 'product', '/contact?interest=general'],
 ].map(([slug, title, description, kind, href]) => mk(slug, title, description, kind as PageData['kind'], 'Explore', href));
 
@@ -268,7 +268,26 @@ Object.assign(pages['pricing/colleges'], { title: 'College Pricing', description
 Object.assign(pages['pricing/enterprise'], { title: 'Enterprise Pricing', description: 'Sales-assisted pricing for workforce assessment, upskilling, AI readiness, and talent intelligence.', sections: [['Pricing model','Enterprise plans are structured around workforce size, capability modules, custom skill maps, and enterprise HRIS integrations.'],['Typical scope','Workforce assessment, role-based upskilling, capability maps, analytics, internal mobility, and hiring intelligence waitlist.'],['Next step','Request an enterprise demo with team size, skill priorities, and timeline.']], href: '/enterprise/request-demo' });
 
 
-for (const slug of ['customers','customers/students','customers/colleges','customers/enterprises','customers/case-studies/sample']) Object.assign(pages[slug], { noindex: true, sections: [['Proof policy','Pathwisse will not publish fake logos, testimonials, numbers, or outcomes.'],['Current state','Customer proof pages remain available as draft-like placeholders until approved stories are ready.'],['Next step','Use case study templates internally, then publish only verified customer-approved evidence.']] });
+for (const slug of [
+  'students/success-stories',
+  'company/careers',
+  'company/press',
+  'customers',
+  'customers/students',
+  'customers/colleges',
+  'customers/enterprises',
+  'customers/case-studies/sample'
+]) {
+  if (pages[slug]) {
+    Object.assign(pages[slug], {
+      noindex: true,
+      sections: [
+        ['Status', 'This page is a development placeholder. Official announcements and roles will be posted upon release.'],
+        ['Proof policy', 'Pathwisse will not publish uncalibrated claims, fake logos, or unapproved materials.']
+      ]
+    });
+  }
+}
 export const hubs: Record<string, HubData> = {
   product: { title: 'Products', description: 'Explore Pathwisse products across direction, practice, projects, readiness, analytics, and integrations.', items: productPages.filter(p => p.slug !== 'product').map(p => p.slug) },
   careers: { title: 'Career roadmaps', description: 'Role pages that connect responsibilities, skills, projects, interview preparation, and next steps.', items: careers.map(c => `careers/${c.slug}`) },
@@ -277,5 +296,10 @@ export const hubs: Record<string, HubData> = {
 };
 
 export const searchable = [...Object.values(pages), ...Object.entries(hubs).map(([slug, hub]) => ({ slug, title: hub.title, description: hub.description }))];
-export const indexablePaths = [...Object.entries(pages).filter(([, p]) => !p.draft && !p.noindex && p.status === 'published').map(([slug]) => slug), ...Object.keys(hubs)];
+export const indexablePaths = [
+  ...Object.entries(pages)
+    .filter(([slug, p]) => !p.draft && !p.noindex && p.status === 'published' && !legacyRedirects['/' + slug])
+    .map(([slug]) => slug),
+  ...Object.keys(hubs).filter(h => !legacyRedirects['/' + h]),
+];
 

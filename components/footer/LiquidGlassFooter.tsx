@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Sparkles, Shield, Compass } from 'lucide-react';
 import { Logo } from '@/app/site';
 import { NewsletterForm } from '@/components/newsletter-form';
-import { APP_URL, CAREER_VOICE_URL } from '@/lib/site-config';
+import { APP_URL, CAREER_VOICE_URL, LEGAL_ENTITY } from '@/lib/site-config';
 
 interface FooterLinkItem {
   label: string;
@@ -36,8 +36,8 @@ const FOOTER_COLUMNS: FooterColumn[] = [
       { label: 'Students Overview', href: '/students' },
       { label: 'Career Roadmaps', href: '/careers' },
       { label: 'College Placement Teams', href: '/colleges' },
-      { label: 'Enterprise Upskilling', href: '/enterprise/upskilling' },
-      { label: 'Talent Intelligence', href: '/enterprise/talent-intelligence' },
+      { label: 'Talent Intelligence', href: '/enterprise' },
+      { label: 'Enterprise Request Demo', href: '/enterprise/request-demo' },
     ],
   },
   {
@@ -141,7 +141,7 @@ export function LiquidGlassFooter() {
                 <Logo />
               </div>
               <p className="text-sm sm:text-[15px] leading-relaxed text-[#56687e] max-w-md">
-                Pathwisse transforms student coursework and daily practice into cryptographically verified capability proof that top hiring managers audit in seconds.
+                Pathwisse transforms student coursework and daily practice into verifiable capability proof that hiring teams can inspect with defensible evidence.
               </p>
 
               {/* Glass Feature Badges */}
@@ -240,7 +240,7 @@ export function LiquidGlassFooter() {
           <div className="relative z-10 pt-8 border-t border-[#142e50]/[0.08] flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Copyright & Legal Links */}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#627386]">
-              <span>© {new Date().getFullYear()} Pathwisse Technologies Inc.</span>
+              <span>© {new Date().getFullYear()} {LEGAL_ENTITY}</span>
               <span className="hidden sm:inline text-slate-300">•</span>
               <Link href="/trust/privacy" className="hover:text-[#173c6e] transition-colors">
                 Privacy Policy

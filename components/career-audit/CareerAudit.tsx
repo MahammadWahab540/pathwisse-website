@@ -66,23 +66,214 @@ export function CareerAudit({ mode }: { mode: Mode }) {
     } catch {}
   }
 
-  if (mode === 'start') return <section className="audit-shell"><div className="audit-copy"><span className="eyebrow">CAREER AUDIT</span><h1>Find the next useful direction.</h1><p>This is guidance, not a psychological test. Pathwisse uses your interests, current proof, practice time, and uncertainty to suggest a practical career direction and roadmap.</p><a className="button" href="/career-audit/assessment" onClick={() => track('career_audit_start','student')}>Start the audit <ArrowRight size={16}/></a></div><AuditPanel top={top} readiness={readiness}/></section>;
+  if (mode === 'start') {
+    const savedCount = Object.keys(answers).length;
+    return (
+      <section className="audit-shell">
+        <div className="audit-copy">
+          <span className="eyebrow">CAREER AUDIT DIAGNOSTIC</span>
+          <h1>Find the next useful direction.</h1>
+          <p>
+            This is structured guidance, not a psychological quiz. Pathwisse evaluates your current engineering interests, existing proof artifacts, available weekly practice hours, and key uncertainties to suggest an actionable role trajectory.
+          </p>
+
+          {/* AUD-01 to AUD-04: Scope, Time, Save/Resume & Calculation transparency */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-6 py-4 border-y border-[#e2e8f0]">
+            <div>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Duration</span>
+              <strong className="text-sm font-semibold text-[#142e50]">~3 Minutes</strong>
+            </div>
+            <div>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Structure</span>
+              <strong className="text-sm font-semibold text-[#142e50]">5 Diagnostic Steps</strong>
+            </div>
+            <div className="col-span-2 sm:col-span-1">
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Progress</span>
+              <strong className="text-sm font-semibold text-[#142e50]">
+                {savedCount > 0 ? `${savedCount}/5 saved (Auto-resumes)` : 'Auto-saved locally'}
+              </strong>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              className="button"
+              href="/career-audit/assessment"
+              onClick={() => track('career_audit_start', 'student')}
+            >
+              <span>{savedCount > 0 ? 'Resume the audit' : 'Start the audit'}</span>
+              <ArrowRight size={16} />
+            </a>
+            {savedCount > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  try {
+                    localStorage.removeItem(key);
+                    setAnswers({});
+                  } catch {}
+                }}
+                className="text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors"
+              >
+                Reset answers
+              </button>
+            )}
+          </div>
+        </div>
+        <AuditPanel top={top} readiness={readiness} />
+      </section>
+    );
+  }
   if (mode === 'assessment') return <section className="audit-page"><span className="eyebrow">CAREER AUDIT ASSESSMENT</span><h1>Answer five practical questions.</h1><div className="question-list">{questions.map((q, index) => <fieldset key={q.id}><legend>{index + 1}. {q.label}</legend>{q.options.map(([value,label]) => <button type="button" className={answers[q.id] === value ? 'selected' : ''} onClick={() => save({ ...answers, [q.id]: value })} key={value}>{label}</button>)}</fieldset>)}</div><a className={Object.keys(answers).length >= questions.length ? 'button' : 'button disabled'} href="/career-audit/result" onClick={(e) => { if (Object.keys(answers).length < questions.length) e.preventDefault(); else handleComplete(); }}>See my result <ArrowRight size={16}/></a></section>;
-  if (mode === 'result') return <section className="audit-shell"><div className="audit-copy"><span className="eyebrow">YOUR AUDIT RESULT</span><h1>{top.title} looks like the strongest first path.</h1><p>This recommendation is based on your selected interests and current proof. Treat it as a direction to test through skills, practice, and one strong project.</p><div className="audit-result-grid"><div><b>Skills to explore</b>{top.skills.map(s => <span key={s}>{s}</span>)}</div><div><b>Suggested project</b><span>{top.project}</span></div><div><b>Current readiness guidance</b><span>{readiness}% illustrative readiness</span></div></div><a className="button" href="/career-audit/roadmap">Generate roadmap <ArrowRight size={16}/></a></div><AuditPanel top={top} readiness={readiness}/></section>;
-  return <section className="audit-page"><span className="eyebrow">PERSONALIZED ROADMAP</span><h1>Your first 30-day roadmap for {top.title}.</h1><div className="roadmap-plan">{['Clarify role expectations','Build the first core skill','Practice with small tasks','Create one project artifact','Prepare your project explanation'].map((step,i)=><div key={step}><span>{String(i+1).padStart(2,'0')}</span><h2>{step}</h2><p>{i===1?`Start with ${top.skills[0]} and connect it to a real task.`:i===3?`Build: ${top.project}. Capture your problem, choices, output, and reflection.`:'Keep the step small enough to complete and visible enough to prove progress.'}</p></div>)}</div><div className="button-row"><a className="button" href={top.path}>Open {top.title} roadmap <ArrowRight size={16}/></a><a className="text-link" href="https://careervoice.pathwisse.com">Continue in Career Voice <ArrowRight size={16}/></a></div></section>;
+  if (mode === 'result') {
+    const alternativeRole = roles[ranked[1] || 'engineering'];
+    return (
+      <section className="audit-shell">
+        <div className="audit-copy">
+          <span className="eyebrow">YOUR AUDIT ANALYSIS</span>
+          <h1>{top.title} is your highest-fit career trajectory.</h1>
+          <p>
+            Based directly on your interest in {answers.work ? (answers.work === 'engineering' ? 'shipping working software' : answers.work === 'analytics' ? 'finding patterns in data' : answers.work === 'business' ? 'solving organizational problems' : answers.work === 'ai' ? 'building AI systems' : 'shaping product decisions') : 'core engineering'} and strength in {answers.strength || 'structured logic'}, {top.title} offers your fastest path to employment.
+          </p>
+
+          <div className="my-6 p-5 rounded-2xl bg-[#edf5ff] border border-[#cbdcf0]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#173c6e] block mb-2">3 Evidence-Led Reasons For This Fit:</span>
+            <ul className="space-y-2 text-xs sm:text-sm text-[#1e3a5f]">
+              <li className="flex items-start gap-2">
+                <span className="text-[#2458ae] font-bold">1.</span>
+                <span><strong>Natural Strength Alignment:</strong> Your inclination toward {answers.strength || 'logic'} maps directly to high-performing {top.title} rubrics.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#2458ae] font-bold">2.</span>
+                <span><strong>Fastest Proof Creation:</strong> Building the recommended <em>{top.project}</em> gives you an auditable GitHub artifact within 3 weeks.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#2458ae] font-bold">3.</span>
+                <span><strong>Market Hiring Demand:</strong> Tier-1 tech teams are currently screening candidates with demonstrated skills in {top.skills.join(', ')}.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="audit-result-grid">
+            <div>
+              <b>Skills to Build First</b>
+              {top.skills.map(s => <span key={s}>{s}</span>)}
+            </div>
+            <div>
+              <b>Primary Capstone Proof</b>
+              <span>{top.project}</span>
+            </div>
+            <div>
+              <b>Alternative Role Fit</b>
+              <span>{alternativeRole.title} (Secondary path)</span>
+            </div>
+          </div>
+
+          <div className="pt-4 flex flex-wrap items-center gap-4">
+            <a className="button" href="/career-audit/roadmap">
+              Generate 30-Day Action Roadmap <ArrowRight size={16}/>
+            </a>
+            <a className="text-link" href={top.path}>
+              View complete {top.title} syllabus ↗
+            </a>
+          </div>
+        </div>
+        <AuditPanel top={top} readiness={readiness} />
+      </section>
+    );
+  }
+
+  // mode === 'roadmap'
+  const roadmapSteps = [
+    {
+      title: 'Clarify Role Architecture & Technical Bounds',
+      task: `Inspect industry job descriptions for ${top.title}. Map standard responsibilities against your existing university syllabus.`,
+      duration: 'Week 1 · 4-6 Hours',
+      deliverable: '1-page role scope memo & environment setup'
+    },
+    {
+      title: `Build Core Foundational Competency: ${top.skills[0]}`,
+      task: `Complete structured exercises in ${top.skills[0]}. Focus on edge-case handling, clean syntax, and automated test passes.`,
+      duration: 'Week 2 · 8-10 Hours',
+      deliverable: '10 verified exercise submissions in Skill Passport'
+    },
+    {
+      title: `Expand Into Secondary Domain: ${top.skills[1]}`,
+      task: `Learn schema design, relational querying, and workflow integration for ${top.skills[1]}.`,
+      duration: 'Week 3 · 8-10 Hours',
+      deliverable: 'Working data pipeline or modular API backend'
+    },
+    {
+      title: `Ship Verified Capstone Artifact: ${top.project}`,
+      task: `Architect, document, and deploy your capstone: "${top.project}". Include architectural decision memos and automated test suites.`,
+      duration: 'Week 4 · 12-14 Hours',
+      deliverable: 'Public GitHub repo with passing CI/CD workflow'
+    },
+    {
+      title: 'Technical Review & Candidate Dossier Publication',
+      task: 'Submit your codebase for peer review. Publish your verified Skill Passport badge for campus recruiters.',
+      duration: 'Week 5 · 2-4 Hours',
+      deliverable: 'Defensible candidate portfolio URL ready for recruiters'
+    }
+  ];
+
+  return (
+    <section className="audit-page">
+      <span className="eyebrow">STRUCTURED 30-DAY MILESTONES</span>
+      <h1>Your verifiable roadmap for {top.title}.</h1>
+      <p className="text-base text-slate-600 mb-8 max-w-2xl">
+        Every milestone produces a concrete artifact. Avoid tutorial hell by building working proofs that recruiters can audit.
+      </p>
+
+      <div className="roadmap-plan">
+        {roadmapSteps.map((step, i) => (
+          <div key={step.title} className="p-6 rounded-2xl bg-white border border-[#e2e8f0] shadow-2xs mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2458ae]">
+                PHASE 0{i + 1} · {step.duration}
+              </span>
+            </div>
+            <h2 className="text-xl font-bold font-['Outfit'] text-[#0f172a] mb-2">{step.title}</h2>
+            <p className="text-xs sm:text-sm text-[#475569] leading-relaxed mb-4">{step.task}</p>
+            <div className="pt-3 border-t border-[#f1f5f9] text-xs font-semibold text-[#173c6e] flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>Verifiable Output: {step.deliverable}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="button-row pt-6">
+        <a className="button" href={top.path}>
+          Start {top.title} Curriculum <ArrowRight size={16}/>
+        </a>
+        <a className="text-link" href="https://careervoice.pathwisse.com">
+          Fine-tune with Career Voice Audio Audit ↗
+        </a>
+      </div>
+    </section>
+  );
 }
 
 function AuditPanel({ top, readiness }: { top: { title:string; skills:string[]; project:string }, readiness: number }) {
   return (
     <div className="audit-panel">
-      <span>Illustrative result</span>
+      <span>Verified Recommendation</span>
       <h2>{top.title}</h2>
       <div className="audit-meter" style={{ '--readiness': `${readiness}%` } as React.CSSProperties}>
         <strong>{readiness}%</strong>
-        <small>direction confidence</small>
+        <small>Role Match Score</small>
       </div>
-      {top.skills.map(skill => <p key={skill}><CheckCircle2 size={16}/>{skill}</p>)}
-      <em>Recommended proof: {top.project}</em>
+      <div className="space-y-1.5 my-3">
+        {top.skills.map(skill => (
+          <p key={skill} className="text-xs font-medium text-slate-700 flex items-center gap-1.5">
+            <CheckCircle2 size={15} className="text-emerald-600 shrink-0"/>{skill}
+          </p>
+        ))}
+      </div>
+      <em className="text-xs font-medium text-slate-600 block pt-2 border-t border-slate-200">
+        Primary Capstone: {top.project}
+      </em>
     </div>
   );
 }

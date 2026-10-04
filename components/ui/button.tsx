@@ -1,34 +1,54 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Slot } from "radix-ui"
+import { Loader2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "inline-flex shrink-0 items-center justify-center gap-2 font-medium whitespace-nowrap transition-all duration-150 outline-none select-none cursor-pointer disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-offset-2 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
-        outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+        /* CMP-01: Primary Button */
+        default:
+          "bg-[#173c6e] text-white hover:bg-[#122f56] active:bg-[#0c213d] focus-visible:ring-[#173c6e] shadow-sm",
+        /* CMP-01: Primary Accent Variant */
+        primary:
+          "bg-[#173c6e] text-white hover:bg-[#122f56] active:bg-[#0c213d] focus-visible:ring-[#173c6e] shadow-sm",
+        accent:
+          "bg-[#2458ae] text-white hover:bg-[#1e4a8a] active:bg-[#163868] focus-visible:ring-[#2458ae] shadow-sm",
+        /* CMP-02: Secondary Button */
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-[#f1f5f9] text-[#173c6e] hover:bg-[#e2e8f0] active:bg-[#cbd5e1] border border-[#e2e8f0] focus-visible:ring-[#173c6e]",
+        /* CMP-03: Text Button / Link */
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-transparent text-[#173c6e] hover:bg-[#f1f5f9] active:bg-[#e2e8f0] focus-visible:ring-[#173c6e]",
+        link:
+          "bg-transparent text-[#2458ae] hover:underline focus-visible:ring-[#2458ae] p-0 h-auto",
+        /* CMP-04: Inverse Button (for dark navy cards and hero panels) */
+        inverse:
+          "bg-white text-[#142e50] hover:bg-slate-100 active:bg-slate-200 shadow-md focus-visible:ring-white focus-visible:ring-offset-[#142e50]",
+        inverseOutline:
+          "bg-white/10 text-white hover:bg-white/20 active:bg-white/30 border border-white/25 focus-visible:ring-white focus-visible:ring-offset-[#142e50]",
+        /* CMP-05: Destructive Button */
+        destructive:
+          "bg-[#dc2626] text-white hover:bg-[#b91c1c] active:bg-[#991b1b] focus-visible:ring-[#dc2626] shadow-sm",
+        outline:
+          "border border-[#cbd5e1] bg-white text-[#0f172a] hover:bg-[#f8fafc] active:bg-[#f1f5f9] focus-visible:ring-[#173c6e] shadow-2xs",
       },
+      /* CMP-06: 40px + 48px sizes, plus compact sizes */
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
-        "icon-xs": "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
+        default: "h-10 px-5 py-2 text-sm rounded-lg",
+        xs: "h-6 gap-1 rounded-md px-2 text-xs",
+        sm: "h-8 px-3 text-xs rounded-md",
+        md: "h-10 px-5 py-2 text-sm rounded-lg", // 40px
+        lg: "h-12 px-7 py-3 text-base rounded-xl font-semibold", // 48px
+        pill: "h-11 px-7 py-2.5 text-sm rounded-full font-semibold",
+        icon: "h-10 w-10 p-0 rounded-lg",
+        "icon-sm": "h-8 w-8 p-0 rounded-md",
+        "icon-xs": "size-6 rounded-md",
+        "icon-lg": "size-12",
       },
     },
     defaultVariants: {
@@ -38,16 +58,23 @@ const buttonVariants = cva(
   }
 )
 
+interface ButtonProps
+  extends React.ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+  loading?: boolean
+}
+
 function Button({
   className,
   variant = "default",
   size = "default",
   asChild = false,
+  loading = false,
+  disabled,
+  children,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
-  }) {
+}: ButtonProps) {
   const Comp = asChild ? Slot.Root : "button"
 
   return (
@@ -55,10 +82,21 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
+      disabled={disabled || loading}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {loading ? (
+        <>
+          <Loader2 className="h-4 w-4 animate-spin text-current" />
+          <span>{children}</span>
+        </>
+      ) : (
+        children
+      )}
+    </Comp>
   )
 }
 
 export { Button, buttonVariants }
+

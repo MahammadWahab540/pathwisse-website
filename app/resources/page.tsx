@@ -20,6 +20,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { careers, skills, blogPosts } from '@/content';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'Resource Hub — Career Roadmaps, Guides & Capability Blueprints | Pathwisse',
@@ -104,38 +105,48 @@ export default function ResourcesPage() {
 
         {/* Feature Spotlight: Career Voice Interactive Diagnosis */}
         <section className="max-w-6xl mx-auto px-6 py-12">
-          <div className="relative rounded-2xl border border-[#dbe4ef] bg-gradient-to-r from-[#142e50] via-[#1a3d6b] to-[#1e4a8a] p-8 sm:p-12 text-white shadow-xl overflow-hidden">
+          <div className="relative rounded-2xl border border-[#173c6e]/40 bg-gradient-to-r from-[#142e50] via-[#1a3d6b] to-[#1e4a8a] p-8 sm:p-12 text-white shadow-xl overflow-hidden">
             <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-10 pointer-events-none flex items-center justify-center">
               <Compass className="w-96 h-96 text-white" />
             </div>
 
             <div className="relative z-10 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/90 text-xs font-semibold mb-4 border border-white/20">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white text-xs font-semibold mb-4 border border-white/20">
                 <span>Interactive Diagnosis</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold font-['Outfit'] mb-3">
+              <h2 className="text-2xl sm:text-3xl font-bold font-['Outfit'] mb-3 text-white">
                 Unsure which direction fits your strengths?
               </h2>
-              <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-6">
+              <p className="text-slate-200 text-sm sm:text-base leading-relaxed mb-6">
                 Take an interactive diagnostic assessment with Career Voice. Answer by voice or text, clarify what you actually enjoy building, diagnose your current skill gaps, and receive a customized roadmap.
               </p>
               <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href={CAREER_VOICE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#142e50] font-semibold text-sm hover:bg-slate-100 transition-colors shadow-sm"
+                <Button
+                  asChild
+                  variant="inverse"
+                  size="lg"
+                  className="font-bold text-[#142e50] shadow-sm hover:bg-slate-100"
                 >
-                  <span>Launch Career Voice</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="/career-audit/start"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition-colors border border-white/15"
+                  <a
+                    href={CAREER_VOICE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Launch Career Voice</span>
+                    <ArrowRight className="w-4 h-4 text-[#142e50]" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="inverseOutline"
+                  size="lg"
+                  className="border-white/25 text-white hover:bg-white/20"
                 >
-                  <span>Guided Career Audit</span>
-                  <ChevronRight className="w-4 h-4" />
-                </a>
+                  <a href="/career-audit/start">
+                    <span>Guided Career Audit</span>
+                    <ChevronRight className="w-4 h-4 text-white" />
+                  </a>
+                </Button>
               </div>
             </div>
           </div>
@@ -457,18 +468,26 @@ export default function ResourcesPage() {
               Join thousands of learners, educators, and enterprise leaders who use Pathwisse to transform raw potential into actionable capability.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a
-                href={APP_AUTH_URL}
-                className="px-6 py-3.5 rounded-xl bg-[#2458ae] text-white font-semibold text-sm hover:bg-[#1e4a8a] transition-colors shadow-lg"
+              <Button
+                asChild
+                variant="accent"
+                size="lg"
+                className="shadow-lg hover:shadow-xl font-bold"
               >
-                Get Started Free
-              </a>
-              <a
-                href="/contact"
-                className="px-6 py-3.5 rounded-xl bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition-colors border border-white/15"
+                <a href={APP_AUTH_URL}>
+                  Get Started Free
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="inverseOutline"
+                size="lg"
+                className="border-white/20 text-white hover:bg-white/10"
               >
-                Schedule an Institutional Demo
-              </a>
+                <a href="/contact">
+                  Schedule an Institutional Demo
+                </a>
+              </Button>
             </div>
           </div>
         </section>

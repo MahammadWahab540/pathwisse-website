@@ -77,25 +77,26 @@ export function NewsletterForm({ className = '' }: { className?: string }) {
           type="submit"
           disabled={state === 'saving' || state === 'success'}
           aria-label="Subscribe to newsletter"
-          className="relative inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-white transition-all duration-200 select-none cursor-pointer disabled:cursor-not-allowed shadow-sm hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2458ae] focus-visible:ring-offset-2"
+          className="relative inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white transition-all duration-200 select-none cursor-pointer disabled:cursor-not-allowed shadow-sm hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2458ae] focus-visible:ring-offset-2"
           style={{
-            background: state === 'success' ? '#10B981' : '#2458ae',
+            background: state === 'success' ? '#059669' : '#173c6e',
+            color: '#ffffff',
           }}
         >
           {state === 'saving' ? (
             <>
-              <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              <span>Joining…</span>
+              <Loader2 className="h-3.5 w-3.5 animate-spin text-white" />
+              <span className="text-white">Joining…</span>
             </>
           ) : state === 'success' ? (
             <>
-              <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
-              <span>Subscribed</span>
+              <Check className="h-3.5 w-3.5 text-white" strokeWidth={2.5} />
+              <span className="text-white">Subscribed</span>
             </>
           ) : (
             <>
-              <span>Subscribe</span>
-              <Send className="h-3.5 w-3.5 transform transition-transform group-hover:translate-x-0.5" />
+              <span className="text-white">Subscribe</span>
+              <Send className="h-3.5 w-3.5 text-white transform transition-transform group-hover:translate-x-0.5" />
             </>
           )}
         </button>

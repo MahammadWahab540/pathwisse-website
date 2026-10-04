@@ -5,14 +5,14 @@ export const metadata = {
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Pathwisse — Turn capability into proof',
-    description: 'Know what to do next. Hire with evidence. Upskill with direction.',
+    description: 'Know what to do next. Hire with evidence. Discover verified capability.',
     url: SITE_URL,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pathwisse — Turn capability into proof',
-    description: 'Know what to do next. Hire with evidence. Upskill with direction.',
+    description: 'Know what to do next. Hire with evidence. Discover verified capability.',
   },
 };
 
@@ -29,7 +29,7 @@ export default function Page() {
         'Career Roadmaps',
         'Placement Readiness',
         'Student Employability',
-        'Enterprise Upskilling',
+        'Evidence-Based Hiring',
         'Talent Intelligence',
         'Applied Skill Proof'
       ],
