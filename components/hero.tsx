@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { ArrowRight, X } from 'lucide-react';
+import { AtomicGlobe } from '@/components/AtomicGlobe';
 
 interface HeroProps {
   accent?: string;
@@ -597,8 +598,8 @@ export function Hero({ accent = '#2458ae', autoplay = true }: HeroProps) {
       </div>
 
       {/* Main hero display area */}
-      <div className="pw-main">
-        <div className="pw-col">
+      <div className="pw-main grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+        <div className="pw-col lg:col-span-7">
           {/* Default Hero Presentation */}
           <div
             className="pw-hero"
@@ -693,6 +694,42 @@ export function Hero({ accent = '#2458ae', autoplay = true }: HeroProps) {
                 })}
               </ul>
             </div>
+          </div>
+        </div>
+
+        {/* Atomic Globe Interactive Visual */}
+        <div className="lg:col-span-5 relative w-full flex items-center justify-center lg:justify-end">
+          <div className="relative w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] xl:w-[480px] xl:h-[480px]">
+            <AtomicGlobe
+              theme="custom"
+              palette={{
+                backdrop: "transparent",
+                ink: "#173c6e",
+                tint: "#2458ae",
+                accent: "#2458ae",
+                backFade: 0.18,
+                labelFill: "#ffffff",
+                labelInk: "#0f172a",
+                accentInk: "#ffffff"
+              }}
+              dotSize={4.5}
+              spin={0.05}
+              tilt={16}
+              cursorMode="sonar"
+              reach={0.55}
+              routesOn={true}
+              routeMode="mesh"
+              routeStyle="pulse"
+              places={[
+                { label: "BENGALURU", lat: 12.9716, lng: 77.5946 },
+                { label: "HYDERABAD", lat: 17.3850, lng: 78.4867 },
+                { label: "LONDON", lat: 51.5074, lng: -0.1278 },
+                { label: "NEW YORK", lat: 40.7128, lng: -74.0060 },
+                { label: "SINGAPORE", lat: 1.3521, lng: 103.8198 },
+                { label: "SAN FRANCISCO", lat: 37.7749, lng: -122.4194 }
+              ]}
+              style={{ width: "100%", height: "100%", borderRadius: "24px" }}
+            />
           </div>
         </div>
       </div>
