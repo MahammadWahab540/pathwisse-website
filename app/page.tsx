@@ -1,5 +1,5 @@
 import { absoluteUrl, APP_AUTH_URL, CAREER_VOICE_URL, SITE_URL } from '@/lib/site-config';
-import { FanoutHomepage } from '@/components/home/FanoutHomepage';
+import { HomePage } from './site';
 
 export const metadata = {
   alternates: { canonical: SITE_URL },
@@ -91,5 +91,5 @@ export default function Page() {
       ],
     },
   ];
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} /><FanoutHomepage /></>;
+  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} /><HomePage /></>;
 }
