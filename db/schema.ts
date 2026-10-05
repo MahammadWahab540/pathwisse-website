@@ -93,3 +93,31 @@ export const blogPosts = sqliteTable('blog_posts', {
   index('blog_status_date').on(t.status, t.publishDate),
   index('blog_category').on(t.category),
 ]);
+
+export const careerRoles = sqliteTable('career_roles', {
+  slug: text('slug').primaryKey(),
+  roleName: text('role_name').notNull(),
+  streamName: text('stream_name').notNull(),
+  roleHook: text('role_hook').notNull(),
+  whatWorkLooksLike: text('what_work_looks_like').notNull(),
+  problemsSolves: text('problems_solves').notNull(),
+  skillCount: integer('skill_count').notNull().default(15),
+  topSkills: text('top_skills').notNull().default('[]'),
+  proofProject: text('proof_project').notNull(),
+  evidenceToShow: text('evidence_to_show').notNull(),
+  pathwisseApproach: text('pathwisse_approach').notNull(),
+  roleCta: text('role_cta').notNull().default('Try for Free on Pathwisse'),
+  referenceSkill: text('reference_skill').notNull().default(''),
+  referenceBook: text('reference_book').notNull().default(''),
+  referenceAuthor: text('reference_author').notNull().default(''),
+  onetBenchmark: text('onet_benchmark').notNull().default(''),
+  externalUrl: text('external_url').notNull().default(''),
+  seoTitle: text('seo_title').notNull(),
+  metaDescription: text('meta_description').notNull(),
+  faq: text('faq').notNull().default('[]'),
+  createdAt: text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text('updated_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+}, (t) => [
+  index('career_roles_stream').on(t.streamName),
+]);
+

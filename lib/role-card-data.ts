@@ -328,3 +328,35 @@ export function getRoleCardBySlug(slug: string): ExtendedRoleCardData | undefine
   return ALL_206_ROLE_CARDS.find((c) => c.slug === slug);
 }
 
+import seoRoleContentJson from './seo-role-centric-content.json';
+
+export interface SeoRoleContent {
+  slug: string;
+  role_name: string;
+  stream_name: string;
+  role_hook: string;
+  what_work_looks_like: string;
+  problems_solves: string;
+  skill_count: number;
+  top_skills: string[];
+  proof_project: string;
+  evidence_to_show: string;
+  pathwisse_approach: string;
+  role_cta: string;
+  reference_skill?: string;
+  reference_book?: string;
+  reference_author?: string;
+  onet_benchmark?: string;
+  external_url?: string;
+  seo_title: string;
+  meta_description: string;
+  faq: [string, string][];
+}
+
+export const SEO_ROLE_CONTENT_LIST: SeoRoleContent[] = seoRoleContentJson as SeoRoleContent[];
+
+export function getSeoRoleContentBySlug(slug: string): SeoRoleContent | undefined {
+  return SEO_ROLE_CONTENT_LIST.find((r) => r.slug === slug);
+}
+
+
