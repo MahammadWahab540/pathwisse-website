@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { ArrowUpRight, Sparkles, Shield, Compass } from 'lucide-react';
 import { Logo } from '@/app/site';
 import { NewsletterForm } from '@/components/newsletter-form';
@@ -214,21 +213,14 @@ export function LiquidGlassFooter() {
 
                     return (
                       <li key={link.label}>
-                        {link.isExternal ? (
-                          <a
-                            href={link.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`${link.label} (opens in new tab)`}
-                            className="cursor-pointer inline-block"
-                          >
-                            {content}
-                          </a>
-                        ) : (
-                          <Link href={link.href} className="cursor-pointer inline-block">
-                            {content}
-                          </Link>
-                        )}
+                        <a
+                          href={link.href}
+                          {...(link.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                          aria-label={link.isExternal ? `${link.label} (opens in new tab)` : link.label}
+                          className="cursor-pointer inline-block"
+                        >
+                          {content}
+                        </a>
                       </li>
                     );
                   })}
@@ -243,17 +235,17 @@ export function LiquidGlassFooter() {
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#627386]">
               <span>© {new Date().getFullYear()} {LEGAL_ENTITY}</span>
               <span className="hidden sm:inline text-slate-300">•</span>
-              <Link href="/trust/privacy" className="hover:text-[#173c6e] transition-colors">
+              <a href="/trust/privacy" className="hover:text-[#173c6e] transition-colors cursor-pointer">
                 Privacy Policy
-              </Link>
+              </a>
               <span className="text-slate-300">•</span>
-              <Link href="/trust/terms" className="hover:text-[#173c6e] transition-colors">
+              <a href="/trust/terms" className="hover:text-[#173c6e] transition-colors cursor-pointer">
                 Terms of Service
-              </Link>
+              </a>
               <span className="text-slate-300">•</span>
-              <Link href="/trust/security" className="hover:text-[#173c6e] transition-colors">
+              <a href="/trust/security" className="hover:text-[#173c6e] transition-colors cursor-pointer">
                 Security
-              </Link>
+              </a>
             </div>
 
             {/* Glass Social & Portal Buttons */}
