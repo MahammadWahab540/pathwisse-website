@@ -23,6 +23,7 @@ import { APP_AUTH_URL, CAREER_VOICE_URL } from '@/lib/site-config';
 import { Hero } from '@/components/hero';
 import { NewsletterForm } from '@/components/newsletter-form';
 import { LiquidGlassFooter } from '@/components/footer/LiquidGlassFooter';
+import { CTABand } from '@/components/shared/CTABand';
 
 export const APP = APP_AUTH_URL;
 
@@ -397,22 +398,20 @@ function TrustBand() {
   );
 }
 
-export function CTA({ title = 'Your next chapter starts with clarity.' }: { title?: string }) {
+export function CTA({ title = 'Turn potential into proof people can act on.' }: { title?: string }) {
   return (
-    <section className="cta-section">
-      <h2>{title}</h2>
-      <p style={{ maxWidth: '580px', margin: '0 auto 28px', color: '#93a7c4', fontSize: '15px' }}>
-        Start with what you know, build what you can show, and move forward with evidence.
-      </p>
-      <div className="button-row">
-        <a className="button" style={{ background: '#2458ae' }} href={APP}>
-          Find your path <ArrowRight size={16} />
-        </a>
-        <a className="light-link" href="/contact">
-          Let&apos;s build together <ArrowUpRight size={16} />
-        </a>
-      </div>
-    </section>
+    <CTABand
+      title={title}
+      description="Start with what you know, build what you can show, and move forward with evidence."
+      primaryAction={{
+        label: "Find your path",
+        href: APP,
+      }}
+      secondaryAction={{
+        label: "Let's build together",
+        href: "/contact",
+      }}
+    />
   );
 }
 

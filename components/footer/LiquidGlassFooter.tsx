@@ -27,14 +27,14 @@ const FOOTER_COLUMNS: FooterColumn[] = [
       { label: 'Career Voice', href: CAREER_VOICE_URL, isExternal: true, badge: 'AI' },
       { label: 'Projects & Artifacts', href: '/product/projects' },
       { label: 'Readiness Scoring', href: '/product/readiness-scoring' },
-      { label: 'Cohort Analytics', href: '/colleges/student-analytics' },
+      { label: 'Cohort Analytics', href: '/colleges' },
     ],
   },
   {
     title: 'Audience Paths',
     links: [
       { label: 'Students Overview', href: '/students' },
-      { label: 'Career Roadmaps', href: '/careers' },
+      { label: 'Hire Talent', href: '/hire', badge: 'New' },
       { label: 'College Placement Teams', href: '/colleges' },
       { label: 'Talent Intelligence', href: '/enterprise' },
       { label: 'Enterprise Request Demo', href: '/enterprise/request-demo' },
@@ -220,11 +220,12 @@ export function LiquidGlassFooter() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`${link.label} (opens in new tab)`}
+                            className="cursor-pointer inline-block"
                           >
                             {content}
                           </a>
                         ) : (
-                          <Link href={link.href}>
+                          <Link href={link.href} className="cursor-pointer inline-block">
                             {content}
                           </Link>
                         )}

@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { careers, skills, blogPosts } from '@/content';
 import { Button } from '@/components/ui/button';
+import { CTABand } from '@/components/shared/CTABand';
 
 export const metadata: Metadata = {
   title: 'Resource Hub — Career Roadmaps, Guides & Capability Blueprints | Pathwisse',
@@ -459,38 +460,18 @@ export default function ResourcesPage() {
         </section>
 
         {/* Global CTA */}
-        <section className="bg-[#142e50] text-white py-16 px-6 text-center">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold font-['Outfit'] mb-4">
-              Start building proof that speaks for itself.
-            </h2>
-            <p className="text-white/80 text-sm sm:text-base mb-8 leading-relaxed">
-              Join thousands of learners, educators, and enterprise leaders who use Pathwisse to transform raw potential into actionable capability.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Button
-                asChild
-                variant="accent"
-                size="lg"
-                className="shadow-lg hover:shadow-xl font-bold"
-              >
-                <a href={APP_AUTH_URL}>
-                  Get Started Free
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="inverseOutline"
-                size="lg"
-                className="border-white/20 text-white hover:bg-white/10"
-              >
-                <a href="/contact">
-                  Schedule an Institutional Demo
-                </a>
-              </Button>
-            </div>
-          </div>
-        </section>
+        <CTABand
+          title="Start building proof that speaks for itself."
+          description="Transform raw coursework and practice into verifiable, defensible engineering capability that hiring teams can inspect."
+          primaryAction={{
+            label: "Get Started Free",
+            href: APP_AUTH_URL,
+          }}
+          secondaryAction={{
+            label: "Schedule Institutional Demo",
+            href: "/contact",
+          }}
+        />
       </main>
       <Footer />
     </>
