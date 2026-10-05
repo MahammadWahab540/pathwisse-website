@@ -215,7 +215,35 @@ export const blogPosts: BlogPost[] = [
   references: [],
 }));
 
-const careerPages = careers.map(c => page({ slug: `careers/${c.slug}`, title: `${c.name} career roadmap`, description: c.shortSummary, eyebrow: 'CAREER ROADMAP', kind: 'career', cta: 'Explore with Career Voice', href: CAREER_VOICE_URL, sections: [['What this role does', c.responsibilities.join('. ') + '.'], ['Skills to build', `Required: ${c.requiredSkills.join(', ')}. Useful optional skills: ${c.optionalSkills.join(', ')}.`], ['Roadmap', c.roadmap.join(' → ') + '.'], ['Projects', c.projects.join(', ') + '.'], ['Interview preparation', c.interviewPreparation.join('. ') + '.']], faq: c.faq, related: [c.product, ...c.requiredSkills.map(s => `skills/${s.toLowerCase().replaceAll(' ', '-')}`)] }));
+import { ALL_206_ROLE_CARDS } from '@/lib/role-card-data';
+
+const baseCareerPages = careers.map(c => page({ slug: `careers/${c.slug}`, title: `${c.name} career roadmap`, description: c.shortSummary, eyebrow: 'CAREER ROADMAP', kind: 'career', cta: 'Explore with Career Voice', href: CAREER_VOICE_URL, sections: [['What this role does', c.responsibilities.join('. ') + '.'], ['Skills to build', `Required: ${c.requiredSkills.join(', ')}. Useful optional skills: ${c.optionalSkills.join(', ')}.`], ['Roadmap', c.roadmap.join(' → ') + '.'], ['Projects', c.projects.join(', ') + '.'], ['Interview preparation', c.interviewPreparation.join('. ') + '.']], faq: c.faq, related: [c.product, ...c.requiredSkills.map(s => `skills/${s.toLowerCase().replaceAll(' ', '-')}`)] }));
+
+const catalogue206CareerPages = ALL_206_ROLE_CARDS.map(rc => page({
+  slug: `careers/${rc.slug}`,
+  title: `${rc.roleName} Career Roadmap & Capability Blueprint`,
+  description: `Understand the core responsibilities, skill stacks, and verified project evidence required for ${rc.roleName} in ${rc.streamName || 'engineering'}.`,
+  eyebrow: rc.roleFamily,
+  kind: 'career',
+  cta: 'Try for Free on Pathwisse',
+  href: rc.tryForFreeUrl,
+  sections: [
+    ['What this role does', rc.responsibilities.join('. ') + '.'],
+    ['Key competencies to build', `Core capability domains: ${(rc.skills || []).join(', ')}. Assessed via hands-on labs and defensible engineering rubrics.`],
+    ['Applied project evidence', `Capstone portfolio projects: ${(rc.projects || []).join('; ')}. Each project yields deployable architecture documents and verified repository commits.`],
+    ['Stream context & capability tier', `Discipline: ${rc.streamName || 'Engineering'}. Capability Tier: ${rc.level}. Publication status reflects verified curriculum benchmarks.`]
+  ],
+  faq: [
+    ['How does Pathwisse verify capability for this role?', 'Learners solve authentic architecture problems, push verified GitHub projects, and undergo rubric-based automated & peer evaluation.'],
+    ['Can I try learning this role for free?', 'Yes, all initial career diagnostic modules, roadmaps, and foundation project blueprints are accessible for free on Pathwisse.']
+  ],
+  related: ['product/career-roadmaps', 'students', 'hire']
+}));
+
+const careerPages = [
+  ...baseCareerPages,
+  ...catalogue206CareerPages.filter(cp => !baseCareerPages.some(b => b.slug === cp.slug))
+];
 const skillPages = skills.map(s => page({ slug: `skills/${s.slug}`, title: `${s.name} skill guide`, description: s.description, eyebrow: 'SKILL GUIDE', kind: 'skill', cta: s.cta, href: APP_AUTH_URL, sections: [['Where it is used', s.whereUsed.join('. ') + '.'], ['Progression', s.progression.join(' → ') + '.'], ['Exercises', s.exercises.join('. ') + '.'], ['Projects', s.projects.join(', ') + '.']], faq: s.faq, related: [...s.careers.map(c => `careers/${c}`), ...s.relatedSkills.map(k => `skills/${k}`)] }));
 const comparisonPages = [
   mk('compare/data-analyst-vs-business-analyst', 'Data Analyst vs Business Analyst', 'Compare responsibilities, skills, tools, projects, learning curve, and transition paths without treating one role as universally better.', 'comparison', 'Find your direction', CAREER_VOICE_URL),

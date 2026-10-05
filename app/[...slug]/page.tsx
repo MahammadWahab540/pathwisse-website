@@ -7,7 +7,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { absoluteUrl, legacyRedirects, SITE_URL } from '@/lib/site-config';
 import { ContactForm } from '../contact/form';
 import { rawDb } from '../../db/raw';
-import { PATHWISSE_ROLE_CARDS } from '@/lib/role-card-data';
+import { PATHWISSE_ROLE_CARDS, getRoleCardBySlug } from '@/lib/role-card-data';
 import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
 
 type Props = { params: Promise<{ slug: string[] }> };
@@ -303,7 +303,7 @@ export default async function Page({ params }: Props) {
           </div>
           {p?.kind === 'career' ? (() => {
             const roleSlug = key.replace('careers/', '');
-            const matchingCard = PATHWISSE_ROLE_CARDS.find((c) => c.slug === roleSlug);
+            const matchingCard = getRoleCardBySlug(roleSlug);
             return matchingCard ? (
               <div className="inner-product flex justify-center lg:justify-end py-4">
                 <PathwisseRoleCard role={matchingCard} isHero className="max-w-[340px] w-full" />

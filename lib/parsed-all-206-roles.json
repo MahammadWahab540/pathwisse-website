@@ -1,0 +1,1650 @@
+[
+  {
+    "id": "cse-01",
+    "title": "Full Stack Developer (Junior)",
+    "slug": "full-stack-developer-junior",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-02",
+    "title": "Frontend Engineer (React/Angular/Next.js)",
+    "slug": "frontend-engineer-react-angular-next-js",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-03",
+    "title": "Backend Engineer (Node/Python/Go)",
+    "slug": "backend-engineer-node-python-go",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-04",
+    "title": "Data Analyst (BI & Visualization)",
+    "slug": "data-analyst-bi-visualization",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-05",
+    "title": "Junior Data Engineer",
+    "slug": "junior-data-engineer",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-06",
+    "title": "Automation QA (Selenium)",
+    "slug": "automation-qa-selenium",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-07",
+    "title": "Junior DevOps Engineer",
+    "slug": "junior-devops-engineer",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-08",
+    "title": "Cloud Support Associate (AWS/Azure)",
+    "slug": "cloud-support-associate-aws-azure",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-09",
+    "title": "Junior Machine Learning Engineer",
+    "slug": "junior-machine-learning-engineer",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-10",
+    "title": "Cybersecurity Analyst (SOC Tier 1)",
+    "slug": "cybersecurity-analyst-soc-tier-1",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-11",
+    "title": "Mobile App Developer (Flutter/React Native)",
+    "slug": "mobile-app-developer-flutter-react-native",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-12",
+    "title": "iOS Application Developer Trainee",
+    "slug": "ios-application-developer-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-13",
+    "title": "Android Developer Trainee",
+    "slug": "android-developer-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-14",
+    "title": "Systems Software Engineer (C/C++)",
+    "slug": "systems-software-engineer-c-c",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-15",
+    "title": "Database Administrator Trainee",
+    "slug": "database-administrator-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-16",
+    "title": "Technical Support Engineer (L1)",
+    "slug": "technical-support-engineer-l1",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-17",
+    "title": "API Integration Specialist Trainee",
+    "slug": "api-integration-specialist-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-18",
+    "title": "Data Quality Analyst Trainee",
+    "slug": "data-quality-analyst-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-19",
+    "title": "Site Reliability Engineering Trainee",
+    "slug": "site-reliability-engineering-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-20",
+    "title": "Network Operations Trainee",
+    "slug": "network-operations-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-21",
+    "title": "Information Security Associate Trainee",
+    "slug": "information-security-associate-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-22",
+    "title": "Manual & Exploratory QA Tester",
+    "slug": "manual-exploratory-qa-tester",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-23",
+    "title": "ETL Developer Trainee",
+    "slug": "etl-developer-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-24",
+    "title": "Junior Data Scientist",
+    "slug": "junior-data-scientist",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-25",
+    "title": "Embedded Linux Programmer Trainee",
+    "slug": "embedded-linux-programmer-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "cse-26",
+    "title": "Microservices Developer Trainee",
+    "slug": "microservices-developer-trainee",
+    "streamId": "cse",
+    "streamName": "Computer Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-01",
+    "title": "Junior Site Engineer",
+    "slug": "junior-site-engineer",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-02",
+    "title": "CAD Draftsman (Civil)",
+    "slug": "cad-draftsman-civil",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-03",
+    "title": "Junior Quantity Surveyor",
+    "slug": "junior-quantity-surveyor",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-04",
+    "title": "BIM Modelling Trainee",
+    "slug": "bim-modelling-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-05",
+    "title": "Junior Structural Design Engineer",
+    "slug": "junior-structural-design-engineer",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-06",
+    "title": "Geotechnical Site Investigator Trainee",
+    "slug": "geotechnical-site-investigator-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-07",
+    "title": "Highway & Transportation Design Trainee",
+    "slug": "highway-transportation-design-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-08",
+    "title": "Construction Billing & Estimation Trainee",
+    "slug": "construction-billing-estimation-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-09",
+    "title": "Water Resource & Hydrology Trainee",
+    "slug": "water-resource-hydrology-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-10",
+    "title": "Quality Control / QA Lab Engineer (Civil)",
+    "slug": "quality-control-qa-lab-engineer-civil",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-11",
+    "title": "Surveying & Total Station Technician Trainee",
+    "slug": "surveying-total-station-technician-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-12",
+    "title": "Environmental Site Assessment Trainee",
+    "slug": "environmental-site-assessment-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-13",
+    "title": "Urban Planning Assistant Trainee",
+    "slug": "urban-planning-assistant-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-14",
+    "title": "Junior Safety & Compliance Officer (Site)",
+    "slug": "junior-safety-compliance-officer-site",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "civ-15",
+    "title": "Precast Concrete Plant Trainee",
+    "slug": "precast-concrete-plant-trainee",
+    "streamId": "civil",
+    "streamName": "Civil Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-01",
+    "title": "CAD Design Engineer (SolidWorks/CATIA)",
+    "slug": "cad-design-engineer-solidworks-catia",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-02",
+    "title": "Junior Quality Engineer (QC/QA)",
+    "slug": "junior-quality-engineer-qc-qa",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-03",
+    "title": "HVAC Design Engineer Trainee",
+    "slug": "hvac-design-engineer-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-04",
+    "title": "Piping Design Engineer Trainee",
+    "slug": "piping-design-engineer-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-05",
+    "title": "FEA / Structural Simulation Analyst Trainee",
+    "slug": "fea-structural-simulation-analyst-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-06",
+    "title": "Thermal Systems Design Trainee",
+    "slug": "thermal-systems-design-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-07",
+    "title": "CNC Machine Programmer Trainee",
+    "slug": "cnc-machine-programmer-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-08",
+    "title": "Automotive Powertrain Trainee",
+    "slug": "automotive-powertrain-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-09",
+    "title": "Plant Maintenance Engineer Trainee",
+    "slug": "plant-maintenance-engineer-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-10",
+    "title": "Hydraulics & Pneumatics Systems Trainee",
+    "slug": "hydraulics-pneumatics-systems-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-11",
+    "title": "Robotic Welding Cell Trainee",
+    "slug": "robotic-welding-cell-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-12",
+    "title": "Production Planning Trainee (Mechanical)",
+    "slug": "production-planning-trainee-mechanical",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-13",
+    "title": "Product Development & Prototyping Trainee",
+    "slug": "product-development-prototyping-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-14",
+    "title": "Tool Design Engineer Trainee (Jigs & Fixtures)",
+    "slug": "tool-design-engineer-trainee-jigs-fixtures",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mec-15",
+    "title": "Reliability Engineering Trainee",
+    "slug": "reliability-engineering-trainee",
+    "streamId": "mech",
+    "streamName": "Mechanical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-01",
+    "title": "Junior Electrical Design Engineer",
+    "slug": "junior-electrical-design-engineer",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-02",
+    "title": "PLC / SCADA Programmer Trainee",
+    "slug": "plc-scada-programmer-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-03",
+    "title": "EV / Battery Systems Trainee",
+    "slug": "ev-battery-systems-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-04",
+    "title": "Power Distribution & Substation Trainee",
+    "slug": "power-distribution-substation-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-05",
+    "title": "Switchgear & Protection Testing Trainee",
+    "slug": "switchgear-protection-testing-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-06",
+    "title": "Solar PV Systems Design Trainee",
+    "slug": "solar-pv-systems-design-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-07",
+    "title": "Control Panel Design Engineer Trainee",
+    "slug": "control-panel-design-engineer-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-08",
+    "title": "Transformer Testing & Commissioning Trainee",
+    "slug": "transformer-testing-commissioning-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-09",
+    "title": "Power Electronics Applications Trainee",
+    "slug": "power-electronics-applications-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-10",
+    "title": "Building Electrical (MEP) Draftsman Trainee",
+    "slug": "building-electrical-mep-draftsman-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-11",
+    "title": "Motor Drives & Inverters Trainee",
+    "slug": "motor-drives-inverters-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-12",
+    "title": "Electrical Safety & Compliance Trainee",
+    "slug": "electrical-safety-compliance-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-13",
+    "title": "Industrial Energy Audit Associate Trainee",
+    "slug": "industrial-energy-audit-associate-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-14",
+    "title": "Instrumentation Calibration Technician Trainee",
+    "slug": "instrumentation-calibration-technician-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ele-15",
+    "title": "Wind Turbine Electrical Systems Trainee",
+    "slug": "wind-turbine-electrical-systems-trainee",
+    "streamId": "elec",
+    "streamName": "Electrical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-01",
+    "title": "Graduate Process Engineer Trainee",
+    "slug": "graduate-process-engineer-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-02",
+    "title": "Junior Quality Control Chemist",
+    "slug": "junior-quality-control-chemist",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-03",
+    "title": "Pharma Process Engineer Trainee",
+    "slug": "pharma-process-engineer-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-04",
+    "title": "P&ID & Process Simulation (Aspen) Trainee",
+    "slug": "p-id-process-simulation-aspen-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-05",
+    "title": "Petrochemical Refining Operations Trainee",
+    "slug": "petrochemical-refining-operations-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-06",
+    "title": "Polymer Manufacturing Technician Trainee",
+    "slug": "polymer-manufacturing-technician-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-07",
+    "title": "Process Safety Management (PSM) Trainee",
+    "slug": "process-safety-management-psm-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-08",
+    "title": "Water & Wastewater Treatment Plant Trainee",
+    "slug": "water-wastewater-treatment-plant-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-09",
+    "title": "Catalyst Testing & Evaluation Trainee",
+    "slug": "catalyst-testing-evaluation-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-10",
+    "title": "Chemical Plant DCS Operator Trainee",
+    "slug": "chemical-plant-dcs-operator-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-11",
+    "title": "Bio-Process Fermentation Trainee",
+    "slug": "bio-process-fermentation-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-12",
+    "title": "Industrial Hygiene & Chemical Safety Trainee",
+    "slug": "industrial-hygiene-chemical-safety-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-13",
+    "title": "Pilot Plant Research Associate Trainee",
+    "slug": "pilot-plant-research-associate-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-14",
+    "title": "Fertilizer Production Operations Trainee",
+    "slug": "fertilizer-production-operations-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "che-15",
+    "title": "Battery Chemical Material Synthesis Trainee",
+    "slug": "battery-chemical-material-synthesis-trainee",
+    "streamId": "chem",
+    "streamName": "Chemical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-01",
+    "title": "Junior Biomedical Equipment Technician",
+    "slug": "junior-biomedical-equipment-technician",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-02",
+    "title": "Clinical Application Specialist Trainee",
+    "slug": "clinical-application-specialist-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-03",
+    "title": "Quality Engineer (Medical Devices)",
+    "slug": "quality-engineer-medical-devices",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-04",
+    "title": "Medical Device Regulatory Affairs Trainee",
+    "slug": "medical-device-regulatory-affairs-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-05",
+    "title": "Biomaterials Testing Technician Trainee",
+    "slug": "biomaterials-testing-technician-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-06",
+    "title": "Medical Imaging System Service Trainee (X-Ray/MRI)",
+    "slug": "medical-imaging-system-service-trainee-x-ray-mri",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-07",
+    "title": "Prosthetics & Orthotics Design Trainee",
+    "slug": "prosthetics-orthotics-design-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-08",
+    "title": "Hospital Clinical Engineering Trainee",
+    "slug": "hospital-clinical-engineering-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-09",
+    "title": "Patient Monitoring System QA Trainee",
+    "slug": "patient-monitoring-system-qa-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-10",
+    "title": "Digital Health Software Tester Trainee",
+    "slug": "digital-health-software-tester-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-11",
+    "title": "Biosensor Development Trainee",
+    "slug": "biosensor-development-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-12",
+    "title": "Microfluidic Chip Fabrication Trainee",
+    "slug": "microfluidic-chip-fabrication-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-13",
+    "title": "Surgical Robotics Maintenance Trainee",
+    "slug": "surgical-robotics-maintenance-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-14",
+    "title": "Physiological Signal Processing Trainee (ECG/EEG)",
+    "slug": "physiological-signal-processing-trainee-ecg-eeg",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "bio-15",
+    "title": "Medical Device Calibration Specialist Trainee",
+    "slug": "medical-device-calibration-specialist-trainee",
+    "streamId": "biomed",
+    "streamName": "Biomedical Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-01",
+    "title": "UAV / Drone Design Engineer Trainee",
+    "slug": "uav-drone-design-engineer-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-02",
+    "title": "CFD / Aerodynamics Analyst Trainee",
+    "slug": "cfd-aerodynamics-analyst-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-03",
+    "title": "Avionics Systems Trainee",
+    "slug": "avionics-systems-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-04",
+    "title": "Aerospace Structures Stress Analyst Trainee",
+    "slug": "aerospace-structures-stress-analyst-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-05",
+    "title": "Gas Turbine Propulsion Trainee",
+    "slug": "gas-turbine-propulsion-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-06",
+    "title": "Aircraft Maintenance & Overhaul (MRO) Trainee",
+    "slug": "aircraft-maintenance-overhaul-mro-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-07",
+    "title": "Flight Control & Guidance Systems Trainee",
+    "slug": "flight-control-guidance-systems-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-08",
+    "title": "Composite Materials Fabrication Trainee",
+    "slug": "composite-materials-fabrication-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-09",
+    "title": "Rocket Propulsion & Thermal Systems Trainee",
+    "slug": "rocket-propulsion-thermal-systems-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-10",
+    "title": "Satellite Systems Assembly & Test Trainee",
+    "slug": "satellite-systems-assembly-test-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-11",
+    "title": "Aerospace Quality Assurance (AS9100) Trainee",
+    "slug": "aerospace-quality-assurance-as9100-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-12",
+    "title": "Wind Tunnel Testing Technician Trainee",
+    "slug": "wind-tunnel-testing-technician-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-13",
+    "title": "Aircraft Weight & Balance Estimator Trainee",
+    "slug": "aircraft-weight-balance-estimator-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-14",
+    "title": "Space Mission Planning Assistant Trainee",
+    "slug": "space-mission-planning-assistant-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "aer-15",
+    "title": "Radar & Telemetry Station Trainee",
+    "slug": "radar-telemetry-station-trainee",
+    "streamId": "aero",
+    "streamName": "Aerospace Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "ece-01",
+    "title": "Junior Hardware Engineer",
+    "slug": "junior-hardware-engineer",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-02",
+    "title": "Embedded Systems Engineer Trainee",
+    "slug": "embedded-systems-engineer-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-03",
+    "title": "VLSI Design Trainee",
+    "slug": "vlsi-design-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-04",
+    "title": "PCB Design Engineer Trainee",
+    "slug": "pcb-design-engineer-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-05",
+    "title": "FPGA Programmer Trainee (Verilog/VHDL)",
+    "slug": "fpga-programmer-trainee-verilog-vhdl",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-06",
+    "title": "RF & Microwave Circuit Testing Trainee",
+    "slug": "rf-microwave-circuit-testing-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-07",
+    "title": "5G / Telecom Protocol Testing Trainee",
+    "slug": "5g-telecom-protocol-testing-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-08",
+    "title": "IoT Device Firmware Developer Trainee",
+    "slug": "iot-device-firmware-developer-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-09",
+    "title": "Semiconductor Fabrication Operations Trainee",
+    "slug": "semiconductor-fabrication-operations-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-10",
+    "title": "Digital Signal Processing (DSP) Trainee",
+    "slug": "digital-signal-processing-dsp-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-11",
+    "title": "Optical Fiber Network Technician Trainee",
+    "slug": "optical-fiber-network-technician-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-12",
+    "title": "Automotive ECU Calibration Trainee",
+    "slug": "automotive-ecu-calibration-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-13",
+    "title": "EMI / EMC Compliance Testing Trainee",
+    "slug": "emi-emc-compliance-testing-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-14",
+    "title": "Consumer Electronics QA Trainee",
+    "slug": "consumer-electronics-qa-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ece-15",
+    "title": "Wireless Sensor Network Field Trainee",
+    "slug": "wireless-sensor-network-field-trainee",
+    "streamId": "ece",
+    "streamName": "Electronics & Communication Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-01",
+    "title": "Sustainability Analyst Trainee",
+    "slug": "sustainability-analyst-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-02",
+    "title": "ESG Data Analyst Trainee",
+    "slug": "esg-data-analyst-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-03",
+    "title": "Junior Environmental Consultant",
+    "slug": "junior-environmental-consultant",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-04",
+    "title": "Air Quality Monitoring Technician Trainee",
+    "slug": "air-quality-monitoring-technician-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-05",
+    "title": "Effluent Treatment Plant (ETP) Trainee",
+    "slug": "effluent-treatment-plant-etp-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-06",
+    "title": "Carbon Accounting & Footprint Trainee",
+    "slug": "carbon-accounting-footprint-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-07",
+    "title": "Solid Waste Management Planner Trainee",
+    "slug": "solid-waste-management-planner-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-08",
+    "title": "Environmental Impact Assessment (EIA) Trainee",
+    "slug": "environmental-impact-assessment-eia-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-09",
+    "title": "Hazardous Waste Compliance Officer Trainee",
+    "slug": "hazardous-waste-compliance-officer-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-10",
+    "title": "Water Resource GIS Analyst Trainee",
+    "slug": "water-resource-gis-analyst-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-11",
+    "title": "Noise & Vibration Assessment Trainee",
+    "slug": "noise-vibration-assessment-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-12",
+    "title": "Industrial Wastewater Compliance Trainee",
+    "slug": "industrial-wastewater-compliance-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-13",
+    "title": "Renewable Energy Integration Analyst Trainee",
+    "slug": "renewable-energy-integration-analyst-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-14",
+    "title": "Ecological Restoration Project Trainee",
+    "slug": "ecological-restoration-project-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "env-15",
+    "title": "Soil Remediation Specialist Trainee",
+    "slug": "soil-remediation-specialist-trainee",
+    "streamId": "env",
+    "streamName": "Environmental Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-01",
+    "title": "Supply Chain Analyst Trainee",
+    "slug": "supply-chain-analyst-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-02",
+    "title": "CAM / CNC Programmer Trainee",
+    "slug": "cam-cnc-programmer-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-03",
+    "title": "Production Planning & Control (PPC) Trainee",
+    "slug": "production-planning-control-ppc-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-04",
+    "title": "Lean Manufacturing & Kaizen Facilitator Trainee",
+    "slug": "lean-manufacturing-kaizen-facilitator-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-05",
+    "title": "Quality Assurance & Six Sigma Trainee",
+    "slug": "quality-assurance-six-sigma-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-06",
+    "title": "Plant Layout & Operations Research Trainee",
+    "slug": "plant-layout-operations-research-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-07",
+    "title": "Inventory Optimization Analyst Trainee",
+    "slug": "inventory-optimization-analyst-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-08",
+    "title": "Warehouse Automation Associate Trainee",
+    "slug": "warehouse-automation-associate-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-09",
+    "title": "Work Study & Ergonomics Analyst Trainee",
+    "slug": "work-study-ergonomics-analyst-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-10",
+    "title": "Manufacturing Execution System (MES) Trainee",
+    "slug": "manufacturing-execution-system-mes-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-11",
+    "title": "Supplier Quality Auditor Trainee",
+    "slug": "supplier-quality-auditor-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-12",
+    "title": "Packaging Design & Logistics Trainee",
+    "slug": "packaging-design-logistics-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-13",
+    "title": "Tool Crib & Fixture Management Trainee",
+    "slug": "tool-crib-fixture-management-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-14",
+    "title": "Total Productive Maintenance (TPM) Trainee",
+    "slug": "total-productive-maintenance-tpm-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "ime-15",
+    "title": "Assembly Line Balancing Specialist Trainee",
+    "slug": "assembly-line-balancing-specialist-trainee",
+    "streamId": "ime",
+    "streamName": "Industrial & Manufacturing Engg",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-01",
+    "title": "Drilling Engineer Trainee",
+    "slug": "drilling-engineer-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-02",
+    "title": "Junior Reservoir Engineer",
+    "slug": "junior-reservoir-engineer",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-03",
+    "title": "Production Operations Trainee",
+    "slug": "production-operations-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-04",
+    "title": "Well Logging & Petrophysics Analyst Trainee",
+    "slug": "well-logging-petrophysics-analyst-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-05",
+    "title": "Mud Logging & Fluids Technician Trainee",
+    "slug": "mud-logging-fluids-technician-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-06",
+    "title": "Subsea Wellhead Installation Trainee",
+    "slug": "subsea-wellhead-installation-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-07",
+    "title": "Pipeline Integrity & Corrosion Trainee",
+    "slug": "pipeline-integrity-corrosion-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-08",
+    "title": "Enhanced Oil Recovery (EOR) Lab Trainee",
+    "slug": "enhanced-oil-recovery-eor-lab-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-09",
+    "title": "Offshore Rig Safety Specialist Trainee",
+    "slug": "offshore-rig-safety-specialist-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-10",
+    "title": "Gas Processing Plant Trainee",
+    "slug": "gas-processing-plant-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-11",
+    "title": "Well Intervention & Workover Trainee",
+    "slug": "well-intervention-workover-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-12",
+    "title": "Seismic Data Interpretation Trainee",
+    "slug": "seismic-data-interpretation-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-13",
+    "title": "LNG Storage & Regasification Trainee",
+    "slug": "lng-storage-regasification-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-14",
+    "title": "Oilfield Chemical Optimization Trainee",
+    "slug": "oilfield-chemical-optimization-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "pet-15",
+    "title": "Refinery Process Economics Analyst Trainee",
+    "slug": "refinery-process-economics-analyst-trainee",
+    "streamId": "petro",
+    "streamName": "Petroleum Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-01",
+    "title": "ROS Developer (Junior)",
+    "slug": "ros-developer-junior",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-02",
+    "title": "Computer Vision Engineer Trainee",
+    "slug": "computer-vision-engineer-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-03",
+    "title": "PLC / SCADA Automation Engineer (Entry)",
+    "slug": "plc-scada-automation-engineer-entry",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-04",
+    "title": "AI/ML for Robotics Trainee",
+    "slug": "ai-ml-for-robotics-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "rob-05",
+    "title": "Industrial Robot Arm Programmer Trainee",
+    "slug": "industrial-robot-arm-programmer-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-06",
+    "title": "Autonomous Mobile Robot (AMR) Trainee",
+    "slug": "autonomous-mobile-robot-amr-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-07",
+    "title": "Sensor Fusion & SLAM Engineer Trainee",
+    "slug": "sensor-fusion-slam-engineer-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-08",
+    "title": "Mechatronics Integration Trainee",
+    "slug": "mechatronics-integration-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-09",
+    "title": "Embedded RTOS Robotics Trainee",
+    "slug": "embedded-rtos-robotics-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-10",
+    "title": "Motion Control Systems Trainee",
+    "slug": "motion-control-systems-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-11",
+    "title": "Robotics Simulation & Gazebo Trainee",
+    "slug": "robotics-simulation-gazebo-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-12",
+    "title": "Automated Guided Vehicle (AGV) Service Trainee",
+    "slug": "automated-guided-vehicle-agv-service-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-13",
+    "title": "End-Effector & Gripper Design Trainee",
+    "slug": "end-effector-gripper-design-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-14",
+    "title": "Cobot (Collaborative Robot) Deployment Trainee",
+    "slug": "cobot-collaborative-robot-deployment-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "rob-15",
+    "title": "Inspection Drone Systems Trainee",
+    "slug": "inspection-drone-systems-trainee",
+    "streamId": "robotics",
+    "streamName": "Robotics & Automation Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-01",
+    "title": "Junior Metallurgist",
+    "slug": "junior-metallurgist",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-02",
+    "title": "Materials Testing Technician / Engineer (Entry)",
+    "slug": "materials-testing-technician-engineer-entry",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-03",
+    "title": "Graduate Materials Engineer Trainee",
+    "slug": "graduate-materials-engineer-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": true
+  },
+  {
+    "id": "mat-04",
+    "title": "Non-Destructive Testing (NDT) Trainee",
+    "slug": "non-destructive-testing-ndt-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-05",
+    "title": "Corrosion Control Specialist Trainee",
+    "slug": "corrosion-control-specialist-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-06",
+    "title": "Ceramics & Refractory Materials Trainee",
+    "slug": "ceramics-refractory-materials-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-07",
+    "title": "Polymer Compound Development Trainee",
+    "slug": "polymer-compound-development-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-08",
+    "title": "Additive Manufacturing (Metal 3D Printing) Trainee",
+    "slug": "additive-manufacturing-metal-3d-printing-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-09",
+    "title": "Failure Analysis Lab Assistant Trainee",
+    "slug": "failure-analysis-lab-assistant-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-10",
+    "title": "Heat Treatment Process Controller Trainee",
+    "slug": "heat-treatment-process-controller-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-11",
+    "title": "Semiconductor Thin-Film Materials Trainee",
+    "slug": "semiconductor-thin-film-materials-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-12",
+    "title": "Foundry & Casting Quality Trainee",
+    "slug": "foundry-casting-quality-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-13",
+    "title": "Composite Matrix Formulation Trainee",
+    "slug": "composite-matrix-formulation-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-14",
+    "title": "Nanomaterials Characterization Trainee (SEM/XRD)",
+    "slug": "nanomaterials-characterization-trainee-sem-xrd",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  },
+  {
+    "id": "mat-15",
+    "title": "Surface Coating & Electroplating Trainee",
+    "slug": "surface-coating-electroplating-trainee",
+    "streamId": "materials",
+    "streamName": "Materials Science Engineering",
+    "hasPublishedPath": false
+  }
+]

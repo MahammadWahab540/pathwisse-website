@@ -308,3 +308,23 @@ export const PATHWISSE_ROLE_CARDS: RoleCardData[] = [
     exploreUrl: '/careers/mechanical-cad-engineer',
   },
 ];
+
+import all206RolesJson from './all-206-role-cards.json';
+
+export interface ExtendedRoleCardData extends RoleCardData {
+  id?: string;
+  streamId?: string;
+  streamName?: string;
+  hasPublishedPath?: boolean;
+  skills?: string[];
+  projects?: string[];
+}
+
+export const ALL_206_ROLE_CARDS: ExtendedRoleCardData[] = all206RolesJson as ExtendedRoleCardData[];
+
+export function getRoleCardBySlug(slug: string): ExtendedRoleCardData | undefined {
+  const custom = PATHWISSE_ROLE_CARDS.find((c) => c.slug === slug);
+  if (custom) return custom;
+  return ALL_206_ROLE_CARDS.find((c) => c.slug === slug);
+}
+
