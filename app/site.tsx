@@ -151,6 +151,9 @@ export function Header() {
           <a href="/pricing" className="text-sm font-semibold text-[#142e50] hover:text-[#2458ae] transition-colors py-2 px-1">
             Pricing
           </a>
+          <a href="/hire" className="text-sm font-semibold text-[#142e50] hover:text-[#2458ae] transition-colors py-2 px-1">
+            Hire Talent
+          </a>
         </nav>
       <div className="nav-actions">
         <a className="login" href={APP}>Log in <ArrowUpRight size={14} /></a>
