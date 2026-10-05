@@ -7,6 +7,8 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { absoluteUrl, legacyRedirects, SITE_URL } from '@/lib/site-config';
 import { ContactForm } from '../contact/form';
 import { rawDb } from '../../db/raw';
+import { PATHWISSE_ROLE_CARDS } from '@/lib/role-card-data';
+import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
 
 type Props = { params: Promise<{ slug: string[] }> };
 
@@ -299,7 +301,19 @@ export default async function Page({ params }: Props) {
             <p>{item.description}</p>
             {p?.cta && <a className="button" href={p.href}>{p.cta}<ArrowRight size={16} /></a>}
           </div>
-          {p?.kind && <div className="inner-product"><Experience kind={p.kind} /></div>}
+          {p?.kind === 'career' ? (() => {
+            const roleSlug = key.replace('careers/', '');
+            const matchingCard = PATHWISSE_ROLE_CARDS.find((c) => c.slug === roleSlug);
+            return matchingCard ? (
+              <div className="inner-product flex justify-center lg:justify-end py-4">
+                <PathwisseRoleCard role={matchingCard} isHero className="max-w-[340px] w-full" />
+              </div>
+            ) : (
+              <div className="inner-product"><Experience kind={p.kind} /></div>
+            );
+          })() : p?.kind ? (
+            <div className="inner-product"><Experience kind={p.kind} /></div>
+          ) : null}
         </section>
         {hub ? (
           <section className="hub-list">

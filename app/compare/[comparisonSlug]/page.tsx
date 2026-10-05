@@ -5,6 +5,8 @@ import { absoluteUrl, CAREER_VOICE_URL, APP_AUTH_URL } from '@/lib/site-config';
 import { Button } from '@/components/ui/button';
 import { CTABand } from '@/components/shared/CTABand';
 import { ArrowRight, CheckCircle2, Split, Sparkles, BookOpen } from 'lucide-react';
+import { PATHWISSE_ROLE_CARDS } from '@/lib/role-card-data';
+import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
 
 interface ComparisonData {
   title: string;
@@ -188,8 +190,36 @@ export default async function ComparisonPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Side-by-Side Dual Profile Cards */}
+        {/* Side-by-Side Dual Profile Cards & Visual Collectible Cards */}
         <section className="max-w-5xl mx-auto px-6 py-12">
+          {(() => {
+            const slugParts = comparisonSlug.split('-vs-');
+            const cardA = PATHWISSE_ROLE_CARDS.find((c) => c.slug === slugParts[0]);
+            const cardB = PATHWISSE_ROLE_CARDS.find((c) => c.slug === slugParts[1]);
+
+            return cardA && cardB ? (
+              <div className="mb-14">
+                <div className="text-center mb-6">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2458ae] block mb-1">
+                    DUAL CAPABILITY VISUAL BLUEPRINT
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold font-['Outfit'] text-[#0f172a]">
+                    Which path feels more like you?
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-3xl mx-auto">
+                  <div className="flex flex-col">
+                    <PathwisseRoleCard role={cardA} />
+                  </div>
+                  <div className="flex flex-col">
+                    <PathwisseRoleCard role={cardB} />
+                  </div>
+                </div>
+              </div>
+            ) : null;
+          })()}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Role A Card */}
             <div className="rounded-2xl border border-[#cbd5e1] bg-white p-8 shadow-sm">

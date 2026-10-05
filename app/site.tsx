@@ -24,6 +24,8 @@ import { Hero } from '@/components/hero';
 import { NewsletterForm } from '@/components/newsletter-form';
 import { LiquidGlassFooter } from '@/components/footer/LiquidGlassFooter';
 import { CTABand } from '@/components/shared/CTABand';
+import { PATHWISSE_ROLE_CARDS } from '@/lib/role-card-data';
+import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
 
 export const APP = APP_AUTH_URL;
 
@@ -423,6 +425,37 @@ export function HomePage() {
         <Hero accent="#3B82F6" />
         <TrustBand />
         <AudienceExperience />
+
+        {/* Featured 4 Collectible Role Cards */}
+        <section className="max-w-6xl mx-auto px-6 py-14">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2458ae] block mb-1">
+                DISCOVER YOUR DIRECTION
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold font-['Outfit'] text-[#0f172a]">
+                Find a path worth exploring.
+              </h2>
+              <p className="text-sm text-[#475569] mt-1 max-w-xl">
+                Don&apos;t start with a generic course. Start with the kind of problems you want to solve, and build verified capability.
+              </p>
+            </div>
+            <a
+              href="/careers"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#173c6e] hover:text-[#2458ae] transition-colors py-1 self-start sm:self-auto"
+            >
+              <span>Explore all role cards</span>
+              <ArrowRight size={14} />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+            {PATHWISSE_ROLE_CARDS.slice(0, 4).map((card) => (
+              <PathwisseRoleCard key={card.slug} role={card} />
+            ))}
+          </div>
+        </section>
+
         <EcosystemStory />
         <ProductEcosystem />
         <section className="resources-section">

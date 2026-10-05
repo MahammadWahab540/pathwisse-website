@@ -16,7 +16,10 @@ import {
   Zap,
   FileText
 } from 'lucide-react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { PATHWISSE_ROLE_CARDS } from '@/lib/role-card-data';
+import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
 
 export const metadata: Metadata = {
   title: 'For Students: Career Direction, Real Projects & Verified Proof | Pathwisse',
@@ -279,6 +282,43 @@ export default function StudentsPage() {
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4.5 Collectible Role Cards Showcase */}
+        <section className="py-20 bg-slate-50 border-t border-slate-200/80">
+          <div className="max-w-[1280px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div className="max-w-2xl">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-widest uppercase bg-blue-100 text-[#002f6c] mb-3">
+                  Collectible Role Cards · Visual System
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#002f6c] tracking-tight">
+                  You don’t need to guess your career. Explore where you could go.
+                </h2>
+                <p className="mt-3 text-slate-600 text-base sm:text-lg">
+                  Every card represents a concrete engineering capability you can understand, build, and prove. Pick a role to inspect its skill stack or start learning immediately.
+                </p>
+              </div>
+              <div>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="rounded-full border-slate-300 font-semibold text-[#002f6c] hover:bg-slate-100"
+                >
+                  <Link href="/careers">
+                    Explore all 9+ role cards <ArrowRight className="ml-2 w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {PATHWISSE_ROLE_CARDS.slice(0, 6).map((card) => (
+                <PathwisseRoleCard key={card.slug} role={card} />
+              ))}
             </div>
           </div>
         </section>
