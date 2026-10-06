@@ -8,6 +8,7 @@ import {
   ShieldCheck, 
   TrendingUp,
 } from 'lucide-react';
+import type { HairlineFigureName } from '@/components/ui/hairline-figure';
 
 export interface StudentOutcomeCard {
   id: string;
@@ -22,6 +23,7 @@ export interface StudentOutcomeCard {
   tint: string;
   gradient: string;
   icon: React.ComponentType<{ className?: string; size?: number }>;
+  hairlineFigure: HairlineFigureName;
   badge: string;
   metrics: string;
   details: string[];
@@ -41,6 +43,7 @@ export const STUDENT_OUTCOME_CARDS: StudentOutcomeCard[] = [
     tint: '#3B82F6',
     gradient: 'linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%)',
     icon: Compass,
+    hairlineFigure: 'query',
     badge: 'STAGE 1 · AUDIT',
     metrics: '94% clarity rate',
     details: [
@@ -62,6 +65,7 @@ export const STUDENT_OUTCOME_CARDS: StudentOutcomeCard[] = [
     tint: '#0284C7',
     gradient: 'linear-gradient(135deg, #0369A1 0%, #0EA5E9 100%)',
     icon: Map,
+    hairlineFigure: 'elevator',
     badge: 'STAGE 2 · ROADMAP',
     metrics: 'Zero course overload',
     details: [
@@ -83,6 +87,7 @@ export const STUDENT_OUTCOME_CARDS: StudentOutcomeCard[] = [
     tint: '#2563EB',
     gradient: 'linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%)',
     icon: Code2,
+    hairlineFigure: 'keyboard',
     badge: 'STAGE 3 · DRILLS',
     metrics: 'Active problem solving',
     details: [
@@ -104,6 +109,7 @@ export const STUDENT_OUTCOME_CARDS: StudentOutcomeCard[] = [
     tint: '#F97316',
     gradient: 'linear-gradient(135deg, #EA580C 0%, #F97316 100%)',
     icon: Briefcase,
+    hairlineFigure: 'branches',
     badge: 'STAGE 4 · EVIDENCE',
     metrics: 'Inspectable code repos',
     details: [
@@ -125,6 +131,7 @@ export const STUDENT_OUTCOME_CARDS: StudentOutcomeCard[] = [
     tint: '#8B5CF6',
     gradient: 'linear-gradient(135deg, #6D28D9 0%, #8B5CF6 100%)',
     icon: Sparkles,
+    hairlineFigure: 'loupe',
     badge: 'STAGE 5 · FEEDBACK',
     metrics: 'Instant mentor review',
     details: [
@@ -146,6 +153,7 @@ export const STUDENT_OUTCOME_CARDS: StudentOutcomeCard[] = [
     tint: '#10B981',
     gradient: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
     icon: ShieldCheck,
+    hairlineFigure: 'vault',
     badge: 'STAGE 6 · VERIFICATION',
     metrics: 'Verifiable proof artifact',
     details: [
@@ -167,6 +175,7 @@ export const STUDENT_OUTCOME_CARDS: StudentOutcomeCard[] = [
     tint: '#059669',
     gradient: 'linear-gradient(135deg, #047857 0%, #10B981 100%)',
     icon: TrendingUp,
+    hairlineFigure: 'sieve',
     badge: 'STAGE 7 · PLACEMENT',
     metrics: 'Direct shortlist matching',
     details: [

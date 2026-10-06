@@ -131,15 +131,6 @@ export default function StudentsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {STUDENT_OUTCOME_CARDS.map((card) => {
               const Icon = card.icon;
-              const stageFigures: Record<string, HairlineFigureName> = {
-                'career-direction': 'query',
-                'skill-roadmap': 'elevator',
-                'deliberate-practice': 'keyboard',
-                'real-projects': 'branches',
-                'ai-review': 'loupe',
-                'verified-proof': 'plot',
-              };
-              const figName = stageFigures[card.id] || 'terrain';
 
               return (
                 <div
@@ -160,7 +151,7 @@ export default function StudentsPage() {
                     </div>
 
                     <div className="w-full max-w-[150px] mx-auto py-2">
-                      <HairlineFigure figure={figName} interactiveHint intensity={0.65} label={`${card.title} interactive simulation`} />
+                      <HairlineFigure figure={card.hairlineFigure} interactiveHint intensity={0.65} label={`${card.title} interactive simulation`} />
                     </div>
 
                     <div>
