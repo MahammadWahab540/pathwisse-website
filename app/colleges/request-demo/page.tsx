@@ -1,6 +1,7 @@
 import { Header, Footer } from '@/app/site';
 import { IntentLeadForm } from '@/components/forms/IntentLeadForm';
 import { CheckCircle2, GraduationCap, BarChart3, Users, Sparkles } from 'lucide-react';
+import { HairlineFigure } from '@/components/ui/hairline-figure';
 
 export const metadata = {
   title: 'Request College Demo | Pathwisse',
@@ -34,11 +35,15 @@ export default function Page() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Context, Trust & Value Proposition */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
-              <div>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#173c6e]/10 text-[#173c6e] text-xs font-bold uppercase tracking-wider mb-4">
-                  <GraduationCap className="w-3.5 h-3.5 text-[#2458ae]" />
-                  Institutional Partnership
-                </span>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#173c6e]/10 text-[#173c6e] text-xs font-bold uppercase tracking-wider">
+                    <GraduationCap className="w-3.5 h-3.5 text-[#2458ae]" />
+                    Institutional Partnership
+                  </span>
+                  <div className="w-16 h-12 text-[#2458ae]">
+                    <HairlineFigure figure="plot" intensity={0.7} label="Cohort Placement Analytics" />
+                  </div>
+                </div>
                 <h1 className="text-4xl sm:text-5xl font-extrabold text-[#142e50] tracking-tight leading-[1.08] mb-5">
                   Measure readiness. <br />
                   <span className="text-[#2458ae]">Elevate placements.</span>
@@ -46,7 +51,6 @@ export default function Page() {
                 <p className="text-base sm:text-lg text-[#586a80] leading-relaxed">
                   Share your cohort size, target graduation year, and placement goals. Our academic solutions team will prepare a customized cohort audit walkthrough for your campus.
                 </p>
-              </div>
 
               <div className="space-y-5 pt-6 border-t border-[#e2e8f0]">
                 {highlights.map((item, idx) => {

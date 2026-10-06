@@ -20,6 +20,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { PATHWISSE_ROLE_CARDS } from '@/lib/role-card-data';
 import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
+import { HairlineFigure, type HairlineFigureName } from '@/components/ui/hairline-figure';
 
 export const metadata: Metadata = {
   title: 'For Students: Career Direction, Real Projects & Verified Proof | Pathwisse',
@@ -130,6 +131,16 @@ export default function StudentsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {STUDENT_OUTCOME_CARDS.map((card) => {
               const Icon = card.icon;
+              const stageFigures: Record<string, HairlineFigureName> = {
+                'career-direction': 'query',
+                'skill-roadmap': 'elevator',
+                'deliberate-practice': 'keyboard',
+                'real-projects': 'branches',
+                'ai-review': 'loupe',
+                'verified-proof': 'plot',
+              };
+              const figName = stageFigures[card.id] || 'terrain';
+
               return (
                 <div
                   key={card.id}
@@ -146,6 +157,10 @@ export default function StudentsPage() {
                       >
                         <Icon className="h-5 w-5" />
                       </div>
+                    </div>
+
+                    <div className="w-full max-w-[150px] mx-auto py-2">
+                      <HairlineFigure figure={figName} interactiveHint intensity={0.65} label={`${card.title} interactive simulation`} />
                     </div>
 
                     <div>

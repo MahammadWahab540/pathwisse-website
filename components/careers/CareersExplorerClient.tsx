@@ -29,6 +29,7 @@ import {
 import { ALL_206_ROLE_CARDS, type ExtendedRoleCardData } from '@/lib/role-card-data';
 import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
 import { CAREER_VOICE_URL, APP_AUTH_URL } from '@/lib/site-config';
+import { HairlineFigure } from '@/components/ui/hairline-figure';
 
 // 13 Engineering & Tech Worlds
 export const CAREER_WORLDS = [
@@ -103,20 +104,34 @@ export function CareersExplorerClient() {
             <span className="text-[#173c6e] font-bold">Role Directory</span>
           </div>
 
-          <div className="max-w-3xl space-y-4">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2458ae]/10 text-[#2458ae] text-xs font-mono font-bold uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-[#2458ae] animate-pulse" />
-              13 CAREER WORLDS · 206 ENTRY-LEVEL ROLES
-            </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-8 space-y-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2458ae]/10 text-[#2458ae] text-xs font-mono font-bold uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-[#2458ae] animate-pulse" />
+                13 CAREER WORLDS · 206 ENTRY-LEVEL ROLES
+              </span>
 
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0f172a] font-['Outfit'] leading-[1.12]">
-              There is more than one way forward.{' '}
-              <span className="text-[#2458ae]">Every role has an authentic roadmap.</span>
-            </h1>
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0f172a] font-['Outfit'] leading-[1.12]">
+                There is more than one way forward.{' '}
+                <span className="text-[#2458ae]">Every role has an authentic roadmap.</span>
+              </h1>
 
-            <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
-              Explore 206 published engineering roles across 13 engineering worlds. Every card represents a concrete capability you can understand, build, and prove through authentic GitHub capstones and skill benchmarks.
-            </p>
+              <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
+                Explore 206 published engineering roles across 13 engineering worlds. Every card represents a concrete capability you can understand, build, and prove through authentic GitHub capstones and skill benchmarks.
+              </p>
+            </div>
+
+            <div className="lg:col-span-4 hidden lg:flex flex-col items-center justify-center p-5 rounded-2xl bg-white border border-[#cbd5e1] shadow-2xs">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#64748b] font-bold mb-1">
+                Capability Landscape
+              </span>
+              <div className="w-full max-w-[220px]">
+                <HairlineFigure figure="terrain" interactiveHint intensity={0.7} label="81-pillar capability terrain" />
+              </div>
+              <span className="text-[11px] font-mono text-[#2458ae] mt-1 font-semibold">
+                81 nodes answer pointer
+              </span>
+            </div>
           </div>
 
           {/* Search Bar & Quick Diagnostic */}

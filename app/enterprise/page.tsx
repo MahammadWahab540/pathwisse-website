@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CTABand } from '@/components/shared/CTABand';
+import { HairlineFigure } from '@/components/ui/hairline-figure';
 
 export const metadata: Metadata = {
   title: 'For Enterprises: Hire With Evidence & Talent Intelligence | Pathwisse',
@@ -194,43 +195,56 @@ export default function EnterprisePage() {
               {[
                 {
                   icon: FileCode2,
+                  figure: 'exploded' as const,
                   title: 'Inspectable Decision Memos',
                   desc: 'Every candidate portfolio includes technical design briefs, architectural trade-offs, and reasoning—not just raw copied tutorial repos.',
                 },
                 {
                   icon: Terminal,
+                  figure: 'terminal' as const,
                   title: 'Production-Grounded Code',
                   desc: 'Projects are evaluated on modularity, error resilience, edge-case coverage, and clean documentation matching real engineering team standards.',
                 },
                 {
                   icon: ShieldCheck,
+                  figure: 'vault' as const,
                   title: 'Authenticity Guarantee',
                   desc: 'We trace iterative progress, daily consistency, and multi-checkpoint submissions to verify that work was genuinely built by the student.',
                 },
                 {
                   icon: Target,
+                  figure: 'keyboard' as const,
                   title: 'Custom Role Calibration',
                   desc: 'Map capability benchmarks directly to your company’s tech stack, junior leveling rubrics, and engineering culture requirements.',
                 },
                 {
                   icon: Zap,
+                  figure: 'sieve' as const,
                   title: 'High-Conversion Shortlisting',
                   desc: 'Bypass generic job portal spam. Connect directly with pre-screened talent who meet your exact baseline readiness score.',
                 },
                 {
                   icon: Briefcase,
+                  figure: 'branches' as const,
                   title: 'Accelerated Day-One Impact',
                   desc: 'Candidates familiar with real engineering workflows, code review hygiene, and delivery deadlines require 60% less onboarding ramp-up.',
                 },
               ].map((card) => {
                 const Icon = card.icon;
                 return (
-                  <div key={card.title} className="p-7 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:shadow-md transition-all">
-                    <div className="w-12 h-12 rounded-lg bg-white border border-[#e2e8f0] flex items-center justify-center text-[#173c6e] mb-5 shadow-2xs">
-                      <Icon size={24} />
+                  <div key={card.title} className="p-7 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="w-12 h-12 rounded-lg bg-white border border-[#e2e8f0] flex items-center justify-center text-[#173c6e] shadow-2xs">
+                          <Icon size={24} />
+                        </div>
+                        <div className="w-16 h-12 text-[#173c6e]">
+                          <HairlineFigure figure={card.figure} intensity={0.65} label={card.title} />
+                        </div>
+                      </div>
+                      <h3 className="text-lg font-bold text-[#0f172a] mb-2">{card.title}</h3>
+                      <p className="text-sm text-[#475569] leading-relaxed">{card.desc}</p>
                     </div>
-                    <h3 className="text-lg font-bold text-[#0f172a] mb-2">{card.title}</h3>
-                    <p className="text-sm text-[#475569] leading-relaxed">{card.desc}</p>
                   </div>
                 );
               })}

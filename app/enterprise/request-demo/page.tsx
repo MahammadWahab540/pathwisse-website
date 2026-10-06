@@ -1,6 +1,7 @@
 import { Header, Footer } from '@/app/site';
 import { IntentLeadForm } from '@/components/forms/IntentLeadForm';
 import { CheckCircle2, ShieldCheck, Sparkles, Building2, TrendingUp, Users } from 'lucide-react';
+import { HairlineFigure } from '@/components/ui/hairline-figure';
 
 export const metadata = {
   title: 'Request Enterprise Demo | Pathwisse',
@@ -34,11 +35,15 @@ export default function Page() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Context, Trust & Value Proposition */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
-              <div>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#173c6e]/10 text-[#173c6e] text-xs font-bold uppercase tracking-wider mb-4">
-                  <Building2 className="w-3.5 h-3.5 text-[#2458ae]" />
-                  Talent Intelligence
-                </span>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#173c6e]/10 text-[#173c6e] text-xs font-bold uppercase tracking-wider">
+                    <Building2 className="w-3.5 h-3.5 text-[#2458ae]" />
+                    Talent Intelligence
+                  </span>
+                  <div className="w-16 h-12 text-[#2458ae]">
+                    <HairlineFigure figure="dish" intensity={0.7} label="Direct Enterprise Connection" />
+                  </div>
+                </div>
                 <h1 className="text-4xl sm:text-5xl font-extrabold text-[#142e50] tracking-tight leading-[1.08] mb-5">
                   Hire with evidence. <br />
                   <span className="text-[#2458ae]">Inspect capability.</span>
@@ -46,7 +51,6 @@ export default function Page() {
                 <p className="text-base sm:text-lg text-[#586a80] leading-relaxed">
                   Tell us about your open engineering roles and hiring timeline. Our solutions team will configure a dedicated walkthrough of our candidate dossiers and verification platform.
                 </p>
-              </div>
 
               <div className="space-y-5 pt-6 border-t border-[#e2e8f0]">
                 {highlights.map((item, idx) => {

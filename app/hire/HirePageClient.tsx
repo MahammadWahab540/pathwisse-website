@@ -32,6 +32,7 @@ import {
 import { MotionSubmitButton } from '@/components/ui/motion-submit-button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { track } from '@/app/tracking';
+import { HairlineFigure } from '@/components/ui/hairline-figure';
 
 // Representative curriculum competencies and capstone projects for authentic previewing
 const STREAM_PROJECT_PREVIEWS: Record<string, {
@@ -604,32 +605,46 @@ export function HirePageClient() {
               step: '1',
               title: 'Share requirements',
               desc: 'Submit your target roles, required skills, hiring timeline, and openings via the form below.',
+              figure: 'keyboard' as const,
+              label: 'Interactive requirements keyboard',
             },
             {
               step: '2',
               title: 'Confirm availability',
               desc: 'We match your role against active cohorts and confirm immediate learner availability.',
+              figure: 'riffle' as const,
+              label: 'Active candidate cohort cards',
             },
             {
               step: '3',
               title: 'Review candidate dossiers',
               desc: 'Inspect verified project artifacts, architectural trade-off memos, and technical rubrics.',
+              figure: 'branches' as const,
+              label: 'Verifiable Git commit tree',
             },
             {
               step: '4',
               title: 'Interview and select',
               desc: 'Conduct your final conversations with pre-evaluated candidates and extend direct offers.',
+              figure: 'vault' as const,
+              label: 'Secured credential offer vault',
             },
           ].map((item) => (
             <div
               key={item.step}
-              className="p-6 rounded-xl bg-white border border-[#cbd5e1] shadow-2xs flex flex-col justify-between"
+              className="p-5 sm:p-6 rounded-xl bg-white border border-[#cbd5e1] shadow-2xs flex flex-col justify-between group hover:border-[#173c6e] hover:shadow-xs transition-all"
             >
               <div>
-                <span className="text-xs font-semibold text-[#173c6e] bg-[#f1f5f9] px-2 py-0.5 rounded border border-[#e2e8f0]">
-                  Step {item.step}
-                </span>
-                <h3 className="font-semibold text-base text-[#0f172a] mt-4 mb-2">{item.title}</h3>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-semibold text-[#173c6e] bg-[#f1f5f9] px-2 py-0.5 rounded border border-[#e2e8f0]">
+                    Step {item.step}
+                  </span>
+                  <span className="text-[10px] font-mono text-[#64748b]">0{item.step}/04</span>
+                </div>
+                <div className="w-full max-w-[130px] mx-auto my-3">
+                  <HairlineFigure figure={item.figure} interactiveHint intensity={0.65} label={item.label} />
+                </div>
+                <h3 className="font-semibold text-base text-[#0f172a] mt-2 mb-1.5">{item.title}</h3>
                 <p className="text-xs text-[#64748b] leading-relaxed">{item.desc}</p>
               </div>
             </div>

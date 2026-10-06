@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CTABand } from '@/components/shared/CTABand';
+import { HairlineFigure } from '@/components/ui/hairline-figure';
 
 export const metadata: Metadata = {
   title: 'For Colleges & Universities: Placement Readiness & Cohort Intelligence | Pathwisse',
@@ -182,31 +183,49 @@ export default function CollegesPage() {
                   icon: BarChart3,
                   title: 'Pre-Season Readiness Audit',
                   desc: 'Comprehensive diagnostic assessing student problem-solving consistency, project depth, and role alignment before recruitment drives begin.',
+                  figure: 'plot' as const,
+                  label: 'Interactive 3D cohort readiness chart',
                 },
                 {
                   icon: Users,
                   title: 'Targeted Intervention Engine',
                   desc: 'Isolate cohort-wide bottlenecks (e.g., system design, SQL window functions, communication) and deploy focused 2-week sprint interventions.',
+                  figure: 'loupe' as const,
+                  label: 'Cohort bottleneck inspection loupe',
                 },
                 {
                   icon: ShieldCheck,
                   title: 'Verifiable Project Portfolios',
                   desc: 'Recruiters inspect authentic code architectures, technical decision memos, and test coverage rather than unverified résumé bullets.',
+                  figure: 'branches' as const,
+                  label: 'Verifiable student git commit tree',
                 },
                 {
                   icon: LineChart,
                   title: 'Recruiter Match Intelligence',
                   desc: 'Instantly filter students by specific company requirements, demonstrated skill signals, and verified project outcomes for high-conversion shortlists.',
+                  figure: 'sieve' as const,
+                  label: 'Candidate screening and qualification sieves',
                 },
               ].map((card) => {
                 const Icon = card.icon;
                 return (
-                  <div key={card.title} className="p-6 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:shadow-md transition-all">
-                    <div className="w-12 h-12 rounded-lg bg-white border border-[#e2e8f0] flex items-center justify-center text-[#2458ae] mb-5 shadow-2xs">
-                      <Icon size={24} />
+                  <div key={card.title} className="p-6 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] hover:bg-white hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-10 h-10 rounded-lg bg-white border border-[#e2e8f0] flex items-center justify-center text-[#2458ae] shadow-2xs">
+                          <Icon size={20} />
+                        </div>
+                        <span className="text-[10px] font-mono text-[#64748b] bg-white px-2 py-0.5 rounded border border-[#e2e8f0]">
+                          Live Signal
+                        </span>
+                      </div>
+                      <div className="w-full max-w-[130px] mx-auto my-3">
+                        <HairlineFigure figure={card.figure} interactiveHint intensity={0.65} label={card.label} />
+                      </div>
+                      <h3 className="text-base font-bold text-[#0f172a] mb-2">{card.title}</h3>
+                      <p className="text-xs text-[#475569] leading-relaxed">{card.desc}</p>
                     </div>
-                    <h3 className="text-lg font-bold text-[#0f172a] mb-2">{card.title}</h3>
-                    <p className="text-sm text-[#475569] leading-relaxed">{card.desc}</p>
                   </div>
                 );
               })}

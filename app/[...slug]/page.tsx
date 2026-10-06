@@ -15,6 +15,7 @@ import {
   type SeoRoleContent,
 } from '@/lib/role-card-data';
 import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
+import { HairlineFigure, type HairlineFigureName } from '@/components/ui/hairline-figure';
 
 type Props = { params: Promise<{ slug: string[] }> };
 
@@ -364,6 +365,17 @@ export default async function Page({ params }: Props) {
       const tryForFreeUrl = `https://app.pathwisse.com/auth?intent=try_free&role=${encodeURIComponent(role.slug)}`;
       const hireUrl = `/hire?role=${encodeURIComponent(role.slug)}&stream=${encodeURIComponent(role.stream_name)}`;
 
+      const streamLower = role.stream_name.toLowerCase();
+      const disciplineFigure: HairlineFigureName =
+        streamLower.includes('computer') || streamLower.includes('software') || streamLower.includes('data') ? 'terminal' :
+        streamLower.includes('electronics') || streamLower.includes('communication') || streamLower.includes('telecom') ? 'dish' :
+        streamLower.includes('mechanical') || streamLower.includes('industrial') || streamLower.includes('tool') ? 'turntable' :
+        streamLower.includes('civil') || streamLower.includes('environmental') ? 'terrain' :
+        streamLower.includes('chemical') || streamLower.includes('petroleum') ? 'sieve' :
+        streamLower.includes('robotics') || streamLower.includes('mechatronics') ? 'branches' :
+        streamLower.includes('biomedical') ? 'phosphor' :
+        streamLower.includes('electrical') ? 'patch' : 'keyboard';
+
       return (
         <>
           <Header />
@@ -462,10 +474,21 @@ export default async function Page({ params }: Props) {
                   <h2 className="text-2xl sm:text-3xl font-bold text-[#0f172a] mt-2 mb-4">
                     What the Work Actually Looks Like in Practice
                   </h2>
-                  <div className="text-base text-[#334155] leading-relaxed bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-6 sm:p-7">
-                    <p className="text-base sm:text-lg leading-relaxed text-[#1e293b]">
-                      {role.what_work_looks_like}
-                    </p>
+                  <div className="flex flex-col md:flex-row gap-6 items-center bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-6 sm:p-7">
+                    <div className="flex-1">
+                      <p className="text-base sm:text-lg leading-relaxed text-[#1e293b]">
+                        {role.what_work_looks_like}
+                      </p>
+                    </div>
+                    <div className="w-full md:w-56 shrink-0 p-3 rounded-lg bg-white border border-[#e2e8f0] shadow-2xs flex flex-col items-center">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#64748b] font-bold mb-1">
+                        Discipline Tooling
+                      </span>
+                      <HairlineFigure figure={disciplineFigure} interactiveHint intensity={0.7} label={`${role.stream_name} isometric simulation`} />
+                      <span className="text-[10px] font-mono text-[#0d7a53] mt-1 font-semibold">
+                        ● Interactive simulation
+                      </span>
+                    </div>
                   </div>
                 </section>
 
@@ -537,8 +560,16 @@ export default async function Page({ params }: Props) {
                       <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#64748b] mb-2">
                         Tangible Evidence Hiring Managers Inspect:
                       </h4>
-                      <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 font-mono text-xs text-[#1e293b] leading-relaxed">
-                        {role.evidence_to_show}
+                      <div className="flex flex-col md:flex-row gap-4 items-center">
+                        <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 font-mono text-xs text-[#1e293b] leading-relaxed flex-1">
+                          {role.evidence_to_show}
+                        </div>
+                        <div className="w-full md:w-44 shrink-0 p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] flex flex-col items-center">
+                          <span className="text-[9px] font-mono uppercase tracking-wider text-[#7c3aed] font-bold mb-1">
+                            Commit Trail
+                          </span>
+                          <HairlineFigure figure="branches" interactiveHint intensity={0.7} label="Git commit graph artifact" />
+                        </div>
                       </div>
                     </div>
 
@@ -555,28 +586,35 @@ export default async function Page({ params }: Props) {
                     Authoritative Benchmarks & Curated References
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-5 bg-white border border-[#e2e8f0] rounded-xl">
-                      <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#0284c7] block mb-2">
-                        Curated Engineering Reference
-                      </span>
-                      <h4 className="font-semibold text-sm text-[#0f172a] mb-1">
-                        {role.reference_book || 'Standard Engineering Reference'}
-                      </h4>
-                      <p className="text-xs text-[#64748b]">
-                        Author / Source: <strong className="text-[#334155]">{role.reference_author || 'Standard Academic Curriculum'}</strong>
-                      </p>
-                      {role.reference_skill && (
-                        <div className="mt-3 pt-3 border-t border-[#f1f5f9] text-[11px] text-[#64748b]">
-                          Focus Domain: <span className="font-medium text-[#1e293b]">{role.reference_skill}</span>
-                        </div>
-                      )}
+                    <div className="p-5 bg-white border border-[#e2e8f0] rounded-xl flex flex-col justify-between">
+                      <div>
+                        <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#0284c7] block mb-2">
+                          Curated Engineering Reference
+                        </span>
+                        <h4 className="font-semibold text-sm text-[#0f172a] mb-1">
+                          {role.reference_book || 'Standard Engineering Reference'}
+                        </h4>
+                        <p className="text-xs text-[#64748b]">
+                          Author / Source: <strong className="text-[#334155]">{role.reference_author || 'Standard Academic Curriculum'}</strong>
+                        </p>
+                        {role.reference_skill && (
+                          <div className="mt-3 pt-3 border-t border-[#f1f5f9] text-[11px] text-[#64748b]">
+                            Focus Domain: <span className="font-medium text-[#1e293b]">{role.reference_skill}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     <div className="p-5 bg-white border border-[#e2e8f0] rounded-xl flex flex-col justify-between">
                       <div>
-                        <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#0284c7] block mb-2">
-                          Official Occupational Standard
-                        </span>
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#0284c7] block">
+                            Official Occupational Standard
+                          </span>
+                          <div className="w-16 h-14 shrink-0 hidden sm:block">
+                            <HairlineFigure figure="loupe" interactiveHint intensity={0.6} label="Benchmark loupe" />
+                          </div>
+                        </div>
                         <h4 className="font-semibold text-sm text-[#0f172a] mb-1">
                           {role.onet_benchmark || 'Engineering Professional Benchmark'}
                         </h4>

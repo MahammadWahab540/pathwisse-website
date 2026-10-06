@@ -26,6 +26,7 @@ import { LiquidGlassFooter } from '@/components/footer/LiquidGlassFooter';
 import { CTABand } from '@/components/shared/CTABand';
 import { PATHWISSE_ROLE_CARDS } from '@/lib/role-card-data';
 import { PathwisseRoleCard } from '@/components/careers/PathwisseRoleCard';
+import { HairlineFigure } from '@/components/ui/hairline-figure';
 
 export const APP = APP_AUTH_URL;
 
@@ -221,13 +222,22 @@ function getStep(active: AudienceKey, step: number) {
 
 function AudienceWorkspace({ active }: { active: AudienceKey }) {
   const data = audienceData[active];
+  const figureName = active === 'students' ? 'elevator' : active === 'placement' ? 'plot' : 'vault';
   return (
     <div className="audience-workspace" aria-live="polite">
       <div className="workspace-top"><div><span className="workspace-mark">Pathwisse</span><b>{data.status}</b></div><span className="workspace-badge">{data.statLabel}</span></div>
       <div className="workspace-body">
         <aside className="workspace-side">{data.nav.map((item, index) => <span className={index === 0 ? 'active' : ''} key={item}>{item}</span>)}</aside>
         <div className="workspace-main">
-          <div className="workspace-hero-line"><div><small>{data.eyebrow}</small><h3>{data.headline}</h3></div><strong>{data.stat}</strong></div>
+          <div className="workspace-hero-line flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+            <div><small>{data.eyebrow}</small><h3>{data.headline}</h3></div>
+            <div className="flex items-center gap-3">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 shrink-0">
+                <HairlineFigure figure={figureName} interactiveHint intensity={0.7} />
+              </div>
+              <strong>{data.stat}</strong>
+            </div>
+          </div>
           <div className="signal-grid">
             {data.steps.map((item, index) => (
               <div className={index === 0 ? 'signal-card primary' : 'signal-card'} key={item[1]}>
@@ -337,7 +347,7 @@ function EcosystemStory() {
           </div>
         </div>
 
-        {/* Recent Artifact Trail */}
+        {/* Recent Artifact Trail with Hairline Commit Graph */}
         <div className="rounded-xl bg-white border border-[#e2e8f0] p-4 shadow-2xs space-y-2.5">
           <div className="flex items-center justify-between text-xs">
             <span className="font-semibold text-[#0f172a] flex items-center gap-1.5">
@@ -345,9 +355,14 @@ function EcosystemStory() {
             </span>
             <span className="text-[10px] text-[#64748b] font-mono">PR #42 · Merged</span>
           </div>
-          <p className="text-xs text-[#475569] leading-relaxed">
-            Architected Redis-backed async job worker with exponential backoff and dead-letter queues. Complete test coverage across 24 edge cases.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <p className="text-xs text-[#475569] leading-relaxed flex-1">
+              Architected Redis-backed async job worker with exponential backoff and dead-letter queues. Complete test coverage across 24 edge cases.
+            </p>
+            <div className="w-24 h-20 shrink-0 hidden sm:block">
+              <HairlineFigure figure="branches" interactiveHint intensity={0.7} label="Task queue git commit graph" />
+            </div>
+          </div>
         </div>
 
         {/* Bottom Bar: Actionable Proof */}
@@ -375,11 +390,41 @@ function ProductEcosystem() {
       <div className="section-heading"><div><span className="eyebrow">THE PATHWISSE ECOSYSTEM</span><h2>Focused products. One direction of travel.</h2></div><a className="text-link" href="/product">Explore all products <ArrowUpRight size={16} /></a></div>
       <div className="product-feature">
         <div><span className="product-badge"><AudioLines size={19} /> CAREER VOICE</span><h3>Start with the question beneath the question.</h3><p>A guided career audit for interests, role comparison, evidence review, diagnosis, and a next action. Answer by voice or text, then move with more confidence.</p><a className="text-link" href="/product/career-voice">Find your career voice <ArrowUpRight size={16} /></a></div>
-        <div className="voice-visual"><div className="voice-orb"><AudioLines size={52} /></div><blockquote>What could my next<br />chapter look like?</blockquote><span>Understand → Choose → Audit → Next action</span></div>
+        <div className="voice-visual">
+          <div className="w-28 h-24 mb-2">
+            <HairlineFigure figure="dish" interactiveHint intensity={0.7} label="Career Voice directional dish" />
+          </div>
+          <blockquote>What could my next<br />chapter look like?</blockquote>
+          <span>Understand → Choose → Audit → Next action</span>
+        </div>
       </div>
       <div className="product-pair">
-        <a href="/enterprise"><span className="eyebrow">TALENT INTELLIGENCE</span><h3>Hiring signals become verifiable capability proof.</h3><p>Discover early-career talent through demonstrated skills, real code projects, and validated problem-solving.</p><span className="text-link">Explore hiring intelligence <ArrowUpRight size={16} /></span></a>
-        <a href="/enterprise/request-demo"><span className="eyebrow">EVALUATION PLATFORM</span><h3>Shortlist candidates with inspected evidence.</h3><p>Skip résumé guesswork with actionable readiness metrics and comprehensive project portfolios.</p><span className="text-link">Request enterprise demo <ArrowUpRight size={16} /></span></a>
+        <a href="/enterprise" className="group">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <span className="eyebrow">TALENT INTELLIGENCE</span>
+              <h3>Hiring signals become verifiable capability proof.</h3>
+              <p>Discover early-career talent through demonstrated skills, real code projects, and validated problem-solving.</p>
+              <span className="text-link">Explore hiring intelligence <ArrowUpRight size={16} /></span>
+            </div>
+            <div className="w-24 h-20 shrink-0 hidden md:block">
+              <HairlineFigure figure="loupe" interactiveHint intensity={0.65} label="Talent inspection loupe" />
+            </div>
+          </div>
+        </a>
+        <a href="/enterprise/request-demo" className="group">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <span className="eyebrow">EVALUATION PLATFORM</span>
+              <h3>Shortlist candidates with inspected evidence.</h3>
+              <p>Skip résumé guesswork with actionable readiness metrics and comprehensive project portfolios.</p>
+              <span className="text-link">Request enterprise demo <ArrowUpRight size={16} /></span>
+            </div>
+            <div className="w-24 h-20 shrink-0 hidden md:block">
+              <HairlineFigure figure="branches" interactiveHint intensity={0.65} label="Code review commit tree" />
+            </div>
+          </div>
+        </a>
       </div>
     </section>
   );
