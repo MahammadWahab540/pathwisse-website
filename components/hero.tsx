@@ -541,21 +541,21 @@ export function Hero({ accent = '#2458ae', autoplay = true }: HeroProps) {
 
   const pathways = [
     {
-      label: 'For Learners',
-      text: 'Build capability. Solve real problems. Prove what you can do.',
+      label: 'For Students',
+      text: 'Build capabilities you can prove. Follow structured roadmaps and turn real projects into verified skill passports.',
       href: '/students',
       hotIndex: 0,
     },
     {
-      label: 'For Employers',
-      text: 'Discover verified talent through demonstrated capability, not résumé signals alone.',
-      href: '/enterprise',
+      label: 'For Colleges',
+      text: 'Make student readiness visible before placement season begins with cohort analytics and gap diagnostics.',
+      href: '/colleges',
       hotIndex: 1,
     },
     {
-      label: 'For Colleges',
-      text: 'Transform students from credential holders into proven, industry-ready problem-solvers.',
-      href: '/colleges',
+      label: 'For Companies',
+      text: 'Discover talent through demonstrated capability, code architecture, and inspectable candidate dossiers.',
+      href: '/enterprise',
       hotIndex: 2,
     },
   ];
@@ -613,29 +613,58 @@ export function Hero({ accent = '#2458ae', autoplay = true }: HeroProps) {
                 : 'opacity .5s ease .1s, transform .5s ease .1s, visibility 0s',
             }}
           >
-            <h1 className="rise rise-1">
-              <span className="block">Potential,</span>
+            <h1
+              className="rise rise-1"
+              style={{
+                fontSize: 'clamp(1.9rem, 3.4vw, 3.15rem)',
+                lineHeight: 1.12,
+                letterSpacing: '-0.025em',
+                fontWeight: 800,
+                color: '#0B111E',
+              }}
+            >
+              <span className="block">ONE PLATFORM. ONE ECOSYSTEM.</span>
               <span className="block" style={{ color: accent }}>
-                made provable.
+                CONNECTING STUDENTS, COLLEGES & COMPANIES.
               </span>
             </h1>
 
-            <p className="rise rise-2 pw-description">
-              Where ambitious students turn real coursework into verified capability, and leading companies discover talent through inspectable technical proof.
+            <p className="rise rise-2 pw-description" style={{ maxWidth: '580px', fontSize: '1.05rem', lineHeight: '1.6' }}>
+              Where ambitious students turn real coursework into verified capability, colleges gain continuous pre-season placement readiness visibility, and leading companies discover talent through inspectable technical proof.
             </p>
 
-            <div className="rise rise-3 pw-cta-wrap">
-              <button type="button" className="cta" onClick={openPaths}>
+            <div className="rise rise-3 pw-cta-wrap" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
+              <a
+                href="https://app.pathwisse.com/auth"
+                className="cta"
+                style={{ textDecoration: 'none' }}
+              >
                 <span className="cta-glow" style={{ background: accent }} />
                 <span className="cta-content">
-                  <span>Explore Pathways</span>
+                  <span>Start Your Path</span>
+                  <ArrowRight className="cta-arrow" size={18} aria-hidden="true" />
+                </span>
+              </a>
+              <button
+                type="button"
+                className="cta"
+                onClick={openPaths}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  color: '#173c6e',
+                  border: '1px solid rgba(31, 56, 97, 0.16)',
+                  boxShadow: '0 4px 14px -6px rgba(31, 56, 97, 0.15)',
+                }}
+              >
+                <span className="cta-content">
+                  <span>Explore Capabilities</span>
                   <ArrowRight className="cta-arrow" size={18} aria-hidden="true" />
                 </span>
               </button>
             </div>
 
-            <p className="rise rise-4 pw-kicker">
-              The capability and verification network connecting real problem-solvers with high-growth companies.
+            <p className="rise rise-4 pw-kicker" style={{ maxWidth: '520px' }}>
+              The unified capability layer connecting students, colleges, and high-growth enterprises.
             </p>
           </div>
 

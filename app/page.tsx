@@ -1,18 +1,24 @@
 import { absoluteUrl, APP_AUTH_URL, CAREER_VOICE_URL, SITE_URL } from '@/lib/site-config';
+import { HOMEPAGE_FAQS } from '@/components/home/faq-data';
 import { HomePage } from './site';
 
 export const metadata = {
+  title: 'Pathwisse — ONE PLATFORM. ONE ECOSYSTEM. CONNECTING STUDENTS, COLLEGES & COMPANIES.',
+  description:
+    'Where ambitious students turn real coursework into verified capability, colleges gain continuous pre-season placement readiness visibility, and leading companies discover talent through inspectable technical proof.',
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'Pathwisse — Turn capability into proof',
-    description: 'Know what to do next. Hire with evidence. Discover verified capability.',
+    title: 'Pathwisse — ONE PLATFORM. ONE ECOSYSTEM. CONNECTING STUDENTS, COLLEGES & COMPANIES.',
+    description:
+      'Where ambitious students turn real coursework into verified capability, colleges gain continuous pre-season placement readiness visibility, and leading companies discover talent through inspectable technical proof.',
     url: SITE_URL,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pathwisse — Turn capability into proof',
-    description: 'Know what to do next. Hire with evidence. Discover verified capability.',
+    title: 'Pathwisse — ONE PLATFORM. ONE ECOSYSTEM. CONNECTING STUDENTS, COLLEGES & COMPANIES.',
+    description:
+      'Where ambitious students turn real coursework into verified capability, colleges gain continuous pre-season placement readiness visibility, and leading companies discover talent through inspectable technical proof.',
   },
 };
 
@@ -24,14 +30,15 @@ export default function Page() {
       name: 'Pathwisse',
       url: SITE_URL,
       logo: absoluteUrl('/favicon.svg'),
-      description: 'Pathwisse is a capability intelligence platform that turns learning and applied work into verifiable proof for students, colleges, and enterprises.',
+      description:
+        'Pathwisse is a capability intelligence platform that turns learning and applied work into verifiable proof for students, colleges, and enterprises.',
       knowsAbout: [
         'Career Roadmaps',
         'Placement Readiness',
         'Student Employability',
         'Evidence-Based Hiring',
         'Talent Intelligence',
-        'Applied Skill Proof'
+        'Applied Skill Proof',
       ],
       sameAs: [APP_AUTH_URL, CAREER_VOICE_URL],
     },
@@ -58,38 +65,30 @@ export default function Page() {
         price: '0',
         priceCurrency: 'USD',
       },
-      description: 'An AI-supported career roadmap and readiness intelligence system connecting students, colleges, and hiring enterprises.',
+      description:
+        'An AI-supported career roadmap and readiness intelligence system connecting students, colleges, and hiring enterprises.',
     },
     {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'What is Pathwisse?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Pathwisse is a connected capability platform that turns learning, daily practice, and applied project work into verifiable proof. It provides career roadmaps for students, cohort readiness analytics for colleges, and evidence-grounded hiring and upskilling for enterprises.',
-          },
+      mainEntity: HOMEPAGE_FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
         },
-        {
-          '@type': 'Question',
-          name: 'How does Pathwisse measure career and placement readiness?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Pathwisse evaluates readiness through demonstrable proof rather than mere certificates or CGPA. It monitors consistent skill practice, problem-solving execution, applied project portfolio artifacts, and role-specific diagnostic assessments before placement drives start.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'What is Career Voice by Pathwisse?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Career Voice is Pathwisse\'s interactive diagnostic guide that allows students to audit their interests, compare roles, diagnose capability gaps, and receive a concrete next action through conversational audio or text interactions.',
-          },
-        },
-      ],
+      })),
     },
   ];
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} /><HomePage /></>;
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
+      />
+      <HomePage />
+    </>
+  );
 }
