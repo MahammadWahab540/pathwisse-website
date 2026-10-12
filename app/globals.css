@@ -654,10 +654,31 @@ button[class~="bg-white"] *,
   .animate-kinetic-reveal,
   .animate-glow-stream,
   .animate-ticker-pulse,
+  .animate-marquee,
   .fanout-moving-border::before {
     animation: none !important;
     transform: none !important;
   }
+}
+
+/* ========================================================================= */
+/* CALENDLY REA PATTERNS: MARQUEE & LIQUID GOO UTILITIES                     */
+/* ========================================================================= */
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.mask-fade-edges {
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
 }
 
 

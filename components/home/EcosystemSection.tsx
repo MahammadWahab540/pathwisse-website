@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useEffect, useRef, useId } from 'react';
 import {
   GraduationCap,
   Building2,
@@ -10,22 +9,18 @@ import {
   Sparkles,
   Compass,
   Award,
-  ShieldCheck,
-  BarChart3,
-  Users,
-  CheckCircle2,
   Terminal,
   Code2,
   Zap,
   Target,
-  Sliders,
   Send,
-  Calendar,
   Check,
-  ChevronLeft,
-  ChevronRight,
-  Clock,
-  Video,
+  CheckCircle2,
+  RotateCcw,
+  Layers3,
+  FileCheck2,
+  Cpu,
+  Search,
 } from 'lucide-react';
 import { PageMascot, FloatingMascot } from '@/components/mascot/PageMascot';
 
@@ -39,28 +34,32 @@ export interface ShowcaseTab {
   id: string;
   name: string;
   badge?: string;
-  icon: string;
+  icon: 'compass' | 'sparkles' | 'terminal' | 'award';
   tabColor: string;
   headline: string;
   description: string;
   ctaText: string;
   ctaLink: string;
   bgGradient: string;
-  mockupType: string;
+  mockupType: 'compass' | 'qalam' | 'drills' | 'vault';
 }
 
 export interface WorkflowStage {
   id: string;
+  stageNumber: string;
   title: string;
+  subtitle: string;
   restingTeaser: string;
   narrative: string;
+  badge: string;
+  badgeColor: string;
   checklist: Array<{
     text: string;
     iconColor: string;
   }>;
   bottomCardTitle: string;
   bottomBgGradient: string;
-  mockupType: string;
+  mockupType: 'discover' | 'build' | 'verify' | 'connect';
 }
 
 export interface PersonaStoryData {
@@ -72,11 +71,13 @@ export interface PersonaStoryData {
   storySub: string;
   primaryColor: string;
   ambientGradient: string;
+  radialGlowColor: string;
+  stats: Array<{ value: string; label: string }>;
   showcaseTabs: ShowcaseTab[];
   workflowStages: WorkflowStage[];
 }
 
-// NOTE: targetLink order must remain: /students, /colleges, /enterprise for invariant tests
+// NOTE: targetLink order must strictly remain: /students, /colleges, /enterprise for invariant tests
 export const ROLES: Record<Persona, PersonaStoryData> = {
   students: {
     persona: 'students',
@@ -89,36 +90,42 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
     primaryColor: '#2458ae',
     ambientGradient:
       'linear-gradient(135deg, #a5e5eb 0%, #bdecf2 25%, #91d0f5 65%, #c5f0ec 100%)',
+    radialGlowColor: 'rgba(36, 88, 174, 0.15)',
+    stats: [
+      { value: '94%', label: 'Target Role Match' },
+      { value: '24/24', label: 'Verified Unit Tests' },
+      { value: '1,840+', label: 'Projects Built' },
+    ],
     showcaseTabs: [
       {
-        id: 'scheduling',
+        id: 'compass',
         name: 'Career Compass',
         icon: 'compass',
         tabColor: '#5DDFD7',
-        headline: 'Book meetings with the world’s #1 career intelligence tool',
+        headline: 'Calibrate your trajectory with real-time capability diagnostics',
         description:
-          'Giving you complete control and total customization, Pathwisse is the easiest and most powerful way to calibrate your trajectory and find time to build.',
-        ctaText: 'Learn more',
+          'Giving you complete visibility into required skills and foundational milestones, Pathwisse maps exactly what to build next without guesswork.',
+        ctaText: 'Explore Student Path',
         ctaLink: '/students',
         bgGradient: '#dcecfe',
-        mockupType: 'calendar',
+        mockupType: 'compass',
       },
       {
-        id: 'callie',
+        id: 'qalam',
         name: 'Qalam AI',
         badge: 'Beta',
         icon: 'sparkles',
         tabColor: '#DBEE9F',
-        headline: 'Introducing your 24/7 AI capability mentor',
+        headline: 'Your 24/7 AI mentor for code review & system design',
         description:
-          'Add Qalam to any project sprint to unblock architecture challenges, review pull requests, and explain complex distributed systems on your behalf.',
-        ctaText: 'Learn more',
+          'Add Qalam to any project sprint to unblock architecture challenges, review pull requests, and explain complex distributed systems on your schedule.',
+        ctaText: 'Try Qalam AI',
         ctaLink: '/students',
         bgGradient: '#f0f8db',
-        mockupType: 'callie',
+        mockupType: 'qalam',
       },
       {
-        id: 'notetaker',
+        id: 'drills',
         name: 'Drills Engine',
         badge: 'New',
         icon: 'terminal',
@@ -126,13 +133,13 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
         headline: 'Actionable, inspectable test suites for every milestone',
         description:
           'Finish every week knowing 24/24 unit tests were verified, technical decision memos were captured, and cryptographic proof was published.',
-        ctaText: 'Learn more',
+        ctaText: 'View Practice Lab',
         ctaLink: '/students',
         bgGradient: '#f0ebfc',
-        mockupType: 'notetaker',
+        mockupType: 'drills',
       },
       {
-        id: 'payments',
+        id: 'vault',
         name: 'Evidence Vault',
         badge: 'New',
         icon: 'award',
@@ -140,72 +147,88 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
         headline: 'Flexible, built-in capability proof tools',
         description:
           'Package verified git commits upfront, document technical trade-offs, and send inspectable proof dossiers that make it easy to get hired.',
-        ctaText: 'Learn more',
+        ctaText: 'See Evidence Dossier',
         ctaLink: '/students',
         bgGradient: '#dbf6f4',
-        mockupType: 'payments',
+        mockupType: 'vault',
       },
     ],
     workflowStages: [
       {
-        id: 'book',
-        title: 'Book',
-        restingTeaser: 'Book the meeting and get paid with zero back-and-forth.',
+        id: 'discover',
+        stageNumber: '01',
+        title: 'Discover',
+        subtitle: 'Career Diagnostics & Role Fit',
+        restingTeaser: 'Calibrate role fit through practical interest & skill diagnostics.',
         narrative:
-          'A student selects a target role. Share a capability dossier or ask Qalam to calibrate milestone sprints that work for hiring teams.',
+          'A student selects a target role. Move from blind applications to an empirical career trajectory grounded in diagnostic benchmarks and prerequisite roadmaps.',
+        badge: 'Diagnostics Calibrated',
+        badgeColor: '#2458ae',
         checklist: [
           { text: 'Target role and prerequisite skills calibrate automatically', iconColor: '#5DDFD7' },
-          { text: 'Diagnostic benchmark evaluates foundations', iconColor: '#5DDFD7' },
-          { text: 'Student secures personalized milestone trajectory', iconColor: '#5DDFD7' },
+          { text: 'Diagnostic benchmark evaluates foundational knowledge', iconColor: '#5DDFD7' },
+          { text: 'Personalized milestone sprint roadmap generated in seconds', iconColor: '#2458ae' },
         ],
-        bottomCardTitle: 'Candidate Consultation',
+        bottomCardTitle: 'Candidate Calibration Radar',
         bottomBgGradient: 'linear-gradient(135deg, #cdeafe 0%, #bde3fe 100%)',
-        mockupType: 'stage-book',
+        mockupType: 'discover',
       },
       {
-        id: 'prep',
-        title: 'Prep',
-        restingTeaser: 'Never walk into a meeting cold.',
+        id: 'build',
+        stageNumber: '02',
+        title: 'Learn & Build',
+        subtitle: 'Production Git Repos & PRs',
+        restingTeaser: 'Ship production-grade code with 24/24 passing unit tests.',
         narrative:
-          'Before the interview, get all of the info you need in one place. Qalam reviews your client’s contact history and helps you show up prepared.',
+          'Build real distributed task queues, REST APIs, and analytics dashboards with AI guidance. Qalam reviews pull requests and reinforces production engineering trade-offs.',
+        badge: 'Production Grade',
+        badgeColor: '#f59e0b',
         checklist: [
-          { text: 'Contact details automatically update', iconColor: '#F8961F' },
-          { text: 'Your client interactions are in one place', iconColor: '#F8961F' },
-          { text: 'Qalam helps you prep', iconColor: '#10B981' },
+          { text: 'Real repository templates with unit tests and Docker scaffolds', iconColor: '#F8961F' },
+          { text: 'Qalam AI provides real-time architectural decision feedback', iconColor: '#F8961F' },
+          { text: 'Clean commit histories and technical decision memos documented', iconColor: '#10B981' },
         ],
-        bottomCardTitle: 'Get answers instantly ✦',
+        bottomCardTitle: 'Qalam Code Review Studio',
         bottomBgGradient: 'linear-gradient(135deg, #fee0b2 0%, #fbd18b 50%, #f79c3b 100%)',
-        mockupType: 'stage-prep',
+        mockupType: 'build',
       },
       {
-        id: 'capture',
-        title: 'Capture',
-        restingTeaser: 'Focus on the conversation. Notetaker handles the notes.',
+        id: 'verify',
+        stageNumber: '03',
+        title: 'Verify',
+        subtitle: 'Automated Tests & Code Reviews',
+        restingTeaser: 'Cryptographically verified capabilities backed by empirical test suites.',
         narrative:
-          'While you run the project, the proof engine captures every commit. The test recap and action items are delivered right after the sprint.',
+          'Say goodbye to keyword-stuffed résumés. Every capstone project runs through automated test runners, verifying API latency, schema design, and unit test coverage.',
+        badge: 'Verified Artifact',
+        badgeColor: '#8b5cf6',
         checklist: [
-          { text: 'Automated test suite joins and verifies code', iconColor: '#B89FFA' },
-          { text: 'You get a ready-to-share technical recap memo', iconColor: '#B89FFA' },
-          { text: 'Recap is stored in verified talent profile', iconColor: '#F8961F' },
+          { text: '24/24 Unit and integration tests passing in CI runner', iconColor: '#B89FFA' },
+          { text: 'Architecture review score: Top 5% modular API design', iconColor: '#B89FFA' },
+          { text: 'Immutable cryptographic verification seal published to dossier', iconColor: '#8b5cf6' },
         ],
-        bottomCardTitle: 'Automated Test Recap',
+        bottomCardTitle: 'Automated Test Matrix',
         bottomBgGradient: 'linear-gradient(135deg, #ede7fd 0%, #dfd3fb 100%)',
-        mockupType: 'stage-capture',
+        mockupType: 'verify',
       },
       {
-        id: 'followup',
-        title: 'Follow up',
-        restingTeaser: 'Work moves forward after the meeting ends.',
+        id: 'connect',
+        stageNumber: '04',
+        title: 'Connect',
+        subtitle: 'Direct Unmediated Interviews',
+        restingTeaser: 'Get shortlisted directly through inspectable code and project proof.',
         narrative:
-          'Review an automated offer draft based on the dossier, add an additional code review link, and add Qalam to the email to schedule the final round.',
+          'Hiring teams and partner companies discover your capability dossier without recruiters filtering by college brand. Direct interview invitations issued with verified retention confidence.',
+        badge: 'Direct Matching',
+        badgeColor: '#10b981',
         checklist: [
-          { text: 'Dossier drafts a follow-up interview invitation', iconColor: '#B89FFA' },
-          { text: 'Qalam finds time for the final technical chat', iconColor: '#DBEE9F' },
-          { text: 'Candidate receives direct offer via verified proof', iconColor: '#5DDFD7' },
+          { text: 'Inspectable technical proof dossier shared directly with hiring teams', iconColor: '#B89FFA' },
+          { text: 'Zero résumé keyword spam; evaluation grounded in real code', iconColor: '#DBEE9F' },
+          { text: 'Fast-track interview rounds unlocked through verified proof', iconColor: '#5DDFD7' },
         ],
-        bottomCardTitle: 'Fast-Track Offer Extended',
+        bottomCardTitle: 'Fast-Track Interview Unlocked',
         bottomBgGradient: 'linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)',
-        mockupType: 'stage-followup',
+        mockupType: 'connect',
       },
     ],
   },
@@ -220,22 +243,28 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
     primaryColor: '#7c3aed',
     ambientGradient:
       'linear-gradient(135deg, #ddd6fe 0%, #ede9fe 35%, #bae6fd 70%, #d8b4fe 100%)',
+    radialGlowColor: 'rgba(124, 58, 237, 0.15)',
+    stats: [
+      { value: '640', label: 'Students Tracked' },
+      { value: '78.4%', label: 'Batch Placement Ready' },
+      { value: '+14.2%', label: 'Sprint Lift Boost' },
+    ],
     showcaseTabs: [
       {
-        id: 'scheduling',
+        id: 'compass',
         name: 'Cohort Radar',
         icon: 'compass',
         tabColor: '#B89FFA',
         headline: 'Real-time readiness tracking for 640 engineering students',
         description:
           'Giving training and placement teams complete cohort visibility across batches, Pathwisse is the easiest way to know who is placement-ready early.',
-        ctaText: 'Learn more',
+        ctaText: 'Explore College Platform',
         ctaLink: '/colleges',
         bgGradient: '#f3e8ff',
-        mockupType: 'calendar',
+        mockupType: 'compass',
       },
       {
-        id: 'callie',
+        id: 'qalam',
         name: 'Syllabus AI',
         badge: 'Beta',
         icon: 'sparkles',
@@ -243,13 +272,13 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
         headline: 'Automated skill deficit diagnostic assistant',
         description:
           'Diagnose whether students struggle with System Design or SQL optimization, and dispatch targeted curriculum acceleration sprints with zero friction.',
-        ctaText: 'Learn more',
-        ctaLink: '/colleges',
+        ctaText: 'Request College Demo',
+        ctaLink: '/colleges/request-demo',
         bgGradient: '#f0f8db',
-        mockupType: 'callie',
+        mockupType: 'qalam',
       },
       {
-        id: 'notetaker',
+        id: 'drills',
         name: 'Sprint Engine',
         badge: 'New',
         icon: 'terminal',
@@ -257,13 +286,13 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
         headline: 'Actionable cohort lifts with +14.2% measured boost',
         description:
           'Deploy modular catch-up sprints to at-risk students, elevating overall batch placement readiness to 78.4% before enterprise recruiters arrive.',
-        ctaText: 'Learn more',
+        ctaText: 'View Sprint Model',
         ctaLink: '/colleges',
         bgGradient: '#dcecfe',
-        mockupType: 'notetaker',
+        mockupType: 'drills',
       },
       {
-        id: 'payments',
+        id: 'vault',
         name: 'Proof Seal',
         badge: 'New',
         icon: 'award',
@@ -271,49 +300,61 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
         headline: '1,840+ verified repositories with zero résumé spam',
         description:
           'Arm your campus placement drives with authenticated student code dossiers backed by passing unit tests and permanent git commit records.',
-        ctaText: 'Learn more',
+        ctaText: 'Inspect Proof Dossier',
         ctaLink: '/colleges',
         bgGradient: '#dbf6f4',
-        mockupType: 'payments',
+        mockupType: 'vault',
       },
     ],
     workflowStages: [
       {
-        id: 'book',
-        title: 'Book',
+        id: 'discover',
+        stageNumber: '01',
+        title: 'Discover',
+        subtitle: 'Cohort Readiness Audits',
         restingTeaser: 'Ingest cohorts and map initial readiness bars.',
         narrative:
-          'A college ingests 640 engineering students. Run continuous baseline capability audits to map department readiness distributions.',
+          'A college ingests 640 engineering students. Run continuous baseline capability audits to map department readiness distributions months ahead of drive day.',
+        badge: 'Audit Active',
+        badgeColor: '#7c3aed',
         checklist: [
-          { text: '640 Engineering students enrolled in telemetry', iconColor: '#B89FFA' },
+          { text: '640 Engineering students enrolled in readiness telemetry', iconColor: '#B89FFA' },
           { text: 'Department baseline scored (Full Stack: 190/226)', iconColor: '#6BB1FF' },
           { text: 'Readiness trajectory calibrated at 78.4% ready', iconColor: '#5DDFD7' },
         ],
         bottomCardTitle: 'Cohort Diagnostic Scan',
         bottomBgGradient: 'linear-gradient(135deg, #ede7fd 0%, #dfd3fb 100%)',
-        mockupType: 'stage-book',
+        mockupType: 'discover',
       },
       {
-        id: 'prep',
-        title: 'Prep',
+        id: 'build',
+        stageNumber: '02',
+        title: 'Learn & Build',
+        subtitle: 'Targeted Acceleration Sprints',
         restingTeaser: 'Diagnose deficits 90 days before company visits.',
         narrative:
-          'Before campus placement season starts, get all deficit diagnostics in one place. Identify priority gaps in system design and database indexing.',
+          'Before campus placement season starts, identify priority gaps in system design and database indexing. Enroll cohorts automatically in targeted sprint tracks.',
+        badge: 'Sprints Active',
+        badgeColor: '#f59e0b',
         checklist: [
           { text: 'SQL deficit detected for 64% of cohort', iconColor: '#F8961F' },
           { text: 'System design priority deficit flagged early', iconColor: '#F8961F' },
           { text: 'Targeted acceleration sprint enrolled automatically', iconColor: '#10B981' },
         ],
-        bottomCardTitle: 'Get answers instantly ✦',
+        bottomCardTitle: 'Curriculum Acceleration Hub',
         bottomBgGradient: 'linear-gradient(135deg, #fee0b2 0%, #fbd18b 50%, #f79c3b 100%)',
-        mockupType: 'stage-prep',
+        mockupType: 'build',
       },
       {
-        id: 'capture',
-        title: 'Capture',
+        id: 'verify',
+        stageNumber: '03',
+        title: 'Verify',
+        subtitle: 'Institutional Proof Seal',
         restingTeaser: 'Audit 1,840+ project git trees and tests.',
         narrative:
           'While students complete sprints, our code audit engine inspects authenticity, commit frequency, and unit test pass rates with 0 inflated claims.',
+        badge: 'Institutional Seal',
+        badgeColor: '#8b5cf6',
         checklist: [
           { text: '1,840+ project repositories audited for depth', iconColor: '#5DDFD7' },
           { text: '0 inflated resume claims permitted in pool', iconColor: '#5DDFD7' },
@@ -321,14 +362,18 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
         ],
         bottomCardTitle: 'Institutional Audit Seal',
         bottomBgGradient: 'linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)',
-        mockupType: 'stage-capture',
+        mockupType: 'verify',
       },
       {
-        id: 'followup',
-        title: 'Follow up',
+        id: 'connect',
+        stageNumber: '04',
+        title: 'Connect',
+        subtitle: 'Placement Drive Sieve',
         restingTeaser: 'Direct candidate pipelines to top corporate partners.',
         narrative:
           'Share calibrated student pools with visiting recruiters. Employers review inspectable decision memos and achieve 3.4x higher Day-1 conversions.',
+        badge: 'Recruiter Matching',
+        badgeColor: '#10b981',
         checklist: [
           { text: '18 hiring partners access curated talent portal', iconColor: '#6BB1FF' },
           { text: 'Recruiters shortlist candidates by code quality', iconColor: '#DBEE9F' },
@@ -336,7 +381,7 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
         ],
         bottomCardTitle: 'Campus Placement Sieve',
         bottomBgGradient: 'linear-gradient(135deg, #cdeafe 0%, #bde3fe 100%)',
-        mockupType: 'stage-followup',
+        mockupType: 'connect',
       },
     ],
   },
@@ -351,542 +396,462 @@ export const ROLES: Record<Persona, PersonaStoryData> = {
     primaryColor: '#0d9488',
     ambientGradient:
       'linear-gradient(135deg, #a7f3d0 0%, #cbf3ef 30%, #bae6fd 65%, #99f6e4 100%)',
+    radialGlowColor: 'rgba(13, 148, 136, 0.15)',
+    stats: [
+      { value: '5 Days', label: 'Average Time-to-Hire' },
+      { value: '0', label: 'Inflated Resume Claims' },
+      { value: '96%', label: '1st-Year Retention Rate' },
+    ],
     showcaseTabs: [
       {
-        id: 'scheduling',
+        id: 'compass',
         name: 'Dossier Review',
         icon: 'compass',
         tabColor: '#5DDFD7',
         headline: 'Review authentic code architectures in under 60 seconds',
         description:
-          'Inspect real technical decision memos, modular API designs, and passing unit test suites before scheduling a single screening call.',
-        ctaText: 'Learn more',
-        ctaLink: '/enterprise',
+          'Inspect pull requests, architecture design memos, and test suite pass rates directly before scheduling your first engineering screen.',
+        ctaText: 'Explore Talent Directory',
+        ctaLink: '/hire',
         bgGradient: '#dbf6f4',
-        mockupType: 'calendar',
+        mockupType: 'compass',
       },
       {
-        id: 'callie',
-        name: 'Talent Sieve',
+        id: 'qalam',
+        name: 'Sieve AI',
         badge: 'Beta',
         icon: 'sparkles',
         tabColor: '#DBEE9F',
-        headline: 'Sieve 500+ applicants by actual code quality',
+        headline: 'Match open roles against verified git capabilities',
         description:
-          'Filter applicant pipelines by verified test pass rates, architectural maintainability scores, and database design instead of college pedigree.',
-        ctaText: 'Learn more',
-        ctaLink: '/enterprise',
+          'Input your team’s required tech stack. Sieve AI filters past uncalibrated résumé keywords to locate candidates who have pushed passing tests.',
+        ctaText: 'Request Enterprise Demo',
+        ctaLink: '/enterprise/request-demo',
         bgGradient: '#f0f8db',
-        mockupType: 'callie',
+        mockupType: 'qalam',
       },
       {
-        id: 'notetaker',
-        name: 'Role Calibrate',
+        id: 'drills',
+        name: 'Trade-Off Drills',
         badge: 'New',
         icon: 'terminal',
-        tabColor: '#B89FFA',
-        headline: 'Define exact capability bars your team needs',
+        tabColor: '#6BB1FF',
+        headline: 'Inspect architectural trade-offs, not memorized puzzles',
         description:
-          'Specify required distributed task handling, SQL transactions, or containerization to evaluate candidates against real day-one responsibilities.',
-        ctaText: 'Learn more',
+          'Evaluate how junior engineers handle Redis concurrency limits, database connection pooling, and schema version migrations in real code.',
+        ctaText: 'View Evidence Model',
         ctaLink: '/enterprise',
-        bgGradient: '#f0ebfc',
-        mockupType: 'notetaker',
+        bgGradient: '#dcecfe',
+        mockupType: 'drills',
       },
       {
-        id: 'payments',
-        name: 'Direct Pipeline',
+        id: 'vault',
+        name: 'Immutable Proof',
         badge: 'New',
         icon: 'award',
         tabColor: '#5DDFD7',
-        headline: 'Shrink engineering hiring cycles from 6 weeks to 5 days',
+        headline: 'Defensible talent shortlists with verifiable confidence',
         description:
-          'Hire day-one contributors through an authenticated talent network with defensible technical proof and zero recruitment regret.',
-        ctaText: 'Learn more',
-        ctaLink: '/enterprise',
-        bgGradient: '#dcecfe',
-        mockupType: 'payments',
+          'Every shortlisted candidate comes with inspectable repository links, test execution logs, and rubrics calibrated for fast engineering onboarding.',
+        ctaText: 'Hire Verified Talent',
+        ctaLink: '/hire',
+        bgGradient: '#dcfce7',
+        mockupType: 'vault',
       },
     ],
     workflowStages: [
       {
-        id: 'book',
-        title: 'Book',
-        restingTeaser: 'Calibrate role thresholds with zero generic noise.',
+        id: 'discover',
+        stageNumber: '01',
+        title: 'Discover',
+        subtitle: 'Talent Capability Sieve',
+        restingTeaser: 'Filter by verified technical abilities instead of college tiers.',
         narrative:
-          'Define the exact competency bars for the role—distributed systems, SQL transaction isolation, and error boundaries—before posting requirements.',
+          'A hiring team posts role requirements. The capability sieve matches engineers based on verified projects, test execution metrics, and architecture scores.',
+        badge: 'Role Calibrated',
+        badgeColor: '#0d9488',
         checklist: [
-          { text: 'Associate Full Stack threshold set to 85+ score', iconColor: '#5DDFD7' },
-          { text: 'Required artifact criteria specified in rubric', iconColor: '#DBEE9F' },
-          { text: 'Direct evidence match filters enabled', iconColor: '#6BB1FF' },
+          { text: 'Role requirements mapped to empirical capability domains', iconColor: '#5DDFD7' },
+          { text: 'Candidates ranked by actual code quality over college pedigree', iconColor: '#5DDFD7' },
+          { text: 'Real engineering trade-offs evaluated upfront', iconColor: '#0d9488' },
         ],
-        bottomCardTitle: 'Associate Engineer Spec',
+        bottomCardTitle: 'Talent Capability Sieve',
         bottomBgGradient: 'linear-gradient(135deg, #cdeafe 0%, #bde3fe 100%)',
-        mockupType: 'stage-book',
+        mockupType: 'discover',
       },
       {
-        id: 'prep',
-        title: 'Prep',
-        restingTeaser: 'Sieve 450 candidate applications in seconds.',
+        id: 'build',
+        stageNumber: '02',
+        title: 'Learn & Build',
+        subtitle: 'Architectural Drills Review',
+        restingTeaser: 'Inspect actual git trees and architecture decisions.',
         narrative:
-          'Before the interview loop, get all candidate evidence in one place. Sieve applicant pools by verified git trees and 24/24 unit test passes.',
+          'Evaluate code quality, schema migrations, and commit discipline before scheduling the first technical screen. Look directly into working repositories.',
+        badge: 'Repo Inspected',
+        badgeColor: '#f59e0b',
         checklist: [
-          { text: '450 applications sieved by test pass rate', iconColor: '#F8961F' },
-          { text: 'Top 18 high-signal candidates surfaced', iconColor: '#F8961F' },
-          { text: '0 keyword spam permitted in final shortlist', iconColor: '#10B981' },
+          { text: 'Inspectable GitHub repository commit history', iconColor: '#F8961F' },
+          { text: 'Technical decision memo explaining design trade-offs', iconColor: '#F8961F' },
+          { text: 'Zero uncalibrated claims; every line of code tested', iconColor: '#10B981' },
         ],
-        bottomCardTitle: 'Get answers instantly ✦',
+        bottomCardTitle: 'Repository Inspection Suite',
         bottomBgGradient: 'linear-gradient(135deg, #fee0b2 0%, #fbd18b 50%, #f79c3b 100%)',
-        mockupType: 'stage-prep',
+        mockupType: 'build',
       },
       {
-        id: 'capture',
-        title: 'Capture',
-        restingTeaser: 'Inspect technical decision memos in <60 seconds.',
+        id: 'verify',
+        stageNumber: '03',
+        title: 'Verify',
+        subtitle: 'Automated Test Verification',
+        restingTeaser: '100% verified test passes and cryptographic audit records.',
         narrative:
-          'Engineering managers review authentic architectural trade-offs, database schemas, and unit test coverage before the first screening call.',
+          'Eliminate false positives from memorized LeetCode answers with authentic production trade-off rubrics and continuous automated test verification.',
+        badge: 'Verified Dossier',
+        badgeColor: '#8b5cf6',
         checklist: [
-          { text: 'Technical decision memo reviewed in <60s', iconColor: '#DBEE9F' },
-          { text: 'SQL schema and indexes scored at 91/100', iconColor: '#5DDFD7' },
-          { text: 'Code maintainability verified at 88/100', iconColor: '#B89FFA' },
+          { text: '24/24 Tests passing in sandboxed evaluation harness', iconColor: '#B89FFA' },
+          { text: 'Top 5% modular API architecture review badge', iconColor: '#B89FFA' },
+          { text: 'Cryptographic proof hash verifies authentic student authorship', iconColor: '#8b5cf6' },
         ],
-        bottomCardTitle: 'Sample Dossier · Ananya K.',
+        bottomCardTitle: 'Candidate Dossier Verified',
         bottomBgGradient: 'linear-gradient(135deg, #ede7fd 0%, #dfd3fb 100%)',
-        mockupType: 'stage-capture',
+        mockupType: 'verify',
       },
       {
-        id: 'followup',
-        title: 'Follow up',
-        restingTeaser: 'Fast-track high-conviction offers in 5 business days.',
+        id: 'connect',
+        stageNumber: '04',
+        title: 'Connect',
+        subtitle: 'Fast-Track Technical Offer',
+        restingTeaser: 'Slash technical screening cycles from weeks to 5 business days.',
         narrative:
-          'Conduct one focused 30-minute architectural discussion and extend offers with 96% first-year retention confidence backed by permanent proof.',
+          'Schedule direct final-round technical chats without initial screening rounds. Extend fast-track offers with high certainty and 96% first-year retention.',
+        badge: 'Fast-Track Hire',
+        badgeColor: '#10b981',
         checklist: [
-          { text: 'Generic screening rounds eliminated via proof', iconColor: '#5DDFD7' },
-          { text: 'Focused 30-min architecture review completed', iconColor: '#6BB1FF' },
-          { text: 'Offer extended in 5 business days', iconColor: '#DBEE9F' },
+          { text: 'Direct scheduling into engineering final round', iconColor: '#DBEE9F' },
+          { text: 'Technical interview conversion rate elevated by 3.8x', iconColor: '#5DDFD7' },
+          { text: 'Candidate joins with verified production readiness from Day 1', iconColor: '#5DDFD7' },
         ],
-        bottomCardTitle: 'Fast-Track Offer Extended',
+        bottomCardTitle: 'Engineering Offer Extended',
         bottomBgGradient: 'linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)',
-        mockupType: 'stage-followup',
+        mockupType: 'connect',
       },
     ],
   },
 };
 
 /* -------------------------------------------------------------------------- */
-/*                               MAIN COMPONENT                               */
+/*                        PATTERN D: LIQUID GOOEY MARQUEE                     */
+/* -------------------------------------------------------------------------- */
+
+const LIQUID_TICKER_ITEMS = [
+  { before: 'PR Submitted', after: 'Capability Verified', tone: 'blue' },
+  { before: 'Coursework Done', after: 'Production Grade', tone: 'purple' },
+  { before: 'Diagnostic Passed', after: 'Interview Unlocked', tone: 'teal' },
+  { before: 'Architecture Drafted', after: 'Benchmark Certified', tone: 'indigo' },
+  { before: 'Cohort Gap Flagged', after: 'Targeted Sprint Deployed', tone: 'amber' },
+  { before: 'Tests Verified (24/24)', after: 'Dossier Published', tone: 'emerald' },
+];
+
+function LiquidGooeyMarquee() {
+  const filterId = useId();
+
+  return (
+    <div className="w-full relative overflow-hidden py-4 border-b border-slate-200/70 bg-gradient-to-r from-slate-50 via-white to-slate-50">
+      {/* Inline SVG Liquid Goo Filter */}
+      <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
+        <defs>
+          <filter id={filterId}>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" />
+          </filter>
+        </defs>
+      </svg>
+
+      <div className="flex items-center gap-3 max-w-7xl mx-auto px-4">
+        <div className="shrink-0 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900 text-white text-[10px] font-mono font-bold tracking-wider uppercase shadow-2xs">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Proof Stream</span>
+        </div>
+
+        {/* Continuous Drifting Ticker */}
+        <div className="overflow-hidden relative flex-1 mask-fade-edges">
+          <div className="flex items-center gap-4 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
+            {[...LIQUID_TICKER_ITEMS, ...LIQUID_TICKER_ITEMS].map((item, idx) => (
+              <div
+                key={`${item.before}-${idx}`}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200/90 shadow-2xs text-xs"
+              >
+                <span className="text-slate-600 font-medium">{item.before}</span>
+                <span className="text-slate-400 font-mono">→</span>
+                <span className="inline-flex items-center gap-1 font-bold text-slate-900">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span>{item.after}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            MAIN ECOSYSTEM COMPONENT                        */
 /* -------------------------------------------------------------------------- */
 
 export function EcosystemSection() {
   const [activePersona, setActivePersona] = useState<Persona>('students');
   const [activeTabIdx, setActiveTabIdx] = useState<number>(0);
-  const [activeStageIdx, setActiveStageIdx] = useState<number>(1); // Default to 'Prep' to match Calendly screenshot!
-  
-  // Interactive Showcase Mockup States
-  const [selectedDate, setSelectedDate] = useState<number>(15);
-  const [monthOffset, setMonthOffset] = useState<number>(0); // 0: July 2026, -1: June 2026, 1: August 2026
-  const [consultationDuration, setConsultationDuration] = useState<'30 min' | '45 min' | '60 min'>('45 min');
-  const [consultationPlatform, setConsultationPlatform] = useState<'Zoom' | 'Meet'>('Zoom');
-  const [qalamPromptSelected, setQalamPromptSelected] = useState<string | null>(null);
-  const [drillsStatus, setDrillsStatus] = useState<'idle' | 'running' | 'success'>('success');
-  const [stageChatInput, setStageChatInput] = useState<string>('');
-  const [stageChatAnswer, setStageChatAnswer] = useState<string | null>(null);
+  const [activeStageIdx, setActiveStageIdx] = useState<number>(0);
 
-  const months = ['June 2026', 'July 2026', 'August 2026'];
-  const currentMonthName = months[monthOffset + 1] || 'July 2026';
+  // Qalam interactive chat state
+  const [qalamInput, setQalamInput] = useState<string>('');
+  const [qalamTyping, setQalamTyping] = useState<boolean>(false);
+  const [qalamActivePrompt, setQalamActivePrompt] = useState<string>('Review my Redis Task Queue PR');
+  const [qalamResponse, setQalamResponse] = useState<string>(
+    'Architecture Review: Top 5% modular API design & clean schema migration. Redis asynchronous worker verified with exponential backoff and 24/24 passing unit tests.'
+  );
+
+  // Auto-advance timer (5.5s interval per REA spec)
+  const isHoveredRef = useRef<boolean>(false);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isHoveredRef.current) {
+        setActiveStageIdx((prev) => (prev + 1) % 4);
+      }
+    }, 5500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const currentStory = ROLES[activePersona];
   const activeTab = currentStory.showcaseTabs[activeTabIdx] || currentStory.showcaseTabs[0];
 
-  useEffect(() => {
-    setActiveTabIdx(0);
-    setActiveStageIdx(1);
-    setSelectedDate(15);
-    setMonthOffset(0);
-    setStageChatAnswer(null);
-    setStageChatInput('');
-  }, [activePersona]);
+  // Stage hover debouncer (60ms debounce per REA Pattern A spec)
+  const handleStagePointerEnter = (idx: number) => {
+    isHoveredRef.current = true;
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      setActiveStageIdx(idx);
+    }, 60);
+  };
 
-  const handleRunDrills = () => {
-    setDrillsStatus('running');
+  const handleStagePointerLeave = () => {
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    isHoveredRef.current = false;
+  };
+
+  const handleStagePointerDown = (idx: number) => {
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    setActiveStageIdx(idx);
+  };
+
+  // Keyboard navigation for tablist
+  const handleStageKeyDown = (e: React.KeyboardEvent, idx: number) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      setActiveStageIdx((idx + 1) % 4);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      setActiveStageIdx((idx - 1 + 4) % 4);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      setActiveStageIdx(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      setActiveStageIdx(3);
+    }
+  };
+
+  // Interactive Qalam prompt selection
+  const handleQalamPrompt = (promptText: string) => {
+    setQalamActivePrompt(promptText);
+    setQalamTyping(true);
     setTimeout(() => {
-      setDrillsStatus('success');
+      setQalamTyping(false);
+      if (promptText.includes('Redis')) {
+        setQalamResponse(
+          'Architecture Review: Top 5% modular API design & clean schema migration. Redis asynchronous worker verified with exponential backoff and 24/24 passing unit tests.'
+        );
+      } else if (promptText.includes('SQL')) {
+        setQalamResponse(
+          'SQL Query Isolation: 91/100. Indexed joins on foreign keys confirmed; window functions optimized for sub-12ms execution latency.'
+        );
+      } else if (promptText.includes('System Design')) {
+        setQalamResponse(
+          'System Design Benchmark: Verified resilient partition tolerance, idempotency tokens on write endpoints, and automated dead-letter queue routing.'
+        );
+      } else {
+        setQalamResponse(
+          `Capability Verified: Candidate demonstrates high architectural clarity for "${promptText}". Passing unit tests and clean commit discipline recorded.`
+        );
+      }
     }, 450);
   };
 
-  const handleStagePromptClick = (promptText: string) => {
-    setStageChatInput(promptText);
-    if (promptText.includes('budget')) {
-      setStageChatAnswer(
-        'Acme Co. approved 4 headcount with top-tier compensation benchmarks for candidates demonstrating verified Redis queue & PostgreSQL transactions.'
-      );
-    } else if (promptText.includes('stakeholders')) {
-      setStageChatAnswer(
-        'Lead Platform Architect, VP of Engineering, and 2 Senior Backend Peers will review the technical decision memo directly.'
-      );
-    } else {
-      setStageChatAnswer(
-        'Evaluation covers distributed task workers, transactional isolation, and automated unit test suites with >= 90% branch coverage.'
-      );
-    }
-  };
-
   /* ------------------------------------------------------------------------ */
-  /*                  RENDER CALENDLY-INSPIRED MOCKUPS                        */
+  /*                    RENDER LOWER MOCKUP (4 STAGES)                        */
   /* ------------------------------------------------------------------------ */
 
-  const renderShowcaseMockup = (type: string) => {
-    if (type === 'calendar') {
-      // Calendly July 2026 Interactive Calendar (from Screenshot 1)
-      const clickableDays = [1, 2, 6, 7, 8, 9, 15, 16, 20, 21, 22, 23, 27, 28, 29, 30];
-
-      return (
-        <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 overflow-hidden">
-          {/* Decorative patterned background pills */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none gap-3">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="w-10 h-32 rounded-full bg-blue-500/40 shrink-0" />
-            ))}
-          </div>
-
-          {/* Floating White Calendar Card */}
-          <motion.div
-            initial={{ scale: 0.94, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-            className="relative z-10 w-full max-w-[280px] sm:max-w-[320px] rounded-[24px] bg-white p-5 sm:p-6 shadow-[0_12px_40px_rgba(7,26,49,0.12)] border border-slate-100"
-          >
-            {/* Calendar Header with interactive months */}
-            <div className="flex items-center justify-between mb-4">
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setMonthOffset((prev) => Math.max(-1, prev - 1))}
-                aria-label="Previous Month"
-                className="p-1 rounded-full text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
-              >
-                <ChevronLeft size={16} />
-              </motion.button>
-              <span className="text-sm font-semibold text-slate-800">{currentMonthName}</span>
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setMonthOffset((prev) => Math.min(1, prev + 1))}
-                aria-label="Next Month"
-                className="p-1 rounded-full text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
-              >
-                <ChevronRight size={16} />
-              </motion.button>
-            </div>
-
-            {/* Days of week */}
-            <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-mono text-slate-400 uppercase mb-2">
-              <span>Sun</span>
-              <span>Mon</span>
-              <span>Tue</span>
-              <span>Wed</span>
-              <span>Thu</span>
-              <span>Fri</span>
-              <span>Sat</span>
-            </div>
-
-            {/* Interactive Calendar grid */}
-            <div className="grid grid-cols-7 gap-1 text-center text-xs">
-              <span className="p-2 text-slate-300"></span>
-              <span className="p-2 text-slate-300"></span>
-              <span className="p-2 text-slate-300"></span>
-              
-              {/* Day 1 - 31 */}
-              {[...Array(31)].map((_, idx) => {
-                const day = idx + 1;
-                const isClickable = clickableDays.includes(day);
-                const isSelected = selectedDate === day;
-
-                if (!isClickable) {
-                  return (
-                    <span key={day} className="p-2 text-slate-400 select-none">
-                      {day}
-                    </span>
-                  );
-                }
-
-                return (
-                  <motion.button
-                    key={day}
-                    type="button"
-                    onClick={() => setSelectedDate(day)}
-                    whileHover={{ scale: 1.18 }}
-                    whileTap={{ scale: 0.92 }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 26 }}
-                    className="relative p-2 font-bold cursor-pointer text-blue-600 focus:outline-none flex items-center justify-center"
-                  >
-                    {isSelected && (
-                      <motion.span
-                        layoutId="activeCalendarDate"
-                        className="absolute inset-0.5 rounded-full bg-[#3B82F6] shadow-md z-0"
-                        transition={{ type: 'spring', stiffness: 450, damping: 28 }}
-                      />
-                    )}
-                    <span className={`relative z-10 ${isSelected ? 'text-white' : ''}`}>
-                      {day}
-                    </span>
-                  </motion.button>
-                );
-              })}
-            </div>
-
-            {/* Selected feedback pill */}
-            <motion.div
-              layout
-              className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500"
-            >
-              <span className="font-semibold text-blue-600">Selected Slot:</span>
-              <span className="font-mono text-slate-700 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200">
-                July {selectedDate}, 10:00 AM
+  const renderStageMockup = (mockupType: WorkflowStage['mockupType']) => {
+    switch (mockupType) {
+      case 'discover':
+        return (
+          <div className="w-full h-full p-4 flex flex-col justify-between bg-white rounded-[20px] shadow-sm border border-slate-100">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span className="text-xs font-bold text-slate-900">Foundational Radar</span>
+              <span className="text-[10px] font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+                Benchmark 85+
               </span>
-            </motion.div>
-          </motion.div>
-        </div>
-      );
-    }
-
-    if (type === 'payments') {
-      // Calendly Payments Consultation Card (from Screenshot 2)
-      return (
-        <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-6 overflow-hidden">
-          {/* Decorative patterned background */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-25 pointer-events-none gap-4">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="w-16 h-36 rounded-2xl bg-teal-400/30 shrink-0 rotate-12" />
-            ))}
+            </div>
+            <div className="space-y-2 py-2">
+              {[
+                { name: 'Core Data Structures', score: '94%', color: '#2458ae' },
+                { name: 'API System Design', score: '88%', color: '#5DDFD7' },
+                { name: 'Database Indexing', score: '91%', color: '#7c3aed' },
+              ].map((m) => (
+                <div key={m.name} className="space-y-1">
+                  <div className="flex justify-between text-[11px] text-slate-700 font-medium">
+                    <span>{m.name}</span>
+                    <span className="font-mono font-bold" style={{ color: m.color }}>{m.score}</span>
+                  </div>
+                  <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{ width: m.score, backgroundColor: m.color }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="text-[10px] text-slate-400 font-mono text-center pt-1 border-t border-slate-50">
+              Verified baseline calibration confirmed
+            </div>
           </div>
+        );
 
-          {/* Floating White Consultation Card with Interactive Controls */}
-          <motion.div
-            initial={{ scale: 0.94, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            whileHover={{ y: -3 }}
-            transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-            className="relative z-10 w-full max-w-[280px] sm:max-w-[320px] rounded-[24px] bg-white p-6 shadow-[0_12px_40px_rgba(7,26,49,0.12)] border border-slate-100 flex flex-col items-center text-center"
-          >
-            <motion.div
-              whileHover={{ scale: 1.08 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md mb-3 cursor-pointer"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
-                alt="Consultant Avatar"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-            <strong className="text-base font-bold text-slate-900 mb-1">Consultation</strong>
-            <span className="text-xs text-slate-500 mb-4">Technical Capability Review</span>
-
-            {/* Interactive Duration Selector */}
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 mb-4 w-full justify-center">
-              {(['30 min', '45 min', '60 min'] as const).map((dur) => {
-                const isSelected = consultationDuration === dur;
-                return (
-                  <motion.button
-                    key={dur}
-                    type="button"
-                    onClick={() => setConsultationDuration(dur)}
-                    whileTap={{ scale: 0.95 }}
-                    className={`relative px-3 py-1 text-[11px] font-semibold rounded-lg transition-colors cursor-pointer ${
-                      isSelected ? 'text-slate-900' : 'text-slate-500 hover:text-slate-800'
-                    }`}
-                  >
-                    {isSelected && (
-                      <motion.span
-                        layoutId="consultationDuration"
-                        className="absolute inset-0 bg-white rounded-lg shadow-xs z-0"
-                        transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-                      />
-                    )}
-                    <span className="relative z-10">{dur}</span>
-                  </motion.button>
-                );
-              })}
-            </div>
-
-            {/* Interactive Platform Badge */}
-            <div className="flex items-center gap-4 text-xs font-semibold text-slate-600 pt-3 border-t border-slate-100 w-full justify-center">
-              <span className="flex items-center gap-1.5 text-slate-700">
-                <Clock size={15} className="text-teal-600" />
-                <span>{consultationDuration}</span>
+      case 'build':
+        return (
+          <div className="w-full h-full p-3.5 flex flex-col justify-between bg-white rounded-[20px] shadow-sm border border-slate-100">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                <Sparkles size={13} className="text-amber-500" />
+                <span>Qalam Assistant</span>
               </span>
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.94 }}
-                onClick={() => setConsultationPlatform((p) => (p === 'Zoom' ? 'Meet' : 'Zoom'))}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer text-[11px]"
-              >
-                <Video size={13} className="text-teal-600" />
-                <span>{consultationPlatform}</span>
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      );
-    }
-
-    if (type === 'callie') {
-      // Qalam AI interactive chat card
-      const promptSuggestions = [
-        'Explain Redis DLQ worker',
-        'Review PR #42 SQL indexes',
-        'Check distributed lock',
-      ];
-
-      return (
-        <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-6 overflow-hidden">
-          <motion.div
-            initial={{ scale: 0.94, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-            className="relative z-10 w-full max-w-[320px] rounded-[24px] bg-white p-5 shadow-[0_12px_40px_rgba(7,26,49,0.12)] border border-slate-100"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Sparkles size={16} className="text-emerald-500" />
-                <strong className="text-xs font-bold text-slate-900">Qalam AI Assistant</strong>
-              </div>
-              <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Online</span>
+              <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
+                PR Approved
               </span>
             </div>
 
-            <div className="space-y-2 text-xs mb-3">
-              <div className="p-3 rounded-xl bg-slate-50 text-slate-700">
-                <span className="text-[10px] text-slate-400 font-mono block mb-1">Qalam</span>
-                <span>
-                  {qalamPromptSelected === 'Explain Redis DLQ worker'
-                    ? 'A dead-letter queue isolates messages exceeding 3 retry attempts with exponential backoff, preventing cascade worker starvation.'
-                    : qalamPromptSelected === 'Review PR #42 SQL indexes'
-                    ? 'Added B-Tree index on (tenant_id, created_at DESC) reduces median query latency from 140ms to 4.2ms.'
-                    : qalamPromptSelected === 'Check distributed lock'
-                    ? 'Redlock algorithm acquired lock token with 500ms TTL and atomic release script.'
-                    : 'You finished Redis task queue fundamentals. Ready to write the dead-letter queue worker?'}
-                </span>
+            <div className="my-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-[11px] text-slate-800 space-y-1">
+              <div className="text-[10px] font-mono font-bold text-amber-700 uppercase">
+                {qalamActivePrompt}
               </div>
+              {qalamTyping ? (
+                <div className="flex items-center gap-1 text-slate-400 text-xs py-1">
+                  <span className="animate-bounce">●</span>
+                  <span className="animate-bounce" style={{ animationDelay: '100ms' }}>●</span>
+                  <span className="animate-bounce" style={{ animationDelay: '200ms' }}>●</span>
+                </div>
+              ) : (
+                <p className="text-[10.5px] text-slate-600 leading-relaxed font-sans line-clamp-3">
+                  {qalamResponse}
+                </p>
+              )}
             </div>
 
-            {/* Clickable prompt suggestions */}
-            <div className="space-y-1.5 mb-3">
-              <span className="text-[10px] text-slate-400 font-mono block">Ask Qalam:</span>
-              <div className="flex flex-wrap gap-1">
-                {promptSuggestions.map((prompt) => (
-                  <motion.button
-                    key={prompt}
-                    type="button"
-                    onClick={() => setQalamPromptSelected(prompt)}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`text-[10px] px-2 py-1 rounded-md border text-left cursor-pointer transition-colors ${
-                      qalamPromptSelected === prompt
-                        ? 'bg-emerald-50 border-emerald-300 text-emerald-800 font-bold'
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                    }`}
-                  >
-                    {prompt}
-                  </motion.button>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-1">
+              {[
+                'Review Redis PR',
+                'Diagnose SQL',
+                'System Design',
+              ].map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => handleQalamPrompt(p)}
+                  className="px-2 py-0.5 rounded-md bg-amber-50 hover:bg-amber-100 text-amber-900 text-[10px] font-medium transition-colors cursor-pointer"
+                >
+                  {p}
+                </button>
+              ))}
             </div>
+          </div>
+        );
 
-            <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-[11px] text-slate-500">
-              <span className="font-semibold text-emerald-600">Suggested Action</span>
-              <span className="text-slate-700 font-medium">Start Milestone 03 →</span>
+      case 'verify':
+        return (
+          <div className="w-full h-full p-3.5 flex flex-col justify-between bg-slate-900 rounded-[20px] shadow-md text-slate-100 border border-slate-800">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span className="text-xs font-bold text-slate-200 font-mono">Test Matrix · Runner #419</span>
+              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-2 py-0.5 rounded-full font-bold">
+                24/24 PASSING
+              </span>
             </div>
-          </motion.div>
-        </div>
-      );
+            <div className="p-2 rounded-lg bg-slate-950 text-[10.5px] font-mono space-y-1">
+              <p className="text-emerald-400">✓ API Architecture Score: 95/100</p>
+              <p className="text-emerald-400">✓ SQL Query Isolation: 91/100</p>
+              <p className="text-emerald-400">✓ Code Maintainability: 88/100</p>
+            </div>
+            <div className="text-[10px] text-slate-400 font-mono text-center flex items-center justify-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>Cryptographic hash seal verified</span>
+            </div>
+          </div>
+        );
+
+      case 'connect':
+        return (
+          <div className="w-full h-full p-4 flex flex-col justify-between bg-white rounded-[20px] shadow-sm border border-emerald-200/60">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span className="text-xs font-bold text-slate-900">Direct Recruiter Match</span>
+              <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
+                Direct Offer
+              </span>
+            </div>
+            <div className="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 space-y-1 text-[11px] text-emerald-950">
+              <span className="font-bold block text-[10.5px]">Fast-track offer issued</span>
+              <p className="text-[10px] text-emerald-800 leading-relaxed">
+                Candidate shortlisted via verified distributed task queue and 24/24 test passes.
+              </p>
+            </div>
+            <div className="text-[10px] text-slate-500 font-mono text-center">
+              Average hiring cycle: 5 business days
+            </div>
+          </div>
+        );
     }
-
-    // Default Notetaker / Drills card
-    return (
-      <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-6 overflow-hidden">
-        <motion.div
-          initial={{ scale: 0.94, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-          className="relative z-10 w-full max-w-[320px] rounded-[24px] bg-slate-900 text-slate-100 p-5 shadow-2xl border border-slate-800 font-mono text-xs"
-        >
-          <div className="flex items-center justify-between pb-2 border-b border-slate-800 mb-3">
-            <span className="text-slate-400 flex items-center gap-1.5 text-[11px]">
-              <Terminal size={13} className="text-blue-400" />
-              <span>test_harness.ts</span>
-            </span>
-            <span
-              className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
-                drillsStatus === 'running'
-                  ? 'text-amber-400 bg-amber-950/40 animate-pulse'
-                  : 'text-emerald-400 bg-emerald-950/40'
-              }`}
-            >
-              {drillsStatus === 'running' ? 'RUNNING SUITE...' : '24/24 PASSING'}
-            </span>
-          </div>
-          
-          <div className="space-y-1.5 text-[11px] text-slate-300 mb-4">
-            <motion.p
-              animate={{ opacity: drillsStatus === 'running' ? 0.4 : 1 }}
-              transition={{ delay: 0.03 }}
-              className="text-emerald-400 flex items-center gap-1.5"
-            >
-              <span>✓</span>
-              <span>queue_connected (12ms)</span>
-            </motion.p>
-            <motion.p
-              animate={{ opacity: drillsStatus === 'running' ? 0.4 : 1 }}
-              transition={{ delay: 0.06 }}
-              className="text-emerald-400 flex items-center gap-1.5"
-            >
-              <span>✓</span>
-              <span>retries_throttled_to_3 (45ms)</span>
-            </motion.p>
-            <motion.p
-              animate={{ opacity: drillsStatus === 'running' ? 0.4 : 1 }}
-              transition={{ delay: 0.09 }}
-              className="text-emerald-400 flex items-center gap-1.5"
-            >
-              <span>✓</span>
-              <span>payload_signature_verified (8ms)</span>
-            </motion.p>
-          </div>
-
-          <motion.button
-            type="button"
-            onClick={handleRunDrills}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-medium border border-slate-700 flex items-center justify-center gap-2 cursor-pointer transition-colors"
-          >
-            <Zap size={12} className="text-amber-400" />
-            <span>Re-run test suite</span>
-          </motion.button>
-        </motion.div>
-      </div>
-    );
   };
 
   return (
     <section
       id="ecosystem"
-      className="relative w-full py-20 sm:py-28 overflow-hidden bg-[#fafbfd] border-t border-slate-200/80"
-      aria-label="Calendly-Inspired Interactive Product Experience"
+      className="relative w-full py-16 sm:py-24 overflow-hidden bg-[#fafbfd] border-t border-slate-200/80"
+      aria-label="Pathwisse Capability Ecosystem"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Pattern D: Liquid Gooey Status Marquee */}
+      <LiquidGooeyMarquee />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
         {/* ============================================================= */}
-        {/* TOP AUDIENCE SWITCHER                                          */}
+        {/* TOP AUDIENCE SWITCHER (PATTERN B: HERO PERSONA STAGE SWITCHER) */}
         {/* ============================================================= */}
-        <div className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16">
+        <div className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 relative">
+          {/* Dynamic Ambient Radial Glow */}
+          <div
+            className="absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[340px] pointer-events-none blur-3xl opacity-60 transition-all duration-700"
+            style={{
+              background: `radial-gradient(circle, ${currentStory.radialGlowColor} 0%, transparent 70%)`,
+            }}
+            aria-hidden="true"
+          />
+
           <span
-            className="text-xs font-mono font-bold tracking-widest uppercase mb-3 block"
+            className="text-xs font-mono font-bold tracking-widest uppercase mb-3 block transition-colors duration-300"
             style={{ color: currentStory.primaryColor }}
           >
             {currentStory.eyebrow}
@@ -894,18 +859,22 @@ export function EcosystemSection() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-['Outfit'] text-slate-900 tracking-tight leading-tight max-w-3xl mb-4">
             {currentStory.storyHeading}
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed mb-6">
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed mb-8">
             {currentStory.storySub}
           </p>
 
+          {/* Interactive Audience Pill Strip with Sliding Squircle */}
           <div
             role="tablist"
             aria-label="Select Audience Persona"
-            className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white border border-slate-200 shadow-xs"
+            className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white border border-slate-200 shadow-xs relative z-10"
           >
             {(['students', 'colleges', 'companies'] as Persona[]).map((persona) => {
               const isSelected = activePersona === persona;
-              const labels: Record<Persona, { title: string; icon: React.ComponentType<{ size?: number; className?: string }> }> = {
+              const labels: Record<
+                Persona,
+                { title: string; icon: React.ComponentType<{ size?: number; className?: string }> }
+              > = {
                 students: { title: 'For Students', icon: GraduationCap },
                 colleges: { title: 'For Colleges', icon: Building2 },
                 companies: { title: 'For Companies', icon: BriefcaseBusiness },
@@ -919,19 +888,21 @@ export function EcosystemSection() {
                   role="tab"
                   id={`audience-tab-${persona}`}
                   aria-selected={isSelected}
-                  onClick={() => setActivePersona(persona)}
+                  onClick={() => {
+                    setActivePersona(persona);
+                    setActiveTabIdx(0);
+                    setActiveStageIdx(0);
+                  }}
                   className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                    isSelected ? 'text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    isSelected
+                      ? 'text-white shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
+                  style={{
+                    backgroundColor: isSelected ? currentStory.primaryColor : 'transparent',
+                    transition: 'background-color 300ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms',
+                  }}
                 >
-                  {isSelected && (
-                    <motion.span
-                      layoutId="audience-pill-glow"
-                      className="absolute inset-0 rounded-full"
-                      style={{ backgroundColor: currentStory.primaryColor }}
-                      transition={{ type: 'spring', stiffness: 450, damping: 35 }}
-                    />
-                  )}
                   <span className="relative z-10 flex items-center gap-2">
                     <ItemIcon size={15} />
                     <span>{labels[persona].title}</span>
@@ -940,74 +911,82 @@ export function EcosystemSection() {
               );
             })}
           </div>
+
+          {/* Persona Reactive Key Stats Ticker */}
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12 mt-8 py-3 px-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 shadow-2xs">
+            {currentStory.stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <span
+                  className="block text-xl sm:text-2xl font-bold font-mono tracking-tight"
+                  style={{ color: currentStory.primaryColor }}
+                >
+                  {stat.value}
+                </span>
+                <span className="text-[11px] font-medium text-slate-500">{stat.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ============================================================= */}
-        {/* SECTION 1: CALENDLY-INSPIRED INTERACTIVE PRODUCT SHOWCASE     */}
-        {/* (EXACT REPLICATION FROM SCREENSHOTS 1 & 2)                    */}
+        {/* SECTION 1: INTERACTIVE FLAGSHIP CAPABILITIES SHOWCASE         */}
         {/* ============================================================= */}
-        <div className="relative mb-28 sm:mb-36">
+        <div className="relative mb-24 sm:mb-32">
           {/* Ambient Banner Gradient Container */}
           <div
             className="w-full rounded-[36px] sm:rounded-[44px] p-4 sm:p-8 lg:p-14 relative transition-all duration-700 overflow-hidden"
             style={{ background: currentStory.ambientGradient }}
           >
-            {/* Top-Center Floating Icon Squircle Dock (Attached to Top of Card) */}
+            {/* Top-Center Floating Icon Squircle Dock */}
             <div className="relative z-20 flex justify-center mb-0">
               <div className="inline-flex items-center gap-2 p-1.5 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-xs mb-[-24px]">
                 {currentStory.showcaseTabs.map((tab, idx) => {
                   const isSelected = activeTabIdx === idx;
                   return (
-                    <div key={tab.id} className="relative">
-                      <motion.button
-                        type="button"
-                        onClick={() => setActiveTabIdx(idx)}
-                        aria-label={tab.name}
-                        whileHover={{ scale: 1.08, y: -2 }}
-                        whileTap={{ scale: 0.94 }}
-                        transition={{ type: 'spring', stiffness: 450, damping: 25 }}
-                        className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center transition-colors cursor-pointer outline-none ${
-                          isSelected ? 'shadow-md' : 'bg-white/60 hover:bg-white text-slate-700'
-                        }`}
-                        style={{ backgroundColor: isSelected ? tab.tabColor : 'rgba(255, 255, 255, 0.7)' }}
-                      >
-                        {/* Dynamic SVG Icon based on type */}
-                        {tab.icon === 'compass' && (
-                          <Compass size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
-                        )}
-                        {tab.icon === 'sparkles' && (
-                          <Sparkles size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
-                        )}
-                        {tab.icon === 'terminal' && (
-                          <Terminal size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
-                        )}
-                        {tab.icon === 'award' && (
-                          <Award size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
-                        )}
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveTabIdx(idx)}
+                      aria-label={tab.name}
+                      className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center transition-all cursor-pointer outline-none hover:scale-105 active:scale-95 ${
+                        isSelected ? 'shadow-md scale-105' : 'bg-white/60 hover:bg-white text-slate-700'
+                      }`}
+                      style={{
+                        backgroundColor: isSelected ? tab.tabColor : 'rgba(255, 255, 255, 0.7)',
+                        transition: 'all 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+                      }}
+                    >
+                      {tab.icon === 'compass' && (
+                        <Compass size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
+                      )}
+                      {tab.icon === 'sparkles' && (
+                        <Sparkles size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
+                      )}
+                      {tab.icon === 'terminal' && (
+                        <Terminal size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
+                      )}
+                      {tab.icon === 'award' && (
+                        <Award size={22} className={isSelected ? 'text-[#071A31]' : 'text-slate-600'} />
+                      )}
 
-                        {/* Calendly's exact curved downward bridge connecting icon into white card with spring glide */}
-                        {isSelected && (
-                          <motion.div
-                            layoutId="dockStemBridge"
-                            className="absolute left-1/2 top-full h-[14px] w-[32px] -translate-x-1/2 pointer-events-none z-30"
-                            transition={{ type: 'spring', stiffness: 480, damping: 28 }}
+                      {/* Calendly's exact curved downward bridge connecting icon into white card */}
+                      {isSelected && (
+                        <div className="absolute left-1/2 top-full h-[14px] w-[32px] -translate-x-1/2 pointer-events-none z-30">
+                          <svg
+                            aria-hidden="true"
+                            className="w-full h-full"
+                            viewBox="0 0 32 14"
+                            fill="none"
+                            preserveAspectRatio="none"
                           >
-                            <svg
-                              aria-hidden="true"
-                              className="w-full h-full"
-                              viewBox="0 0 32 14"
-                              fill="none"
-                              preserveAspectRatio="none"
-                            >
-                              <path
-                                d="M25.0486 0C25.0486 0 20.3636 0.869539 20.3636 7C20.3636 13.1305 32 14 32 14L0 14C0 14 11.6364 13.1305 11.6364 7C11.6364 0.869539 6.95136 0 6.95136 0L25.0486 0Z"
-                                fill="#FFFFFF"
-                              />
-                            </svg>
-                          </motion.div>
-                        )}
-                      </motion.button>
-                    </div>
+                            <path
+                              d="M25.0486 0C25.0486 0 20.3636 0.869539 20.3636 7C20.3636 13.1305 32 14 32 14L0 14C0 14 11.6364 13.1305 11.6364 7C11.6364 0.869539 6.95136 0 6.95136 0L25.0486 0Z"
+                              fill="#FFFFFF"
+                            />
+                          </svg>
+                        </div>
+                      )}
+                    </button>
                   );
                 })}
               </div>
@@ -1015,360 +994,371 @@ export function EcosystemSection() {
 
             {/* Main Pure-White Squircle Card */}
             <div className="relative z-10 w-full rounded-[28px] sm:rounded-[36px] bg-white p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(7,26,49,0.08)] mt-2">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${activePersona}-${activeTab.id}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                {/* Left Column: Heading, Description, Underlined CTA */}
+                <div className="lg:col-span-6 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="w-5 h-5 rounded-md flex items-center justify-center text-xs text-[#071A31]"
+                      style={{ backgroundColor: activeTab.tabColor }}
+                    >
+                      {activeTab.icon === 'compass' && <Compass size={12} />}
+                      {activeTab.icon === 'sparkles' && <Sparkles size={12} />}
+                      {activeTab.icon === 'terminal' && <Terminal size={12} />}
+                      {activeTab.icon === 'award' && <Award size={12} />}
+                    </div>
+                    <span className="text-sm font-semibold text-slate-800">{activeTab.name}</span>
+                    {activeTab.badge && (
+                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold font-mono bg-slate-100 text-slate-600">
+                        {activeTab.badge}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-['Outfit'] text-slate-900 tracking-tight leading-snug">
+                    {activeTab.headline}
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
+                    {activeTab.description}
+                  </p>
+
+                  <div className="pt-2">
+                    <a
+                      href={activeTab.ctaLink}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 border-b-[1.5px] border-slate-900 pb-0.5 hover:text-blue-600 hover:border-blue-600 transition-colors cursor-pointer group"
+                    >
+                      <span>{activeTab.ctaText}</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right Column: Tinted Mockup Box with Floating White Card */}
+                <div
+                  className="lg:col-span-6 rounded-[24px] overflow-hidden min-h-[300px] sm:min-h-[340px] p-6 flex items-center justify-center relative transition-colors duration-500"
+                  style={{ backgroundColor: activeTab.bgGradient }}
                 >
-                  {/* Left Column: Heading, Description, Underlined CTA */}
-                  <div className="lg:col-span-6 space-y-4">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="w-5 h-5 rounded-md flex items-center justify-center text-xs text-[#071A31]"
-                        style={{ backgroundColor: activeTab.tabColor }}
-                      >
-                        {activeTab.icon === 'compass' && <Compass size={12} />}
-                        {activeTab.icon === 'sparkles' && <Sparkles size={12} />}
-                        {activeTab.icon === 'terminal' && <Terminal size={12} />}
-                        {activeTab.icon === 'award' && <Award size={12} />}
-                      </div>
-                      <span className="text-sm font-semibold text-slate-800">{activeTab.name}</span>
-                      {activeTab.badge && (
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold font-mono bg-slate-100 text-slate-600">
-                          {activeTab.badge}
+                  {/* Pattern C: Embedded Qalam Interactive Showcase Mockup */}
+                  {activeTab.mockupType === 'qalam' ? (
+                    <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-slate-200/80 p-5 space-y-4">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700">
+                            <Sparkles size={16} />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900">Qalam AI Mentor</div>
+                            <div className="text-[10px] font-mono text-emerald-600 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                              <span>Live Engine Ready</span>
+                            </div>
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                          v2.4
                         </span>
-                      )}
-                    </div>
+                      </div>
 
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-['Outfit'] text-slate-900 tracking-tight leading-snug">
-                      {activeTab.headline}
-                    </h3>
+                      {/* Live Conversation Balloon */}
+                      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1.5">
+                        <span className="text-[10px] font-mono text-amber-800 font-bold uppercase block">
+                          Prompt: &ldquo;{qalamActivePrompt}&rdquo;
+                        </span>
+                        {qalamTyping ? (
+                          <div className="flex items-center gap-1 text-slate-400 py-1 text-xs">
+                            <span className="animate-bounce">●</span>
+                            <span className="animate-bounce" style={{ animationDelay: '100ms' }}>●</span>
+                            <span className="animate-bounce" style={{ animationDelay: '200ms' }}>●</span>
+                          </div>
+                        ) : (
+                          <p className="text-xs text-slate-700 leading-relaxed font-sans">
+                            {qalamResponse}
+                          </p>
+                        )}
+                      </div>
 
-                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
-                      {activeTab.description}
-                    </p>
+                      {/* Interactive Prompt Pills */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                          Simulate Prompt:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {[
+                            'Review my Redis Task Queue PR',
+                            'Diagnose SQL Deficit',
+                            'Check System Design Benchmark',
+                          ].map((p) => (
+                            <button
+                              key={p}
+                              type="button"
+                              onClick={() => handleQalamPrompt(p)}
+                              className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-[11px] font-medium transition-colors cursor-pointer"
+                            >
+                              {p}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
 
-                    <div className="pt-2">
-                      <motion.a
-                        href={activeTab.ctaLink}
-                        whileHover={{ x: 3 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 border-b-[1.5px] border-slate-900 pb-0.5 hover:text-blue-600 hover:border-blue-600 transition-colors cursor-pointer"
+                      {/* Input Simulation Bar */}
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          if (qalamInput.trim()) {
+                            handleQalamPrompt(qalamInput);
+                            setQalamInput('');
+                          }
+                        }}
+                        className="flex items-center gap-2 p-1.5 rounded-xl border border-slate-200 bg-white"
                       >
-                        <span>{activeTab.ctaText}</span>
-                        <ArrowRight size={14} />
-                      </motion.a>
+                        <input
+                          type="text"
+                          value={qalamInput}
+                          onChange={(e) => setQalamInput(e.target.value)}
+                          placeholder="Ask Qalam about your code architecture..."
+                          className="w-full text-xs text-slate-800 placeholder-slate-400 px-2 outline-none"
+                        />
+                        <button
+                          type="submit"
+                          aria-label="Send query to Qalam"
+                          className="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center shrink-0 hover:bg-blue-600 transition-colors cursor-pointer"
+                        >
+                          <Send size={12} />
+                        </button>
+                      </form>
                     </div>
-                  </div>
-
-                  {/* Right Column: Tinted Mockup Box with Floating White Card */}
-                  <div
-                    className="lg:col-span-6 rounded-[24px] overflow-hidden min-h-[300px] sm:min-h-[340px] flex items-center justify-center relative transition-colors duration-500"
-                    style={{ backgroundColor: activeTab.bgGradient }}
-                  >
-                    {renderShowcaseMockup(activeTab.mockupType)}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                  ) : activeTab.mockupType === 'compass' ? (
+                    <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-slate-200/80 p-5 space-y-4">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <span className="text-xs font-bold text-slate-900">Capability Diagnostic Map</span>
+                        <span className="text-[10px] font-mono font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full">
+                          94% Match
+                        </span>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="p-2.5 rounded-xl bg-slate-50 flex items-center justify-between">
+                          <span className="text-xs font-semibold text-slate-800">Target: Full Stack Engineer</span>
+                          <span className="text-xs font-mono font-bold text-blue-600">Level 2</span>
+                        </div>
+                        <div className="p-2.5 rounded-xl bg-slate-50 flex items-center justify-between">
+                          <span className="text-xs text-slate-600">Active Sprint: Distributed Cache</span>
+                          <span className="text-xs font-mono text-emerald-600 font-bold">Week 3/4</span>
+                        </div>
+                        <div className="p-2.5 rounded-xl bg-slate-50 flex items-center justify-between">
+                          <span className="text-xs text-slate-600">Unit Test Coverage</span>
+                          <span className="text-xs font-mono text-slate-900 font-bold">96.4%</span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : activeTab.mockupType === 'drills' ? (
+                    <div className="w-full max-w-md bg-slate-900 rounded-2xl shadow-xl border border-slate-800 p-5 space-y-3 text-slate-100 font-mono">
+                      <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <span className="text-xs text-slate-300">Terminal · Sprint Test Harness</span>
+                        <span className="text-[10px] text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded">
+                          ALL PASS
+                        </span>
+                      </div>
+                      <div className="text-[11px] space-y-1 text-slate-300">
+                        <p className="text-emerald-400">PASS tests/queue-worker.spec.ts (12 tests)</p>
+                        <p className="text-emerald-400">PASS tests/schema-migration.spec.ts (8 tests)</p>
+                        <p className="text-emerald-400">PASS tests/rate-limiter.spec.ts (4 tests)</p>
+                        <p className="text-slate-500 pt-1">Time: 1.48s, estimated latency: 8ms</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-slate-200/80 p-5 space-y-3">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                        <span className="text-xs font-bold text-slate-900">Verified Evidence Seal</span>
+                        <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
+                          Immutable
+                        </span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1 text-xs">
+                        <span className="font-mono text-[10px] text-slate-400 uppercase block">SHA-256 Proof:</span>
+                        <p className="font-mono text-[10px] text-slate-800 break-all">
+                          e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                        </p>
+                      </div>
+                      <div className="text-[11px] text-slate-600 flex items-center justify-between">
+                        <span>Candidate: Ananya K.</span>
+                        <span className="font-bold text-blue-600">Ready for Interview</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* ============================================================= */}
-        {/* SECTION 2: 4-STAGE EXPANDING ACCORDION                        */}
-        {/* (EXACT REPLICATION FROM SCREENSHOT 3)                         */}
-        {/* Book -> Prep -> Capture -> Follow up                          */}
+        {/* SECTION 2: MULTI-STAGE HORIZONTAL ACCORDION DECK             */}
+        {/* (PATTERN A: TIMELINE FEATURE DECK / VERIFIED LIFECYCLE)       */}
         {/* ============================================================= */}
         <div className="mb-24 sm:mb-32">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <span
+              className="text-xs font-mono font-bold tracking-widest uppercase mb-2 block"
+              style={{ color: currentStory.primaryColor }}
+            >
+              THE 4-STAGE LIFECYCLE
+            </span>
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-['Outfit'] text-slate-900 tracking-tight leading-tight">
-              meetings, so you have more space for what matters.
+              A verified capability lifecycle built for proof, not speculation.
             </h3>
+            <p className="text-sm sm:text-base text-slate-600 mt-3 max-w-xl mx-auto">
+              Hover or click across each stage to inspect how ambition transforms into unmediated opportunity.
+            </p>
           </div>
 
-          {/* 4 Cards Side-by-Side on Desktop */}
-          <div className="hidden lg:flex items-stretch gap-4 w-full">
+          {/* Pattern A: Horizontal Expandable Accordion Deck on Desktop (>= 1024px) */}
+          <div
+            role="tablist"
+            aria-label="Verified Capability Lifecycle Stages"
+            className="hidden lg:flex items-stretch gap-3 w-full"
+            onPointerLeave={handleStagePointerLeave}
+          >
             {currentStory.workflowStages.map((stage, idx) => {
               const isActive = activeStageIdx === idx;
 
               return (
-                <motion.div
+                <div
                   key={stage.id}
-                  layout
-                  transition={{ type: 'spring', stiffness: 350, damping: 28, mass: 0.8 }}
-                  onClick={() => setActiveStageIdx(idx)}
-                  whileHover={{ y: isActive ? 0 : -4 }}
-                  whileTap={{ scale: 0.99 }}
-                  className={`relative rounded-[32px] bg-white border border-slate-200/80 shadow-sm transition-all cursor-pointer overflow-hidden flex flex-col justify-between ${
-                    isActive ? 'flex-[2.6] p-8 ring-2 ring-slate-900/5' : 'flex-1 p-6 hover:shadow-md'
+                  role="tab"
+                  id={`stage-tab-${stage.id}`}
+                  aria-selected={isActive}
+                  aria-controls={`stage-panel-${stage.id}`}
+                  tabIndex={0}
+                  onPointerEnter={() => handleStagePointerEnter(idx)}
+                  onPointerDown={() => handleStagePointerDown(idx)}
+                  onKeyDown={(e) => handleStageKeyDown(e, idx)}
+                  style={{
+                    flex: isActive ? '2.8' : '1',
+                    minWidth: isActive ? '380px' : '230px',
+                    transition: 'all 500ms cubic-bezier(0.16, 1, 0.3, 1)',
+                    borderColor: isActive ? currentStory.primaryColor : '#e2e8f0',
+                  }}
+                  className={`relative rounded-[32px] bg-white border shadow-xs transition-all cursor-pointer overflow-hidden flex flex-col justify-between p-6 select-none ${
+                    isActive
+                      ? 'shadow-[0_20px_48px_-12px_rgba(15,23,42,0.14)] ring-2 ring-slate-900/5'
+                      : 'hover:shadow-md hover:border-slate-300'
                   }`}
                 >
                   {/* Card Top Content */}
                   <div>
-                    <h4 className="text-2xl font-bold font-['Outfit'] text-slate-900 mb-2">
+                    {/* Stage Number & Badge */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-mono font-bold text-slate-400">
+                        {stage.stageNumber}
+                      </span>
+                      <span
+                        className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full"
+                        style={{
+                          backgroundColor: isActive ? `${currentStory.primaryColor}15` : '#f1f5f9',
+                          color: isActive ? currentStory.primaryColor : '#64748b',
+                        }}
+                      >
+                        {stage.badge}
+                      </span>
+                    </div>
+
+                    <h4 className="text-xl sm:text-2xl font-bold font-['Outfit'] text-slate-900 mb-1">
                       {stage.title}
                     </h4>
+                    <p className="text-xs font-semibold text-slate-500 mb-3">
+                      {stage.subtitle}
+                    </p>
 
-                    {/* Resting Teaser */}
-                    {!isActive && (
-                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
-                        {stage.restingTeaser}
-                      </p>
-                    )}
-
-                    {/* Active Expanded Narrative & Checklist */}
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.25 }}
-                        className="space-y-4 my-3"
+                    {/* Zero Layout Shift Stack (CSS Grid cell with overlapping children) */}
+                    <div className="grid grid-cols-1 grid-rows-1">
+                      {/* Resting description */}
+                      <div
+                        style={{
+                          gridArea: '1 / 1',
+                          opacity: isActive ? 0 : 1,
+                          transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
+                          pointerEvents: isActive ? 'none' : 'auto',
+                          transition: 'opacity 350ms cubic-bezier(0.16, 1, 0.3, 1), transform 350ms',
+                        }}
                       >
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
+                          {stage.restingTeaser}
+                        </p>
+                      </div>
+
+                      {/* Active expanded narrative & checklist */}
+                      <div
+                        style={{
+                          gridArea: '1 / 1',
+                          opacity: isActive ? 1 : 0,
+                          transform: isActive ? 'translateY(0)' : 'translateY(6px)',
+                          pointerEvents: isActive ? 'auto' : 'none',
+                          transition: 'opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms',
+                        }}
+                        className="space-y-3"
+                      >
+                        <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
                           {stage.narrative}
                         </p>
 
-                        {/* Checklist with circular colored icon badges and vertical connector line */}
-                        <div className="space-y-1 py-1">
+                        {/* Checklist items */}
+                        <div className="space-y-1.5 pt-1">
                           {stage.checklist.map((item, cIdx) => (
-                            <React.Fragment key={item.text}>
-                              <motion.div
-                                initial={{ opacity: 0, x: -8 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{
-                                  delay: cIdx * 0.035, // Complies with physics-no-excessive-stagger (<= 50ms)
-                                  duration: 0.25,
-                                  ease: [0.16, 1, 0.3, 1],
-                                }}
-                                className="flex items-center gap-3"
+                            <div key={item.text} className="flex items-start gap-2">
+                              <span
+                                className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold text-slate-900 shrink-0 mt-0.5"
+                                style={{ backgroundColor: item.iconColor }}
                               >
-                                <span
-                                  className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-slate-900 shrink-0 shadow-2xs"
-                                  style={{ backgroundColor: item.iconColor }}
-                                >
-                                  ✓
-                                </span>
-                                <span className="text-xs text-slate-600 font-medium leading-tight">
-                                  {item.text}
-                                </span>
-                              </motion.div>
-                              {cIdx < stage.checklist.length - 1 && (
-                                <div className="ml-2.5 h-2 w-[1.5px] bg-slate-200" />
-                              )}
-                            </React.Fragment>
+                                ✓
+                              </span>
+                              <span className="text-[11.5px] text-slate-700 font-medium leading-tight">
+                                {item.text}
+                              </span>
+                            </div>
                           ))}
                         </div>
-                      </motion.div>
-                    )}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Card Bottom Visual Layer (Present on ALL 4 Cards!) */}
+                  {/* Card Bottom Visual Area */}
                   <div
-                    className={`w-full rounded-[24px] overflow-hidden transition-all duration-300 mt-4 relative flex items-center justify-center ${
-                      isActive ? 'min-h-[220px] p-4 shadow-inner' : 'h-[140px] p-2'
+                    className={`w-full rounded-[22px] overflow-hidden transition-all duration-500 mt-5 relative flex items-center justify-center ${
+                      isActive ? 'min-h-[220px] shadow-inner' : 'h-[130px]'
                     }`}
                     style={{ background: stage.bottomBgGradient }}
                   >
-                    {/* Active Glowing Chat Box or Stage Visual */}
                     {isActive ? (
-                      <motion.div
-                        initial={{ scale: 0.95, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 26 }}
-                        className="w-full h-full rounded-[20px] bg-white p-4 shadow-md flex flex-col justify-between"
-                      >
-                        {idx === 1 ? (
-                          // Prep Stage (Exact match from Calendly Screenshot 3)
-                          <>
-                            <div>
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                                  <span>{stage.bottomCardTitle}</span>
-                                </span>
-                                {stageChatAnswer && (
-                                  <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">
-                                    Answered
-                                  </span>
-                                )}
-                              </div>
-
-                              {stageChatAnswer ? (
-                                <motion.div
-                                  initial={{ opacity: 0, y: 4 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  className="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/60 text-[11px] text-amber-950 mb-2 leading-relaxed"
-                                >
-                                  <span className="font-bold block text-[10px] text-amber-700 uppercase mb-0.5 font-mono">
-                                    Qalam Intelligence:
-                                  </span>
-                                  {stageChatAnswer}
-                                </motion.div>
-                              ) : (
-                                <div className="space-y-1.5 text-[10px] text-slate-600 mb-2">
-                                  <span className="text-[9px] text-slate-400 uppercase tracking-wider block font-mono">
-                                    Suggested:
-                                  </span>
-                                  <div className="flex flex-wrap gap-1.5">
-                                    {[
-                                      'What’s Acme Co.’s budget?',
-                                      'Who are the main stakeholders?',
-                                      'What’s the required tech stack?',
-                                    ].map((promptText) => (
-                                      <motion.button
-                                        key={promptText}
-                                        type="button"
-                                        whileHover={{ scale: 1.04, y: -1 }}
-                                        whileTap={{ scale: 0.96 }}
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleStagePromptClick(promptText);
-                                        }}
-                                        className="px-2 py-0.5 rounded-md bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium cursor-pointer transition-colors text-left"
-                                      >
-                                        {promptText}
-                                      </motion.button>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-
-                            {/* Interactive Input Bar */}
-                            <form
-                              onSubmit={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                if (stageChatInput.trim()) {
-                                  handleStagePromptClick(stageChatInput);
-                                }
-                              }}
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex items-center justify-between p-1.5 rounded-full border border-slate-200 bg-slate-50 text-[11px] text-slate-500 focus-within:border-blue-400 focus-within:bg-white transition-colors"
-                            >
-                              <div className="flex items-center gap-2 pl-2 w-full">
-                                <Sparkles size={13} className="text-slate-400 shrink-0" />
-                                <input
-                                  type="text"
-                                  value={stageChatInput}
-                                  onChange={(e) => setStageChatInput(e.target.value)}
-                                  placeholder="Help me prep for my next meeting"
-                                  className="w-full bg-transparent text-[11px] text-slate-800 placeholder-slate-400 outline-none"
-                                />
-                              </div>
-                              <motion.button
-                                type="submit"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="w-6 h-6 rounded-full bg-slate-900 hover:bg-blue-600 text-white flex items-center justify-center shrink-0 cursor-pointer transition-colors shadow-2xs"
-                              >
-                                <Send size={10} />
-                              </motion.button>
-                            </form>
-                          </>
-                        ) : idx === 0 ? (
-                          // Stage 0: Book
-                          <div className="flex flex-col justify-between h-full">
-                            <div>
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-xs font-bold text-slate-900">{stage.bottomCardTitle}</span>
-                                <span className="text-[10px] font-mono text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full font-bold">
-                                  Milestone Locked
-                                </span>
-                              </div>
-                              <div className="space-y-1.5 text-[11px] text-slate-600">
-                                <div className="p-2 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-between">
-                                  <span>Associate Full Stack Milestone</span>
-                                  <span className="font-bold text-blue-600">85+ Benchmark</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="text-[10px] text-slate-400 font-mono text-center">
-                              Diagnostic calibration confirmed
-                            </div>
-                          </div>
-                        ) : idx === 2 ? (
-                          // Stage 2: Capture
-                          <div className="flex flex-col justify-between h-full">
-                            <div>
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-xs font-bold text-slate-900">{stage.bottomCardTitle}</span>
-                                <span className="text-[10px] font-mono text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full font-bold">
-                                  Verified Artifact
-                                </span>
-                              </div>
-                              <div className="p-2 rounded-lg bg-slate-900 text-slate-100 font-mono text-[10px] space-y-1">
-                                <p className="text-emerald-400">✓ API Architecture Score: 95/100</p>
-                                <p className="text-emerald-400">✓ SQL Query Isolation: 91/100</p>
-                                <p className="text-emerald-400">✓ Code Maintainability: 88/100</p>
-                              </div>
-                            </div>
-                            <div className="text-[10px] text-slate-400 font-mono text-center">
-                              Audit ready in under 60 seconds
-                            </div>
-                          </div>
-                        ) : (
-                          // Stage 3: Follow up
-                          <div className="flex flex-col justify-between h-full">
-                            <div>
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-xs font-bold text-slate-900">{stage.bottomCardTitle}</span>
-                                <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
-                                  Cryptographic Proof
-                                </span>
-                              </div>
-                              <div className="p-2 rounded-lg bg-emerald-50 border border-emerald-200/80 text-[11px] text-emerald-950 font-medium">
-                                Fast-track offer issued with verified 96% first-year retention confidence.
-                              </div>
-                            </div>
-                            <div className="text-[10px] text-slate-400 font-mono text-center">
-                              Hiring cycle: 5 business days
-                            </div>
-                          </div>
-                        )}
-                      </motion.div>
+                      renderStageMockup(stage.mockupType)
                     ) : (
-                      /* Resting Abstract Silhouette (Exact Match from Calendly Screenshot 3) */
-                      <div className="w-full h-full flex flex-col items-center justify-center relative">
+                      /* Resting Abstract Silhouette */
+                      <div className="w-full h-full flex flex-col items-center justify-center relative p-3 text-center">
                         {idx === 0 && (
-                          <svg className="w-20 h-20 text-blue-600/35" viewBox="0 0 100 100" fill="currentColor">
-                            <rect x="25" y="25" width="50" height="50" rx="12" />
-                            <circle cx="50" cy="50" r="14" fill="#FFFFFF" fillOpacity="0.4" />
-                          </svg>
+                          <Compass size={32} className="text-blue-600/40 mb-1" />
                         )}
                         {idx === 1 && (
-                          <svg className="w-20 h-20 text-amber-600/40" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M20,80 C20,40 40,20 60,20 C80,20 90,50 90,80 Z" />
-                          </svg>
+                          <Code2 size={32} className="text-amber-600/40 mb-1" />
                         )}
                         {idx === 2 && (
-                          <svg className="w-20 h-20 text-purple-600/35" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M30,20 L70,20 C76,20 80,24 80,30 L80,80 L30,80 Z" />
-                            <circle cx="45" cy="45" r="10" fill="#FFFFFF" fillOpacity="0.4" />
-                          </svg>
+                          <Terminal size={32} className="text-purple-600/40 mb-1" />
                         )}
                         {idx === 3 && (
-                          <svg className="w-20 h-20 text-emerald-600/35" viewBox="0 0 100 100" fill="currentColor">
-                            <circle cx="50" cy="50" r="30" />
-                            <path d="M40,50 L47,57 L62,42" stroke="#FFFFFF" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                          </svg>
+                          <Award size={32} className="text-emerald-600/40 mb-1" />
                         )}
-                        <span className="text-[10px] font-mono font-semibold text-slate-600/70 tracking-wider uppercase mt-1">
-                          Click to expand
+                        <span className="text-[10px] font-mono font-semibold text-slate-600/70 tracking-wider uppercase">
+                          Hover to inspect
                         </span>
                       </div>
                     )}
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
 
-          {/* Mobile & Tablet Fallback with Touch Navigation */}
+          {/* Mobile & Tablet Fallback Vertical Accordion (< 1024px) */}
           <div className="lg:hidden space-y-4">
             <div className="flex items-center justify-center gap-2 mb-4">
               {currentStory.workflowStages.map((stage, idx) => (
@@ -1376,8 +1366,8 @@ export function EcosystemSection() {
                   key={stage.id}
                   type="button"
                   onClick={() => setActiveStageIdx(idx)}
-                  className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
-                    activeStageIdx === idx ? 'bg-slate-900 w-6' : 'bg-slate-300'
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    activeStageIdx === idx ? 'bg-slate-900 w-6' : 'bg-slate-300 w-2'
                   }`}
                   aria-label={`Go to ${stage.title}`}
                 />
@@ -1387,31 +1377,38 @@ export function EcosystemSection() {
             {currentStory.workflowStages.map((stage, idx) => {
               const isActive = activeStageIdx === idx;
               return (
-                <motion.div
+                <div
                   key={stage.id}
-                  whileTap={{ scale: 0.98 }}
                   onClick={() => setActiveStageIdx(idx)}
                   className={`rounded-[24px] bg-white border transition-all p-6 cursor-pointer ${
-                    isActive ? 'border-slate-300 shadow-md ring-1 ring-slate-900/5' : 'border-slate-200/80'
+                    isActive
+                      ? 'border-slate-300 shadow-md ring-1 ring-slate-900/5'
+                      : 'border-slate-200/80 hover:border-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="text-xl font-bold font-['Outfit'] text-slate-900">
-                      {stage.title}
-                    </h4>
-                    <span className="text-xs font-mono font-bold text-slate-400">
-                      0{idx + 1}
+                    <div>
+                      <span className="text-xs font-mono font-bold text-slate-400 mr-2">
+                        {stage.stageNumber}
+                      </span>
+                      <h4 className="text-xl font-bold font-['Outfit'] text-slate-900 inline">
+                        {stage.title}
+                      </h4>
+                    </div>
+                    <span
+                      className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full"
+                      style={{
+                        backgroundColor: isActive ? `${currentStory.primaryColor}15` : '#f1f5f9',
+                        color: isActive ? currentStory.primaryColor : '#64748b',
+                      }}
+                    >
+                      {stage.badge}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 mb-3">{stage.restingTeaser}</p>
+                  <p className="text-xs text-slate-500 mb-3">{stage.subtitle}</p>
 
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      transition={{ duration: 0.25 }}
-                      className="pt-3 border-t border-slate-100 space-y-4"
-                    >
+                  {isActive ? (
+                    <div className="pt-3 border-t border-slate-100 space-y-4">
                       <p className="text-xs text-slate-600 leading-relaxed">{stage.narrative}</p>
                       <div className="space-y-2">
                         {stage.checklist.map((item) => (
@@ -1426,9 +1423,17 @@ export function EcosystemSection() {
                           </div>
                         ))}
                       </div>
-                    </motion.div>
+                      <div
+                        className="w-full rounded-2xl overflow-hidden min-h-[190px] p-3"
+                        style={{ background: stage.bottomBgGradient }}
+                      >
+                        {renderStageMockup(stage.mockupType)}
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-slate-400 line-clamp-2">{stage.restingTeaser}</p>
                   )}
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -1470,10 +1475,10 @@ export function EcosystemSection() {
               <ArrowRight size={13} />
             </a>
             <a
-              href="/anatomy"
+              href="/hire"
               className="px-4 py-2 rounded-xl bg-teal-50 border border-teal-200 hover:border-teal-400 text-teal-800 hover:text-teal-900 text-xs font-bold transition-all inline-flex items-center gap-1.5 shadow-2xs"
             >
-              <span>Physical Anatomy Rig</span>
+              <span>Hire Talent Directory</span>
               <ArrowRight size={13} />
             </a>
           </div>
