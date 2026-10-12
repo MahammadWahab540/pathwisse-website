@@ -23,6 +23,7 @@ import {
   Search,
 } from 'lucide-react';
 import { PageMascot, FloatingMascot } from '@/components/mascot/PageMascot';
+import { InteractiveExperienceSection } from './InteractiveExperienceSection';
 
 export type Persona = 'students' | 'colleges' | 'companies';
 
@@ -1438,6 +1439,14 @@ export function EcosystemSection() {
             })}
           </div>
         </div>
+
+        {/* ============================================================= */}
+        {/* INTERACTIVE EXPERIENCE & OUTCOMES SHOWCASE                    */}
+        {/* ============================================================= */}
+        <InteractiveExperienceSection
+          activePersona={activePersona}
+          onPersonaChange={setActivePersona}
+        />
 
         {/* ============================================================= */}
         {/* EXPLORER LINK STRIP                                           */}
