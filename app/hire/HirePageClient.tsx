@@ -294,6 +294,12 @@ export function HirePageClient() {
             >
               Search 206 catalogue roles
             </a>
+            <a
+              href="/enterprise"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-lg bg-white text-[#173c6e] font-medium text-sm hover:bg-[#f8fafc] border border-[#cbd5e1] transition-colors"
+            >
+              Enterprise Talent Intelligence
+            </a>
           </div>
 
           {/* Core System Parameters */}
@@ -928,6 +934,37 @@ export function HirePageClient() {
               />
             </form>
           )}
+        </div>
+      </section>
+
+      {/* ENTERPRISE TALENT INTELLIGENCE BRIDGE */}
+      <section className="py-16 px-6 sm:px-10 bg-[#f8fafc] border-t border-[#e2e8f0]">
+        <div className="max-w-5xl mx-auto rounded-2xl bg-white border border-[#e2e8f0] p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="max-w-xl">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#2458ae]">
+              ENTERPRISE TALENT INTELLIGENCE
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-bold font-['Outfit'] text-[#0f172a] tracking-tight mt-1 mb-3">
+              Looking for campus cohort shortlists or custom hiring benchmarks?
+            </h3>
+            <p className="text-sm text-[#475569] leading-relaxed">
+              Explore our full enterprise platform to inspect candidate code architectures, review technical decision memos, and align junior hiring with strict Indian DPDP Act compliance.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
+            <a
+              href="/enterprise"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#f1f5f9] text-[#173c6e] font-semibold text-sm hover:bg-[#e2e8f0] transition-colors"
+            >
+              Explore Enterprise Model <ArrowRight className="w-4 h-4" />
+            </a>
+            <a
+              href="/enterprise/request-demo"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#173c6e] text-white font-semibold text-sm hover:bg-[#122f56] transition-colors"
+            >
+              Request Enterprise Demo
+            </a>
+          </div>
         </div>
       </section>
 

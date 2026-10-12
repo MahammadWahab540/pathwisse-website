@@ -1,23 +1,28 @@
+import type { Metadata } from 'next';
 import { Header, Footer } from '@/app/site';
 import { IntentLeadForm } from '@/components/forms/IntentLeadForm';
-import { CheckCircle2, GraduationCap, BarChart3, Users, Sparkles } from 'lucide-react';
+import { CheckCircle2, GraduationCap, BarChart3, Users, Sparkles, ArrowRight } from 'lucide-react';
 import { HairlineFigure } from '@/components/ui/hairline-figure';
+import { absoluteUrl } from '@/lib/site-config';
 
-export const metadata = {
-  title: 'Request College Demo | Pathwisse',
-  description: 'Request a Pathwisse demo for student readiness, placement analytics, and institutional partnership.',
+export const metadata: Metadata = {
+  title: 'Request College Demo | Institutional Placement Intelligence | Pathwisse',
+  description: 'Request a Pathwisse institutional demo for student readiness, placement analytics, cohort diagnostics, and university partnership.',
+  alternates: {
+    canonical: absoluteUrl('/colleges/request-demo'),
+  },
 };
 
-export default function Page() {
+export default function CollegeRequestDemoPage() {
   const highlights = [
     {
       title: 'Real-time cohort capability diagnostics',
-      description: 'Audit technical strengths, framework proficiencies, and readiness deficits across entire departments before recruiters arrive.',
+      description: 'Audit technical strengths, framework proficiencies, and readiness deficits across entire engineering departments before recruiters arrive.',
       icon: BarChart3,
     },
     {
-      title: 'Targeted placement acceleration',
-      description: 'Replace generic training workshops with milestone-driven sprints calibrated to tier-1 employer hiring standards.',
+      title: 'Targeted placement acceleration sprints',
+      description: 'Replace generic training workshops with milestone-driven 2-week sprints calibrated to tier-1 employer hiring standards.',
       icon: GraduationCap,
     },
     {
@@ -35,10 +40,11 @@ export default function Page() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Context, Trust & Value Proposition */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
+              <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#173c6e]/10 text-[#173c6e] text-xs font-bold uppercase tracking-wider">
                     <GraduationCap className="w-3.5 h-3.5 text-[#2458ae]" />
-                    Institutional Partnership
+                    Institutional Placement Intelligence
                   </span>
                   <div className="w-16 h-12 text-[#2458ae]">
                     <HairlineFigure figure="plot" intensity={0.7} label="Cohort Placement Analytics" />
@@ -51,6 +57,7 @@ export default function Page() {
                 <p className="text-base sm:text-lg text-[#586a80] leading-relaxed">
                   Share your cohort size, target graduation year, and placement goals. Our academic solutions team will prepare a customized cohort audit walkthrough for your campus.
                 </p>
+              </div>
 
               <div className="space-y-5 pt-6 border-t border-[#e2e8f0]">
                 {highlights.map((item, idx) => {
@@ -96,4 +103,3 @@ export default function Page() {
     </>
   );
 }
-

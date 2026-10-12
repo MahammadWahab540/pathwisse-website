@@ -19,7 +19,7 @@ import { HairlineFigure, type HairlineFigureName } from '@/components/ui/hairlin
 
 type Props = { params: Promise<{ slug: string[] }> };
 
-function parseBlogRow(row: Record<string, unknown>): Record<string, any> {
+function parseBlogRow(row: Record<string, unknown>): Record<string, unknown> {
   return {
     ...row,
     tags: JSON.parse((row.tags as string) || '[]'),
@@ -229,7 +229,7 @@ export default async function Page({ params }: Props) {
                 <span>By <strong style={{ color: '#1E293B' }}>{String(post.author || 'Pathwisse Research')}</strong></span>
                 <span>•</span>
                 <time dateTime={String(post.publish_date)}>Published: {new Date(String(post.publish_date)).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
-                {post.modified_date && (
+                {Boolean(post.modified_date) && (
                   <>
                     <span>•</span>
                     <time dateTime={String(post.modified_date)}>Updated: {new Date(String(post.modified_date)).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>

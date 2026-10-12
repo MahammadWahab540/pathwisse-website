@@ -9,8 +9,11 @@ import {
   Code,
   FileCode2,
   FolderGit2,
+  GitBranch,
   Layers,
+  Lock,
   Search,
+  Server,
   ShieldCheck,
   Target,
   Terminal,
@@ -63,7 +66,7 @@ export default function EnterprisePage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
 
-        {/* 1. Enterprise Hero */}
+        {/* 1. Enterprise Hero (E01 & E02) */}
         <section className="relative overflow-hidden bg-[#f8fafc] border-b border-[#e2e8f0] pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="max-w-7xl mx-auto px-6 md:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -106,16 +109,21 @@ export default function EnterprisePage() {
                 </div>
               </div>
 
-              {/* Hero Candidate Dossier Mockup */}
+              {/* Hero Candidate Dossier Mockup (E02) */}
               <div className="lg:col-span-5">
-                <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-xl">
-                  <div className="flex items-center justify-between pb-4 border-b border-[#f1f5f9] mb-5">
+                <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-xl relative">
+                  <div className="flex items-center justify-between pb-4 border-b border-[#f1f5f9] mb-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-[#173c6e] text-white flex items-center justify-center font-bold text-sm">
                         AK
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-[#0f172a]">Ananya K.</h4>
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-sm font-bold text-[#0f172a]">Ananya K.</h4>
+                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#f1f5f9] text-[#475569]">
+                            SAMPLE DOSSIER · DEMO
+                          </span>
+                        </div>
                         <span className="text-[11px] text-[#64748b]">Target: Associate Full Stack Engineer</span>
                       </div>
                     </div>
@@ -124,19 +132,26 @@ export default function EnterprisePage() {
                     </span>
                   </div>
 
-                  <div className="space-y-4 mb-5">
+                  <div className="space-y-3.5 mb-5">
+                    {/* Project Artifact & Technical Decision Memo */}
                     <div className="p-3.5 rounded-xl bg-[#f8fafc] border border-[#e2e8f0]">
-                      <div className="flex justify-between items-center mb-2">
+                      <div className="flex justify-between items-center mb-1.5">
                         <span className="text-xs font-bold text-[#0f172a] flex items-center gap-1.5">
-                          <FolderGit2 size={15} className="text-[#2458ae]" /> Demonstrated Project Proof
+                          <FolderGit2 size={15} className="text-[#2458ae]" /> Technical Decision Memo
                         </span>
                         <span className="text-[11px] text-[#2458ae] font-semibold">3 Verified Artifacts</span>
                       </div>
-                      <p className="text-xs text-[#475569] leading-relaxed">
-                        Built high-concurrency event ingestion pipeline with PostgreSQL connection pooling and structured schema migrations.
+                      <p className="text-xs text-[#334155] leading-relaxed mb-2 font-mono bg-white p-2.5 rounded-lg border border-[#e2e8f0]">
+                        Distributed Task Queue with Redis async worker, exponential backoff, dead-letter queue, 24 passing unit tests.
                       </p>
+                      <div className="flex items-center justify-between text-[11px] text-[#1e824c] font-medium">
+                        <span className="flex items-center gap-1">
+                          <CheckCircle2 size={13} /> Architecture Review: Top 5% modular API design & clean schema migration
+                        </span>
+                      </div>
                     </div>
 
+                    {/* Evaluated Engineering Dimensions */}
                     <div className="p-3.5 rounded-xl bg-[#f8fafc] border border-[#e2e8f0]">
                       <span className="text-xs font-bold text-[#0f172a] block mb-2">
                         Evaluated Engineering Dimensions
@@ -176,7 +191,7 @@ export default function EnterprisePage() {
           </div>
         </section>
 
-        {/* 2. Core Value Pillars */}
+        {/* 2. 6 Capability Advantage Pillars with Hairline figures (E03) */}
         <section id="evidence-model" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-6 md:px-8">
             <div className="max-w-2xl mb-16">
@@ -196,38 +211,38 @@ export default function EnterprisePage() {
                 {
                   icon: FileCode2,
                   figure: 'exploded' as const,
-                  title: 'Inspectable Decision Memos',
+                  title: 'Inspectable Code Architecture',
                   desc: 'Every candidate portfolio includes technical design briefs, architectural trade-offs, and reasoning—not just raw copied tutorial repos.',
                 },
                 {
                   icon: Terminal,
                   figure: 'terminal' as const,
-                  title: 'Production-Grounded Code',
-                  desc: 'Projects are evaluated on modularity, error resilience, edge-case coverage, and clean documentation matching real engineering team standards.',
+                  title: 'Algorithmic Consistency Drills',
+                  desc: 'Track authentic coding practice over time, measuring edge-case handling, algorithmic complexity awareness, and clean error recovery.',
                 },
                 {
                   icon: ShieldCheck,
                   figure: 'vault' as const,
-                  title: 'Authenticity Guarantee',
+                  title: 'Immutable Skill Verification',
                   desc: 'We trace iterative progress, daily consistency, and multi-checkpoint submissions to verify that work was genuinely built by the student.',
                 },
                 {
                   icon: Target,
                   figure: 'keyboard' as const,
-                  title: 'Custom Role Calibration',
-                  desc: 'Map capability benchmarks directly to your company’s tech stack, junior leveling rubrics, and engineering culture requirements.',
+                  title: 'Real Production Trade-Offs',
+                  desc: 'Evaluate how candidates balance latency, maintainability, and resource constraints in realistic engineering briefs.',
                 },
                 {
                   icon: Zap,
                   figure: 'sieve' as const,
-                  title: 'High-Conversion Shortlisting',
+                  title: 'Direct Evidence Shortlisting',
                   desc: 'Bypass generic job portal spam. Connect directly with pre-screened talent who meet your exact baseline readiness score.',
                 },
                 {
                   icon: Briefcase,
                   figure: 'branches' as const,
-                  title: 'Accelerated Day-One Impact',
-                  desc: 'Candidates familiar with real engineering workflows, code review hygiene, and delivery deadlines require 60% less onboarding ramp-up.',
+                  title: 'Zero Résumé Keyword Spam',
+                  desc: 'Replace keyword-stuffed PDFs with verifiable Git commit histories, test suites, and deployable prototypes you can test.',
                 },
               ].map((card) => {
                 const Icon = card.icon;
@@ -252,7 +267,7 @@ export default function EnterprisePage() {
           </div>
         </section>
 
-        {/* 3. The 4-Step Hiring Workflow */}
+        {/* 3. 4-Step Technical Hiring Workflow (E04) */}
         <section className="py-20 bg-[#f8fafc] border-y border-[#e2e8f0]">
           <div className="max-w-7xl mx-auto px-6 md:px-8">
             <div className="text-center max-w-2xl mx-auto mb-16">
@@ -260,7 +275,7 @@ export default function EnterprisePage() {
                 EVIDENCE-LED HIRING WORKFLOW
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold font-['Outfit'] text-[#0f172a] tracking-tight mt-2">
-                From Role Definition to Verified Offer
+                Four Steps From Benchmark to Defensible Hire
               </h2>
               <p className="text-[#334155] text-base mt-3">
                 A streamlined technical recruitment process designed for engineering leaders and high-performing talent teams.
@@ -269,10 +284,26 @@ export default function EnterprisePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
-                { step: '01', title: 'Role Benchmark', desc: 'Define required tech skills, core project archetypes, and minimum readiness thresholds.' },
-                { step: '02', title: 'Evidence Search', desc: 'Filter candidates by demonstrated proof, code quality metrics, and algorithmic consistency.' },
-                { step: '03', title: 'Artifact Review', desc: 'Inspect architectural memos, PR structures, and test suites in one structured candidate dossier.' },
-                { step: '04', title: 'Direct Offer', desc: 'Conduct fast, high-confidence technical conversations and make definitive hiring offers.' },
+                {
+                  step: '01',
+                  title: 'Role Benchmark',
+                  desc: 'Define required capabilities and architectural standards tailored to your stack and leveling criteria.',
+                },
+                {
+                  step: '02',
+                  title: 'Evidence Search',
+                  desc: 'Filter cohorts by demonstrated project proof and test metrics rather than uncalibrated résumé claims.',
+                },
+                {
+                  step: '03',
+                  title: 'Artifact Review',
+                  desc: 'Inspect code repositories and technical decision memos with verified commit signatures and test runs.',
+                },
+                {
+                  step: '04',
+                  title: 'Direct Offer',
+                  desc: 'Fast-track high-readiness candidates directly to technical interviews and extend high-confidence job offers.',
+                },
               ].map((col) => (
                 <div key={col.step} className="p-6 rounded-xl border border-[#e2e8f0] bg-white shadow-2xs relative">
                   <span className="text-3xl font-extrabold text-[#173c6e]/20 block mb-3 font-['Outfit']">{col.step}</span>
@@ -284,12 +315,93 @@ export default function EnterprisePage() {
           </div>
         </section>
 
-        {/* 4. Enterprise CTA Banner */}
+        {/* 4. Compliance, Security & DPDP (E06) */}
+        <section id="compliance-security" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-5 space-y-5">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#2458ae]">
+                  ENTERPRISE TRUST & DATA GOVERNANCE
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-bold font-['Outfit'] text-[#0f172a] tracking-tight">
+                  Enterprise-grade security and strict DPDP compliance.
+                </h2>
+                <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
+                  We treat candidate data, institutional rosters, and employer evaluation rubrics with the highest level of confidentiality and regulatory rigor.
+                </p>
+                <div className="pt-2 flex flex-wrap gap-4">
+                  <a
+                    href="/trust/security"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#173c6e] hover:text-[#2458ae] underline underline-offset-4"
+                  >
+                    Security Architecture <ArrowRight size={13} />
+                  </a>
+                  <a
+                    href="/trust/privacy"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#173c6e] hover:text-[#2458ae] underline underline-offset-4"
+                  >
+                    Privacy Notice <ArrowRight size={13} />
+                  </a>
+                  <a
+                    href="/trust/dpdp"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#173c6e] hover:text-[#2458ae] underline underline-offset-4"
+                  >
+                    DPDP Alignment <ArrowRight size={13} />
+                  </a>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="p-6 rounded-2xl border border-[#e2e8f0] bg-[#f8fafc]">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-center text-[#173c6e] mb-4 shadow-2xs">
+                    <Lock size={20} />
+                  </div>
+                  <h4 className="text-base font-bold text-[#0f172a] mb-2">Indian DPDP Act Alignment</h4>
+                  <p className="text-xs text-[#64748b] leading-relaxed">
+                    Strict consent management under the Digital Personal Data Protection Act. Student dossiers are only shared with authorized recruiters upon affirmative opt-in.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-2xl border border-[#e2e8f0] bg-[#f8fafc]">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-center text-[#173c6e] mb-4 shadow-2xs">
+                    <Server size={20} />
+                  </div>
+                  <h4 className="text-base font-bold text-[#0f172a] mb-2">SOC 2 Type II Compliant Edge</h4>
+                  <p className="text-xs text-[#64748b] leading-relaxed">
+                    Hosted on Cloudflare Workers edge network with automated DDoS protection, encrypted D1 SQLite storage, and isolated tenant environments.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-2xl border border-[#e2e8f0] bg-[#f8fafc]">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-center text-[#173c6e] mb-4 shadow-2xs">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <h4 className="text-base font-bold text-[#0f172a] mb-2">Defensible Audit Trails</h4>
+                  <p className="text-xs text-[#64748b] leading-relaxed">
+                    Every verification signal contains immutable timestamped logs and GPG-signed commit verification to prevent credential fabrication.
+                  </p>
+                </div>
+
+                <div className="p-6 rounded-2xl border border-[#e2e8f0] bg-[#f8fafc]">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-[#e2e8f0] flex items-center justify-center text-[#173c6e] mb-4 shadow-2xs">
+                    <CheckCircle2 size={20} className="text-[#1e824c]" />
+                  </div>
+                  <h4 className="text-base font-bold text-[#0f172a] mb-2">Zero Résumé Scraping</h4>
+                  <p className="text-xs text-[#64748b] leading-relaxed">
+                    No web scrapers or unverified third-party data broker sourcing. 100% of candidate evidence is built directly within the Pathwisse platform.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. Enterprise CTA Banner */}
         <CTABand
           title="Stop filtering résumés. Start inspecting capability."
           description="Partner with Pathwisse to discover pre-evaluated engineering talent ready to ship code from week one."
           primaryAction={{
-            label: "Schedule Talent Intelligence Demo",
+            label: "Request Enterprise Demo",
             href: "/enterprise/request-demo",
           }}
           secondaryAction={{

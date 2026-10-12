@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
@@ -110,9 +110,9 @@ a.button * {
 /* Secondary & Inverse White Buttons: MUST always be dark navy text */
 a.bg-white,
 button.bg-white,
-a[class*="bg-white"],
-button[class*="bg-white"],
-[data-slot="button"][class*="bg-white"],
+a[class~="bg-white"],
+button[class~="bg-white"],
+[data-slot="button"][class~="bg-white"],
 [data-slot="button"][data-variant="inverse"],
 [data-slot="button"][data-variant="secondary"] {
   color: #142e50 !important;
@@ -120,12 +120,18 @@ button[class*="bg-white"],
 
 a.bg-white *,
 button.bg-white *,
-a[class*="bg-white"] *,
-button[class*="bg-white"] *,
-[data-slot="button"][class*="bg-white"] *,
+a[class~="bg-white"] *,
+button[class~="bg-white"] *,
+[data-slot="button"][class~="bg-white"] *,
 [data-slot="button"][data-variant="inverse"] *,
 [data-slot="button"][data-variant="secondary"] * {
   color: #142e50 !important;
+}
+
+/* Inverse Outline Buttons: MUST always be white text on dark cards/backgrounds */
+[data-slot="button"][data-variant="inverseOutline"],
+[data-slot="button"][data-variant="inverseOutline"] * {
+  color: #ffffff !important;
 }
 
 /* Dark Card Container Content */
@@ -491,4 +497,168 @@ button[class*="bg-white"] *,
     transition: none;
   }
 }
+
+@keyframes heroFlowDash {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-flow-dash {
+  animation: heroFlowDash 3.5s linear infinite;
+}
+
+/* ------------------------------------------------------------- */
+/* Apple SF-Inspired Reactive Icon Micro-Interactions            */
+/* ------------------------------------------------------------- */
+
+@keyframes iconReactPop {
+  0% { transform: scale(1); }
+  25% { transform: scale(0.82); }
+  50% { transform: scale(1.28); }
+  75% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes iconRippleShockwave {
+  0% { transform: scale(0.6); opacity: 0.95; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes iconSparkDash {
+  0% { stroke-dashoffset: 40; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.3; }
+}
+
+@keyframes iconNodePop {
+  0% { transform: scale(1); }
+  50% { transform: scale(2.2); filter: drop-shadow(0 0 5px currentColor); }
+  100% { transform: scale(1); }
+}
+
+@keyframes iconMagneticAttract {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.15) translateX(1px); }
+  70% { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+.animate-icon-pop {
+  animation: iconReactPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-icon-ripple {
+  animation: iconRippleShockwave 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-icon-spark {
+  animation: iconSparkDash 0.6s ease-out forwards;
+}
+
+.animate-node-pop-1 {
+  animation: iconNodePop 0.4s ease-out 0ms both;
+  transform-origin: center;
+}
+
+.animate-node-pop-2 {
+  animation: iconNodePop 0.4s ease-out 80ms both;
+  transform-origin: center;
+}
+
+.animate-node-pop-3 {
+  animation: iconNodePop 0.4s ease-out 160ms both;
+  transform-origin: center;
+}
+
+.animate-node-pop-4 {
+  animation: iconNodePop 0.45s ease-out 240ms both;
+  transform-origin: center;
+}
+
+.animate-magnetic-left {
+  animation: iconMagneticAttract 0.5s ease-out both;
+  transform-origin: 7.5px 12px;
+}
+
+.animate-magnetic-right {
+  animation: iconMagneticAttract 0.5s ease-out both;
+  transform-origin: 16.5px 12px;
+}
+
+/* ========================================================================= */
+/* FANOUT-INSPIRED KINETIC TYPOGRAPHY & SCROLL STORYTELLING SYSTEM           */
+/* ========================================================================= */
+
+@keyframes kineticReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-kinetic-reveal {
+  animation: kineticReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fanoutRunner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fanout-moving-border {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  padding: 1.5px;
+}
+
+.fanout-moving-border::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(from 0deg, #3B82F6, #8B5CF6, #EC4899, #F59E0B, #10B981, #3B82F6);
+  animation: fanoutRunner 4.5s linear infinite;
+  opacity: 0.65;
+}
+
+@keyframes tickerPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.18); }
+}
+
+.animate-ticker-pulse {
+  animation: tickerPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes glowStream {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-glow-stream {
+  background-size: 200% 200%;
+  animation: glowStream 6s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kinetic-reveal,
+  .animate-glow-stream,
+  .animate-ticker-pulse,
+  .fanout-moving-border::before {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
 

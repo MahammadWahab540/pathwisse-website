@@ -48,3 +48,8 @@ next-env.d.ts
 /screenshots/
 *.pdf
 /scripts/*.cjs
+# Temporary screenshots and scratch
+/*.png
+/scripts/*.png
+/.superpowers/
+/scratch/

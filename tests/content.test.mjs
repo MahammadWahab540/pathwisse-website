@@ -111,5 +111,8 @@ await import('./challenger-students.test.mjs');
 // Run reviewer_m3_2 adversarial stress test suite
 await import('./reviewer_m3_2.test.mjs');
 
+// Run comprehensive college & enterprise test suite (C01 - C07 & E01 - E06)
+await import('./colleges-enterprise.test.mjs');
 
-
+// Run challenger M4 adversarial stress test suite (C01 - C07 & E01 - E06)
+await import('./challenger-colleges-enterprise.test.mjs');

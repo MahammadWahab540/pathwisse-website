@@ -1,14 +1,19 @@
+import type { Metadata } from 'next';
 import { Header, Footer } from '@/app/site';
 import { IntentLeadForm } from '@/components/forms/IntentLeadForm';
-import { CheckCircle2, ShieldCheck, Sparkles, Building2, TrendingUp, Users } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Sparkles, Building2, TrendingUp, Users, Lock } from 'lucide-react';
 import { HairlineFigure } from '@/components/ui/hairline-figure';
+import { absoluteUrl } from '@/lib/site-config';
 
-export const metadata = {
-  title: 'Request Enterprise Demo | Pathwisse',
+export const metadata: Metadata = {
+  title: 'Request Enterprise Demo | Early-Career Talent Intelligence | Pathwisse',
   description: 'Request a Pathwisse enterprise demo for early-career talent intelligence, candidate verification, and evidence-based technical hiring.',
+  alternates: {
+    canonical: absoluteUrl('/enterprise/request-demo'),
+  },
 };
 
-export default function Page() {
+export default function EnterpriseRequestDemoPage() {
   const highlights = [
     {
       title: 'Inspectable candidate evidence',
@@ -35,13 +40,14 @@ export default function Page() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Context, Trust & Value Proposition */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
+              <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#173c6e]/10 text-[#173c6e] text-xs font-bold uppercase tracking-wider">
                     <Building2 className="w-3.5 h-3.5 text-[#2458ae]" />
-                    Talent Intelligence
+                    Early-Career Talent Intelligence
                   </span>
                   <div className="w-16 h-12 text-[#2458ae]">
-                    <HairlineFigure figure="dish" intensity={0.7} label="Direct Enterprise Connection" />
+                    <HairlineFigure figure="vault" intensity={0.7} label="Verifiable Candidate Evidence" />
                   </div>
                 </div>
                 <h1 className="text-4xl sm:text-5xl font-extrabold text-[#142e50] tracking-tight leading-[1.08] mb-5">
@@ -51,6 +57,7 @@ export default function Page() {
                 <p className="text-base sm:text-lg text-[#586a80] leading-relaxed">
                   Tell us about your open engineering roles and hiring timeline. Our solutions team will configure a dedicated walkthrough of our candidate dossiers and verification platform.
                 </p>
+              </div>
 
               <div className="space-y-5 pt-6 border-t border-[#e2e8f0]">
                 {highlights.map((item, idx) => {
@@ -76,14 +83,14 @@ export default function Page() {
               <div className="p-4 rounded-2xl bg-white border border-[#e2e8f0] shadow-xs flex items-center justify-between text-xs text-[#586a80]">
                 <span className="flex items-center gap-1.5 font-semibold text-[#142e50]">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  SOC 2 & ISO Ready
+                  DPDP Aligned & SOC 2 Ready
                 </span>
                 <span>•</span>
                 <span>Response within 24 business hours</span>
               </div>
             </div>
 
-            {/* Right Column: Framer-Inspired Form Card */}
+            {/* Right Column: Form Card */}
             <div className="lg:col-span-7">
               <div className="rounded-3xl border border-[#e2e8f0] bg-white p-8 md:p-12 shadow-xl shadow-[#142e50]/5">
                 <IntentLeadForm variant="enterprise" />

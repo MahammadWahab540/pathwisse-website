@@ -25,41 +25,19 @@ import { CompaniesSection } from '@/components/home/CompaniesSection';
 import { TrustProofSection } from '@/components/home/TrustProofSection';
 import { FAQSection } from '@/components/home/FAQSection';
 
+import { BrandLogo } from '@/components/icons/BrandLogo';
+
 export const APP = APP_AUTH_URL;
 
-export function Logo() {
+export function Logo({ height = 38, showTagline = true }: { height?: number; showTagline?: boolean }) {
   return (
     <a
       className="logo"
       href="/"
       aria-label="Pathwisse home"
-      style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
+      style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}
     >
-      <span
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          fontFamily: "'Outfit', sans-serif",
-          fontSize: '23px',
-          fontWeight: 700,
-          letterSpacing: '-0.02em',
-          color: '#1F3861',
-        }}
-      >
-        <span
-          style={{
-            display: 'block',
-            width: '10px',
-            height: '10px',
-            borderRadius: '50%',
-            background: '#1F3861',
-          }}
-        />
-        <span>
-          Path<span style={{ color: '#2458ae' }}>wisse</span>
-        </span>
-      </span>
+      <BrandLogo height={height} showTagline={showTagline} />
     </a>
   );
 }
@@ -67,55 +45,27 @@ export function Logo() {
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="header">
+    <header className="header" style={{ maxWidth: '1360px', height: '80px', borderBottom: '1px solid rgba(226, 232, 240, 0.6)' }}>
       <Logo />
-      <nav className={open ? 'nav open' : 'nav'} aria-label="Main navigation">
+      <nav className={open ? 'nav open' : 'nav'} aria-label="Main navigation" style={{ gap: '28px' }}>
+        <a href="/product" className="text-[13px] font-medium text-slate-700 hover:text-blue-600 transition-colors">
+          How It Works
+        </a>
+        <a href="/students" className="text-[13px] font-medium text-slate-700 hover:text-blue-600 transition-colors">
+          For Students
+        </a>
+        <a href="/colleges" className="text-[13px] font-medium text-slate-700 hover:text-blue-600 transition-colors">
+          For Colleges
+        </a>
+        <a href="/enterprise" className="text-[13px] font-medium text-slate-700 hover:text-blue-600 transition-colors">
+          For Companies
+        </a>
+        <a href="/company/about" className="text-[13px] font-medium text-slate-700 hover:text-blue-600 transition-colors">
+          Our Vision
+        </a>
         <details>
-          <summary>
-            Students <ChevronDown size={13} />
-          </summary>
-          <div className="dropdown">
-            <a href="/students">For Students</a>
-            <a href="/career-audit/start">Career Audit & Assessment</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            Colleges <ChevronDown size={13} />
-          </summary>
-          <div className="dropdown">
-            <a href="/colleges">For Colleges & Placement</a>
-            <a href="/colleges/request-demo">Request Partnership Demo</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            Enterprise <ChevronDown size={13} />
-          </summary>
-          <div className="dropdown">
-            <a href="/enterprise">Talent & Hiring Intelligence</a>
-            <a href="/enterprise/request-demo">Request Enterprise Demo</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            Products <ChevronDown size={13} />
-          </summary>
-          <div className="dropdown">
-            <a href="/product">Pathwisse Platform</a>
-            <a href="/product/career-voice">Career Voice</a>
-            <a href="/product/career-roadmaps">Career Roadmaps</a>
-            <a href="/product/practice-lab">Practice Lab</a>
-            <a href="/product/projects">Applied Projects</a>
-            <a href="/product/skill-passport">Skill Passport</a>
-            <a href="/product/readiness-scoring">Readiness Scoring</a>
-            <a href="/product/analytics">Analytics & Signals</a>
-            <a href="/product/integrations">Integrations</a>
-          </div>
-        </details>
-        <details>
-          <summary>
-            Resources <ChevronDown size={13} />
+          <summary className="text-[13px] font-medium text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
+            Resources <ChevronDown size={12} className="opacity-70" />
           </summary>
           <div className="dropdown">
             <a href="/resources">Resource Hub</a>
@@ -123,30 +73,50 @@ export function Header() {
             <a href="/careers">Career Roadmaps</a>
             <a href="/skills">Skill Guides</a>
             <a href="/compare/data-analyst-vs-business-analyst">Role Comparisons</a>
+            <a href="/pricing">Pricing Plans</a>
+            <a href="/hire">Hire Talent</a>
             <a href={CAREER_VOICE_URL} target="_blank" rel="noopener noreferrer">
               Career Voice Audit
             </a>
           </div>
         </details>
-        <a
-          href="/pricing"
-          className="text-sm font-semibold text-[#142e50] hover:text-[#2458ae] transition-colors py-2 px-1"
-        >
-          Pricing
-        </a>
-        <a
-          href="/hire"
-          className="text-sm font-semibold text-[#142e50] hover:text-[#2458ae] transition-colors py-2 px-1"
-        >
-          Hire Talent
-        </a>
       </nav>
-      <div className="nav-actions">
-        <a className="login" href={APP}>
-          Log in <ArrowUpRight size={14} />
+      <div className="nav-actions" style={{ gap: '20px' }}>
+        <button
+          type="button"
+          aria-label="Search"
+          className="text-slate-500 hover:text-slate-800 transition-colors p-1"
+          onClick={() => {
+            window.location.href = '/resources';
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </button>
+        <a className="login" href={APP} style={{ fontSize: '13px', fontWeight: 500, color: '#0F172A' }}>
+          Log in
         </a>
-        <a className="button small" href={APP}>
-          Get started <ArrowRight size={14} />
+        <a
+          className="cta-pill-button"
+          href={APP}
+          style={{
+            background: '#0F172A',
+            color: '#FFFFFF',
+            padding: '9px 18px',
+            borderRadius: '999px',
+            fontSize: '13px',
+            fontWeight: 600,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            textDecoration: 'none',
+            boxShadow: '0 2px 8px rgba(15, 23, 42, 0.15)',
+          }}
+        >
+          <span>Get started</span>
+          <ArrowRight size={13} aria-hidden="true" />
         </a>
         <button
           className="mobile-toggle"
@@ -309,10 +279,11 @@ export function CTA({
   return (
     <CTABand
       title={title}
-      description="Start with what you know, build what you can show, and move forward with evidence. Connect with the Pathwisse ecosystem today."
+      closingHeadline="Students build capabilities → Colleges develop talent → Companies discover proven problem-solvers."
+      description="One continuous capability network. Turn learning into demonstrable proof, make readiness visible early, and discover talent with confidence."
       primaryAction={{
-        label: 'Get Started Now',
-        href: APP,
+        label: 'Explore the Pathwisse Network →',
+        href: '/students',
       }}
       secondaryAction={{
         label: 'Contact Solutions Team',

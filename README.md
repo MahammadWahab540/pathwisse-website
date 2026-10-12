@@ -1,8 +1,9 @@
-# vinext-starter
+# Pathwisse Platform
 
-A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
+> One Platform. One Ecosystem. Connecting Students, Colleges & Companies.
 
-## Prerequisites
+- **Live Deployment:** [https://pathwisse-website.gmdwahab.workers.dev](https://pathwisse-website.gmdwahab.workers.dev)
+- **Repository:** [https://github.com/MahammadWahab540/pathwisse-website](https://github.com/MahammadWahab540/pathwisse-website)
 
 - Node.js `>=22.13.0`
 - Portable: Windows, macOS, or Linux; no Bash required

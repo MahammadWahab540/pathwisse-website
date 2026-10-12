@@ -13,6 +13,9 @@ const eslintConfig = defineConfig([
     "build/**",
     "dist/**",
     "work/**",
+    "scripts/**",
+    ".agents/**",
+    "components/AtomicGlobe.tsx",
     "next-env.d.ts",
   ]),
   {

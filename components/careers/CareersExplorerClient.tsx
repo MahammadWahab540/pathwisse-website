@@ -150,7 +150,7 @@ export function CareersExplorerClient() {
             <div className="flex items-center gap-2">
               <select
                 value={tierFilter}
-                onChange={(e) => setTierFilter(e.target.value as any)}
+                onChange={(e) => setTierFilter(e.target.value as 'all' | 'published_paths' | 'trainee')}
                 className="px-3 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-xs font-mono font-medium text-[#475569] focus:outline-none focus:border-[#2458ae]"
               >
                 <option value="all">All Tiers (206)</option>
