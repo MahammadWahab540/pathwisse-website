@@ -165,31 +165,31 @@ export function Hero({ accent = '#2458ae', autoplay = true }: HeroProps) {
         {/* 1. HERO HEADER: KINETIC EYEBROW, CINEMATIC HEADLINE, CTA      */}
         {/* ------------------------------------------------------------- */}
 
-        {/* Kinetic Eyebrow Badge: THE NETWORK BUILT ON SKILLS */}
+        {/* Kinetic Eyebrow Badge: FROM LEARNING TO REAL CAPABILITY */}
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-blue-50/90 border border-blue-100/90 text-[11px] font-mono font-semibold tracking-[0.2em] text-blue-700 uppercase mb-5 shadow-2xs animate-kinetic-reveal">
           <span className="flex h-2 w-2 relative">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600" />
           </span>
-          <span>THE NETWORK BUILT ON SKILLS</span>
+          <span>FROM LEARNING TO REAL CAPABILITY</span>
         </div>
 
-        {/* Cinematic Headline: "Connect through what you can do." */}
+        {/* Cinematic Headline: "What you can do deserves to be seen." */}
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-extrabold tracking-[-0.035em] text-[#0F172A] leading-[1.08] animate-kinetic-reveal">
-            Connect through{' '}
+            What you can do{' '}
             <span className="bg-gradient-to-r from-[#2563EB] via-[#4F46E5] to-[#8B5CF6] bg-clip-text text-transparent drop-shadow-2xs">
-              what you can do.
+              deserves to be seen.
             </span>
           </h2>
 
           {/* Subheadline Copy */}
           <p className="mt-5 text-slate-600 text-base sm:text-lg md:text-[19px] max-w-2xl mx-auto leading-relaxed font-normal animate-kinetic-reveal" style={{ animationDelay: '100ms' }}>
-            Pathwisse brings students, colleges, and companies together through demonstrated skills and real work.
+            Discover career paths, build skills through practical work, and show what you&apos;ve created. Pathwisse connects that progress with colleges and companies.
           </p>
         </div>
 
-        {/* Primary CTA Button: "See how it works →" (Smooth scroll to interactive story) */}
+        {/* Primary CTA Button: "See Pathwisse in action →" (Smooth scroll to interactive story) */}
         <div className="mt-7 flex flex-col sm:flex-row items-center gap-3.5 animate-kinetic-reveal" style={{ animationDelay: '180ms' }}>
           <a
             href="https://app.pathwisse.com/auth"
@@ -197,7 +197,7 @@ export function Hero({ accent = '#2458ae', autoplay = true }: HeroProps) {
             style={{ color: '#FFFFFF' }}
             className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-[#0B1222] hover:bg-[#1E293B] text-white text-[14.5px] font-semibold rounded-full shadow-[0_10px_25px_-5px_rgba(15,23,42,0.3)] hover:shadow-[0_16px_32px_-6px_rgba(15,23,42,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           >
-            <span className="text-white font-medium">See how it works</span>
+            <span className="text-white font-medium">See Pathwisse in action</span>
             <ArrowRight size={15} className="text-white group-hover:translate-x-1 transition-transform" />
           </a>
         </div>

@@ -48,6 +48,25 @@
   --color-status-error: #dc2626;
   --color-status-error-bg: #fef2f2;
 
+  /* Consolidated Pathwisse Core Semantic Tokens */
+  --pw-color-canvas: #ffffff;
+  --pw-color-surface-subtle: #f8fafc;
+  --pw-color-surface-muted: #f1f5f9;
+  --pw-color-surface-elevated: #ffffff;
+  --pw-color-text-primary: #0f172a;
+  --pw-color-text-secondary: #334155;
+  --pw-color-text-muted: #64748b;
+  --pw-color-text-subtle: #94a3b8;
+  --pw-color-brand-primary: #173c6e;
+  --pw-color-brand-accent: #2458ae;
+  --pw-color-brand-vivid: #3b82f6;
+  --pw-color-border-subtle: #e2e8f0;
+  --pw-color-border-medium: #cbd5e1;
+  --pw-color-status-success: #059669;
+  --pw-color-status-success-bg: #ecfdf5;
+  --pw-color-status-warning: #d97706;
+  --pw-color-status-warning-bg: #fffbeb;
+
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Outfit', 'Inter', sans-serif;
 }
