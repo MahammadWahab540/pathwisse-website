@@ -23,6 +23,7 @@ import { StudentsSection } from '@/components/home/StudentsSection';
 import { CollegesSection } from '@/components/home/CollegesSection';
 import { CompaniesSection } from '@/components/home/CompaniesSection';
 import { TrustProofSection } from '@/components/home/TrustProofSection';
+import { EvidenceSorterSection } from '@/components/home/EvidenceSorterSection';
 import { FAQSection } from '@/components/home/FAQSection';
 
 import { BrandLogo } from '@/components/icons/BrandLogo';
@@ -312,6 +313,9 @@ export function HomePage() {
 
         {/* 5. Companies Section (H07) */}
         <CompaniesSection />
+
+        {/* Interactive Visible Evidence: demonstrate project artifacts before Trust & Proof. */}
+        <EvidenceSorterSection />
 
         {/* 6. Trust & Proof Section (H08) */}
         <TrustProofSection />
